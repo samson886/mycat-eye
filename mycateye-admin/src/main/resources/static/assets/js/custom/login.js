@@ -26,6 +26,6 @@ function ajaxBeforeAndReturnUrl() {
 	$("#alert").hide();
 	var username = $("#username").val();
 	var password = $("#password").val();
-	var ajaxUrl = ajaxHost + "agent/sysuser/login?username=" + username + "&password=" + password;
+	var ajaxUrl = ajaxUrlPrefix + "/sysuser/login?username=" + username + "&password=" + password;
 	return ajaxUrl;
 }

@@ -17,7 +17,7 @@ $(function($) {
 				} else {
 					var username = $.cookie('MYCAT-EYE-ADMIN');
 					var password = result;
-					var ajaxUrl = ajaxHost + "agent/sysuser/modify-password?username=" + username + "&newPassword=" + password;
+					var ajaxUrl = ajaxUrlPrefix + "/sysuser/modify-password?username=" + username + "&newPassword=" + password;
 					$.getJSON(ajaxUrl, function(json) {
 						$.cookie("MYCAT-EYE-ADMIN", null, {
 							path: '/'
@@ -36,7 +36,7 @@ var fnLoadUsername=function(){
 }
 //加载当前节点
 var fnLoadCurrentNode = function() {
-	var ajaxUrl = ajaxHost + "agent/mysql/node/list";
+	var ajaxUrl = ajaxUrlPrefix + "/mysql/node/list";
 	$.getJSON(ajaxUrl, {
 		draw: 1,
 		start: 0,

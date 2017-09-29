@@ -17,7 +17,7 @@ $(function($) {
 
 //初始化控制台概要数据
 var fnDashboardOverviewInit = function(serverId) {
-	var ajaxUrl = ajaxHost + "agent/dashboard/" + serverId + "/dashboard-overview";
+	var ajaxUrl = ajaxUrlPrefix + "/dashboard/" + serverId + "/dashboard-overview";
 	$.getJSON(ajaxUrl, function(json) {
 		$("#uptime").text(json.uptime);
 		$("#threadsRunning").text(json.threadsRunning);
@@ -36,7 +36,7 @@ var fnDashboardOverviewInit = function(serverId) {
 }
 //初始化当前进程列表
 var fnShowProcesslistInit = function(serverId) {
-	var ajaxUrl = ajaxHost + "agent/dashboard/" + serverId + "/processlist";
+	var ajaxUrl = ajaxUrlPrefix + "/dashboard/" + serverId + "/processlist";
 	var table = $('#processlist')
 		.DataTable({
 			"bLengthChange": false,

@@ -22,7 +22,7 @@ $("#submit").click(function() {
 	var password = $("#password").val();
 	var tags = $("#tags").val();
 	var clusterId = $("#clusterSelect").val();
-	var ajaxUrl = ajaxHost + "agent/mysql/node/save?id=" + id + "&host=" + host + "&port=" + port + "&username=" + username + "&password=" + password + "&tags=" + tags + "&clusterId=" + clusterId;
+	var ajaxUrl = ajaxUrlPrefix + "/mysql/node/save?id=" + id + "&host=" + host + "&port=" + port + "&username=" + username + "&password=" + password + "&tags=" + tags + "&clusterId=" + clusterId;
 	$.getJSON(ajaxUrl, function(json) {
 		if(json.code == 200) {
 			location.reload(true);
@@ -34,7 +34,7 @@ $("#submit").click(function() {
 });
 //加载节点列表
 var fnLoadNodeList = function() {
-	var ajaxUrl = ajaxHost + "agent/mysql/node/list";
+	var ajaxUrl = ajaxUrlPrefix + "/mysql/node/list";
 	var table = $('#nodeList')
 		.DataTable({
 			"bLengthChange": false,
@@ -92,7 +92,7 @@ var fnLoadNodeList = function() {
 //加载集群下拉菜单
 var fnLoadClusterSelect = function(id) {
 	$("#clusterSelect").empty();
-	var ajaxUrl = ajaxHost + "agent/mysql/cluster/all";
+	var ajaxUrl = ajaxUrlPrefix + "/mysql/cluster/all";
 	$.getJSON(ajaxUrl, function(data) {
 		//初始化集群下拉菜单
 		var option = "";
@@ -111,7 +111,7 @@ var fnLoadClusterSelect = function(id) {
 }
 // 编辑节点名称
 var fnEditNode = function(id) {
-	var ajaxUrl = ajaxHost + "agent/mysql/node/info?id=" + id;
+	var ajaxUrl = ajaxUrlPrefix + "/mysql/node/info?id=" + id;
 	$.getJSON(ajaxUrl, function(json) {
 		$("#id").val(json.id);
 		$('#nodeModal').modal('show');
@@ -129,7 +129,7 @@ var fnDeleteNode = function(id, name) {
 	bootbox.confirm("你确认删除" + name + "这个节点吗？", function(
 		result) {
 		if(result) {
-			var ajaxUrl = ajaxHost + "agent/mysql/node/delete?id=" + id;
+			var ajaxUrl = ajaxUrlPrefix + "/mysql/node/delete?id=" + id;
 			$.getJSON(ajaxUrl, function(json) {
 				if(json.code == "200") {
 					location.reload(true);

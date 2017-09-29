@@ -25,10 +25,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class AgentController
 {
-    @Value("${agent.host}")
+    @Value("${agent.url}")
     private String agentUrl;
     
-    @RequestMapping("/agent-host")
+    @RequestMapping("/agent-url")
     public String getAgentUrl() {
         return agentUrl;
     }

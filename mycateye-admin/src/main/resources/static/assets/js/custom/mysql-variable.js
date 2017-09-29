@@ -5,7 +5,7 @@ $(function($) {
 //加载变量列表
 var fnLoadVariables = function(filter) {
 	var serverId = window.localStorage.getItem("currentServerId");
-	var ajaxUrl = ajaxHost + "agent/mysql/" + serverId + "/globalVariables?filter=" + filter;
+	var ajaxUrl = ajaxUrlPrefix + "/mysql/" + serverId + "/globalVariables?filter=" + filter;
 	$.getJSON(ajaxUrl, function(json) {
 		if(json.code == "200") {
 			$("#tbody_variables").empty();
@@ -39,7 +39,7 @@ var fnEditVariables = function(variableName, variableValue) {
 			if(result == null) {
 				return;
 			} else {
-				var ajaxUrl = ajaxHost + "agent/mysql/" + serverId + "/globalVariables/" + variableName + "/" + result + "/";
+				var ajaxUrl = ajaxUrlPrefix + "/mysql/" + serverId + "/globalVariables/" + variableName + "/" + result + "/";
 				$.getJSON(ajaxUrl, function(json) {
 					if(json.code == "200") {
 						var filter = $("#input_variables").val();

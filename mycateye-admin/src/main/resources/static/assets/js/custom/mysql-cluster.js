@@ -13,7 +13,7 @@ $(function($) {
 						return;
 					} else {
 						var clusterName = result;
-						var ajaxUrl = ajaxHost + "agent/mysql/cluster/save?id=0&name=" + clusterName;
+						var ajaxUrl = ajaxUrlPrefix + "/mysql/cluster/save?id=0&name=" + clusterName;
 						$.getJSON(ajaxUrl, function(json) {
 							if(json.code == "200") {
 								fnLoadClusterList();
@@ -26,7 +26,7 @@ $(function($) {
 });
 //加载集群列表
 var fnLoadClusterList = function() {
-	var ajaxUrl = ajaxHost + "agent/mysql/cluster/all";
+	var ajaxUrl = ajaxUrlPrefix + "/mysql/cluster/all";
 	$.getJSON(ajaxUrl, function(json) {
 		var tbCluster = $("#tbCluster");
 		tbCluster.empty();
@@ -61,7 +61,7 @@ var fnEditCluster = function(id, name) {
 					return;
 				} else {
 					var newName = result;
-					var ajaxUrl = ajaxHost + "agent/mysql/cluster/save?id=" + id + "&name=" + newName;
+					var ajaxUrl = ajaxUrlPrefix + "/mysql/cluster/save?id=" + id + "&name=" + newName;
 					$.getJSON(ajaxUrl, function(json) {
 						if(json.code == "200") {
 							fnLoadClusterList();
@@ -77,7 +77,7 @@ var fnDeleteCluster = function(id, name) {
 	bootbox.confirm("你确认删除" + name + "这个集群吗？删除后集群下的节点不会被删除", function(
 		result) {
 		if(result) {
-			var ajaxUrl = ajaxHost + "agent/mysql/cluster/delete?id=" + id;
+			var ajaxUrl = ajaxUrlPrefix + "/mysql/cluster/delete?id=" + id;
 			$.getJSON(ajaxUrl, function(json) {
 				if(json.code == "200") {
 					fnLoadClusterList();
