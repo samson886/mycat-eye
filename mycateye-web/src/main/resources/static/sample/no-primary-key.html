@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>主键检查结果</title>
+</head>
+<body>
+	<div id="content"></div>
+	<script type="text/javascript" src="/assets/js/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="/assets/js/jquery.jsonview.js"></script>
+	<script type="text/javascript" src="/assets/js/misc-util.js"></script>
+	<script type="text/javascript">
+		$(function($) {
+			// 获取参数id的值
+			var serverId = getUrlParam("serverId");
+			$.get("../agent-url", function(agentUrl) {
+				$.getJSON(agentUrl + "/health-check/no-primary-key/" + serverId,
+						function(json) {
+							$("#content").JSONView(json.data);
+						});
+			});
+		});
+	</script>
+</body>
+</html>

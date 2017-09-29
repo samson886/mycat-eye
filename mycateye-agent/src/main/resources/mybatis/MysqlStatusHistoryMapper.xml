@@ -1,0 +1,1184 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="io.mycat.eye.agent.mapper.MysqlStatusHistoryMapper" >
+  <resultMap id="BaseResultMap" type="io.mycat.eye.agent.bean.MysqlStatusHistory" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="server_id" property="serverId" jdbcType="BIGINT" />
+    <result column="uptime" property="uptime" jdbcType="VARCHAR" />
+    <result column="open_tables" property="openTables" jdbcType="INTEGER" />
+    <result column="threads_connected" property="threadsConnected" jdbcType="INTEGER" />
+    <result column="threads_running" property="threadsRunning" jdbcType="INTEGER" />
+    <result column="threads_created" property="threadsCreated" jdbcType="INTEGER" />
+    <result column="threads_cached" property="threadsCached" jdbcType="INTEGER" />
+    <result column="connections" property="connections" jdbcType="INTEGER" />
+    <result column="aborted_clients" property="abortedClients" jdbcType="INTEGER" />
+    <result column="aborted_connects" property="abortedConnects" jdbcType="INTEGER" />
+    <result column="bytes_received" property="bytesReceived" jdbcType="BIGINT" />
+    <result column="bytes_received_persecond" property="bytesReceivedPersecond" jdbcType="VARCHAR" />
+    <result column="bytes_sent" property="bytesSent" jdbcType="BIGINT" />
+    <result column="bytes_sent_persecond" property="bytesSentPersecond" jdbcType="VARCHAR" />
+    <result column="com_select" property="comSelect" jdbcType="BIGINT" />
+    <result column="com_select_persecond" property="comSelectPersecond" jdbcType="VARCHAR" />
+    <result column="com_insert" property="comInsert" jdbcType="BIGINT" />
+    <result column="com_insert_persecond" property="comInsertPersecond" jdbcType="VARCHAR" />
+    <result column="com_update" property="comUpdate" jdbcType="BIGINT" />
+    <result column="com_update_persecond" property="comUpdatePersecond" jdbcType="VARCHAR" />
+    <result column="com_delete" property="comDelete" jdbcType="BIGINT" />
+    <result column="com_delete_persecond" property="comDeletePersecond" jdbcType="VARCHAR" />
+    <result column="com_commit" property="comCommit" jdbcType="BIGINT" />
+    <result column="com_commit_persecond" property="comCommitPersecond" jdbcType="VARCHAR" />
+    <result column="com_rollback" property="comRollback" jdbcType="BIGINT" />
+    <result column="com_rollback_persecond" property="comRollbackPersecond" jdbcType="VARCHAR" />
+    <result column="questions" property="questions" jdbcType="BIGINT" />
+    <result column="questions_persecond" property="questionsPersecond" jdbcType="VARCHAR" />
+    <result column="transactions" property="transactions" jdbcType="BIGINT" />
+    <result column="transactions_persecond" property="transactionsPersecond" jdbcType="VARCHAR" />
+    <result column="created_tmp_tables" property="createdTmpTables" jdbcType="BIGINT" />
+    <result column="created_tmp_tables_persecond" property="createdTmpTablesPersecond" jdbcType="VARCHAR" />
+    <result column="created_tmp_disk_tables" property="createdTmpDiskTables" jdbcType="BIGINT" />
+    <result column="created_tmp_disk_tables_persecond" property="createdTmpDiskTablesPersecond" jdbcType="VARCHAR" />
+    <result column="created_tmp_files" property="createdTmpFiles" jdbcType="BIGINT" />
+    <result column="created_tmp_files_persecond" property="createdTmpFilesPersecond" jdbcType="VARCHAR" />
+    <result column="innodb_data_reads" property="innodbDataReads" jdbcType="BIGINT" />
+    <result column="innodb_data_reads_persecond" property="innodbDataReadsPersecond" jdbcType="VARCHAR" />
+    <result column="innodb_data_writes" property="innodbDataWrites" jdbcType="BIGINT" />
+    <result column="innodb_data_writes_persecond" property="innodbDataWritesPersecond" jdbcType="VARCHAR" />
+    <result column="innodb_data_fsyncs" property="innodbDataFsyncs" jdbcType="BIGINT" />
+    <result column="innodb_data_fsyncs_persecond" property="innodbDataFsyncsPersecond" jdbcType="VARCHAR" />
+    <result column="innodb_data_read" property="innodbDataRead" jdbcType="BIGINT" />
+    <result column="innodb_data_read_persecond" property="innodbDataReadPersecond" jdbcType="VARCHAR" />
+    <result column="innodb_data_written" property="innodbDataWritten" jdbcType="BIGINT" />
+    <result column="innodb_data_written_persecond" property="innodbDataWrittenPersecond" jdbcType="VARCHAR" />
+    <result column="innodb_buffer_pool_pages_dirty" property="innodbBufferPoolPagesDirty" jdbcType="BIGINT" />
+    <result column="innodb_buffer_pool_pages_dirty_persecond" property="innodbBufferPoolPagesDirtyPersecond" jdbcType="VARCHAR" />
+    <result column="innodb_buffer_pool_pages_flushed" property="innodbBufferPoolPagesFlushed" jdbcType="BIGINT" />
+    <result column="innodb_buffer_pool_pages_flushed_persecond" property="innodbBufferPoolPagesFlushedPersecond" jdbcType="VARCHAR" />
+    <result column="innodb_buffer_read_hit_ratio" property="innodbBufferReadHitRatio" jdbcType="VARCHAR" />
+    <result column="innodb_buffer_usage" property="innodbBufferUsage" jdbcType="VARCHAR" />
+    <result column="innodb_rows_inserted" property="innodbRowsInserted" jdbcType="BIGINT" />
+    <result column="innodb_rows_inserted_persecond" property="innodbRowsInsertedPersecond" jdbcType="VARCHAR" />
+    <result column="innodb_rows_updated" property="innodbRowsUpdated" jdbcType="BIGINT" />
+    <result column="innodb_rows_updated_persecond" property="innodbRowsUpdatedPersecond" jdbcType="VARCHAR" />
+    <result column="innodb_rows_deleted" property="innodbRowsDeleted" jdbcType="BIGINT" />
+    <result column="innodb_rows_deleted_persecond" property="innodbRowsDeletedPersecond" jdbcType="VARCHAR" />
+    <result column="innodb_buffer_pool_pages_total" property="innodbBufferPoolPagesTotal" jdbcType="BIGINT" />
+    <result column="innodb_buffer_pool_pages_free" property="innodbBufferPoolPagesFree" jdbcType="BIGINT" />
+    <result column="innodb_page_size" property="innodbPageSize" jdbcType="INTEGER" />
+    <result column="slow_queries" property="slowQueries" jdbcType="INTEGER" />
+    <result column="slave_delay" property="slaveDelay" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, server_id, uptime, open_tables, threads_connected, threads_running, threads_created, 
+    threads_cached, connections, aborted_clients, aborted_connects, bytes_received, bytes_received_persecond, 
+    bytes_sent, bytes_sent_persecond, com_select, com_select_persecond, com_insert, com_insert_persecond, 
+    com_update, com_update_persecond, com_delete, com_delete_persecond, com_commit, com_commit_persecond, 
+    com_rollback, com_rollback_persecond, questions, questions_persecond, transactions, 
+    transactions_persecond, created_tmp_tables, created_tmp_tables_persecond, created_tmp_disk_tables, 
+    created_tmp_disk_tables_persecond, created_tmp_files, created_tmp_files_persecond, 
+    innodb_data_reads, innodb_data_reads_persecond, innodb_data_writes, innodb_data_writes_persecond, 
+    innodb_data_fsyncs, innodb_data_fsyncs_persecond, innodb_data_read, innodb_data_read_persecond, 
+    innodb_data_written, innodb_data_written_persecond, innodb_buffer_pool_pages_dirty, 
+    innodb_buffer_pool_pages_dirty_persecond, innodb_buffer_pool_pages_flushed, innodb_buffer_pool_pages_flushed_persecond, 
+    innodb_buffer_read_hit_ratio, innodb_buffer_usage, innodb_rows_inserted, innodb_rows_inserted_persecond, 
+    innodb_rows_updated, innodb_rows_updated_persecond, innodb_rows_deleted, innodb_rows_deleted_persecond, 
+    innodb_buffer_pool_pages_total, innodb_buffer_pool_pages_free, innodb_page_size, 
+    slow_queries, slave_delay, create_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="io.mycat.eye.agent.bean.MysqlStatusHistoryExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from mysql_status_history
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0" >
+      limit ${limitStart} , ${pageSize}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from mysql_status_history
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from mysql_status_history
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="io.mycat.eye.agent.bean.MysqlStatusHistoryExample" >
+    delete from mysql_status_history
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="io.mycat.eye.agent.bean.MysqlStatusHistory" useGeneratedKeys="true" keyProperty="id" >
+    insert into mysql_status_history (id, server_id, uptime, 
+      open_tables, threads_connected, threads_running, 
+      threads_created, threads_cached, connections, 
+      aborted_clients, aborted_connects, bytes_received, 
+      bytes_received_persecond, bytes_sent, bytes_sent_persecond, 
+      com_select, com_select_persecond, com_insert, 
+      com_insert_persecond, com_update, com_update_persecond, 
+      com_delete, com_delete_persecond, com_commit, 
+      com_commit_persecond, com_rollback, com_rollback_persecond, 
+      questions, questions_persecond, transactions, 
+      transactions_persecond, created_tmp_tables, 
+      created_tmp_tables_persecond, created_tmp_disk_tables, 
+      created_tmp_disk_tables_persecond, created_tmp_files, 
+      created_tmp_files_persecond, innodb_data_reads, 
+      innodb_data_reads_persecond, innodb_data_writes, 
+      innodb_data_writes_persecond, innodb_data_fsyncs, 
+      innodb_data_fsyncs_persecond, innodb_data_read, 
+      innodb_data_read_persecond, innodb_data_written, 
+      innodb_data_written_persecond, innodb_buffer_pool_pages_dirty, 
+      innodb_buffer_pool_pages_dirty_persecond, innodb_buffer_pool_pages_flushed, 
+      innodb_buffer_pool_pages_flushed_persecond, innodb_buffer_read_hit_ratio, 
+      innodb_buffer_usage, innodb_rows_inserted, innodb_rows_inserted_persecond, 
+      innodb_rows_updated, innodb_rows_updated_persecond, 
+      innodb_rows_deleted, innodb_rows_deleted_persecond, 
+      innodb_buffer_pool_pages_total, innodb_buffer_pool_pages_free, 
+      innodb_page_size, slow_queries, slave_delay, 
+      create_time)
+    values (#{id,jdbcType=BIGINT}, #{serverId,jdbcType=BIGINT}, #{uptime,jdbcType=VARCHAR}, 
+      #{openTables,jdbcType=INTEGER}, #{threadsConnected,jdbcType=INTEGER}, #{threadsRunning,jdbcType=INTEGER}, 
+      #{threadsCreated,jdbcType=INTEGER}, #{threadsCached,jdbcType=INTEGER}, #{connections,jdbcType=INTEGER}, 
+      #{abortedClients,jdbcType=INTEGER}, #{abortedConnects,jdbcType=INTEGER}, #{bytesReceived,jdbcType=BIGINT}, 
+      #{bytesReceivedPersecond,jdbcType=VARCHAR}, #{bytesSent,jdbcType=BIGINT}, #{bytesSentPersecond,jdbcType=VARCHAR}, 
+      #{comSelect,jdbcType=BIGINT}, #{comSelectPersecond,jdbcType=VARCHAR}, #{comInsert,jdbcType=BIGINT}, 
+      #{comInsertPersecond,jdbcType=VARCHAR}, #{comUpdate,jdbcType=BIGINT}, #{comUpdatePersecond,jdbcType=VARCHAR}, 
+      #{comDelete,jdbcType=BIGINT}, #{comDeletePersecond,jdbcType=VARCHAR}, #{comCommit,jdbcType=BIGINT}, 
+      #{comCommitPersecond,jdbcType=VARCHAR}, #{comRollback,jdbcType=BIGINT}, #{comRollbackPersecond,jdbcType=VARCHAR}, 
+      #{questions,jdbcType=BIGINT}, #{questionsPersecond,jdbcType=VARCHAR}, #{transactions,jdbcType=BIGINT}, 
+      #{transactionsPersecond,jdbcType=VARCHAR}, #{createdTmpTables,jdbcType=BIGINT}, 
+      #{createdTmpTablesPersecond,jdbcType=VARCHAR}, #{createdTmpDiskTables,jdbcType=BIGINT}, 
+      #{createdTmpDiskTablesPersecond,jdbcType=VARCHAR}, #{createdTmpFiles,jdbcType=BIGINT}, 
+      #{createdTmpFilesPersecond,jdbcType=VARCHAR}, #{innodbDataReads,jdbcType=BIGINT}, 
+      #{innodbDataReadsPersecond,jdbcType=VARCHAR}, #{innodbDataWrites,jdbcType=BIGINT}, 
+      #{innodbDataWritesPersecond,jdbcType=VARCHAR}, #{innodbDataFsyncs,jdbcType=BIGINT}, 
+      #{innodbDataFsyncsPersecond,jdbcType=VARCHAR}, #{innodbDataRead,jdbcType=BIGINT}, 
+      #{innodbDataReadPersecond,jdbcType=VARCHAR}, #{innodbDataWritten,jdbcType=BIGINT}, 
+      #{innodbDataWrittenPersecond,jdbcType=VARCHAR}, #{innodbBufferPoolPagesDirty,jdbcType=BIGINT}, 
+      #{innodbBufferPoolPagesDirtyPersecond,jdbcType=VARCHAR}, #{innodbBufferPoolPagesFlushed,jdbcType=BIGINT}, 
+      #{innodbBufferPoolPagesFlushedPersecond,jdbcType=VARCHAR}, #{innodbBufferReadHitRatio,jdbcType=VARCHAR}, 
+      #{innodbBufferUsage,jdbcType=VARCHAR}, #{innodbRowsInserted,jdbcType=BIGINT}, #{innodbRowsInsertedPersecond,jdbcType=VARCHAR}, 
+      #{innodbRowsUpdated,jdbcType=BIGINT}, #{innodbRowsUpdatedPersecond,jdbcType=VARCHAR}, 
+      #{innodbRowsDeleted,jdbcType=BIGINT}, #{innodbRowsDeletedPersecond,jdbcType=VARCHAR}, 
+      #{innodbBufferPoolPagesTotal,jdbcType=BIGINT}, #{innodbBufferPoolPagesFree,jdbcType=BIGINT}, 
+      #{innodbPageSize,jdbcType=INTEGER}, #{slowQueries,jdbcType=INTEGER}, #{slaveDelay,jdbcType=BIGINT}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="io.mycat.eye.agent.bean.MysqlStatusHistory" useGeneratedKeys="true" keyProperty="id" >
+    insert into mysql_status_history
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="serverId != null" >
+        server_id,
+      </if>
+      <if test="uptime != null" >
+        uptime,
+      </if>
+      <if test="openTables != null" >
+        open_tables,
+      </if>
+      <if test="threadsConnected != null" >
+        threads_connected,
+      </if>
+      <if test="threadsRunning != null" >
+        threads_running,
+      </if>
+      <if test="threadsCreated != null" >
+        threads_created,
+      </if>
+      <if test="threadsCached != null" >
+        threads_cached,
+      </if>
+      <if test="connections != null" >
+        connections,
+      </if>
+      <if test="abortedClients != null" >
+        aborted_clients,
+      </if>
+      <if test="abortedConnects != null" >
+        aborted_connects,
+      </if>
+      <if test="bytesReceived != null" >
+        bytes_received,
+      </if>
+      <if test="bytesReceivedPersecond != null" >
+        bytes_received_persecond,
+      </if>
+      <if test="bytesSent != null" >
+        bytes_sent,
+      </if>
+      <if test="bytesSentPersecond != null" >
+        bytes_sent_persecond,
+      </if>
+      <if test="comSelect != null" >
+        com_select,
+      </if>
+      <if test="comSelectPersecond != null" >
+        com_select_persecond,
+      </if>
+      <if test="comInsert != null" >
+        com_insert,
+      </if>
+      <if test="comInsertPersecond != null" >
+        com_insert_persecond,
+      </if>
+      <if test="comUpdate != null" >
+        com_update,
+      </if>
+      <if test="comUpdatePersecond != null" >
+        com_update_persecond,
+      </if>
+      <if test="comDelete != null" >
+        com_delete,
+      </if>
+      <if test="comDeletePersecond != null" >
+        com_delete_persecond,
+      </if>
+      <if test="comCommit != null" >
+        com_commit,
+      </if>
+      <if test="comCommitPersecond != null" >
+        com_commit_persecond,
+      </if>
+      <if test="comRollback != null" >
+        com_rollback,
+      </if>
+      <if test="comRollbackPersecond != null" >
+        com_rollback_persecond,
+      </if>
+      <if test="questions != null" >
+        questions,
+      </if>
+      <if test="questionsPersecond != null" >
+        questions_persecond,
+      </if>
+      <if test="transactions != null" >
+        transactions,
+      </if>
+      <if test="transactionsPersecond != null" >
+        transactions_persecond,
+      </if>
+      <if test="createdTmpTables != null" >
+        created_tmp_tables,
+      </if>
+      <if test="createdTmpTablesPersecond != null" >
+        created_tmp_tables_persecond,
+      </if>
+      <if test="createdTmpDiskTables != null" >
+        created_tmp_disk_tables,
+      </if>
+      <if test="createdTmpDiskTablesPersecond != null" >
+        created_tmp_disk_tables_persecond,
+      </if>
+      <if test="createdTmpFiles != null" >
+        created_tmp_files,
+      </if>
+      <if test="createdTmpFilesPersecond != null" >
+        created_tmp_files_persecond,
+      </if>
+      <if test="innodbDataReads != null" >
+        innodb_data_reads,
+      </if>
+      <if test="innodbDataReadsPersecond != null" >
+        innodb_data_reads_persecond,
+      </if>
+      <if test="innodbDataWrites != null" >
+        innodb_data_writes,
+      </if>
+      <if test="innodbDataWritesPersecond != null" >
+        innodb_data_writes_persecond,
+      </if>
+      <if test="innodbDataFsyncs != null" >
+        innodb_data_fsyncs,
+      </if>
+      <if test="innodbDataFsyncsPersecond != null" >
+        innodb_data_fsyncs_persecond,
+      </if>
+      <if test="innodbDataRead != null" >
+        innodb_data_read,
+      </if>
+      <if test="innodbDataReadPersecond != null" >
+        innodb_data_read_persecond,
+      </if>
+      <if test="innodbDataWritten != null" >
+        innodb_data_written,
+      </if>
+      <if test="innodbDataWrittenPersecond != null" >
+        innodb_data_written_persecond,
+      </if>
+      <if test="innodbBufferPoolPagesDirty != null" >
+        innodb_buffer_pool_pages_dirty,
+      </if>
+      <if test="innodbBufferPoolPagesDirtyPersecond != null" >
+        innodb_buffer_pool_pages_dirty_persecond,
+      </if>
+      <if test="innodbBufferPoolPagesFlushed != null" >
+        innodb_buffer_pool_pages_flushed,
+      </if>
+      <if test="innodbBufferPoolPagesFlushedPersecond != null" >
+        innodb_buffer_pool_pages_flushed_persecond,
+      </if>
+      <if test="innodbBufferReadHitRatio != null" >
+        innodb_buffer_read_hit_ratio,
+      </if>
+      <if test="innodbBufferUsage != null" >
+        innodb_buffer_usage,
+      </if>
+      <if test="innodbRowsInserted != null" >
+        innodb_rows_inserted,
+      </if>
+      <if test="innodbRowsInsertedPersecond != null" >
+        innodb_rows_inserted_persecond,
+      </if>
+      <if test="innodbRowsUpdated != null" >
+        innodb_rows_updated,
+      </if>
+      <if test="innodbRowsUpdatedPersecond != null" >
+        innodb_rows_updated_persecond,
+      </if>
+      <if test="innodbRowsDeleted != null" >
+        innodb_rows_deleted,
+      </if>
+      <if test="innodbRowsDeletedPersecond != null" >
+        innodb_rows_deleted_persecond,
+      </if>
+      <if test="innodbBufferPoolPagesTotal != null" >
+        innodb_buffer_pool_pages_total,
+      </if>
+      <if test="innodbBufferPoolPagesFree != null" >
+        innodb_buffer_pool_pages_free,
+      </if>
+      <if test="innodbPageSize != null" >
+        innodb_page_size,
+      </if>
+      <if test="slowQueries != null" >
+        slow_queries,
+      </if>
+      <if test="slaveDelay != null" >
+        slave_delay,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="serverId != null" >
+        #{serverId,jdbcType=BIGINT},
+      </if>
+      <if test="uptime != null" >
+        #{uptime,jdbcType=VARCHAR},
+      </if>
+      <if test="openTables != null" >
+        #{openTables,jdbcType=INTEGER},
+      </if>
+      <if test="threadsConnected != null" >
+        #{threadsConnected,jdbcType=INTEGER},
+      </if>
+      <if test="threadsRunning != null" >
+        #{threadsRunning,jdbcType=INTEGER},
+      </if>
+      <if test="threadsCreated != null" >
+        #{threadsCreated,jdbcType=INTEGER},
+      </if>
+      <if test="threadsCached != null" >
+        #{threadsCached,jdbcType=INTEGER},
+      </if>
+      <if test="connections != null" >
+        #{connections,jdbcType=INTEGER},
+      </if>
+      <if test="abortedClients != null" >
+        #{abortedClients,jdbcType=INTEGER},
+      </if>
+      <if test="abortedConnects != null" >
+        #{abortedConnects,jdbcType=INTEGER},
+      </if>
+      <if test="bytesReceived != null" >
+        #{bytesReceived,jdbcType=BIGINT},
+      </if>
+      <if test="bytesReceivedPersecond != null" >
+        #{bytesReceivedPersecond,jdbcType=VARCHAR},
+      </if>
+      <if test="bytesSent != null" >
+        #{bytesSent,jdbcType=BIGINT},
+      </if>
+      <if test="bytesSentPersecond != null" >
+        #{bytesSentPersecond,jdbcType=VARCHAR},
+      </if>
+      <if test="comSelect != null" >
+        #{comSelect,jdbcType=BIGINT},
+      </if>
+      <if test="comSelectPersecond != null" >
+        #{comSelectPersecond,jdbcType=VARCHAR},
+      </if>
+      <if test="comInsert != null" >
+        #{comInsert,jdbcType=BIGINT},
+      </if>
+      <if test="comInsertPersecond != null" >
+        #{comInsertPersecond,jdbcType=VARCHAR},
+      </if>
+      <if test="comUpdate != null" >
+        #{comUpdate,jdbcType=BIGINT},
+      </if>
+      <if test="comUpdatePersecond != null" >
+        #{comUpdatePersecond,jdbcType=VARCHAR},
+      </if>
+      <if test="comDelete != null" >
+        #{comDelete,jdbcType=BIGINT},
+      </if>
+      <if test="comDeletePersecond != null" >
+        #{comDeletePersecond,jdbcType=VARCHAR},
+      </if>
+      <if test="comCommit != null" >
+        #{comCommit,jdbcType=BIGINT},
+      </if>
+      <if test="comCommitPersecond != null" >
+        #{comCommitPersecond,jdbcType=VARCHAR},
+      </if>
+      <if test="comRollback != null" >
+        #{comRollback,jdbcType=BIGINT},
+      </if>
+      <if test="comRollbackPersecond != null" >
+        #{comRollbackPersecond,jdbcType=VARCHAR},
+      </if>
+      <if test="questions != null" >
+        #{questions,jdbcType=BIGINT},
+      </if>
+      <if test="questionsPersecond != null" >
+        #{questionsPersecond,jdbcType=VARCHAR},
+      </if>
+      <if test="transactions != null" >
+        #{transactions,jdbcType=BIGINT},
+      </if>
+      <if test="transactionsPersecond != null" >
+        #{transactionsPersecond,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTmpTables != null" >
+        #{createdTmpTables,jdbcType=BIGINT},
+      </if>
+      <if test="createdTmpTablesPersecond != null" >
+        #{createdTmpTablesPersecond,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTmpDiskTables != null" >
+        #{createdTmpDiskTables,jdbcType=BIGINT},
+      </if>
+      <if test="createdTmpDiskTablesPersecond != null" >
+        #{createdTmpDiskTablesPersecond,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTmpFiles != null" >
+        #{createdTmpFiles,jdbcType=BIGINT},
+      </if>
+      <if test="createdTmpFilesPersecond != null" >
+        #{createdTmpFilesPersecond,jdbcType=VARCHAR},
+      </if>
+      <if test="innodbDataReads != null" >
+        #{innodbDataReads,jdbcType=BIGINT},
+      </if>
+      <if test="innodbDataReadsPersecond != null" >
+        #{innodbDataReadsPersecond,jdbcType=VARCHAR},
+      </if>
+      <if test="innodbDataWrites != null" >
+        #{innodbDataWrites,jdbcType=BIGINT},
+      </if>
+      <if test="innodbDataWritesPersecond != null" >
+        #{innodbDataWritesPersecond,jdbcType=VARCHAR},
+      </if>
+      <if test="innodbDataFsyncs != null" >
+        #{innodbDataFsyncs,jdbcType=BIGINT},
+      </if>
+      <if test="innodbDataFsyncsPersecond != null" >
+        #{innodbDataFsyncsPersecond,jdbcType=VARCHAR},
+      </if>
+      <if test="innodbDataRead != null" >
+        #{innodbDataRead,jdbcType=BIGINT},
+      </if>
+      <if test="innodbDataReadPersecond != null" >
+        #{innodbDataReadPersecond,jdbcType=VARCHAR},
+      </if>
+      <if test="innodbDataWritten != null" >
+        #{innodbDataWritten,jdbcType=BIGINT},
+      </if>
+      <if test="innodbDataWrittenPersecond != null" >
+        #{innodbDataWrittenPersecond,jdbcType=VARCHAR},
+      </if>
+      <if test="innodbBufferPoolPagesDirty != null" >
+        #{innodbBufferPoolPagesDirty,jdbcType=BIGINT},
+      </if>
+      <if test="innodbBufferPoolPagesDirtyPersecond != null" >
+        #{innodbBufferPoolPagesDirtyPersecond,jdbcType=VARCHAR},
+      </if>
+      <if test="innodbBufferPoolPagesFlushed != null" >
+        #{innodbBufferPoolPagesFlushed,jdbcType=BIGINT},
+      </if>
+      <if test="innodbBufferPoolPagesFlushedPersecond != null" >
+        #{innodbBufferPoolPagesFlushedPersecond,jdbcType=VARCHAR},
+      </if>
+      <if test="innodbBufferReadHitRatio != null" >
+        #{innodbBufferReadHitRatio,jdbcType=VARCHAR},
+      </if>
+      <if test="innodbBufferUsage != null" >
+        #{innodbBufferUsage,jdbcType=VARCHAR},
+      </if>
+      <if test="innodbRowsInserted != null" >
+        #{innodbRowsInserted,jdbcType=BIGINT},
+      </if>
+      <if test="innodbRowsInsertedPersecond != null" >
+        #{innodbRowsInsertedPersecond,jdbcType=VARCHAR},
+      </if>
+      <if test="innodbRowsUpdated != null" >
+        #{innodbRowsUpdated,jdbcType=BIGINT},
+      </if>
+      <if test="innodbRowsUpdatedPersecond != null" >
+        #{innodbRowsUpdatedPersecond,jdbcType=VARCHAR},
+      </if>
+      <if test="innodbRowsDeleted != null" >
+        #{innodbRowsDeleted,jdbcType=BIGINT},
+      </if>
+      <if test="innodbRowsDeletedPersecond != null" >
+        #{innodbRowsDeletedPersecond,jdbcType=VARCHAR},
+      </if>
+      <if test="innodbBufferPoolPagesTotal != null" >
+        #{innodbBufferPoolPagesTotal,jdbcType=BIGINT},
+      </if>
+      <if test="innodbBufferPoolPagesFree != null" >
+        #{innodbBufferPoolPagesFree,jdbcType=BIGINT},
+      </if>
+      <if test="innodbPageSize != null" >
+        #{innodbPageSize,jdbcType=INTEGER},
+      </if>
+      <if test="slowQueries != null" >
+        #{slowQueries,jdbcType=INTEGER},
+      </if>
+      <if test="slaveDelay != null" >
+        #{slaveDelay,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="io.mycat.eye.agent.bean.MysqlStatusHistoryExample" resultType="java.lang.Integer" >
+    select count(*) from mysql_status_history
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <select id="maxByExample" parameterType="io.mycat.eye.agent.bean.MysqlStatusHistoryExample" resultType="java.lang.Long" >
+    select max(id) from mysql_status_history
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update mysql_status_history
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.serverId != null" >
+        server_id = #{record.serverId,jdbcType=BIGINT},
+      </if>
+      <if test="record.uptime != null" >
+        uptime = #{record.uptime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.openTables != null" >
+        open_tables = #{record.openTables,jdbcType=INTEGER},
+      </if>
+      <if test="record.threadsConnected != null" >
+        threads_connected = #{record.threadsConnected,jdbcType=INTEGER},
+      </if>
+      <if test="record.threadsRunning != null" >
+        threads_running = #{record.threadsRunning,jdbcType=INTEGER},
+      </if>
+      <if test="record.threadsCreated != null" >
+        threads_created = #{record.threadsCreated,jdbcType=INTEGER},
+      </if>
+      <if test="record.threadsCached != null" >
+        threads_cached = #{record.threadsCached,jdbcType=INTEGER},
+      </if>
+      <if test="record.connections != null" >
+        connections = #{record.connections,jdbcType=INTEGER},
+      </if>
+      <if test="record.abortedClients != null" >
+        aborted_clients = #{record.abortedClients,jdbcType=INTEGER},
+      </if>
+      <if test="record.abortedConnects != null" >
+        aborted_connects = #{record.abortedConnects,jdbcType=INTEGER},
+      </if>
+      <if test="record.bytesReceived != null" >
+        bytes_received = #{record.bytesReceived,jdbcType=BIGINT},
+      </if>
+      <if test="record.bytesReceivedPersecond != null" >
+        bytes_received_persecond = #{record.bytesReceivedPersecond,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bytesSent != null" >
+        bytes_sent = #{record.bytesSent,jdbcType=BIGINT},
+      </if>
+      <if test="record.bytesSentPersecond != null" >
+        bytes_sent_persecond = #{record.bytesSentPersecond,jdbcType=VARCHAR},
+      </if>
+      <if test="record.comSelect != null" >
+        com_select = #{record.comSelect,jdbcType=BIGINT},
+      </if>
+      <if test="record.comSelectPersecond != null" >
+        com_select_persecond = #{record.comSelectPersecond,jdbcType=VARCHAR},
+      </if>
+      <if test="record.comInsert != null" >
+        com_insert = #{record.comInsert,jdbcType=BIGINT},
+      </if>
+      <if test="record.comInsertPersecond != null" >
+        com_insert_persecond = #{record.comInsertPersecond,jdbcType=VARCHAR},
+      </if>
+      <if test="record.comUpdate != null" >
+        com_update = #{record.comUpdate,jdbcType=BIGINT},
+      </if>
+      <if test="record.comUpdatePersecond != null" >
+        com_update_persecond = #{record.comUpdatePersecond,jdbcType=VARCHAR},
+      </if>
+      <if test="record.comDelete != null" >
+        com_delete = #{record.comDelete,jdbcType=BIGINT},
+      </if>
+      <if test="record.comDeletePersecond != null" >
+        com_delete_persecond = #{record.comDeletePersecond,jdbcType=VARCHAR},
+      </if>
+      <if test="record.comCommit != null" >
+        com_commit = #{record.comCommit,jdbcType=BIGINT},
+      </if>
+      <if test="record.comCommitPersecond != null" >
+        com_commit_persecond = #{record.comCommitPersecond,jdbcType=VARCHAR},
+      </if>
+      <if test="record.comRollback != null" >
+        com_rollback = #{record.comRollback,jdbcType=BIGINT},
+      </if>
+      <if test="record.comRollbackPersecond != null" >
+        com_rollback_persecond = #{record.comRollbackPersecond,jdbcType=VARCHAR},
+      </if>
+      <if test="record.questions != null" >
+        questions = #{record.questions,jdbcType=BIGINT},
+      </if>
+      <if test="record.questionsPersecond != null" >
+        questions_persecond = #{record.questionsPersecond,jdbcType=VARCHAR},
+      </if>
+      <if test="record.transactions != null" >
+        transactions = #{record.transactions,jdbcType=BIGINT},
+      </if>
+      <if test="record.transactionsPersecond != null" >
+        transactions_persecond = #{record.transactionsPersecond,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdTmpTables != null" >
+        created_tmp_tables = #{record.createdTmpTables,jdbcType=BIGINT},
+      </if>
+      <if test="record.createdTmpTablesPersecond != null" >
+        created_tmp_tables_persecond = #{record.createdTmpTablesPersecond,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdTmpDiskTables != null" >
+        created_tmp_disk_tables = #{record.createdTmpDiskTables,jdbcType=BIGINT},
+      </if>
+      <if test="record.createdTmpDiskTablesPersecond != null" >
+        created_tmp_disk_tables_persecond = #{record.createdTmpDiskTablesPersecond,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdTmpFiles != null" >
+        created_tmp_files = #{record.createdTmpFiles,jdbcType=BIGINT},
+      </if>
+      <if test="record.createdTmpFilesPersecond != null" >
+        created_tmp_files_persecond = #{record.createdTmpFilesPersecond,jdbcType=VARCHAR},
+      </if>
+      <if test="record.innodbDataReads != null" >
+        innodb_data_reads = #{record.innodbDataReads,jdbcType=BIGINT},
+      </if>
+      <if test="record.innodbDataReadsPersecond != null" >
+        innodb_data_reads_persecond = #{record.innodbDataReadsPersecond,jdbcType=VARCHAR},
+      </if>
+      <if test="record.innodbDataWrites != null" >
+        innodb_data_writes = #{record.innodbDataWrites,jdbcType=BIGINT},
+      </if>
+      <if test="record.innodbDataWritesPersecond != null" >
+        innodb_data_writes_persecond = #{record.innodbDataWritesPersecond,jdbcType=VARCHAR},
+      </if>
+      <if test="record.innodbDataFsyncs != null" >
+        innodb_data_fsyncs = #{record.innodbDataFsyncs,jdbcType=BIGINT},
+      </if>
+      <if test="record.innodbDataFsyncsPersecond != null" >
+        innodb_data_fsyncs_persecond = #{record.innodbDataFsyncsPersecond,jdbcType=VARCHAR},
+      </if>
+      <if test="record.innodbDataRead != null" >
+        innodb_data_read = #{record.innodbDataRead,jdbcType=BIGINT},
+      </if>
+      <if test="record.innodbDataReadPersecond != null" >
+        innodb_data_read_persecond = #{record.innodbDataReadPersecond,jdbcType=VARCHAR},
+      </if>
+      <if test="record.innodbDataWritten != null" >
+        innodb_data_written = #{record.innodbDataWritten,jdbcType=BIGINT},
+      </if>
+      <if test="record.innodbDataWrittenPersecond != null" >
+        innodb_data_written_persecond = #{record.innodbDataWrittenPersecond,jdbcType=VARCHAR},
+      </if>
+      <if test="record.innodbBufferPoolPagesDirty != null" >
+        innodb_buffer_pool_pages_dirty = #{record.innodbBufferPoolPagesDirty,jdbcType=BIGINT},
+      </if>
+      <if test="record.innodbBufferPoolPagesDirtyPersecond != null" >
+        innodb_buffer_pool_pages_dirty_persecond = #{record.innodbBufferPoolPagesDirtyPersecond,jdbcType=VARCHAR},
+      </if>
+      <if test="record.innodbBufferPoolPagesFlushed != null" >
+        innodb_buffer_pool_pages_flushed = #{record.innodbBufferPoolPagesFlushed,jdbcType=BIGINT},
+      </if>
+      <if test="record.innodbBufferPoolPagesFlushedPersecond != null" >
+        innodb_buffer_pool_pages_flushed_persecond = #{record.innodbBufferPoolPagesFlushedPersecond,jdbcType=VARCHAR},
+      </if>
+      <if test="record.innodbBufferReadHitRatio != null" >
+        innodb_buffer_read_hit_ratio = #{record.innodbBufferReadHitRatio,jdbcType=VARCHAR},
+      </if>
+      <if test="record.innodbBufferUsage != null" >
+        innodb_buffer_usage = #{record.innodbBufferUsage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.innodbRowsInserted != null" >
+        innodb_rows_inserted = #{record.innodbRowsInserted,jdbcType=BIGINT},
+      </if>
+      <if test="record.innodbRowsInsertedPersecond != null" >
+        innodb_rows_inserted_persecond = #{record.innodbRowsInsertedPersecond,jdbcType=VARCHAR},
+      </if>
+      <if test="record.innodbRowsUpdated != null" >
+        innodb_rows_updated = #{record.innodbRowsUpdated,jdbcType=BIGINT},
+      </if>
+      <if test="record.innodbRowsUpdatedPersecond != null" >
+        innodb_rows_updated_persecond = #{record.innodbRowsUpdatedPersecond,jdbcType=VARCHAR},
+      </if>
+      <if test="record.innodbRowsDeleted != null" >
+        innodb_rows_deleted = #{record.innodbRowsDeleted,jdbcType=BIGINT},
+      </if>
+      <if test="record.innodbRowsDeletedPersecond != null" >
+        innodb_rows_deleted_persecond = #{record.innodbRowsDeletedPersecond,jdbcType=VARCHAR},
+      </if>
+      <if test="record.innodbBufferPoolPagesTotal != null" >
+        innodb_buffer_pool_pages_total = #{record.innodbBufferPoolPagesTotal,jdbcType=BIGINT},
+      </if>
+      <if test="record.innodbBufferPoolPagesFree != null" >
+        innodb_buffer_pool_pages_free = #{record.innodbBufferPoolPagesFree,jdbcType=BIGINT},
+      </if>
+      <if test="record.innodbPageSize != null" >
+        innodb_page_size = #{record.innodbPageSize,jdbcType=INTEGER},
+      </if>
+      <if test="record.slowQueries != null" >
+        slow_queries = #{record.slowQueries,jdbcType=INTEGER},
+      </if>
+      <if test="record.slaveDelay != null" >
+        slave_delay = #{record.slaveDelay,jdbcType=BIGINT},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update mysql_status_history
+    set id = #{record.id,jdbcType=BIGINT},
+      server_id = #{record.serverId,jdbcType=BIGINT},
+      uptime = #{record.uptime,jdbcType=VARCHAR},
+      open_tables = #{record.openTables,jdbcType=INTEGER},
+      threads_connected = #{record.threadsConnected,jdbcType=INTEGER},
+      threads_running = #{record.threadsRunning,jdbcType=INTEGER},
+      threads_created = #{record.threadsCreated,jdbcType=INTEGER},
+      threads_cached = #{record.threadsCached,jdbcType=INTEGER},
+      connections = #{record.connections,jdbcType=INTEGER},
+      aborted_clients = #{record.abortedClients,jdbcType=INTEGER},
+      aborted_connects = #{record.abortedConnects,jdbcType=INTEGER},
+      bytes_received = #{record.bytesReceived,jdbcType=BIGINT},
+      bytes_received_persecond = #{record.bytesReceivedPersecond,jdbcType=VARCHAR},
+      bytes_sent = #{record.bytesSent,jdbcType=BIGINT},
+      bytes_sent_persecond = #{record.bytesSentPersecond,jdbcType=VARCHAR},
+      com_select = #{record.comSelect,jdbcType=BIGINT},
+      com_select_persecond = #{record.comSelectPersecond,jdbcType=VARCHAR},
+      com_insert = #{record.comInsert,jdbcType=BIGINT},
+      com_insert_persecond = #{record.comInsertPersecond,jdbcType=VARCHAR},
+      com_update = #{record.comUpdate,jdbcType=BIGINT},
+      com_update_persecond = #{record.comUpdatePersecond,jdbcType=VARCHAR},
+      com_delete = #{record.comDelete,jdbcType=BIGINT},
+      com_delete_persecond = #{record.comDeletePersecond,jdbcType=VARCHAR},
+      com_commit = #{record.comCommit,jdbcType=BIGINT},
+      com_commit_persecond = #{record.comCommitPersecond,jdbcType=VARCHAR},
+      com_rollback = #{record.comRollback,jdbcType=BIGINT},
+      com_rollback_persecond = #{record.comRollbackPersecond,jdbcType=VARCHAR},
+      questions = #{record.questions,jdbcType=BIGINT},
+      questions_persecond = #{record.questionsPersecond,jdbcType=VARCHAR},
+      transactions = #{record.transactions,jdbcType=BIGINT},
+      transactions_persecond = #{record.transactionsPersecond,jdbcType=VARCHAR},
+      created_tmp_tables = #{record.createdTmpTables,jdbcType=BIGINT},
+      created_tmp_tables_persecond = #{record.createdTmpTablesPersecond,jdbcType=VARCHAR},
+      created_tmp_disk_tables = #{record.createdTmpDiskTables,jdbcType=BIGINT},
+      created_tmp_disk_tables_persecond = #{record.createdTmpDiskTablesPersecond,jdbcType=VARCHAR},
+      created_tmp_files = #{record.createdTmpFiles,jdbcType=BIGINT},
+      created_tmp_files_persecond = #{record.createdTmpFilesPersecond,jdbcType=VARCHAR},
+      innodb_data_reads = #{record.innodbDataReads,jdbcType=BIGINT},
+      innodb_data_reads_persecond = #{record.innodbDataReadsPersecond,jdbcType=VARCHAR},
+      innodb_data_writes = #{record.innodbDataWrites,jdbcType=BIGINT},
+      innodb_data_writes_persecond = #{record.innodbDataWritesPersecond,jdbcType=VARCHAR},
+      innodb_data_fsyncs = #{record.innodbDataFsyncs,jdbcType=BIGINT},
+      innodb_data_fsyncs_persecond = #{record.innodbDataFsyncsPersecond,jdbcType=VARCHAR},
+      innodb_data_read = #{record.innodbDataRead,jdbcType=BIGINT},
+      innodb_data_read_persecond = #{record.innodbDataReadPersecond,jdbcType=VARCHAR},
+      innodb_data_written = #{record.innodbDataWritten,jdbcType=BIGINT},
+      innodb_data_written_persecond = #{record.innodbDataWrittenPersecond,jdbcType=VARCHAR},
+      innodb_buffer_pool_pages_dirty = #{record.innodbBufferPoolPagesDirty,jdbcType=BIGINT},
+      innodb_buffer_pool_pages_dirty_persecond = #{record.innodbBufferPoolPagesDirtyPersecond,jdbcType=VARCHAR},
+      innodb_buffer_pool_pages_flushed = #{record.innodbBufferPoolPagesFlushed,jdbcType=BIGINT},
+      innodb_buffer_pool_pages_flushed_persecond = #{record.innodbBufferPoolPagesFlushedPersecond,jdbcType=VARCHAR},
+      innodb_buffer_read_hit_ratio = #{record.innodbBufferReadHitRatio,jdbcType=VARCHAR},
+      innodb_buffer_usage = #{record.innodbBufferUsage,jdbcType=VARCHAR},
+      innodb_rows_inserted = #{record.innodbRowsInserted,jdbcType=BIGINT},
+      innodb_rows_inserted_persecond = #{record.innodbRowsInsertedPersecond,jdbcType=VARCHAR},
+      innodb_rows_updated = #{record.innodbRowsUpdated,jdbcType=BIGINT},
+      innodb_rows_updated_persecond = #{record.innodbRowsUpdatedPersecond,jdbcType=VARCHAR},
+      innodb_rows_deleted = #{record.innodbRowsDeleted,jdbcType=BIGINT},
+      innodb_rows_deleted_persecond = #{record.innodbRowsDeletedPersecond,jdbcType=VARCHAR},
+      innodb_buffer_pool_pages_total = #{record.innodbBufferPoolPagesTotal,jdbcType=BIGINT},
+      innodb_buffer_pool_pages_free = #{record.innodbBufferPoolPagesFree,jdbcType=BIGINT},
+      innodb_page_size = #{record.innodbPageSize,jdbcType=INTEGER},
+      slow_queries = #{record.slowQueries,jdbcType=INTEGER},
+      slave_delay = #{record.slaveDelay,jdbcType=BIGINT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="io.mycat.eye.agent.bean.MysqlStatusHistory" >
+    update mysql_status_history
+    <set >
+      <if test="serverId != null" >
+        server_id = #{serverId,jdbcType=BIGINT},
+      </if>
+      <if test="uptime != null" >
+        uptime = #{uptime,jdbcType=VARCHAR},
+      </if>
+      <if test="openTables != null" >
+        open_tables = #{openTables,jdbcType=INTEGER},
+      </if>
+      <if test="threadsConnected != null" >
+        threads_connected = #{threadsConnected,jdbcType=INTEGER},
+      </if>
+      <if test="threadsRunning != null" >
+        threads_running = #{threadsRunning,jdbcType=INTEGER},
+      </if>
+      <if test="threadsCreated != null" >
+        threads_created = #{threadsCreated,jdbcType=INTEGER},
+      </if>
+      <if test="threadsCached != null" >
+        threads_cached = #{threadsCached,jdbcType=INTEGER},
+      </if>
+      <if test="connections != null" >
+        connections = #{connections,jdbcType=INTEGER},
+      </if>
+      <if test="abortedClients != null" >
+        aborted_clients = #{abortedClients,jdbcType=INTEGER},
+      </if>
+      <if test="abortedConnects != null" >
+        aborted_connects = #{abortedConnects,jdbcType=INTEGER},
+      </if>
+      <if test="bytesReceived != null" >
+        bytes_received = #{bytesReceived,jdbcType=BIGINT},
+      </if>
+      <if test="bytesReceivedPersecond != null" >
+        bytes_received_persecond = #{bytesReceivedPersecond,jdbcType=VARCHAR},
+      </if>
+      <if test="bytesSent != null" >
+        bytes_sent = #{bytesSent,jdbcType=BIGINT},
+      </if>
+      <if test="bytesSentPersecond != null" >
+        bytes_sent_persecond = #{bytesSentPersecond,jdbcType=VARCHAR},
+      </if>
+      <if test="comSelect != null" >
+        com_select = #{comSelect,jdbcType=BIGINT},
+      </if>
+      <if test="comSelectPersecond != null" >
+        com_select_persecond = #{comSelectPersecond,jdbcType=VARCHAR},
+      </if>
+      <if test="comInsert != null" >
+        com_insert = #{comInsert,jdbcType=BIGINT},
+      </if>
+      <if test="comInsertPersecond != null" >
+        com_insert_persecond = #{comInsertPersecond,jdbcType=VARCHAR},
+      </if>
+      <if test="comUpdate != null" >
+        com_update = #{comUpdate,jdbcType=BIGINT},
+      </if>
+      <if test="comUpdatePersecond != null" >
+        com_update_persecond = #{comUpdatePersecond,jdbcType=VARCHAR},
+      </if>
+      <if test="comDelete != null" >
+        com_delete = #{comDelete,jdbcType=BIGINT},
+      </if>
+      <if test="comDeletePersecond != null" >
+        com_delete_persecond = #{comDeletePersecond,jdbcType=VARCHAR},
+      </if>
+      <if test="comCommit != null" >
+        com_commit = #{comCommit,jdbcType=BIGINT},
+      </if>
+      <if test="comCommitPersecond != null" >
+        com_commit_persecond = #{comCommitPersecond,jdbcType=VARCHAR},
+      </if>
+      <if test="comRollback != null" >
+        com_rollback = #{comRollback,jdbcType=BIGINT},
+      </if>
+      <if test="comRollbackPersecond != null" >
+        com_rollback_persecond = #{comRollbackPersecond,jdbcType=VARCHAR},
+      </if>
+      <if test="questions != null" >
+        questions = #{questions,jdbcType=BIGINT},
+      </if>
+      <if test="questionsPersecond != null" >
+        questions_persecond = #{questionsPersecond,jdbcType=VARCHAR},
+      </if>
+      <if test="transactions != null" >
+        transactions = #{transactions,jdbcType=BIGINT},
+      </if>
+      <if test="transactionsPersecond != null" >
+        transactions_persecond = #{transactionsPersecond,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTmpTables != null" >
+        created_tmp_tables = #{createdTmpTables,jdbcType=BIGINT},
+      </if>
+      <if test="createdTmpTablesPersecond != null" >
+        created_tmp_tables_persecond = #{createdTmpTablesPersecond,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTmpDiskTables != null" >
+        created_tmp_disk_tables = #{createdTmpDiskTables,jdbcType=BIGINT},
+      </if>
+      <if test="createdTmpDiskTablesPersecond != null" >
+        created_tmp_disk_tables_persecond = #{createdTmpDiskTablesPersecond,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTmpFiles != null" >
+        created_tmp_files = #{createdTmpFiles,jdbcType=BIGINT},
+      </if>
+      <if test="createdTmpFilesPersecond != null" >
+        created_tmp_files_persecond = #{createdTmpFilesPersecond,jdbcType=VARCHAR},
+      </if>
+      <if test="innodbDataReads != null" >
+        innodb_data_reads = #{innodbDataReads,jdbcType=BIGINT},
+      </if>
+      <if test="innodbDataReadsPersecond != null" >
+        innodb_data_reads_persecond = #{innodbDataReadsPersecond,jdbcType=VARCHAR},
+      </if>
+      <if test="innodbDataWrites != null" >
+        innodb_data_writes = #{innodbDataWrites,jdbcType=BIGINT},
+      </if>
+      <if test="innodbDataWritesPersecond != null" >
+        innodb_data_writes_persecond = #{innodbDataWritesPersecond,jdbcType=VARCHAR},
+      </if>
+      <if test="innodbDataFsyncs != null" >
+        innodb_data_fsyncs = #{innodbDataFsyncs,jdbcType=BIGINT},
+      </if>
+      <if test="innodbDataFsyncsPersecond != null" >
+        innodb_data_fsyncs_persecond = #{innodbDataFsyncsPersecond,jdbcType=VARCHAR},
+      </if>
+      <if test="innodbDataRead != null" >
+        innodb_data_read = #{innodbDataRead,jdbcType=BIGINT},
+      </if>
+      <if test="innodbDataReadPersecond != null" >
+        innodb_data_read_persecond = #{innodbDataReadPersecond,jdbcType=VARCHAR},
+      </if>
+      <if test="innodbDataWritten != null" >
+        innodb_data_written = #{innodbDataWritten,jdbcType=BIGINT},
+      </if>
+      <if test="innodbDataWrittenPersecond != null" >
+        innodb_data_written_persecond = #{innodbDataWrittenPersecond,jdbcType=VARCHAR},
+      </if>
+      <if test="innodbBufferPoolPagesDirty != null" >
+        innodb_buffer_pool_pages_dirty = #{innodbBufferPoolPagesDirty,jdbcType=BIGINT},
+      </if>
+      <if test="innodbBufferPoolPagesDirtyPersecond != null" >
+        innodb_buffer_pool_pages_dirty_persecond = #{innodbBufferPoolPagesDirtyPersecond,jdbcType=VARCHAR},
+      </if>
+      <if test="innodbBufferPoolPagesFlushed != null" >
+        innodb_buffer_pool_pages_flushed = #{innodbBufferPoolPagesFlushed,jdbcType=BIGINT},
+      </if>
+      <if test="innodbBufferPoolPagesFlushedPersecond != null" >
+        innodb_buffer_pool_pages_flushed_persecond = #{innodbBufferPoolPagesFlushedPersecond,jdbcType=VARCHAR},
+      </if>
+      <if test="innodbBufferReadHitRatio != null" >
+        innodb_buffer_read_hit_ratio = #{innodbBufferReadHitRatio,jdbcType=VARCHAR},
+      </if>
+      <if test="innodbBufferUsage != null" >
+        innodb_buffer_usage = #{innodbBufferUsage,jdbcType=VARCHAR},
+      </if>
+      <if test="innodbRowsInserted != null" >
+        innodb_rows_inserted = #{innodbRowsInserted,jdbcType=BIGINT},
+      </if>
+      <if test="innodbRowsInsertedPersecond != null" >
+        innodb_rows_inserted_persecond = #{innodbRowsInsertedPersecond,jdbcType=VARCHAR},
+      </if>
+      <if test="innodbRowsUpdated != null" >
+        innodb_rows_updated = #{innodbRowsUpdated,jdbcType=BIGINT},
+      </if>
+      <if test="innodbRowsUpdatedPersecond != null" >
+        innodb_rows_updated_persecond = #{innodbRowsUpdatedPersecond,jdbcType=VARCHAR},
+      </if>
+      <if test="innodbRowsDeleted != null" >
+        innodb_rows_deleted = #{innodbRowsDeleted,jdbcType=BIGINT},
+      </if>
+      <if test="innodbRowsDeletedPersecond != null" >
+        innodb_rows_deleted_persecond = #{innodbRowsDeletedPersecond,jdbcType=VARCHAR},
+      </if>
+      <if test="innodbBufferPoolPagesTotal != null" >
+        innodb_buffer_pool_pages_total = #{innodbBufferPoolPagesTotal,jdbcType=BIGINT},
+      </if>
+      <if test="innodbBufferPoolPagesFree != null" >
+        innodb_buffer_pool_pages_free = #{innodbBufferPoolPagesFree,jdbcType=BIGINT},
+      </if>
+      <if test="innodbPageSize != null" >
+        innodb_page_size = #{innodbPageSize,jdbcType=INTEGER},
+      </if>
+      <if test="slowQueries != null" >
+        slow_queries = #{slowQueries,jdbcType=INTEGER},
+      </if>
+      <if test="slaveDelay != null" >
+        slave_delay = #{slaveDelay,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="io.mycat.eye.agent.bean.MysqlStatusHistory" >
+    update mysql_status_history
+    set server_id = #{serverId,jdbcType=BIGINT},
+      uptime = #{uptime,jdbcType=VARCHAR},
+      open_tables = #{openTables,jdbcType=INTEGER},
+      threads_connected = #{threadsConnected,jdbcType=INTEGER},
+      threads_running = #{threadsRunning,jdbcType=INTEGER},
+      threads_created = #{threadsCreated,jdbcType=INTEGER},
+      threads_cached = #{threadsCached,jdbcType=INTEGER},
+      connections = #{connections,jdbcType=INTEGER},
+      aborted_clients = #{abortedClients,jdbcType=INTEGER},
+      aborted_connects = #{abortedConnects,jdbcType=INTEGER},
+      bytes_received = #{bytesReceived,jdbcType=BIGINT},
+      bytes_received_persecond = #{bytesReceivedPersecond,jdbcType=VARCHAR},
+      bytes_sent = #{bytesSent,jdbcType=BIGINT},
+      bytes_sent_persecond = #{bytesSentPersecond,jdbcType=VARCHAR},
+      com_select = #{comSelect,jdbcType=BIGINT},
+      com_select_persecond = #{comSelectPersecond,jdbcType=VARCHAR},
+      com_insert = #{comInsert,jdbcType=BIGINT},
+      com_insert_persecond = #{comInsertPersecond,jdbcType=VARCHAR},
+      com_update = #{comUpdate,jdbcType=BIGINT},
+      com_update_persecond = #{comUpdatePersecond,jdbcType=VARCHAR},
+      com_delete = #{comDelete,jdbcType=BIGINT},
+      com_delete_persecond = #{comDeletePersecond,jdbcType=VARCHAR},
+      com_commit = #{comCommit,jdbcType=BIGINT},
+      com_commit_persecond = #{comCommitPersecond,jdbcType=VARCHAR},
+      com_rollback = #{comRollback,jdbcType=BIGINT},
+      com_rollback_persecond = #{comRollbackPersecond,jdbcType=VARCHAR},
+      questions = #{questions,jdbcType=BIGINT},
+      questions_persecond = #{questionsPersecond,jdbcType=VARCHAR},
+      transactions = #{transactions,jdbcType=BIGINT},
+      transactions_persecond = #{transactionsPersecond,jdbcType=VARCHAR},
+      created_tmp_tables = #{createdTmpTables,jdbcType=BIGINT},
+      created_tmp_tables_persecond = #{createdTmpTablesPersecond,jdbcType=VARCHAR},
+      created_tmp_disk_tables = #{createdTmpDiskTables,jdbcType=BIGINT},
+      created_tmp_disk_tables_persecond = #{createdTmpDiskTablesPersecond,jdbcType=VARCHAR},
+      created_tmp_files = #{createdTmpFiles,jdbcType=BIGINT},
+      created_tmp_files_persecond = #{createdTmpFilesPersecond,jdbcType=VARCHAR},
+      innodb_data_reads = #{innodbDataReads,jdbcType=BIGINT},
+      innodb_data_reads_persecond = #{innodbDataReadsPersecond,jdbcType=VARCHAR},
+      innodb_data_writes = #{innodbDataWrites,jdbcType=BIGINT},
+      innodb_data_writes_persecond = #{innodbDataWritesPersecond,jdbcType=VARCHAR},
+      innodb_data_fsyncs = #{innodbDataFsyncs,jdbcType=BIGINT},
+      innodb_data_fsyncs_persecond = #{innodbDataFsyncsPersecond,jdbcType=VARCHAR},
+      innodb_data_read = #{innodbDataRead,jdbcType=BIGINT},
+      innodb_data_read_persecond = #{innodbDataReadPersecond,jdbcType=VARCHAR},
+      innodb_data_written = #{innodbDataWritten,jdbcType=BIGINT},
+      innodb_data_written_persecond = #{innodbDataWrittenPersecond,jdbcType=VARCHAR},
+      innodb_buffer_pool_pages_dirty = #{innodbBufferPoolPagesDirty,jdbcType=BIGINT},
+      innodb_buffer_pool_pages_dirty_persecond = #{innodbBufferPoolPagesDirtyPersecond,jdbcType=VARCHAR},
+      innodb_buffer_pool_pages_flushed = #{innodbBufferPoolPagesFlushed,jdbcType=BIGINT},
+      innodb_buffer_pool_pages_flushed_persecond = #{innodbBufferPoolPagesFlushedPersecond,jdbcType=VARCHAR},
+      innodb_buffer_read_hit_ratio = #{innodbBufferReadHitRatio,jdbcType=VARCHAR},
+      innodb_buffer_usage = #{innodbBufferUsage,jdbcType=VARCHAR},
+      innodb_rows_inserted = #{innodbRowsInserted,jdbcType=BIGINT},
+      innodb_rows_inserted_persecond = #{innodbRowsInsertedPersecond,jdbcType=VARCHAR},
+      innodb_rows_updated = #{innodbRowsUpdated,jdbcType=BIGINT},
+      innodb_rows_updated_persecond = #{innodbRowsUpdatedPersecond,jdbcType=VARCHAR},
+      innodb_rows_deleted = #{innodbRowsDeleted,jdbcType=BIGINT},
+      innodb_rows_deleted_persecond = #{innodbRowsDeletedPersecond,jdbcType=VARCHAR},
+      innodb_buffer_pool_pages_total = #{innodbBufferPoolPagesTotal,jdbcType=BIGINT},
+      innodb_buffer_pool_pages_free = #{innodbBufferPoolPagesFree,jdbcType=BIGINT},
+      innodb_page_size = #{innodbPageSize,jdbcType=INTEGER},
+      slow_queries = #{slowQueries,jdbcType=INTEGER},
+      slave_delay = #{slaveDelay,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

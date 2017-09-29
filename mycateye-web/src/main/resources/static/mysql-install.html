@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans2">
+<head>
+	<title>MyCAT EYE</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Responsive Website Template">
+	<meta name="author" content="The Develovers">
+	<link href="assets/css/bootstrap.css" rel="stylesheet" type="text/css">
+	<link href="assets/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<link href="assets/css/elegant-icons.css" rel="stylesheet" type="text/css">
+	<link href="assets/css/main.css" rel="stylesheet" type="text/css">
+	<link href="assets/css/my-custom-styles.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+	<div id="wrapper">
+		<!-- 导航菜单 -->
+		<nav class="navbar navbar-default navbar-fixed-top ">
+			<div class="container">
+				<a href="index.html" class="navbar-brand">
+					<img src="assets/img/logo/logo_80.png" style="width:80;height:46px;">
+				</a>
+				<div id="main-nav-collapse" class="collapse navbar-collapse">
+					<ul class="nav navbar-nav main-navbar-nav">
+						<li class="dropdown">
+							<a href="index.html" class="dropdown-toggle" data-toggle="dropdown">首页</a>
+						</li>
+						<li class="dropdown active">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">安装配置<i class="fa fa-angle-down"></i></a>
+							<ul class="dropdown-menu" role="menu">
+								<li><a href="mysql-install.html">自动安装脚本</a></li>
+								<li><a href="mysql-mycnf.html">my.cnf自动生成工具</a></li>
+							</ul>
+						</li>
+						<li class="dropdown ">
+							<a href="mysql-cluster.html" class="dropdown-toggle" data-toggle="dropdown">集群管理</a>
+						</li>
+						<li class="dropdown ">
+							<a href="mysql-performance-monitor.html" class="dropdown-toggle" data-toggle="dropdown">性能监控</a>
+						</li>
+						<li class="dropdown "><a href="#" class="dropdown-toggle"
+							data-toggle="dropdown">开发者工具<i class="fa fa-angle-down"></i></a>
+							<ul class="dropdown-menu" role="menu">
+								<li><a href="mysql-sql-monitor.html">SQL监控</a></li>
+								<li><a href="mysql-slow-monitor.html">慢查询SQL</a></li>
+							</ul></li>
+						<li class="dropdown "><a href="mysql-health-check.html" class="dropdown-toggle"
+							data-toggle="dropdown">健康检查</a></li>
+						<li class="dropdown ">
+							<div class="btn-group" style="margin-top:18px;margin-left:40px;">
+							  <button type="button" class="btn btn-default">Action</button>
+							  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							    <span class="caret"></span>
+							    <span class="sr-only">Toggle Dropdown</span>
+							  </button>
+							  <ul class="dropdown-menu">
+							    <li><a href="#">Action</a></li>
+							    <li><a href="#">Another action</a></li>
+							    <li><a href="#">Something else here</a></li>
+							    <li role="separator" class="divider"></li>
+							    <li><a href="#">Separated link</a></li>
+							  </ul>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<!-- END 导航菜单 -->
+		<!-- 内容 -->
+		<section>
+			<div class="container">
+			<ol class="breadcrumb" style="font-size:14px;">
+			  <li><a href="index.html">首页</a></li>
+			  <li><a href="#">安装配置</a></li>
+			  <li class="active">MySQL自动安装脚本</li>
+			</ol>
+				<div class="panel panel-default">
+					  <div class="panel-body" style="line-height:35px;font-size:12px;">
+					    <div>&nbsp;&nbsp;&nbsp;&nbsp;本系统提供MySQL5.7.17（目前最稳当、性能最好的版本）自动化脚本安装的方法 : 下载安装包</div>
+					    <div>1、在服务器上创建/data/tools/mysql目录；</div>
+					    <div>2、使用unzip mysql-5.7.17-setup.zip命令，将安装包中的install.sh、my.cnf、mysql-5.7.17-linux-glibc2.5-x86_64.tar.gz解压到/data/tools/mysql目录；</div>
+					    <div>3、执行./install.sh；</div>
+					    <div>4、等待安装，完成后，临时密码存放在/tmp/mypass.txt中。</div>
+					    <div>5、使用临时密码登录到MySQL服务器，并使用set password='new password'，修改成自己的新密码。</div>
+					    <div>6、完成初始安装</div>
+					    <div>7、如需定制MySQL配置文件，请点击：<a href="mysql-mycnf.html">自动生成my.cnf文件</a></div>
+					  </div>
+				</div>
+			</div>
+		</section>
+		<!-- END 内容 -->
+		<!-- 页脚 -->
+		<footer class="footer-newsletter">
+			<div class="container">
+				
+				<div class="footer-bottom">
+					<div class="left">
+						
+						<p class="copyright-text">&copy;2017 MyCAT EYE</p>
+					</div>
+					
+				</div>
+			</div>
+		</footer>
+		<!-- END 页脚 -->
+		<div class="back-to-top">
+			<a href="#top"><i class="fa fa-chevron-up"></i></a>
+		</div>
+	</div>
+	<!-- JAVASCRIPT -->
+	<script src="assets/js/jquery-2.1.1.min.js"></script>
+	<script src="assets/js/bootstrap.min.js"></script>
+	<script src="assets/js/plugins/easing/jquery.easing.min.js"></script>
+	<script src="assets/js/plugins/morphext/morphext.min.js"></script>
+	<script src="assets/js/plugins/owl-carousel/owl.carousel.min.js"></script>
+	<script src="assets/js/bravana-lite.js"></script>
+</body>
+
+</html>

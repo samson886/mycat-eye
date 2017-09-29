@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>MyCAT EYE</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Responsive Website Template">
+<meta name="author" content="The Develovers">
+<link href="assets/css/bootstrap.css" rel="stylesheet" type="text/css">
+<link href="assets/css/font-awesome.min.css" rel="stylesheet"
+	type="text/css">
+<link href="assets/css/elegant-icons.css" rel="stylesheet"
+	type="text/css">
+<link href="assets/css/main.css" rel="stylesheet" type="text/css">
+<link href="assets/css/my-custom-styles.css" rel="stylesheet"
+	type="text/css">
+<link rel="stylesheet" type="text/css" media="all" href="assets/css/daterangepicker-bs3.css" />
+<link rel="stylesheet" href="assets/css/jquery.mloading.css" />
+<style>
+.float-container { position:absolute; right:0; width:50px; height:50px; }
+.float { top:300px; }
+</style>
+</head>
+
+<body>
+	<div id="wrapper">
+		<!-- 导航 -->
+		<nav class="navbar navbar-default navbar-fixed-top ">
+			<div class="container">
+				<a href="index.html" class="navbar-brand"> <img
+					src="assets/img/logo/logo_80.png" style="width: 80; height: 46px;">
+				</a>
+				<div id="main-nav-collapse" class="collapse navbar-collapse">
+					<ul class="nav navbar-nav main-navbar-nav">
+						<li class="dropdown"><a href="index.html"
+							class="dropdown-toggle" data-toggle="dropdown">首页</a></li>
+						<li class="dropdown"><a href="mysql-mycnf.html"
+							class="dropdown-toggle" data-toggle="dropdown">my.cnf生成工具</a></li>
+						<li class="dropdown "><a href="mysql-cluster.html" class="dropdown-toggle"
+							data-toggle="dropdown">集群管理</a></li>
+						<li class="dropdown active"><a href="mysql-performance-monitor.html"
+							class="dropdown-toggle" data-toggle="dropdown">性能监控</a></li>
+						<li class="dropdown "><a href="#" class="dropdown-toggle"
+							data-toggle="dropdown">开发者工具<i class="fa fa-angle-down"></i></a>
+							<ul class="dropdown-menu" role="menu">
+								<li><a href="mysql-sql-monitor.html">SQL监控</a></li>
+								<li><a href="mysql-slow-monitor.html">慢查询SQL</a></li>
+							</ul></li>
+						<li class="dropdown "><a href="mysql-health-check.html" class="dropdown-toggle"
+							data-toggle="dropdown">健康检查</a></li>
+						<li class="dropdown ">
+							<div class="btn-group"
+								style="margin-top: 18px; margin-left: 40px;">
+								<button type="button" class="btn btn-default" id="defaultNode">选择节点</button>
+								<button type="button" class="btn btn-default dropdown-toggle"
+									data-toggle="dropdown" aria-haspopup="true"
+									aria-expanded="false">
+									<span class="caret"></span> <span class="sr-only">Toggle
+										Dropdown</span>
+								</button>
+								<ul class="dropdown-menu" id="nodeUl">
+								</ul>
+							</div>
+							<input type="hidden" id="defaultServerId" value="" />
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<!-- END 导航 -->
+		<!-- 内容 -->
+		<section>
+			<div class="container">
+				<div class="btn-group pull-right" role="group">
+				
+				  <!-- <div class="btn-group" role="group">
+				    <button type="button" name="timeRangeGroup" id="timeRange1" class="btn btn-default btn-info">1小时</button>
+				  </div>
+				  <div class="btn-group" role="group">
+				    <button type="button" name="timeRangeGroup" id="timeRange8" class="btn btn-default">8小时</button>
+				  </div>
+				  <div class="btn-group" role="group">
+				    <button type="button" name="timeRangeGroup" id="timeRange24" class="btn btn-default">24小时</button>
+				  </div> -->
+				  <input type="hidden" id="defaultTimeRange" value="-1" />
+				</div>
+				<ol class="breadcrumb" style="font-size: 14px;">
+					<li><a href="index.html">首页</a></li>
+					<li class="active">性能监控</li>
+				</ol>
+				<div class="panel panel-default" style="border:0px;">
+				<div class="panel-body" style="padding:0px;">
+					<div class="input-prepend input-group pull-left" >
+												<span class="add-on input-group-addon">查询时间：<i
+													class="glyphicon glyphicon-calendar fa fa-calendar"></i></span> <span ><input
+													type="text" style="width: 320px;" name="reservation"
+													id="reservationtime" class="form-control"
+													value="2017/08/01 1:00:00 - 2017/08/02 13:30:00"
+													class="span4" />
+													</span>
+											</div>
+					<div class="btn-group" role="group" style="margin-top:10px;">
+							  <a type="button" href="#f_qps" class="btn btn-default">QPS</a>
+							  <a type="button" href="#f_thread" class="btn btn-default">线程数</a>
+							  <a type="button" href="#f_bytes" class="btn btn-default">数据量</a>
+							  <a type="button" href="#f_curd" class="btn btn-default">CURD</a>
+							  <a type="button" href="#f_transaction" class="btn btn-default">事务</a>
+							  <a type="button" href="#f_fsync" class="btn btn-default">InnoDB刷盘</a>
+							  <a type="button" href="#f_dirtypage" class="btn btn-default">InnoDB脏页</a>
+							  <a type="button" href="#f_dml" class="btn btn-default">InnoDB DML</a>
+							</div>
+				</div>
+				</div>
+				<div id="f_qps" class="panel panel-default">
+					<div class="panel-heading">QPS</div>
+					<div class="panel-body" style="line-height: 35px; font-size: 12px;">
+						<div id="qpsChart" style="width: 100%; height: 350px;"></div>
+					</div>
+				</div>
+				<div id="f_thread" class="panel panel-default">
+					<div class="panel-heading">线程数</div>
+					<div class="panel-body" style="line-height: 35px; font-size: 12px;">
+						<div id="threadsChart" style="width: 100%; height: 350px;"></div>
+					</div>
+				</div>
+				<div id="f_bytes" class="panel panel-default">
+					<div class="panel-heading">发送接受数据量</div>
+					<div class="panel-body" style="line-height: 35px; font-size: 12px;">
+						<div id="sendReceivedChart" style="width: 100%; height: 350px;"></div>
+					</div>
+				</div>
+				<div id="f_curd" class="panel panel-default">
+					<div class="panel-heading">CURD</div>
+					<div class="panel-body" style="line-height: 35px; font-size: 12px;">
+						<div id="curdChart" style="width: 100%; height: 350px;"></div>
+					</div>
+				</div>
+				<div id="f_transaction" class="panel panel-default">
+					<div class="panel-heading">事务</div>
+					<div class="panel-body" style="line-height: 35px; font-size: 12px;">
+						<div id="transactionChart" style="width: 100%; height: 350px;"></div>
+					</div>
+				</div>
+				<div id="f_fsync" class="panel panel-default">
+					<div class="panel-heading">InnoDB刷盘</div>
+					<div class="panel-body" style="line-height: 35px; font-size: 12px;">
+						<div id="fsyncChart" style="width: 100%; height: 350px;"></div>
+					</div>
+				</div>
+				<div id="f_dirtypage" class="panel panel-default">
+					<div class="panel-heading">InnoDB刷新/生成脏页</div>
+					<div class="panel-body" style="line-height: 35px; font-size: 12px;">
+						<div id="dirtyPageChart" style="width: 100%; height: 350px;"></div>
+					</div>
+				</div>
+				<div id="f_dml" class="panel panel-default">
+					<div class="panel-heading">InnoDB DML</div>
+					<div class="panel-body" style="line-height: 35px; font-size: 12px;">
+						<div id="dmlChart" style="width: 100%; height: 350px;"></div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- END 内容 -->
+		<!-- 页脚 -->
+		<footer class="footer-newsletter">
+			<div class="container">
+
+				<div class="footer-bottom">
+					<div class="left">
+
+						<p class="copyright-text">&copy;2017 MyCAT EYE</p>
+					</div>
+
+				</div>
+			</div>
+		</footer>
+		<!-- END 页脚 -->
+		<div class="back-to-top">
+			<a href="#top"><i class="fa fa-chevron-up"></i></a>
+		</div>
+	</div>
+	<div class="fakeloader"></div>
+	<!-- JAVASCRIPT -->
+	<script src="assets/js/jquery-2.1.1.min.js"></script>
+	<script src="assets/js/bootstrap.min.js"></script>
+	<script src="assets/js/plugins/easing/jquery.easing.min.js"></script>
+	<script src="assets/js/plugins/morphext/morphext.min.js"></script>
+	<script src="assets/js/plugins/owl-carousel/owl.carousel.min.js"></script>
+	<script src="assets/js/bravana-lite.js"></script>
+	<script src="assets/js/echarts.common.min.js"></script>
+	<!-- 自定义JAVASCRIPT -->
+	<script src="assets/js/misc-util.js"></script>
+	<script src="assets/js/monitor-chart-init.js"></script>
+	<script src="assets/js/monitor-qps-chart-init.js"></script>
+	<script src="assets/js/monitor-threads-chart-init.js"></script>
+	<script src="assets/js/monitor-sendreceived-chart-init.js"></script>
+	<script src="assets/js/monitor-curd-chart-init.js"></script>
+	<script src="assets/js/monitor-transaction-chart-init.js"></script>
+	<script src="assets/js/monitor-innodb-fsync-chart-init.js"></script>
+	<script src="assets/js/monitor-innodb-dirtypage-chart-init.js"></script>
+	<script src="assets/js/monitor-innodb-dml-chart-init.js"></script>
+	<script src="assets/js/monitor-timerange-switch.js"></script>
+	<!-- 时间区间组件 -->
+	<script type="text/javascript" src="assets/js/moment.js"></script>
+	<script type="text/javascript" src="assets/js/daterangepicker.js"></script>
+	<!-- loading效果 -->
+	<script src="assets/js/jquery.mloading.js"></script>
+	<!-- 置顶悬浮图标 -->
+	<div class="float-container float"><a href="javascript:$(window).scrollTop(0, 0);"><img src="assets/img/top.gif" style="border:0px;" /></a></div>
+</body>
+
+</html>

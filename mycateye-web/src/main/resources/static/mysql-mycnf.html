@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans2">
+<head>
+<title>MyCAT EYE</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Responsive Website Template">
+<meta name="author" content="The Develovers">
+<link href="assets/css/bootstrap.css" rel="stylesheet" type="text/css">
+<link href="assets/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link href="assets/css/elegant-icons.css" rel="stylesheet" type="text/css">
+<link href="assets/css/main.css" rel="stylesheet" type="text/css">
+<link href="assets/css/my-custom-styles.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+	<div id="wrapper">
+		<!-- 导航 -->
+		<nav class="navbar navbar-default navbar-fixed-top ">
+			<div class="container">
+				<a href="index.html" class="navbar-brand"> <img
+					src="assets/img/logo/logo_80.png" style="width: 80; height: 46px;">
+				</a>
+				<div id="main-nav-collapse" class="collapse navbar-collapse">
+					<ul class="nav navbar-nav main-navbar-nav">
+						<li class="dropdown"><a href="index.html"
+							class="dropdown-toggle" data-toggle="dropdown">首页</a></li>
+						<li class="dropdown active"><a href="mysql-mycnf.html"
+							class="dropdown-toggle" data-toggle="dropdown">my.cnf生成工具</a></li>
+						<li class="dropdown "><a href="mysql-cluster.html" class="dropdown-toggle"
+							data-toggle="dropdown">集群管理</a></li>
+						<li class="dropdown "><a href="mysql-performance-monitor.html" class="dropdown-toggle"
+							data-toggle="dropdown">性能监控</a></li>
+						<li class="dropdown "><a href="#" class="dropdown-toggle"
+							data-toggle="dropdown">开发者工具<i class="fa fa-angle-down"></i></a>
+							<ul class="dropdown-menu" role="menu">
+								<li><a href="mysql-sql-monitor.html">SQL监控</a></li>
+								<li><a href="mysql-slow-monitor.html">慢查询SQL</a></li>
+							</ul></li>
+						<li class="dropdown "><a href="mysql-health-check.html" class="dropdown-toggle"
+							data-toggle="dropdown">健康检查</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<!-- END 导航 -->
+		<!-- 内容 -->
+		<section>
+			<div class="container">
+				<ol class="breadcrumb" style="font-size: 14px;">
+					<li><a href="index.html">首页</a></li>
+					<li class="active">my.cnf自动生成工具</li>
+				</ol>
+				<div class="panel panel-default">
+					<div class="panel-body" style="line-height: 35px; font-size: 12px;">
+						<form method="post" id="mycnfGenerateForm" action="/mysql/mycnf/generate" class="form-horizontal">
+							<div class="row">
+								<div class="col-sm-12">
+									<div class="form-group">
+										<label for="contact-name" class="control-label">您的MySQL数据库服务器名称</label>
+										<input type="text" class="form-control" id="serverHostName"
+											name="serverHostName" value="mysqldb"
+											placeholder="您的MySQL数据库服务器主机名*" required="">
+									</div>
+								</div>
+								<div class="col-sm-12">
+									<div class="form-group">
+										<label for="contact-name" class="control-label">您的MySQL数据库ServerId</label>
+										<input type="text" class="form-control" id="serverId"
+											name="serverId" placeholder="请输入" required="">
+									</div>
+								</div>
+								<div class="col-sm-12">
+									<div class="form-group">
+										<label for="contact-name" class="control-label">服务器物理内存（单位G）</label>
+										<input type="text" class="form-control" id="physicalMemory"
+											name="physicalMemory" value="16" placeholder="服务器物理内存（单位G）*"
+											required="">
+									</div>
+								</div>
+								<div class="col-sm-12">
+									<div class="form-group">
+										<label for="contact-name" class="control-label">MySQL安装路径</label>
+										<input type="text" class="form-control" id="installPath"
+											name="installPath" value="/usr/local/mysql"
+											placeholder="MySQL安装路径*" required="">
+									</div>
+								</div>
+								<div class="col-sm-12">
+									<div class="form-group">
+										<label for="contact-name" class="control-label">MySQL数据目录</label>
+										<input type="text" class="form-control" id="dataFilePath"
+											name="dataFilePath" value="/data/mysql/"
+											placeholder="MySQL数据目录*" required="">
+									</div>
+								</div>
+								<div class="col-sm-12">
+									<div class="form-group">
+										<label for="contact-name" class="control-label">MySQL监听的端口</label>
+										<input type="text" class="form-control" id="listenPort"
+											name="listenPort" value="3306" placeholder="MySQL监听的端口*"
+											required="">
+									</div>
+								</div>
+								<div class="col-sm-12">
+									<div class="form-group">
+										<label for="contact-name" class="control-label">预计最大并发连接数</label>
+										<input type="text" class="form-control"
+											id="expectedMaxConnect" name="expectedMaxConnect" value="512"
+											placeholder="预计最大并发连接数*" required="">
+									</div>
+								</div>
+								<div class="col-sm-12">
+									<div class="form-group">
+										<label for="contact-name" class="control-label">binlog保留多久(单位：天)</label>
+										<input type="text" class="form-control" id="binlogExpireDays"
+											name="binlogExpireDays" value="7"
+											placeholder="binlog保留多久(单位：天)*" required="">
+									</div>
+								</div>
+								<div class="col-sm-12">
+									<div class="form-group">
+										<label for="contact-name" class="control-label">排序，表连接等查询是否较多？</label>
+										<div>
+											<span><input name="sort_join" type="radio" value="false"
+												checked />还好，不算多 </span>&nbsp;&nbsp; <span><input
+												name="sort_join" type="radio" value="true" />嗯，好像有点多 </span>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-12">
+									<div class="form-group">
+										<label for="contact-name" class="control-label">MySQL异常宕机时怕丢数据不？</label>
+										<div>
+											<span><input name="data_safe" type="radio" value="true"
+												checked />想啥呢，肯定不能丢数据啊 </span>&nbsp;&nbsp; <span><input
+												name="data_safe" type="radio" value="false" />嗯，无所谓吧，不是什么重要数据库</span>
+										</div>
+									</div>
+								</div>
+							</div>
+
+
+							<input type="hidden" name="msg-submitted" id="msg-submitted"
+								value="true">
+							<div class="col-sm-12">
+								<button id="submit-button" type="submit" class="btn btn-primary">
+									<i class="fa loading-icon"></i> <span>立即生成my.cnf</span>
+								</button>
+							</div>
+						</form>
+
+					</div>
+				</div>
+				
+			</div>
+		</section>
+		<!-- END 内容 -->
+		<!-- 页脚 -->
+		<footer class="footer-newsletter">
+			<div class="container">
+
+				<div class="footer-bottom">
+					<div class="left">
+
+						<p class="copyright-text">&copy;2017 MyCAT EYE</p>
+					</div>
+
+				</div>
+			</div>
+		</footer>
+		<!-- END 页脚 -->
+		<div class="back-to-top">
+			<a href="#top"><i class="fa fa-chevron-up"></i></a>
+		</div>
+	</div>
+	<!-- JAVASCRIPT -->
+	<script src="assets/js/jquery-2.1.1.min.js"></script>
+	<script src="assets/js/bootstrap.min.js"></script>
+	<script src="assets/js/plugins/easing/jquery.easing.min.js"></script>
+	<script src="assets/js/plugins/morphext/morphext.min.js"></script>
+	<script src="assets/js/plugins/owl-carousel/owl.carousel.min.js"></script>
+	<script src="assets/js/bravana-lite.js"></script>
+
+</body>
+
+</html>

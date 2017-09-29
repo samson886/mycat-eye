@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+	<head>
+		<meta charset="utf-8">
+		<title>MyCATEYE</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="renderer" content="webkit">
+
+		<!-- Loading Bootstrap -->
+		<link href="assets/css/backend.min.css" rel="stylesheet">
+		<style>
+				.skin-list li {
+					float: left;
+					width: 33.33333%;
+					padding: 5px;
+				}
+				
+				.skin-list li a {
+					display: block;
+					box-shadow: 0 0 3px rgba(0, 0, 0, 0.4);
+				}
+		</style>
+		<!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+		<!--[if lt IE 9]>
+          <script src="assets/js/html5shiv.js"></script>
+          <script src="assets/js/respond.min.js"></script>
+        <![endif]-->
+
+		<script type="text/javascript">
+			var require = {
+				"config": {
+					"site": {
+						"name": "",
+						"cdnurl": "./",
+						"version": "1.0.0",
+						"timezone": "Asia/Shanghai",
+						"languages": {
+							"backend": "zh-cn",
+							"frontend": "zh-cn"
+						}
+					},
+
+					"modulename": "admin",
+					"controllername": "index",
+					"actionname": "index",
+					"jsname": "backend/index",
+					"moduleurl": "./",
+					"language": "zh-cn",
+					"referer": null
+				}
+			};
+		</script>
+		
+	</head>
+
+	<body class="hold-transition skin-green sidebar-mini fixed" id="tabs">
+		<div class="wrapper">
+
+			<header id="header" class="main-header">
+				<!-- Logo -->
+				<a href="./" class="logo">
+					<!-- 迷你模式下Logo的大小为50X50 -->
+					<span class="logo-mini">ME</span>
+					<!-- 普通模式下Logo -->
+					<span class="logo-lg"><b>MyCAT</b>EYE</span>
+				</a>
+				<!-- 顶部通栏样式 -->
+				<nav class="navbar navbar-static-top">
+					<!-- 边栏切换按钮-->
+					<a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+						<span class="sr-only">Toggle navigation</span>
+					</a>
+
+					<div id="nav" class="pull-left">
+						<!--如果不想在顶部显示角标,则给ul加上disable-top-badge类即可-->
+						<ul class="nav nav-tabs nav-addtabs disable-top-badge" role="tablist">
+						</ul>
+					</div>
+
+					<div class="navbar-custom-menu">
+						<ul class="nav navbar-nav">
+							<li class="hidden-xs">
+								<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-github"></i>当前节点：<span id="currentServerId">10.89.0.0</span></a>
+								<ul class="dropdown-menu" id="ulNodeList">
+									
+								</ul>
+							</li>
+							<li>
+								<a href="mysql-node.html" addtabs="30001" url="mysql-node.html" py="jdgl" pinyin="jiedianguanli"><i class="fa fa-github"></i>节点管理</a>
+							</li>
+							<li>
+								<a href="mysql-cluster.html" addtabs="30000" url="mysql-cluster.html" py="jqgl" pinyin="jiqunguanli"><i class="fa fa-github"></i>集群管理</a>
+							</li>
+
+							<!-- 账号信息下拉框 -->
+							<li class="dropdown user user-menu">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+									<img src="assets/img/avatar.png" class="user-image" alt="Admin">
+									<span class="hidden-xs username">
+										<!--
+                                                	加载用户名
+                                                -->
+									</span>
+								</a>
+								<ul class="dropdown-menu">
+									<!-- User image -->
+									<li class="user-header">
+										<img src="assets/img/avatar.png" class="img-circle" alt="">
+
+										<p>
+											<span class="username">
+												<!--
+                                                	加载用户名
+                                                -->
+											</span>
+										</p>
+									</li>
+									<!-- Menu Footer-->
+									<li class="user-footer">
+										<div class="pull-left">
+											<button id="modifyPassword" class="btn btn-default">修改密码</button>
+										</div>
+										<div class="pull-right">
+											<button id="logout" class="btn btn-default">注销</button>
+										</div>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</nav>
+			</header>
+			<!-- Left side column. contains the logo and sidebar -->
+			<aside class="main-sidebar">
+				<!-- sidebar: style can be found in sidebar.less -->
+				<section class="sidebar">
+					<!-- Sidebar user panel -->
+					<div class="user-panel hidden-xs">
+						<div class="pull-left image">
+							<a href="profile" class="addtabsit"><img src="assets/img/avatar.png" class="img-circle" /></a>
+						</div>
+						<div class="pull-left info">
+							<p class="username">
+								<!--
+                                                	加载用户名
+                                                -->
+							</p>
+							<i class="fa fa-circle text-success"></i> 在线 </div>
+					</div>
+
+					<!-- search form -->
+					<form action="" method="get" class="sidebar-form" onsubmit="return false;">
+						<div class="input-group">
+							<input type="text" name="q" class="form-control" placeholder="搜索菜单">
+							<span class="input-group-btn">
+                                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+                                </button>
+                            </span>
+							<div class="menuresult list-group sidebar-form hide">
+							</div>
+						</div>
+					</form>
+					<!-- /.search form -->
+
+					<!-- sidebar menu: : style can be found in sidebar.less -->
+					<!--如果想始终显示子菜单,则给ul加上show-submenu类即可-->
+					<ul class="sidebar-menu">
+						<li class="header">站内导航</li>
+						<li class=" active">
+							<a href="dashboard.html" addtabs="11180" url="dashboard.html" py="kzt" pinyin="kongzhitai"><i class="fa fa-dashboard"></i> <span>控制台</span> <span class="pull-right-container"> </span></a>
+						</li>
+						<li class="">
+							<a href="mysql-variable.html" addtabs="20000" url="mysql-variable.html" py="blgl" pinyin="bianliangguanli"><i class="fa fa-file-text-o"></i> <span>变量管理</span> <span class="pull-right-container"> </span></a>
+						</li>
+
+						
+						<li class="header">相关链接</li>
+						<li>
+							<a href="http://www.mycat.io/" target="_blank"><i class="fa fa-list text-red"></i> <span>官方网站</span></a>
+						</li>
+					</ul>
+				</section>
+				<!-- /.sidebar -->
+			</aside>
+
+			<!-- Content Wrapper. Contains page content -->
+			<div class="content-wrapper tab-content tab-addtabs">
+
+			</div>
+			<!-- /.content-wrapper -->
+			<footer class="main-footer hide">
+				<div class="pull-right hidden-xs">
+				</div>
+				<strong>Copyright &copy; 2017-2018 MyCATEYE.</strong> All rights reserved.
+			</footer>
+
+			<!-- Add the sidebar's background. This div must be placed
+                 immediately after the control sidebar -->
+			<div class="control-sidebar-bg"></div>
+			
+			<!-- Control Sidebar -->
+
+			<!-- /.control-sidebar -->
+		</div>
+
+		<!-- ./wrapper -->
+		<!-- end main content -->
+		<!-- jQuery 2.2.3 -->
+		<script src="assets/js/jquery-2.2.3.min.js"></script>
+
+		<script src="assets/js/jquery.cookie.js" type="text/javascript" charset="utf-8"></script>
+		<script src="assets/js/bootbox.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="assets/js/modal.js" type="text/javascript" charset="utf-8"></script>
+		<!--
+        	作者：360841519@qq.com
+        	时间：2017-09-08
+        	描述：自定义JS
+        -->
+        <script src="assets/js/custom/parent.js" type="text/javascript" charset="utf-8"></script>
+        <script src="assets/js/custom/login-auth.js" type="text/javascript" charset="utf-8"></script>
+        <script src="assets/js/custom/index.js" type="text/javascript" charset="utf-8"></script>
+		<script src="assets/js/require.min.js" data-main="assets/js/require-backend.js"></script>
+
+
+	</body>
+
+</html>

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>MyCAT EYE</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Responsive Website Template">
+<meta name="author" content="The Develovers">
+<link href="assets/css/bootstrap.css" rel="stylesheet" type="text/css">
+<link href="assets/css/font-awesome.min.css" rel="stylesheet"
+	type="text/css">
+<link href="assets/css/elegant-icons.css" rel="stylesheet"
+	type="text/css">
+<link href="assets/css/main.css" rel="stylesheet" type="text/css">
+<link href="assets/css/my-custom-styles.css" rel="stylesheet"
+	type="text/css">
+<link rel="stylesheet" href="assets/css/dataTables.bootstrap.css">
+<link rel="stylesheet" href="assets/css/jquery.mloading.css" />
+<style>
+.selected {
+	background-color: #gray
+}
+
+pre {
+	white-space: pre-wrap;
+	word-wrap: break-word;
+}
+.float-container { position:absolute; right:0; width:50px; height:50px; }
+.float { top:300px; }
+</style>
+</head>
+
+<body>
+	<div id="wrapper">
+		<!-- 导航 -->
+		<nav class="navbar navbar-default navbar-fixed-top ">
+			<div class="container">
+				<a href="index.html" class="navbar-brand"> <img
+					src="assets/img/logo/logo_80.png" style="width: 80; height: 46px;">
+				</a>
+				<div id="main-nav-collapse" class="collapse navbar-collapse">
+					<ul class="nav navbar-nav main-navbar-nav">
+						<li class="dropdown"><a href="index.html"
+							class="dropdown-toggle" data-toggle="dropdown">首页</a></li>
+						<li class="dropdown"><a href="mysql-mycnf.html"
+							class="dropdown-toggle" data-toggle="dropdown">my.cnf生成工具</a></li>
+						<li class="dropdown "><a href="mysql-cluster.html" class="dropdown-toggle"
+							data-toggle="dropdown">集群管理</a></li>
+						<li class="dropdown"><a href="mysql-performance-monitor.html"
+							class="dropdown-toggle" data-toggle="dropdown">性能监控</a></li>
+						<li class="dropdown active"><a href="#"
+							class="dropdown-toggle" data-toggle="dropdown">开发者工具<i
+								class="fa fa-angle-down"></i></a>
+							<ul class="dropdown-menu" role="menu">
+								<li><a href="mysql-sql-monitor.html">SQL监控</a></li>
+								<li><a href="mysql-slow-monitor.html">慢查询SQL</a></li>
+							</ul></li>
+						<li class="dropdown "><a href="mysql-health-check.html"
+							class="dropdown-toggle" data-toggle="dropdown">健康检查</a></li>
+						<li class="dropdown ">
+							<div class="btn-group"
+								style="margin-top: 18px; margin-left: 40px;">
+								<button type="button" class="btn btn-default" id="defaultNode">选择节点</button>
+								<button type="button" class="btn btn-default dropdown-toggle"
+									data-toggle="dropdown" aria-haspopup="true"
+									aria-expanded="false">
+									<span class="caret"></span> <span class="sr-only">Toggle
+										Dropdown</span>
+								</button>
+								<ul class="dropdown-menu" id="nodeUl">
+								</ul>
+							</div> <input type="hidden" id="defaultServerId" value="" />
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<!-- END 导航 -->
+		<!-- 内容 -->
+		<section>
+			<div class="container">
+				<ol class="breadcrumb" style="font-size: 14px;">
+					<li><a href="index.html">首页</a></li>
+					<li>开发工具</li>
+					<li class="active">SQL监控</li>
+				</ol>
+
+				<div class="panel panel-default">
+					<div class="panel-heading">SQL监控<span style="font-size:12px;">&nbsp;(点击“分析”按钮可在页面下方查看分析结果)</span></div>
+					<div class="panel-body" style="line-height: 35px; font-size: 12px;">
+						<table id="example" class="display table table-hover" width="100%">
+							<thead>
+								<tr>
+									<th>SQL</th>
+									<th style="width: 40px;">数据库</th>
+									<th style="width: 50px;">平均耗时</th>
+									<th style="width: 100px;">最近执行时间</th>
+									<th style="width: 50px;">执行次数</th>
+									<th style="width: 40px;">操作</th>
+								</tr>
+							</thead>
+						</table>
+					</div>
+				</div>
+				<div class="panel panel-default" style="display: none"
+					id="panel_sql_analyze">
+					<div class="panel-heading">SQL分析</div>
+					<div class="panel-body" style="line-height: 20px; font-size: 12px;">
+						<div class="row">
+							<div class="col-md-12">
+								<ul class="nav nav-tabs" role="sql_example">
+									<li role="presentation" class="active"><a
+										href="#sql_statement" aria-controls="sql_statement" role="tab"
+										data-toggle="tab">查询语句</a></li>
+									<li role="presentation"><a href="#sql_statement_example"
+										aria-controls="sql_statement_example" role="tab"
+										data-toggle="tab">例子</a></li>
+								</ul>
+
+								<div class="tab-content">
+									<div role="sql_example" class="tab-pane active"
+										style="margin: 15px;" id="sql_statement"></div>
+									<pre role="sql_example" class="tab-pane"
+										style="margin: 15px; word-wrap: break-word;"
+										id="sql_statement_example"></pre>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<ul class="nav nav-tabs" role="sql_stat">
+									<li role="presentation" class="active"><a href="#sql_stat"
+										aria-controls="sql_stat" role="tab" data-toggle="tab">SQL统计</a></li>
+								</ul>
+
+								<div class="tab-content">
+									<div role="sql_stat" class="tab-pane active" id="sql_stat">
+										<table class="table table-bordered table-hover"
+											style="margin-top: 15px;">
+											<tbody>
+												<tr>
+													<td>数据库</td>
+													<td id="currentSchema"></td>
+												</tr>
+												<tr>
+													<td>表</td>
+													<td id="currentTable"></td>
+												</tr>
+												<tr>
+													<td>首次执行</td>
+													<td id="firstSeen"></td>
+												</tr>
+												<tr>
+													<td>最后执行</td>
+													<td id="lastSeen"></td>
+												</tr>
+												<tr>
+													<td>查询总次数</td>
+													<td id="countStar"></td>
+												</tr>
+												<tr>
+													<td>平均耗时</td>
+													<td id="avgTimerWait"></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<ul class="nav nav-tabs" role="sql_explain">
+									<li role="presentation" class="active"><a
+										href="#sql_explain" aria-controls="sql_explain" role="tab"
+										data-toggle="tab">执行计划</a></li>
+								</ul>
+
+								<div class="tab-content">
+									<div role="sql_explain" class="tab-pane active"
+										id="sql_explain">
+										<table class="table table-bordered table-hover"
+											style="margin-top: 15px; width: 100%; TABLE-LAYOUT: fixed">
+											<thead>
+												<tr>
+													<th style="WORD-WRAP: break-word">ID</th>
+													<th style="WORD-WRAP: break-word">select_type</th>
+													<th style="WORD-WRAP: break-word">table</th>
+													<th style="WORD-WRAP: break-word">partitions</th>
+													<th style="WORD-WRAP: break-word">type</th>
+													<th style="WORD-WRAP: break-word">possible_keys</th>
+													<th style="WORD-WRAP: break-word">key</th>
+													<th style="WORD-WRAP: break-word">key_len</th>
+													<th style="WORD-WRAP: break-word">ref</th>
+													<th style="WORD-WRAP: break-word">rows</th>
+													<th style="WORD-WRAP: break-word">filtered</th>
+													<th style="WORD-WRAP: break-word">extra</th>
+												</tr>
+											</thead>
+											<tbody id="sql_explain_tbody">
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<ul class="nav nav-tabs" role="sql_advisor">
+									<li role="presentation" class="active"><a
+										href="#sql_advisor" aria-controls="sql_advisor" role="tab"
+										data-toggle="tab">SQL建议</a></li>
+								</ul>
+
+								<div class="tab-content">
+									<pre role="sql_advisor" class="tab-pane active"
+										style="margin-top: 15px; word-wrap: break-word;"
+										id="sql_advisor"></pre>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<ul class="nav nav-tabs" role="sql_table_info">
+									<li role="presentation" class="active"><a
+										href="#sql_table_info" aria-controls="sql_table_info"
+										role="tab" data-toggle="tab">表信息</a></li>
+								</ul>
+
+								<div class="tab-content">
+									<div role="sql_table_info" class="tab-pane active"
+										id="sql_table_info" style="margin-top: 15px;">
+										<div class="row">
+											<div class="col-md-2">
+												<div class="list-group" id="tableList"></div>
+											</div>
+											<div class="col-md-10">
+												<ul id="myTab" class="nav nav-tabs">
+													<li class="active"><a href="#showCreateTable"
+														data-toggle="tab"> 建表语句 </a></li>
+													<li><a href="#tableIndex" data-toggle="tab">表索引</a></li>
+												</ul>
+												<div id="myTabContent" class="tab-content"
+													style="margin-top: 15px;">
+													<pre class="tab-pane fade in active" id="showCreateTable">
+														</pre>
+													<div class="tab-pane fade" id="tableIndex">
+														<table class="table table-bordered table-hover"
+															style="margin-top: 15px; width: 100%; TABLE-LAYOUT: fixed">
+															<thead>
+																<tr>
+																	<th style="WORD-WRAP: break-word">是否是唯一索引</th>
+																	<th style="WORD-WRAP: break-word">列名</th>
+																	<th style="WORD-WRAP: break-word">索引名</th>
+																	<th style="WORD-WRAP: break-word">可为空</th>
+																	<th style="WORD-WRAP: break-word">索引类型</th>
+																	<th style="WORD-WRAP: break-word">索引基数</th>
+																</tr>
+															</thead>
+															<tbody id="table_index_tbody">
+															</tbody>
+														</table>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- END 内容 -->
+		<!-- 页脚 -->
+		<footer class="footer-newsletter">
+			<div class="container">
+
+				<div class="footer-bottom">
+					<div class="left">
+
+						<p class="copyright-text">&copy;2017 MyCAT EYE</p>
+					</div>
+
+				</div>
+			</div>
+		</footer>
+		<!-- END 页脚 -->
+	</div>
+	<div class="fakeloader"></div>
+	<!-- JAVASCRIPT -->
+	<script src="assets/js/jquery-2.1.1.min.js"></script>
+	<script src="assets/js/bootstrap.min.js"></script>
+	<script src="assets/js/plugins/easing/jquery.easing.min.js"></script>
+	<script src="assets/js/plugins/morphext/morphext.min.js"></script>
+	<script src="assets/js/plugins/owl-carousel/owl.carousel.min.js"></script>
+	<script src="assets/js/bravana-lite.js"></script>
+	<script src="assets/js/echarts.common.min.js"></script>
+	<!-- DataTables -->
+	<script src="assets/js/jquery.dataTables.min.js"></script>
+	<script src="assets/js/dataTables.bootstrap.min.js"></script>
+	<!-- 自定义JAVASCRIPT -->
+	<script src="assets/js/misc-util.js"></script>
+	<script src="assets/js/sql-monitor-init.js"></script>
+	<script src="assets/js/sql-monitor-analyze.js"></script>
+	<!-- loading效果 -->
+	<script src="assets/js/jquery.mloading.js"></script>
+	<!-- 置顶悬浮图标 -->
+	<div class="float-container float"><a href="javascript:$(window).scrollTop(0, 0);"><img src="assets/img/top.gif" style="border:0px;" /></a></div>
+</body>
+
+</html>

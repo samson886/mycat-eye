@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans2">
+<head>
+	<title>MyCAT EYE</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Responsive Website Template">
+	<meta name="author" content="The Develovers">
+	<link href="assets/css/bootstrap.css" rel="stylesheet" type="text/css">
+	<link href="assets/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<link href="assets/css/elegant-icons.css" rel="stylesheet" type="text/css">
+	<link href="assets/css/main.css" rel="stylesheet" type="text/css">
+	<link href="assets/css/my-custom-styles.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" type="text/css" href="assets/css/step.css"/>
+	<style>
+	.badge{
+    background-color: transparent; 
+	}
+	</style>
+</head>
+
+<body>
+	<div id="wrapper">
+		<!-- 导航菜单 -->
+		<nav class="navbar navbar-default navbar-fixed-top ">
+			<div class="container">
+				<a href="index.html" class="navbar-brand">
+					<img src="assets/img/logo/logo_80.png" style="width:80;height:46px;">
+				</a>
+				<div id="main-nav-collapse" class="collapse navbar-collapse">
+					<ul class="nav navbar-nav main-navbar-nav">
+						<li class="dropdown">
+							<a href="index.html" class="dropdown-toggle" data-toggle="dropdown">首页</a>
+						</li>
+						<li class="dropdown"><a href="mysql-mycnf.html"
+							class="dropdown-toggle" data-toggle="dropdown">my.cnf生成工具</a></li>
+						<li class="dropdown ">
+							<a href="mysql-cluster.html" class="dropdown-toggle" data-toggle="dropdown">集群管理</a>
+						</li>
+						<li class="dropdown ">
+							<a href="mysql-performance-monitor.html" class="dropdown-toggle" data-toggle="dropdown">性能监控</a>
+						</li>
+						<li class="dropdown "><a href="#" class="dropdown-toggle"
+							data-toggle="dropdown">开发者工具<i class="fa fa-angle-down"></i></a>
+							<ul class="dropdown-menu" role="menu">
+								<li><a href="mysql-sql-monitor.html">SQL监控</a></li>
+								<li><a href="mysql-slow-monitor.html">慢查询SQL</a></li>
+							</ul></li>
+						<li class="dropdown active"><a href="mysql-health-check.html" class="dropdown-toggle"
+							data-toggle="dropdown">健康检查</a></li>
+						<li class="dropdown ">
+							<div class="btn-group"
+								style="margin-top: 18px; margin-left: 40px;">
+								<button type="button" class="btn btn-default" id="defaultNode">选择节点</button>
+								<button type="button" class="btn btn-default dropdown-toggle"
+									data-toggle="dropdown" aria-haspopup="true"
+									aria-expanded="false">
+									<span class="caret"></span> <span class="sr-only">Toggle
+										Dropdown</span>
+								</button>
+								<ul class="dropdown-menu" id="nodeUl">
+								</ul>
+							</div> <input type="hidden" id="defaultServerId" value="" />
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<!-- END 导航菜单 -->
+		<!-- 内容 -->
+		<section>
+			<div class="container">
+			<div style="width:100%"><a class="btn btn-success pull-right" style="margin-buttom:15px;" href="#" id="btCheck" role="button">立即检查</a></div>
+			<ol class="breadcrumb" style="font-size:14px;">
+			  <li><a href="index.html">首页</a></li>
+			  <li class="active"><a href="#">健康检查</a></li>
+			</ol>
+			
+				<div class="panel panel-default">
+					  <div class="panel-body" style="line-height:35px;font-size:12px;">
+					    <ul class="nav nav-pills nav-justified step step-progress">
+							<li>
+								<a>安全检查<span class="caret"></span></a>
+							</li>
+							<li>
+								<a>用户访问<span class="caret"></span></a>
+							</li>
+							<li>
+								<a>参数检查<span class="caret"></span></a>
+							</li>
+							<li>
+								<a>复制检查<span class="caret"></span></a>
+							</li>
+							<li>
+								<a>索引检查<span class="caret"></span></a>
+							</li>
+						</ul>
+					  </div>
+				</div>
+				<div class="panel panel-default">
+						  <div class="panel-heading">安全检查项</div>
+						  <div class="panel-body">
+						    <ul class="list-group">
+							  <li class="list-group-item" id="li_super_priv"><span class="badge" id="span_super_priv"></span>权限检查
+							  </li>
+							  <li class="list-group-item " id="li_weak_password"><span class="badge" id="span_weak_password"></span>弱密码检查</li>
+							</ul>
+						  </div>
+			    </div>
+			    <div class="panel panel-default">
+						  <div class="panel-heading">用户访问检查项</div>
+						  <div class="panel-body">
+						    <ul class="list-group">
+							  <li class="list-group-item" id="li_lock_wait"><span class="badge" id="span_lock_wait"></span>锁等待</li>
+							  <li class="list-group-item" id="li_transaction"><span class="badge" id="span_transaction"></span>事务检查</li>
+							  <li class="list-group-item" id="li_slow"><span class="badge" id="span_slow"></span>慢查询</li>
+							</ul>
+						  </div>
+			    </div>
+			    <div class="panel panel-default">
+						  <div class="panel-heading">参数检查项</div>
+						  <div class="panel-body">
+						    <ul class="list-group">
+							  <li class="list-group-item" id="li_charset"><span class="badge" id="span_charset"></span>编码配置</li>
+							</ul>
+						  </div>
+			    </div>
+			    <div class="panel panel-default">
+						  <div class="panel-heading">复制检查项</div>
+						  <div class="panel-body">
+						    <ul class="list-group">
+							  <li class="list-group-item" id="li_slave_io_running"><span class="badge" id="span_slave_io_running"></span>IO线程</li>
+							  <li class="list-group-item" id="li_slave_sql_running"><span class="badge" id="span_slave_sql_running"></span>SQL线程</li>
+							  <li class="list-group-item" id="li_seconds_behind_master"><span class="badge" id="span_seconds_behind_master"></span>复制延迟</li>
+							</ul>
+						  </div>
+			    </div>
+			    <div class="panel panel-default">
+						  <div class="panel-heading">索引检查项</div>
+						  <div class="panel-body">
+						    <ul class="list-group">
+							  <li class="list-group-item" id="li_unused_index"><span class="badge" id="span_unused_index"></span>无效索引</li>
+							  <li class="list-group-item" id="li_primary_key"><span class="badge" id="span_primary_key"></span>主键检查</li>
+							  <li class="list-group-item" id="li_index_cardinality"><span class="badge" id="span_index_cardinality"></span>索引区分度</li>
+							  <li class="list-group-item" id="li_redundant_index"><span class="badge" id="span_redundant_index"></span>冗余索引</li>
+							</ul>
+						  </div>
+			    </div>
+			</div>
+		</section>
+		<!-- END 内容 -->
+		<!-- 页脚 -->
+		<footer class="footer-newsletter">
+			<div class="container">
+				
+				<div class="footer-bottom">
+					<div class="left">
+						
+						<p class="copyright-text">&copy;2017 MyCAT EYE</p>
+					</div>
+					
+				</div>
+			</div>
+		</footer>
+		<!-- END 页脚 -->
+		<div class="back-to-top">
+			<a href="#top"><i class="fa fa-chevron-up"></i></a>
+		</div>
+	</div>
+	<!-- 模态窗口，用于临时保存检查结果 -->
+	<div class="modal fade" id="checkResultModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" id="myModalLabel"><span id="modalTitle"></span></h4>
+	      </div>
+	      <div class="modal-body" id="checkResult">
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">确认</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<!-- JAVASCRIPT -->
+	<script src="assets/js/jquery-2.1.1.min.js"></script>
+	<script src="assets/js/bootstrap.min.js"></script>
+	<script src="assets/js/plugins/easing/jquery.easing.min.js"></script>
+	<script src="assets/js/plugins/morphext/morphext.min.js"></script>
+	<script src="assets/js/plugins/owl-carousel/owl.carousel.min.js"></script>
+	<script src="assets/js/bravana-lite.js"></script>
+	<script type="text/javascript" src="assets/js/step.js"></script>
+	<script type="text/javascript" src="assets/js/json2.js"></script>
+	<script type="text/javascript" src="assets/js/jquery.jsonview.js"></script>
+	<!-- 获取agent url -->
+	<script type="text/javascript" src="assets/js/agent-url.js"></script>
+	<!-- 监控检查相关js -->
+	<script type="text/javascript" src="assets/js/health-check-init.js"></script>
+	<script type="text/javascript" src="assets/js/health-check-security.js"></script>
+	<script type="text/javascript" src="assets/js/health-check-user-access.js"></script>
+	<script type="text/javascript" src="assets/js/health-check-variable.js"></script>
+	<script type="text/javascript" src="assets/js/health-check-replication.js"></script>
+	<script type="text/javascript" src="assets/js/health-check-index.js"></script>
+	
+</body>
+
+</html>

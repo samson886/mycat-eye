@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<configuration>  
+	<!-- 文件输出格式 -->
+	<property name="PATTERN" value="%-12(%d{yyyy-MM-dd HH:mm:ss.SSS}) |-%-5level [%thread] %c [%L] -| %msg%n" />
+	<!-- test文件路径 -->
+	<property name="TEST_FILE_PATH" value="/var/log" />
+	<!-- pro文件路径 -->
+	<property name="PRO_FILE_PATH" value="/var/log" />
+
+	<!-- 开发环境 -->
+    <springProfile name="dev">
+        <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder>
+                <pattern>${PATTERN}</pattern>
+            </encoder>
+        </appender>
+        <root level="INFO">
+            <appender-ref ref="STDOUT"/>
+        </root>
+    </springProfile>
+
+	<!-- 测试环境 -->
+    <springProfile name="test">
+
+        <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder>
+                <pattern>${PATTERN}</pattern>
+            </encoder>
+        </appender>
+
+        <!-- ch.qos.logback.core.rolling.RollingFileAppender 文件日志输出 -->
+        <appender name="TEST_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <!--不能有这项配置！！！！！-->
+            <!--<Encoding>UTF-8</Encoding>-->
+            <File>${TEST_FILE_PATH}/dbeye-for-nosql.log</File>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <FileNamePattern>${TEST_FILE_PATH}/dbeye-for-nosql.%d{yyyy-MM-dd}-%i.log</FileNamePattern>
+                <MaxHistory>30</MaxHistory>
+                <TimeBasedFileNamingAndTriggeringPolicy
+                        class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                    <MaxFileSize>20MB</MaxFileSize>
+                </TimeBasedFileNamingAndTriggeringPolicy>
+            </rollingPolicy>
+
+            <layout class="ch.qos.logback.classic.PatternLayout">
+                <pattern>${PATTERN}</pattern>
+            </layout>
+        </appender>
+        <root level="info">
+            <appender-ref ref="STDOUT"/>
+            <appender-ref ref="TEST_FILE"/>
+        </root>
+    </springProfile>
+
+	<!-- 生产环境 -->
+    <springProfile name="prd">
+        <!-- ch.qos.logback.core.rolling.RollingFileAppender 文件日志输出 -->
+        <appender name="PROD_FILE"
+                  class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <!--<Encoding>UTF-8</Encoding>-->
+            <File>${PRO_FILE_PATH}/dbeye-for-nosql.log</File>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <FileNamePattern>${PRO_FILE_PATH}/dbeye-for-nosql.%d{yyyy-MM-dd}-%i.log</FileNamePattern>
+                <MaxHistory>30</MaxHistory>
+                <TimeBasedFileNamingAndTriggeringPolicy
+                        class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                    <MaxFileSize>20MB</MaxFileSize>
+                </TimeBasedFileNamingAndTriggeringPolicy>
+            </rollingPolicy>
+            <layout class="ch.qos.logback.classic.PatternLayout">
+                <pattern>${PATTERN}</pattern>
+            </layout>
+        </appender>
+        <root level="INFO">
+            <appender-ref ref="PROD_FILE"/>
+        </root>
+    </springProfile>
+ </configuration>  
