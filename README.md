@@ -19,25 +19,26 @@ DBA或管理人员视图：http://120.77.46.146:7002 登录用户名、密码:ad
 
 端口预留：7001 7002 7003 3306
 
+7001预留给mycateye-web，7002预留给mycateye-admin,7003预留给mycateye-agent,3306预留给MySQL。
+
 ## 安装步骤：
 
 1、安装初始数据，在MySQL数据库上新建mycat_eye数据库，导入build/mycat_eye.sql文件。新建数据库账户:dev，密码：123456
 
 2、将build目录中的三个jar文件传输到服务器。
 
-1）首先启动mycateye-agent-xx.jar,执行：java -jar mycateye-agent-xx.jar。mycateye-agent模块使用7003端口。
+1）首先启动mycateye-agent-xx.jar,执行：java -jar mycateye-agent-xx.jar &
 
-2）再启动mycateye-admin-xx.jar,执行：java -jar mycateye-admin-xx.jar --agent.url=http://{ip}:7003。
+2）再启动mycateye-admin-xx.jar,执行：java -jar mycateye-admin-xx.jar --agent.url=http://{ip}:7003 &
 
-注意：由于该项目使用了ajax跨域访问，这里的ip需要填写用户在浏览器上可访问的IP，局域网访问使用内网IP，外网访问使用外网IP，例如：java -jar mycateye-admin-xx.jar --agent.host=http://192.168.0.100:7003/。
+注意：由于该项目使用ajax跨域请求，如果需要在外网访问，则这里的IP需要填写服务器外网IP，如果只在局域网使用则填写服务器的内网IP，例如：java -jar mycateye-admin-xx.jar --agent.host=http://192.168.0.100:7003 &
 
-mycateye-admin模块使用7002端口。
 
-3）最后启动mycateye-web-xx.jar,执行：java -jar mycateye-web-xx.jar --agent.url=http://{ip}:7003。
 
-同样这里的IP和mycateye-admin启动时一致。
+3）最后启动mycateye-web-xx.jar,执行：java -jar mycateye-web-xx.jar --agent.url=http://{ip}:7003 &
 
-mycateye-web模块使用7001端口。
+同样这里的IP和mycateye-admin配置一致。
+
 
 如需在后台启动请使用：nohup java -jar mycateye-xx-xx.jar > /dev/null 2>&1 & 启动各应用。
 
