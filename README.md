@@ -27,13 +27,15 @@ DBA或管理人员视图：http://120.77.46.146:7002 登录用户名、密码:ad
 
 1）首先启动mycateye-agent-xx.jar,执行：java -jar mycateye-agent-xx.jar。mycateye-agent模块使用7003端口。
 
-2）再启动mycateye-admin-xx.jar,执行：java -jar mycateye-admin-xx.jar --agent.host=http://{ip}:7003/。
+2）再启动mycateye-admin-xx.jar,执行：java -jar mycateye-admin-xx.jar --agent.url=http://{ip}:7003/。
 
 注意：由于该项目使用了ajax跨域访问，这里的ip需要填写用户在浏览器上可访问的IP，局域网访问使用内网IP，外网访问使用外网IP，例如：java -jar mycateye-admin-xx.jar --agent.host=http://192.168.0.100:7003/。
 
 mycateye-admin模块使用7002端口。
 
-3）最后启动mycateye-web-xx.jar,执行：java -jar mycateye-web-xx.jar。
+3）最后启动mycateye-web-xx.jar,执行：java -jar mycateye-web-xx.jar --agent.url=http://{ip}:7003/。
+
+同样这里的IP和mycateye-admin启动时一致。
 
 mycateye-web模块使用7001端口。
 
