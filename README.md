@@ -25,22 +25,22 @@ DBA或管理人员视图：http://106.14.181.95:7002 登录用户名、密码:ad
 
 2、将build目录中的三个jar文件传输到服务器。
 
-1）首先启动mycateye-agent-xx.jar,执行：java -jar mycateye-agent-xx.jar。该模块使用7003端口。
+1）首先启动mycateye-agent-xx.jar,执行：java -jar mycateye-agent-xx.jar。mycateye-agent模块使用7003端口。
 
 2）再启动mycateye-admin-xx.jar,执行：java -jar mycateye-admin-xx.jar --agent.host=http://{ip}:7003/。
 
 注意：由于该项目使用了ajax跨域访问，这里的ip需要填写用户在浏览器上可访问的IP，局域网访问使用内网IP，外网访问使用外网IP，例如：java -jar mycateye-admin-xx.jar --agent.host=http://192.168.0.100:7003/。
 
-该模块使用7002端口。
+mycateye-admin模块使用7002端口。
 
 3）最后启动mycateye-web-xx.jar,执行：java -jar mycateye-web-xx.jar。
 
-该模块使用7001端口。
+mycateye-web模块使用7001端口。
 
 如需在后台启动请使用：nohup java -jar mycateye-xx-xx.jar > /dev/null 2>&1 & 启动各应用。
 
-## 快速使用：
-以下假设你的服务器IP为192.168.0.100
+## 快速开始：
+以下假设你的服务器IP为192.168.0.100，实际环境中将它替换为你的服务器IP即可。
 
 ### 登录管理视图：
 登录http://192.168.0.100:7002
