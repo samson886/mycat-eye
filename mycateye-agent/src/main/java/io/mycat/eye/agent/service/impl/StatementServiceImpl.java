@@ -43,7 +43,7 @@ import io.mycat.eye.agent.service.StatementService;
 public class StatementServiceImpl extends AbstractService implements StatementService
 {
     // 内置数据库
-    protected static final String BUILT_IN_SCHEMA = "'information_schema','mysql','performance_schema','sys','test'";
+    protected static final String BUILT_IN_SCHEMA = "'information_schema','mysql','performance_schema','sys','test',''";
     
     @Resource
     private MysqlServerMapper mysqlServerMapper;
