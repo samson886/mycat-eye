@@ -44,6 +44,7 @@ CREATE TABLE `mysql_server` (
   `tags` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '标签',
   `cluster_id` bigint(20) DEFAULT NULL COMMENT '归属于哪个集群id',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `ver` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '版本',
   PRIMARY KEY (`id`),
   KEY `idx_host` (`host`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
