@@ -19,8 +19,18 @@ public class MysqlServer implements Serializable {
     private Long clusterId;
 
     private Date createTime;
+    
+    private String ver;
 
-    private static final long serialVersionUID = 1L;
+    public String getVer() {
+		return ver;
+	}
+
+	public void setVer(String ver) {
+		this.ver = ver;
+	}
+
+	private static final long serialVersionUID = 1L;
 
     public Long getId() {
         return id;
