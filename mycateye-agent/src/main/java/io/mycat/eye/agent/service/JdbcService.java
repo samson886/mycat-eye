@@ -43,7 +43,7 @@ public interface JdbcService {
 	 * @return        
 	 * @throws
 	 */
-	public QueryResult<Integer> queryForCount(String url, String sql);
+	public QueryResult<Integer> queryForCount(String url, String sql, String user, String password);
 
 
 	/**
@@ -52,7 +52,7 @@ public interface JdbcService {
 	 * @param sql
 	 * @return
 	 */
-	public QueryResult<Integer> executeSqlForBoolean(String url, String sql);
+	public QueryResult<Integer> executeSqlForBoolean(String url, String sql, String user, String password);
 	
 	/**
 	 * 执行SQL
@@ -61,6 +61,6 @@ public interface JdbcService {
 	 * @param sql        
 	 * @throws
 	 */
-	public void executeSql(String url, String sql);
+	public void executeSql(String url, String sql, String user, String password);
 
 }
