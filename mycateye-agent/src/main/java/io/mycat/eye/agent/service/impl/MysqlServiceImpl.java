@@ -107,6 +107,7 @@ public class MysqlServiceImpl extends AbstractService implements MysqlService
         String version = (String)queryResultVersion.getData().get(0).get("version");
         
         //版本不为5.7+，则返回
+        /*
         if (!version.startsWith("5.7"))
         {
             restResponse.setCode(1);
@@ -114,6 +115,7 @@ public class MysqlServiceImpl extends AbstractService implements MysqlService
             
             return restResponse;
         }
+        */
         //查看内置数据库是否存在
         String sqlShowDatabases = "show databases";
         QueryResult<List<Map<Object, Object>>> queryResultShowDatabases =
@@ -188,6 +190,7 @@ public class MysqlServiceImpl extends AbstractService implements MysqlService
         mysqlServer.setPort(port);
         mysqlServer.setTags(tags);
         mysqlServer.setUsername(username);
+        mysqlServer.setVer((String)mysqlVerifyRestResponse.getData());
         try
         {
             //如果id为0，这为新增
@@ -392,56 +395,65 @@ public class MysqlServiceImpl extends AbstractService implements MysqlService
         String overviewSql =
             "show variables where Variable_name in ('log_error','general_log','general_log_file','slow_query_log','slow_query_log_file','datadir','basedir','innodb_buffer_pool_size','performance_schema','version','character_set_database')";
         QueryResult<List<Map<Object, Object>>> queryResult = getQueryResult(serverId, overviewSql);
+        
         if (queryResult.isSuccess())
         {
             List<Map<Object, Object>> list = queryResult.getData();
+			String Variable_name="VARIABLE_NAME";//"Variable_name";
+			String Value="VARIABLE_VALUE";//Value;
+			
+			String Variable=(String)list.get(0).get(Variable_name);
+			if (Variable==null){
+				Variable_name="Variable_name";
+				Value="Value";				
+			}
             for (Map<Object, Object> map : list)
             {
-                String variableName = (String)map.get("Variable_name");
+                String variableName = (String)map.get(Variable_name);
                 if (variableName.equals("basedir"))
                 {
-                    mysqlOverview.setBasedir((String)map.get("Value"));
+                    mysqlOverview.setBasedir((String)map.get(Value));
                 }
                 if (variableName.equals("datadir"))
                 {
-                    mysqlOverview.setDatadir((String)map.get("Value"));
+                    mysqlOverview.setDatadir((String)map.get(Value));
                 }
                 if (variableName.equals("general_log"))
                 {
-                    mysqlOverview.setGeneralLog((String)map.get("Value"));
+                    mysqlOverview.setGeneralLog((String)map.get(Value));
                 }
                 if (variableName.equals("general_log_file"))
                 {
-                    mysqlOverview.setGeneralLogFile((String)map.get("Value"));
+                    mysqlOverview.setGeneralLogFile((String)map.get(Value));
                 }
                 if (variableName.equals("innodb_buffer_pool_size"))
                 {
-                    Long innodbBufferPoolSize = Long.valueOf((String)map.get("Value"));
+                    Long innodbBufferPoolSize = Long.valueOf((String)map.get(Value));
                     mysqlOverview.setInnodbBufferPoolSize(MiscUtil.getHumanSizeByBytes(innodbBufferPoolSize));
                 }
                 if (variableName.equals("log_error"))
                 {
-                    mysqlOverview.setLogError((String)map.get("Value"));
+                    mysqlOverview.setLogError((String)map.get(Value));
                 }
                 if (variableName.equals("performance_schema"))
                 {
-                    mysqlOverview.setPerformanceSchema((String)map.get("Value"));
+                    mysqlOverview.setPerformanceSchema((String)map.get(Value));
                 }
                 if (variableName.equals("slow_query_log"))
                 {
-                    mysqlOverview.setSlowQueryLog((String)map.get("Value"));
+                    mysqlOverview.setSlowQueryLog((String)map.get(Value));
                 }
                 if (variableName.equals("slow_query_log_file"))
                 {
-                    mysqlOverview.setSlowQueryLogFile((String)map.get("Value"));
+                    mysqlOverview.setSlowQueryLogFile((String)map.get(Value));
                 }
                 if (variableName.equals("version"))
                 {
-                    mysqlOverview.setVersion((String)map.get("Value"));
+                    mysqlOverview.setVersion((String)map.get(Value));
                 }
                 if (variableName.equals("character_set_database"))
                 {
-                    mysqlOverview.setCharacterSetDatabase((String)map.get("Value"));
+                    mysqlOverview.setCharacterSetDatabase((String)map.get(Value));
                 }
             }
             restResponse.setCode(Constant.SUCCESS_CODE);

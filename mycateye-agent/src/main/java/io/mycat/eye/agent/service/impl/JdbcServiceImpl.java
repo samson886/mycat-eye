@@ -52,7 +52,7 @@ public class JdbcServiceImpl implements JdbcService {
         QueryResult<List<Map<Object, Object>>> queryResult = new QueryResult<List<Map<Object, Object>>>();
         Connection conn = null;
         try {
-            conn = getConnection(url);
+            conn = getConnection(url,user,password);
             if (conn != null) {
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(sql);
@@ -82,12 +82,12 @@ public class JdbcServiceImpl implements JdbcService {
      * java.lang.String)
      */
     @Override
-    public QueryResult<Integer> queryForCount(String url, String sql) {
+    public QueryResult<Integer> queryForCount(String url, String sql, String user, String password) {
         QueryResult<Integer> queryResult = new QueryResult<Integer>();
         Integer count = 0;
         Connection conn = null;
         try {
-            conn = getConnection(url);
+            conn = getConnection(url,user,password);
             if (conn != null) {
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(sql);
@@ -111,11 +111,11 @@ public class JdbcServiceImpl implements JdbcService {
 
 
     @Override
-    public QueryResult<Integer> executeSqlForBoolean(String url, String sql) {
+    public QueryResult<Integer> executeSqlForBoolean(String url, String sql, String user, String password) {
         QueryResult<Integer> queryResult = new QueryResult<Integer>();
         Connection conn = null;
         try {
-            conn = getConnection(url);
+            conn = getConnection(url,user,password);
             if (conn != null) {
                 Statement stmt = conn.createStatement();
                 Integer executeResult = stmt.executeUpdate(sql);
@@ -135,10 +135,10 @@ public class JdbcServiceImpl implements JdbcService {
     }
     
     @Override
-    public void executeSql(String url, String sql) {
+    public void executeSql(String url, String sql, String user, String password) {
         Connection conn = null;
         try {
-            conn = getConnection(url);
+            conn = getConnection(url,user,password);
             if (conn != null) {
                 Statement stmt = conn.createStatement();
                 Integer executeResult = stmt.executeUpdate(sql);
@@ -182,14 +182,20 @@ public class JdbcServiceImpl implements JdbcService {
     /**
      * 获取连接 @Title: getConnection @param url @return @throws Exception @throws
      */
-    private Connection getConnection(String url) throws Exception {
+    private Connection getConnection1(String url) throws Exception {
         Class.forName("com.mysql.jdbc.Driver");
         Connection conn = DriverManager.getConnection(url);
         LOGGER.info("create a data connection");
 
         return conn;
     }
-
+    
+    private Connection getConnection(String url,String uname ,String upass) throws Exception {
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection conn = DriverManager.getConnection(url,uname,upass);
+        LOGGER.info("create a data connection");
+        return conn;
+    }
     /**
      * 关闭连接 @Title: closeConnection @param conn @throws
      */

@@ -230,33 +230,40 @@ public class DashboardServiceImpl extends AbstractService implements DashboardSe
             List<Map<Object, Object>> resultList = queryResult.getData();
             Long innodbBufferPoolPagesFree = 0L;
             Long innodbBufferPoolPagesTotal = 0L;
+			String Variable_name="VARIABLE_NAME";//"Variable_name";
+			String Value="VARIABLE_VALUE";//Value;			
+			String Variable=(String)resultList.get(0).get(Variable_name);
+			if (Variable==null){
+				Variable_name="Variable_name";
+				Value="Value";				
+			}
             for (Map<Object, Object> map : resultList)
             {
-                String variableName = (String)map.get("Variable_name");
+                String variableName = (String)map.get(Variable_name);
                 if (variableName.equals("Uptime"))
                 {
-                    dashboardOverview.setUptime(MiscUtil.getHumanTimeBySeconds(new Long(map.get("Value").toString())));
+                    dashboardOverview.setUptime(MiscUtil.getHumanTimeBySeconds(new Long(map.get(Value).toString())));
                 }
                 if (variableName.equals("Bytes_received"))
                 {
                     dashboardOverview
-                        .setBytesReceived(MiscUtil.getHumanSizeByBytes(new Long(map.get("Value").toString())));
+                        .setBytesReceived(MiscUtil.getHumanSizeByBytes(new Long(map.get(Value).toString())));
                 }
                 if (variableName.equals("Bytes_sent"))
                 {
-                    dashboardOverview.setBytesSent(MiscUtil.getHumanSizeByBytes(new Long(map.get("Value").toString())));
+                    dashboardOverview.setBytesSent(MiscUtil.getHumanSizeByBytes(new Long(map.get(Value).toString())));
                 }
                 if (variableName.equals("Innodb_buffer_pool_pages_free"))
                 {
-                    innodbBufferPoolPagesFree = new Long(map.get("Value").toString());
+                    innodbBufferPoolPagesFree = new Long(map.get(Value).toString());
                 }
                 if (variableName.equals("Innodb_buffer_pool_pages_total"))
                 {
-                    innodbBufferPoolPagesTotal = new Long(map.get("Value").toString());
+                    innodbBufferPoolPagesTotal = new Long(map.get(Value).toString());
                 }
                 if (variableName.equals("Threads_running"))
                 {
-                    dashboardOverview.setThreadsRunning((String)map.get("Value"));
+                    dashboardOverview.setThreadsRunning((String)map.get(Value));
                 }
             }
             dashboardOverview.setInnoDBBufferPoolSize(MiscUtil

@@ -13,8 +13,14 @@ var fnLoadVariables = function(filter) {
 			$.each(data, function(index, value) {
 				var html = "";
 				html += "<tr>";
-				html += "<td>" + value.Variable_name + "</td>";
-				html += "<td>" + value.Value + "</td>";
+				if (value.Variable_name==null){
+				html += "<td>" + value.VARIABLE_NAME + "</td>";
+				html += "<td>" + value.VARIABLE_VALUE + "</td>";
+				}
+				else {
+					html += "<td>" + value.Variable_name + "</td>";
+					html += "<td>" + value.Value + "</td>";					
+				}
 				html += "<td><a class=\"btn btn-success btn-editone btn-xs\" href=\"javascript:fnEditVariables('" + value.Variable_name + "','" + value.Value + "')\"><i class=\"fa fa-pencil\"></i></a></td>";
 				html += "</tr>";
 				$("#tbody_variables").append(html);

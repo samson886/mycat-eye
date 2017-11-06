@@ -57,147 +57,154 @@ public class UpdateMysqlStatusTask extends AbstractTask {
 			MysqlStatusHistory statusHistory = new MysqlStatusHistory();
 			statusHistory.setServerId(serverId);
 			statusHistory.setCreateTime(new Date());
-
+			String Variable_name="VARIABLE_NAME";//"Variable_name";
+			String Value="VARIABLE_VALUE";//Value;
+			
+			String Variable=(String)statusList.get(0).get(Variable_name);
+			if (Variable==null){
+				Variable_name="Variable_name";
+				Value="Value";				
+			}			
 			// 设置各属性
 			for (Map<Object, Object> map : statusList) {
-				if ("Aborted_clients".equals((String) map.get("Variable_name"))) {
-					statusHistory.setAbortedClients(new Integer(map.get("Value").toString()));
+				if ("Aborted_clients".equals((String) map.get(Variable_name))) {
+					statusHistory.setAbortedClients(new Integer(map.get(Value).toString()));
 				}
 
-				if ("Aborted_connects".equals((String) map.get("Variable_name"))) {
-					statusHistory.setAbortedConnects(new Integer(map.get("Value").toString()));
+				if ("Aborted_connects".equals((String) map.get(Variable_name))) {
+					statusHistory.setAbortedConnects(new Integer(map.get(Value).toString()));
 				}
 
-				if ("Bytes_received".equals((String) map.get("Variable_name"))) {
-					statusHistory.setBytesReceived(new Long(map.get("Value").toString()));
+				if ("Bytes_received".equals((String) map.get(Variable_name))) {
+					statusHistory.setBytesReceived(new Long(map.get(Value).toString()));
 				}
 
-				if ("Bytes_sent".equals((String) map.get("Variable_name"))) {
-					statusHistory.setBytesSent(new Long(map.get("Value").toString()));
+				if ("Bytes_sent".equals((String) map.get(Variable_name))) {
+					statusHistory.setBytesSent(new Long(map.get(Value).toString()));
 				}
 
-				if ("Com_commit".equals((String) map.get("Variable_name"))) {
-					statusHistory.setComCommit(new Long(map.get("Value").toString()));
+				if ("Com_commit".equals((String) map.get(Variable_name))) {
+					statusHistory.setComCommit(new Long(map.get(Value).toString()));
 				}
 
-				if ("Com_delete".equals((String) map.get("Variable_name"))) {
-					statusHistory.setComDelete(new Long(map.get("Value").toString()));
+				if ("Com_delete".equals((String) map.get(Variable_name))) {
+					statusHistory.setComDelete(new Long(map.get(Value).toString()));
 				}
 
-				if ("Com_insert".equals((String) map.get("Variable_name"))) {
-					statusHistory.setComInsert(new Long(map.get("Value").toString()));
+				if ("Com_insert".equals((String) map.get(Variable_name))) {
+					statusHistory.setComInsert(new Long(map.get(Value).toString()));
 				}
 
-				if ("Com_rollback".equals((String) map.get("Variable_name"))) {
-					statusHistory.setComRollback(new Long(map.get("Value").toString()));
+				if ("Com_rollback".equals((String) map.get(Variable_name))) {
+					statusHistory.setComRollback(new Long(map.get(Value).toString()));
 				}
 
-				if ("Com_select".equals((String) map.get("Variable_name"))) {
-					statusHistory.setComSelect(new Long(map.get("Value").toString()));
+				if ("Com_select".equals((String) map.get(Variable_name))) {
+					statusHistory.setComSelect(new Long(map.get(Value).toString()));
 				}
 
-				if ("Com_update".equals((String) map.get("Variable_name"))) {
-					statusHistory.setComUpdate(new Long(map.get("Value").toString()));
+				if ("Com_update".equals((String) map.get(Variable_name))) {
+					statusHistory.setComUpdate(new Long(map.get(Value).toString()));
 				}
 
-				if ("Connections".equals((String) map.get("Variable_name"))) {
-					statusHistory.setConnections(new Integer(map.get("Value").toString()));
+				if ("Connections".equals((String) map.get(Variable_name))) {
+					statusHistory.setConnections(new Integer(map.get(Value).toString()));
 				}
 
-				if ("Created_tmp_disk_tables".equals((String) map.get("Variable_name"))) {
-					statusHistory.setCreatedTmpDiskTables(new Long(map.get("Value").toString()));
+				if ("Created_tmp_disk_tables".equals((String) map.get(Variable_name))) {
+					statusHistory.setCreatedTmpDiskTables(new Long(map.get(Value).toString()));
 				}
 
-				if ("Created_tmp_files".equals((String) map.get("Variable_name"))) {
-					statusHistory.setCreatedTmpFiles(new Long(map.get("Value").toString()));
+				if ("Created_tmp_files".equals((String) map.get(Variable_name))) {
+					statusHistory.setCreatedTmpFiles(new Long(map.get(Value).toString()));
 				}
 
-				if ("Created_tmp_tables".equals((String) map.get("Variable_name"))) {
-					statusHistory.setCreatedTmpTables(new Long(map.get("Value").toString()));
+				if ("Created_tmp_tables".equals((String) map.get(Variable_name))) {
+					statusHistory.setCreatedTmpTables(new Long(map.get(Value).toString()));
 				}
 
-				if ("Innodb_buffer_pool_pages_dirty".equals((String) map.get("Variable_name"))) {
-					statusHistory.setInnodbBufferPoolPagesDirty(new Long(map.get("Value").toString()));
+				if ("Innodb_buffer_pool_pages_dirty".equals((String) map.get(Variable_name))) {
+					statusHistory.setInnodbBufferPoolPagesDirty(new Long(map.get(Value).toString()));
 				}
 
-				if ("Innodb_buffer_pool_pages_flushed".equals((String) map.get("Variable_name"))) {
-					statusHistory.setInnodbBufferPoolPagesFlushed(new Long(map.get("Value").toString()));
+				if ("Innodb_buffer_pool_pages_flushed".equals((String) map.get(Variable_name))) {
+					statusHistory.setInnodbBufferPoolPagesFlushed(new Long(map.get(Value).toString()));
 				}
 
-				if ("Innodb_buffer_pool_pages_free".equals((String) map.get("Variable_name"))) {
-					statusHistory.setInnodbBufferPoolPagesFree(new Long(map.get("Value").toString()));
+				if ("Innodb_buffer_pool_pages_free".equals((String) map.get(Variable_name))) {
+					statusHistory.setInnodbBufferPoolPagesFree(new Long(map.get(Value).toString()));
 				}
 
-				if ("Innodb_buffer_pool_pages_total".equals((String) map.get("Variable_name"))) {
-					statusHistory.setInnodbBufferPoolPagesTotal(new Long(map.get("Value").toString()));
+				if ("Innodb_buffer_pool_pages_total".equals((String) map.get(Variable_name))) {
+					statusHistory.setInnodbBufferPoolPagesTotal(new Long(map.get(Value).toString()));
 				}
 
-				if ("Innodb_data_fsyncs".equals((String) map.get("Variable_name"))) {
-					statusHistory.setInnodbDataFsyncs(new Long(map.get("Value").toString()));
+				if ("Innodb_data_fsyncs".equals((String) map.get(Variable_name))) {
+					statusHistory.setInnodbDataFsyncs(new Long(map.get(Value).toString()));
 				}
 
-				if ("Innodb_data_read".equals((String) map.get("Variable_name"))) {
-					statusHistory.setInnodbDataRead(new Long(map.get("Value").toString()));
+				if ("Innodb_data_read".equals((String) map.get(Variable_name))) {
+					statusHistory.setInnodbDataRead(new Long(map.get(Value).toString()));
 				}
 
-				if ("Innodb_data_reads".equals((String) map.get("Variable_name"))) {
-					statusHistory.setInnodbDataReads(new Long(map.get("Value").toString()));
+				if ("Innodb_data_reads".equals((String) map.get(Variable_name))) {
+					statusHistory.setInnodbDataReads(new Long(map.get(Value).toString()));
 				}
 
-				if ("Innodb_data_writes".equals((String) map.get("Variable_name"))) {
-					statusHistory.setInnodbDataWrites(new Long(map.get("Value").toString()));
+				if ("Innodb_data_writes".equals((String) map.get(Variable_name))) {
+					statusHistory.setInnodbDataWrites(new Long(map.get(Value).toString()));
 				}
 
-				if ("Innodb_data_written".equals((String) map.get("Variable_name"))) {
-					statusHistory.setInnodbDataWritten(new Long(map.get("Value").toString()));
+				if ("Innodb_data_written".equals((String) map.get(Variable_name))) {
+					statusHistory.setInnodbDataWritten(new Long(map.get(Value).toString()));
 				}
 
-				if ("Innodb_page_size".equals((String) map.get("Variable_name"))) {
-					statusHistory.setInnodbPageSize(new Integer(map.get("Value").toString()));
+				if ("Innodb_page_size".equals((String) map.get(Variable_name))) {
+					statusHistory.setInnodbPageSize(new Integer(map.get(Value).toString()));
 				}
 
-				if ("Innodb_rows_deleted".equals((String) map.get("Variable_name"))) {
-					statusHistory.setInnodbRowsDeleted(new Long(map.get("Value").toString()));
+				if ("Innodb_rows_deleted".equals((String) map.get(Variable_name))) {
+					statusHistory.setInnodbRowsDeleted(new Long(map.get(Value).toString()));
 				}
 
-				if ("Innodb_rows_inserted".equals((String) map.get("Variable_name"))) {
-					statusHistory.setInnodbRowsInserted(new Long(map.get("Value").toString()));
+				if ("Innodb_rows_inserted".equals((String) map.get(Variable_name))) {
+					statusHistory.setInnodbRowsInserted(new Long(map.get(Value).toString()));
 				}
 
-				if ("Innodb_rows_updated".equals((String) map.get("Variable_name"))) {
-					statusHistory.setInnodbRowsInserted(new Long(map.get("Value").toString()));
+				if ("Innodb_rows_updated".equals((String) map.get(Variable_name))) {
+					statusHistory.setInnodbRowsInserted(new Long(map.get(Value).toString()));
 				}
 
-				if ("Open_tables".equals((String) map.get("Variable_name"))) {
-					statusHistory.setOpenTables(new Integer(map.get("Value").toString()));
+				if ("Open_tables".equals((String) map.get(Variable_name))) {
+					statusHistory.setOpenTables(new Integer(map.get(Value).toString()));
 				}
 
-				if ("Questions".equals((String) map.get("Variable_name"))) {
-					statusHistory.setQuestions(new Long(map.get("Value").toString()));
+				if ("Questions".equals((String) map.get(Variable_name))) {
+					statusHistory.setQuestions(new Long(map.get(Value).toString()));
 				}
 
-				if ("Slow_queries".equals((String) map.get("Variable_name"))) {
-					statusHistory.setSlowQueries(new Integer(map.get("Value").toString()));
+				if ("Slow_queries".equals((String) map.get(Variable_name))) {
+					statusHistory.setSlowQueries(new Integer(map.get(Value).toString()));
 				}
 
-				if ("Threads_cached".equals((String) map.get("Variable_name"))) {
-					statusHistory.setThreadsCached(new Integer(map.get("Value").toString()));
+				if ("Threads_cached".equals((String) map.get(Variable_name))) {
+					statusHistory.setThreadsCached(new Integer(map.get(Value).toString()));
 				}
 
-				if ("Threads_connected".equals((String) map.get("Variable_name"))) {
-					statusHistory.setThreadsConnected(new Integer(map.get("Value").toString()));
+				if ("Threads_connected".equals((String) map.get(Variable_name))) {
+					statusHistory.setThreadsConnected(new Integer(map.get(Value).toString()));
 				}
 
-				if ("Threads_created".equals((String) map.get("Variable_name"))) {
-					statusHistory.setThreadsCreated(new Integer(map.get("Value").toString()));
+				if ("Threads_created".equals((String) map.get(Variable_name))) {
+					statusHistory.setThreadsCreated(new Integer(map.get(Value).toString()));
 				}
 
-				if ("Threads_running".equals((String) map.get("Variable_name"))) {
-					statusHistory.setThreadsRunning(new Integer(map.get("Value").toString()));
+				if ("Threads_running".equals((String) map.get(Variable_name))) {
+					statusHistory.setThreadsRunning(new Integer(map.get(Value).toString()));
 				}
 
-				if ("Uptime".equals((String) map.get("Variable_name"))) {
-					statusHistory.setUptime(map.get("Value").toString());
+				if ("Uptime".equals((String) map.get(Variable_name))) {
+					statusHistory.setUptime(map.get(Value).toString());
 				}
 			}
 
