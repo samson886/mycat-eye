@@ -99,8 +99,14 @@ var getStatus = function(serverId, filter) {
 						$.each(data, function(index, value) {
 							var html = "";
 							html += "<tr>";
+							if (value.Variable_name==null){
+								html += "<td>" + value.VARIABLE_NAME + "</td>";
+								html += "<td>" + value.VARIABLE_VALUE + "</td>";						
+							}
+							else{
 							html += "<td>" + value.Variable_name + "</td>";
 							html += "<td>" + value.Value + "</td>";
+							}
 							html += "</tr>";
 							$("#tbody_status").append(html);
 						});
