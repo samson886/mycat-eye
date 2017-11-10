@@ -76,15 +76,16 @@ public class AbstractService
      */
     protected String getDataSourceUrl(String host, String port, String username, String password)
     {
-        String url =
-            "jdbc:mysql://" + host + ":" + port + "/?user=" + username + "&password=" + password + "&useSSL=false";
+       // String url =
+       //     "jdbc:mysql://" + host + ":" + port + "/?user=" + username + "&password=" + password + "&useSSL=false";
+        String url ="jdbc:mysql://" + host + ":" + port + "/?useSSL=false";
+
         return url;
     }
     
     protected String getDataSourceUrl(String host, String port, String schema, String username, String password)
     {
-        String url = "jdbc:mysql://" + host + ":" + port + "/" + schema + "?user=" + username + "&password=" + password
-            + "&useSSL=false";
+        String url = "jdbc:mysql://" + host + ":" + port + "/" + schema + "?useSSL=false";
         return url;
     }
     
@@ -120,7 +121,7 @@ public class AbstractService
     protected Integer getQueryCount(String host, String port, String sql, String username, String password)
     {
         String url = getDataSourceUrl(host, port, username, password);
-        QueryResult<Integer> countQueryResult = jdbcService.queryForCount(url, sql);
+        QueryResult<Integer> countQueryResult = jdbcService.queryForCount(url, sql,username,password);
         return countQueryResult.getData();
     }
     
@@ -203,8 +204,7 @@ public class AbstractService
         String port = String.valueOf(mysqlServer.getPort());
         String username = mysqlServer.getUsername();
         String password = mysqlServer.getPassword();
-        String url = "jdbc:mysql://" + host + ":" + port + "/" + "?user=" + username + "&password=" + password
-                + "&useSSL=false";
+        String url = "jdbc:mysql://" + host + ":" + port + "/" + "?useSSL=false";
         QueryResult<List<Map<Object, Object>>> queryResult = jdbcService.queryForList(url, sql, username, password);
         if (queryResult.isSuccess() == false) {
             restResponse.setCode(1);
@@ -225,9 +225,10 @@ public class AbstractService
         String port = String.valueOf(mysqlServer.getPort());
         String username = mysqlServer.getUsername();
         String password = mysqlServer.getPassword();
-        String url = "jdbc:mysql://" + host + ":" + port + "/" + "?user=" + username + "&password=" + password
-                + "&useSSL=false";
-        QueryResult<Integer> queryResult = jdbcService.executeSqlForBoolean(url,sql);
+        //String url = "jdbc:mysql://" + host + ":" + port + "/" + "?user=" + username + "&password=" + password
+        //        + "&useSSL=false";
+        String url = "jdbc:mysql://" + host + ":" + port + "/?useSSL=false";
+        QueryResult<Integer> queryResult = jdbcService.executeSqlForBoolean(url,sql,username,password);
         if (queryResult.isSuccess() == false) {
             restResponse.setCode(Constant.FAIL_CODE);
             restResponse.setMessage(queryResult.getException());

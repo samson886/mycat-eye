@@ -108,10 +108,10 @@
   <insert id="insert" parameterType="io.mycat.eye.agent.bean.MysqlServer" useGeneratedKeys="true" keyProperty="id" >
     insert into mysql_server (id, host, port, 
       username, password, tags, 
-      cluster_id, create_time)
+      cluster_id, create_time,ver)
     values (#{id,jdbcType=BIGINT}, #{host,jdbcType=VARCHAR}, #{port,jdbcType=INTEGER}, 
       #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{tags,jdbcType=VARCHAR}, 
-      #{clusterId,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP})
+      #{clusterId,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{ver,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="io.mycat.eye.agent.bean.MysqlServer" useGeneratedKeys="true" keyProperty="id" >
     insert into mysql_server
@@ -255,7 +255,8 @@
       password = #{password,jdbcType=VARCHAR},
       tags = #{tags,jdbcType=VARCHAR},
       cluster_id = #{clusterId,jdbcType=BIGINT},
-      create_time = #{createTime,jdbcType=TIMESTAMP}
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      ver = #{ver,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>
