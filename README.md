@@ -36,9 +36,9 @@ DBA或管理人员视图：http://122.112.238.95:7002 登录用户名、密码:a
 
 2、将build目录中的2个jar文件传输到服务器。
 
-1）首先启动mycateye-agent-xx.jar,执行：java -jar mycateye-agent-0.8.jar --mysql.host=localhost &
+1）启动mycateye-agent-xx.jar,执行：java -jar mycateye-agent-0.8.jar --mysql.host=localhost &
 
-2）再启动mycateye-web-xx.jar,执行：java -jar mycateye-web-0.8.jar --mysql.host=localhost --agent.url=http://{ip}:7003/agent &
+2）启动mycateye-web-xx.jar,执行：java -jar mycateye-web-0.8.jar --mysql.host=localhost --agent.url=http://{ip}:7003/agent &
 
 注意：由于该项目使用ajax跨域请求，如果需要在外网访问，则这里的IP需要填写服务器外网IP，如果只在局域网使用则填写服务器的内网IP，例如：java -jar mycateye-web-0.8.jar --agent.url=http://192.168.0.100:7003 &
 
