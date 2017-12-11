@@ -5,7 +5,7 @@
 
 	<groupId>io.mycat.eye</groupId>
 	<artifactId>mycateye-web</artifactId>
-	<version>0.7</version>
+	<version>0.8</version>
 	<packaging>jar</packaging>
 
 	<name>mycateye-web</name>
