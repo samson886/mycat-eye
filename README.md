@@ -26,9 +26,9 @@ DBA或管理人员视图：http://122.112.238.95:7001/admin/index.html 登录用
 
 推荐：centos7（6.*也可以）、MySQL5.7、JDK8
 
-端口预留：7001 7002 7003 3306
+端口预留：7001 7003 3306
 
-7001预留给mycateye-web，7002预留给mycateye-admin,7003预留给mycateye-agent,3306预留给MySQL。
+7001预留给mycateye-web，7003预留给mycateye-agent,3306预留给MySQL。
 
 ## 安装步骤：
 
