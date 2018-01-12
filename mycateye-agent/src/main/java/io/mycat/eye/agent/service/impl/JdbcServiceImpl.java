@@ -60,14 +60,14 @@ public class JdbcServiceImpl implements JdbcService {
                 // 操作成功，则将数据放入查询结果中
                 queryResult.setSuccess(true);
                 queryResult.setData(list);
-                LOGGER.info("url:" + url + ",sql:" + sql);
+              //LOGGER.info("url:" + url + ",user:" + user+ ",password:" + password+ ",sql:" + sql);
             }
         } catch (Exception e) {
             // 数据操作异常，则将异常信息放入查询结果中
             queryResult.setSuccess(false);
             queryResult.setException(e.getMessage());
             // 打印日志
-            String message = "url:" + url + ",sql:" + sql + ",exception:" + e.getMessage();
+            String message = "url:" + url + ",user:" + user+ ",password:" + password+ ",sql:" + sql + ",exception:" + e.getMessage();
             LOGGER.error(message);
         } finally {
             closeConnection(conn);
@@ -95,10 +95,12 @@ public class JdbcServiceImpl implements JdbcService {
                 count = Integer.valueOf(rs.getInt(1));
                 queryResult.setSuccess(true);
                 queryResult.setData(count);
-                LOGGER.info("url:" + url + ",sql:" + sql);
+               // LOGGER.info("url:" + url + ",sql:" + sql);
             }
         } catch (Exception e) {
             LOGGER.error(e.getMessage());
+            String message = "url:" + url + ",sql:" + sql + ",exception:" + e.getMessage();
+            LOGGER.error(message);
             queryResult.setSuccess(false);
             queryResult.setException(e.getMessage());
         } finally {
@@ -121,10 +123,12 @@ public class JdbcServiceImpl implements JdbcService {
                 Integer executeResult = stmt.executeUpdate(sql);
                 queryResult.setSuccess(true);
                 queryResult.setData(executeResult);
-                LOGGER.info("url:" + url + ",sql:" + sql);
+                //LOGGER.info("url:" + url + ",sql:" + sql);
             }
         } catch (Exception e) {
             LOGGER.error(e.getMessage());
+            String message = "url:" + url + ",sql:" + sql + ",exception:" + e.getMessage();
+            LOGGER.error(message);
             queryResult.setSuccess(false);
             queryResult.setException(e.getMessage());
         } finally {
@@ -142,10 +146,12 @@ public class JdbcServiceImpl implements JdbcService {
             if (conn != null) {
                 Statement stmt = conn.createStatement();
                 Integer executeResult = stmt.executeUpdate(sql);
-                LOGGER.info("url:" + url + ",sql:" + sql+",executeResult:"+executeResult);
+               // LOGGER.info("url:" + url + ",sql:" + sql+",executeResult:"+executeResult);
             }
         } catch (Exception e) {
             LOGGER.error(e.getMessage());
+            String message = "url:" + url + ",sql:" + sql + ",exception:" + e.getMessage();
+            LOGGER.error(message);
         } finally {
             closeConnection(conn);
         }
@@ -185,7 +191,7 @@ public class JdbcServiceImpl implements JdbcService {
     private Connection getConnection1(String url) throws Exception {
         Class.forName("com.mysql.jdbc.Driver");
         Connection conn = DriverManager.getConnection(url);
-        LOGGER.info("create a data connection");
+        //LOGGER.info("create a data connection");
 
         return conn;
     }
@@ -193,7 +199,7 @@ public class JdbcServiceImpl implements JdbcService {
     private Connection getConnection(String url,String uname ,String upass) throws Exception {
         Class.forName("com.mysql.jdbc.Driver");
         Connection conn = DriverManager.getConnection(url,uname,upass);
-        LOGGER.info("create a data connection");
+        //LOGGER.info("create a data connection");
         return conn;
     }
     /**
@@ -204,7 +210,7 @@ public class JdbcServiceImpl implements JdbcService {
             if (conn != null) {
                 conn.close();
             }
-            LOGGER.info("close a data connection");
+           // LOGGER.info("close a data connection");
         } catch (SQLException e) {
             LOGGER.error(e.getMessage());
         }

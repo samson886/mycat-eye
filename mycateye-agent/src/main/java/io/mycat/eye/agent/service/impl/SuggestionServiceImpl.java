@@ -112,7 +112,8 @@ public class SuggestionServiceImpl implements SuggestionService
         String password)
     {
         String dataSourceUrl =
-            "jdbc:mysql://" + host + ":" + port + "?user=" + username + "&password=" + password + "&useSSL=false";
+            "jdbc:mysql://" + host + ":" + port + "?useSSL=false";
+       // "jdbc:mysql://" + host + ":" + port + "?user=" + username + "&password=" + password + "&useSSL=false";
         QueryResult<List<Map<Object, Object>>> queryResult =
             jdbcService.queryForList(dataSourceUrl, sql, username, password);
         

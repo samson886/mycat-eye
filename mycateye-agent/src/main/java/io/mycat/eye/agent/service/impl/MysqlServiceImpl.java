@@ -65,7 +65,8 @@ public class MysqlServiceImpl extends AbstractService implements MysqlService
     {
         RestResponse<Object> restResponse = new RestResponse<Object>();
         String dataSourceUrl =
-            "jdbc:mysql://" + host + ":" + port + "?user=" + username + "&password=" + password + "&useSSL=false";
+            "jdbc:mysql://" + host + ":" + port + "/?useSSL=false";
+        //"jdbc:mysql://" + host + ":" + port + "?user=" + username + "&password=" + password + "&useSSL=false";
         //查看版本
         String sqlVersion = "select version() as version";
         QueryResult<List<Map<Object, Object>>> queryResultVersion =
