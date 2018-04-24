@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mycat 性能监控</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Responsive Website Template">
+
+    <link href="assets/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="assets/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="assets/css/elegant-icons.css" rel="stylesheet" type="text/css">
+    <link href="assets/css/main.css" rel="stylesheet" type="text/css">
+    <link href="assets/css/my-custom-styles.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" media="all" href="assets/css/daterangepicker-bs3.css" />
+    <link rel="stylesheet" href="assets/css/jquery.mloading.css" />
+</head>
+<body>
+    <div id="wrapper">
+        <!-- 导航 -->
+        <nav class="navbar navbar-default navbar-fixed-top ">
+            <div class="container">
+                <a href="index.html" class="navbar-brand">
+                    <img src="assets/img/logo/logo_80.png" style="width: 80px; height: 46px;">
+                </a>
+                <div id="main-nav-collapse" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav main-navbar-nav">
+                        <li class="dropdown">
+                            <a href="index.html" class="dropdown-toggle" data-toggle="dropdown">首页</a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="mysql-mycnf.html" class="dropdown-toggle" data-toggle="dropdown">my.cnf生成工具</a>
+                        </li>
+                        <li class="dropdown ">
+                            <a href="mysql-cluster.html" class="dropdown-toggle" data-toggle="dropdown">集群管理</a>
+                        </li>
+                        <!--<li class="dropdown">-->
+                            <!--<a href="mysql-performance-monitor.html" class="dropdown-toggle" data-toggle="dropdown">性能监控</a>-->
+                        <!--</li>-->
+                        <li class="dropdown active">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                Mycat监控 <i class="fa fa-angle-down"></i>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="monitor-mycat.html">服务监控</a></li>
+                                <li><a href="monitor-mycat-sql.html">SQL性能监控</a></li>
+                                <li><a href="monitor-mycat-datanode.html">物理节点</a></li>
+                                <li><a href="monitor-mycat-synchronized.html">主从同步监控</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                Mysql监控 <i class="fa fa-angle-down"></i>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="mysql-sql-monitor.html">SQL监控</a></li>
+                                <li><a href="mysql-slow-monitor.html">慢查询SQL</a></li>
+                                <li><a href="mysql-performance-monitor.html">性能监控</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="mysql-health-check.html" class="dropdown-toggle" data-toggle="dropdown">健康检查</a>
+                        </li>
+                        <li class="dropdown">
+                            <a target="_blank" href="admin/index.html" class="dropdown-toggle" data-toggle="dropdown">控制台</a>
+                        </li>
+                        <li class="dropdown">
+                            <div class="btn-group" style="margin-top: 18px; margin-left: 40px;">
+                                <button type="button" class="btn btn-default" id="defaultNode">选择节点</button>
+                                <button type="button" class="btn btn-default dropdown-toggle"
+                                        data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false">
+                                    <span class="caret"></span>
+                                    <span class="sr-only">Toggle Dropdown</span>
+                                </button>
+                                <ul class="dropdown-menu" id="nodeUl">
+                                </ul>
+                            </div>
+                            <input type="hidden" id="defaultServerId" value="" />
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- END 导航 -->
+
+        <!-- 内容 -->
+        <section>
+            <div class="container">
+                <ol class="breadcrumb" style="font-size: 14px;">
+                    <li><a href="index.html">首页</a></li>
+                    <li>Mycat 监控</li>
+                    <li class="active">Mycat 服务监控</li>
+                </ol>
+            </div>
+
+            <div class="container">
+                <div class="input-prepend input-group pull-left" style="margin-bottom:10px;">
+                    <span class="add-on input-group-addon">
+                        查询时间：<i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+                    </span>
+                    <span>
+                        <input type="text" style="width: 320px;" name="reservation"
+                                       id="reservationtime" class="form-control"
+                                       value="2017/08/01 1:00:00 - 2017/08/02 13:30:00"
+                                       class="span4" />
+                    </span>
+                    <button type="button" class="btn btn-success">查看</button>
+                </div>
+
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active">
+                        <a href="#mm-detail" aria-controls="mm-detail" role="tab" data-toggle="tab">Mycat 内存分析</a>
+                    </li>
+                    <!--<li role="presentation">-->
+                        <!--<a href="#mm-threads" aria-controls="mm-threads" role="tab" data-toggle="tab">Mycat 活动线程分析</a>-->
+                    <!--</li>-->
+                    <li role="presentation">
+                        <a href="#mm-connection" aria-controls="mm-connection" role="tab" data-toggle="tab">Mycat 连接分析</a>
+                    </li>
+                    <!--<li role="presentation">-->
+                        <!--<a href="#mm-tps" aria-controls="mm-tps" role="tab" data-toggle="tab">Mycat TPS分析</a>-->
+                    <!--</li>-->
+                    <!--<li role="presentation">-->
+                        <!--<a href="#mm-queue" aria-controls="mm-queue" role="tab" data-toggle="tab">Mycat 缓冲队列分析</a>-->
+                    <!--</li>-->
+                    <!--<li role="presentation">-->
+                        <!--<a href="#mm-flow" aria-controls="mm-flow" role="tab" data-toggle="tab">Mycat 流量分析</a>-->
+                    <!--</li>-->
+                </ul>
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="mm-detail">
+                        1
+                    </div>
+                    <!--<div role="tabpanel" class="tab-pane" id="mm-threads">-->
+                        <!--2-->
+                    <!--</div>-->
+                    <div role="tabpanel" class="tab-pane" id="mm-connection">
+                        3
+                    </div>
+                    <!--<div role="tabpanel" class="tab-pane" id="mm-tps">-->
+                        <!--4-->
+                    <!--</div>-->
+                    <!--<div role="tabpanel" class="tab-pane" id="mm-queue">-->
+                        <!--5-->
+                    <!--</div>-->
+                    <!--<div role="tabpanel" class="tab-pane" id="mm-flow">-->
+                        <!--6-->
+                    <!--</div>-->
+                </div>
+            </div>
+        </section>
+        <!-- END 内容 -->
+
+        <!-- 页脚 -->
+        <footer class="footer-newsletter">
+            <div class="container">
+
+                <div class="footer-bottom">
+                    <div class="left">
+
+                        <p class="copyright-text">&copy;2017 MyCAT EYE</p>
+                    </div>
+
+                </div>
+            </div>
+        </footer>
+        <!-- END 页脚 -->
+    </div>
+
+    <div class="fakeloader"></div>
+    <!-- JAVASCRIPT -->
+    <script src="assets/js/jquery-2.1.1.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/plugins/easing/jquery.easing.min.js"></script>
+    <script src="assets/js/plugins/morphext/morphext.min.js"></script>
+    <script src="assets/js/plugins/owl-carousel/owl.carousel.min.js"></script>
+    <script src="assets/js/bravana-lite.js"></script>
+    <script src="assets/js/echarts.common.min.js"></script>
+    <!-- DataTables -->
+    <script src="assets/js/jquery.dataTables.min.js"></script>
+    <script src="assets/js/dataTables.bootstrap.min.js"></script>
+    <!-- 时间区间组件 -->
+    <script type="text/javascript" src="assets/js/moment.js"></script>
+    <script type="text/javascript" src="assets/js/daterangepicker.js"></script>
+    <!-- loading效果 -->
+    <script src="assets/js/jquery.mloading.js"></script>
+    <!-- 置顶悬浮图标 -->
+    <div class="float-container float"><a href="javascript:$(window).scrollTop(0, 0);"><img src="assets/img/top.gif" style="border:0px;" /></a></div>
+
+    <!-- 自定义JAVASCRIPT -->
+    <script src="assets/js/misc-util.js"></script>
+    <script src="assets/js/utils.js"></script>
+    <script src="assets/js/monitor/mycat.js"></script>
+</body>
+</html>

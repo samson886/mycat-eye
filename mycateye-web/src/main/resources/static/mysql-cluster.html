@@ -39,15 +39,27 @@
 							class="dropdown-toggle" data-toggle="dropdown">my.cnf生成工具</a></li>
 						<li class="dropdown active"><a href="mysql-cluster.html"
 							class="dropdown-toggle" data-toggle="dropdown">集群管理</a></li>
-						<li class="dropdown "><a
-							href="mysql-performance-monitor.html" class="dropdown-toggle"
-							data-toggle="dropdown">性能监控</a></li>
-						<li class="dropdown "><a href="#" class="dropdown-toggle"
-							data-toggle="dropdown">开发者工具<i class="fa fa-angle-down"></i></a>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+								Mycat监控 <i class="fa fa-angle-down"></i>
+							</a>
+							<ul class="dropdown-menu" role="menu">
+								<li><a href="monitor-mycat.html">服务监控</a></li>
+								<li><a href="monitor-mycat-sql.html">SQL性能监控</a></li>
+								<li><a href="monitor-mycat-datanode.html">物理节点</a></li>
+								<li><a href="monitor-mycat-synchronized.html">主从同步监控</a></li>
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+								Mysql监控 <i class="fa fa-angle-down"></i>
+							</a>
 							<ul class="dropdown-menu" role="menu">
 								<li><a href="mysql-sql-monitor.html">SQL监控</a></li>
 								<li><a href="mysql-slow-monitor.html">慢查询SQL</a></li>
-							</ul></li>
+								<li><a href="mysql-performance-monitor.html">性能监控</a></li>
+							</ul>
+						</li>
 						<li class="dropdown "><a href="mysql-health-check.html"
 							class="dropdown-toggle" data-toggle="dropdown">健康检查</a></li>
 							<li class="dropdown "><a target="_blank" href="admin/index.html"

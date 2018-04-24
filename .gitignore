@@ -1,0 +1,38 @@
+java/season03/*-bak
+
+# maven #
+**/target
+**/bin
+
+# eclipse #
+**/.settings
+**/.project
+**/.classpath
+**/.log
+
+# windows #
+Thumbs.db
+
+# Mac #
+.DS_Store
+**/.DS_Store
+
+# Package Files #
+*.war
+*.ear
+
+# idea #
+*.iml
+**/.idea/
+**/overlays
+
+# VSCode #
+.vscode
+**/.vscode
+
+# SML #
+**/*.sml#
+#*.sml#
+
+
+

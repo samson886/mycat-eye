@@ -7,13 +7,10 @@
 <meta name="description" content="Responsive Website Template">
 <meta name="author" content="The Develovers">
 <link href="assets/css/bootstrap.css" rel="stylesheet" type="text/css">
-<link href="assets/css/font-awesome.min.css" rel="stylesheet"
-	type="text/css">
-<link href="assets/css/elegant-icons.css" rel="stylesheet"
-	type="text/css">
+<link href="assets/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link href="assets/css/elegant-icons.css" rel="stylesheet" type="text/css">
 <link href="assets/css/main.css" rel="stylesheet" type="text/css">
-<link href="assets/css/my-custom-styles.css" rel="stylesheet"
-	type="text/css">
+<link href="assets/css/my-custom-styles.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" type="text/css" media="all" href="assets/css/daterangepicker-bs3.css" />
 <link rel="stylesheet" href="assets/css/jquery.mloading.css" />
 <style>
@@ -38,14 +35,27 @@
 							class="dropdown-toggle" data-toggle="dropdown">my.cnf生成工具</a></li>
 						<li class="dropdown "><a href="mysql-cluster.html" class="dropdown-toggle"
 							data-toggle="dropdown">集群管理</a></li>
-						<li class="dropdown active"><a href="mysql-performance-monitor.html"
-							class="dropdown-toggle" data-toggle="dropdown">性能监控</a></li>
-						<li class="dropdown "><a href="#" class="dropdown-toggle"
-							data-toggle="dropdown">开发者工具<i class="fa fa-angle-down"></i></a>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+								Mycat监控 <i class="fa fa-angle-down"></i>
+							</a>
+							<ul class="dropdown-menu" role="menu">
+								<li><a href="monitor-mycat.html">服务监控</a></li>
+								<li><a href="monitor-mycat-sql.html">SQL性能监控</a></li>
+								<li><a href="monitor-mycat-datanode.html">物理节点</a></li>
+								<li><a href="monitor-mycat-synchronized.html">主从同步监控</a></li>
+							</ul>
+						</li>
+						<li class="dropdown active">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+								Mysql监控 <i class="fa fa-angle-down"></i>
+							</a>
 							<ul class="dropdown-menu" role="menu">
 								<li><a href="mysql-sql-monitor.html">SQL监控</a></li>
 								<li><a href="mysql-slow-monitor.html">慢查询SQL</a></li>
-							</ul></li>
+								<li><a href="mysql-performance-monitor.html">性能监控</a></li>
+							</ul>
+						</li>
 						<li class="dropdown "><a href="mysql-health-check.html" class="dropdown-toggle"
 							data-toggle="dropdown">健康检查</a></li>
 							<li class="dropdown "><a target="_blank" href="admin/index.html"
@@ -88,20 +98,23 @@
 				</div>
 				<ol class="breadcrumb" style="font-size: 14px;">
 					<li><a href="index.html">首页</a></li>
+					<li>Mysql 监控</li>
 					<li class="active">性能监控</li>
 				</ol>
 				<div class="panel panel-default" style="border:0px;">
-				<div class="panel-body" style="padding:0px;">
-					<div class="input-prepend input-group pull-left" >
-												<span class="add-on input-group-addon">查询时间：<i
-													class="glyphicon glyphicon-calendar fa fa-calendar"></i></span> <span ><input
-													type="text" style="width: 320px;" name="reservation"
+					<div class="panel-body" style="padding:0px;">
+						<div class="input-prepend input-group pull-left" >
+							<span class="add-on input-group-addon">
+								查询时间：<i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+							</span>
+							<span>
+								<input type="text" style="width: 320px;" name="reservation"
 													id="reservationtime" class="form-control"
 													value="2017/08/01 1:00:00 - 2017/08/02 13:30:00"
 													class="span4" />
-													</span>
-											</div>
-					<div class="btn-group" role="group" style="margin-top:10px;">
+							</span>
+						</div>
+						<div class="btn-group" role="group" style="margin-top:10px;">
 							  <a type="button" href="#f_qps" class="btn btn-default">QPS</a>
 							  <a type="button" href="#f_thread" class="btn btn-default">线程数</a>
 							  <a type="button" href="#f_bytes" class="btn btn-default">数据量</a>
@@ -110,8 +123,8 @@
 							  <a type="button" href="#f_fsync" class="btn btn-default">InnoDB刷盘</a>
 							  <a type="button" href="#f_dirtypage" class="btn btn-default">InnoDB脏页</a>
 							  <a type="button" href="#f_dml" class="btn btn-default">InnoDB DML</a>
-							</div>
-				</div>
+						</div>
+					</div>
 				</div>
 				<div id="f_qps" class="panel panel-default">
 					<div class="panel-heading">QPS</div>
