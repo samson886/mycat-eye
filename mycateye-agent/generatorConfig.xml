@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+	<classPathEntry
+		location="/Users/xqy/.m2/repository/mysql/mysql-connector-java/6.0.5/mysql-connector-java-6.0.5.jar" />
+
+	<context id="context1" targetRuntime="MyBatis3">
+		<!--<plugin type="com.softwareloop.mybatis.generator.plugins.LombokPlugin">-->
+             <!--<property name="builder" value="true"/>-->
+             <!--<property name="allArgsConstructor" value="true"/>-->
+        <!--</plugin>-->
+		<plugin type="org.mybatis.generator.plugins.SerializablePlugin">
+		</plugin>
+		<plugin type="org.mybatis.generator.plugins.ToStringPlugin"></plugin>
+        
+		<commentGenerator>
+			<property name="suppressAllComments" value="true" />
+			<property name="suppressDate" value="true" />
+			<property name="addRemarkComments" value="false" />
+			<property name="javaFileEncoding" value="UTF-8" />
+		</commentGenerator>
+		<jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
+			connectionURL="jdbc:mysql://120.24.54.175:3309/mycat_eye" userId="root"
+			password="123456">
+		</jdbcConnection>
+
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+		<javaModelGenerator targetPackage="io.mycat.eye.agent.bean" targetProject="MAVEN">
+		</javaModelGenerator>
+		<sqlMapGenerator targetPackage="io.mycat.eye.agent.xml" targetProject="MAVEN"></sqlMapGenerator>
+		<javaClientGenerator targetPackage="io.mycat.eye.agent.mapper"
+							 targetProject="MAVEN" type="XMLMAPPER">
+		</javaClientGenerator>
+
+		<table schema="mycat_eye" tableName="mycat_cluster" domainObjectName="MycatCluster"/>
+		<table schema="mycat_eye" tableName="mycat_server" domainObjectName="MycatServer"/>
+		<table schema="mycat_eye" tableName="mycat_server_status" domainObjectName="MycatServerStatus"/>
+	</context>
+</generatorConfiguration>
