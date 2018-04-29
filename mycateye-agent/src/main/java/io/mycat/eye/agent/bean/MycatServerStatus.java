@@ -9,19 +9,21 @@ public class MycatServerStatus implements Serializable {
 
     private String uptime;
 
-    private Integer usedMemory;
+    private Long usedMemory;
 
-    private Integer totalMemory;
+    private Long totalMemory;
 
-    private Integer maxMemory;
+    private Long maxMemory;
 
-    private Integer reloadTime;
+    private Long reloadTime;
 
-    private Integer rollbackTime;
+    private Long rollbackTime;
 
     private String charset;
 
     private String status;
+
+    private Long collectTime;
 
     private static final long serialVersionUID = 1L;
 
@@ -49,43 +51,43 @@ public class MycatServerStatus implements Serializable {
         this.uptime = uptime;
     }
 
-    public Integer getUsedMemory() {
+    public Long getUsedMemory() {
         return usedMemory;
     }
 
-    public void setUsedMemory(Integer usedMemory) {
+    public void setUsedMemory(Long usedMemory) {
         this.usedMemory = usedMemory;
     }
 
-    public Integer getTotalMemory() {
+    public Long getTotalMemory() {
         return totalMemory;
     }
 
-    public void setTotalMemory(Integer totalMemory) {
+    public void setTotalMemory(Long totalMemory) {
         this.totalMemory = totalMemory;
     }
 
-    public Integer getMaxMemory() {
+    public Long getMaxMemory() {
         return maxMemory;
     }
 
-    public void setMaxMemory(Integer maxMemory) {
+    public void setMaxMemory(Long maxMemory) {
         this.maxMemory = maxMemory;
     }
 
-    public Integer getReloadTime() {
+    public Long getReloadTime() {
         return reloadTime;
     }
 
-    public void setReloadTime(Integer reloadTime) {
+    public void setReloadTime(Long reloadTime) {
         this.reloadTime = reloadTime;
     }
 
-    public Integer getRollbackTime() {
+    public Long getRollbackTime() {
         return rollbackTime;
     }
 
-    public void setRollbackTime(Integer rollbackTime) {
+    public void setRollbackTime(Long rollbackTime) {
         this.rollbackTime = rollbackTime;
     }
 
@@ -105,6 +107,14 @@ public class MycatServerStatus implements Serializable {
         this.status = status;
     }
 
+    public Long getCollectTime() {
+        return collectTime;
+    }
+
+    public void setCollectTime(Long collectTime) {
+        this.collectTime = collectTime;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -121,6 +131,7 @@ public class MycatServerStatus implements Serializable {
         sb.append(", rollbackTime=").append(rollbackTime);
         sb.append(", charset=").append(charset);
         sb.append(", status=").append(status);
+        sb.append(", collectTime=").append(collectTime);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

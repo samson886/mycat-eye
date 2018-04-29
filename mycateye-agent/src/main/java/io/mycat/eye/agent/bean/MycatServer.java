@@ -7,13 +7,19 @@ public class MycatServer implements Serializable {
 
     private String serverName;
 
-    private String ipAddr;
+    private String serverHost;
 
     private Integer managerPort;
 
     private Integer serverPort;
 
     private Integer clusterId;
+
+    private Long startup;
+
+    private String user;
+
+    private String password;
 
     private static final long serialVersionUID = 1L;
 
@@ -33,12 +39,12 @@ public class MycatServer implements Serializable {
         this.serverName = serverName;
     }
 
-    public String getIpAddr() {
-        return ipAddr;
+    public String getServerHost() {
+        return serverHost;
     }
 
-    public void setIpAddr(String ipAddr) {
-        this.ipAddr = ipAddr;
+    public void setServerHost(String serverHost) {
+        this.serverHost = serverHost;
     }
 
     public Integer getManagerPort() {
@@ -65,6 +71,30 @@ public class MycatServer implements Serializable {
         this.clusterId = clusterId;
     }
 
+    public Long getStartup() {
+        return startup;
+    }
+
+    public void setStartup(Long startup) {
+        this.startup = startup;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -73,10 +103,13 @@ public class MycatServer implements Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
         sb.append(", serverName=").append(serverName);
-        sb.append(", ipAddr=").append(ipAddr);
+        sb.append(", serverHost=").append(serverHost);
         sb.append(", managerPort=").append(managerPort);
         sb.append(", serverPort=").append(serverPort);
         sb.append(", clusterId=").append(clusterId);
+        sb.append(", startup=").append(startup);
+        sb.append(", user=").append(user);
+        sb.append(", password=").append(password);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

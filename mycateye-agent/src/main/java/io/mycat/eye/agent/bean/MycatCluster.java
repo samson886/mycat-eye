@@ -7,7 +7,7 @@ public class MycatCluster implements Serializable {
 
     private String clusterName;
 
-    private String clusterIp;
+    private String clusterHost;
 
     private Integer clusterPort;
 
@@ -29,12 +29,12 @@ public class MycatCluster implements Serializable {
         this.clusterName = clusterName;
     }
 
-    public String getClusterIp() {
-        return clusterIp;
+    public String getClusterHost() {
+        return clusterHost;
     }
 
-    public void setClusterIp(String clusterIp) {
-        this.clusterIp = clusterIp;
+    public void setClusterHost(String clusterHost) {
+        this.clusterHost = clusterHost;
     }
 
     public Integer getClusterPort() {
@@ -53,7 +53,7 @@ public class MycatCluster implements Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
         sb.append(", clusterName=").append(clusterName);
-        sb.append(", clusterIp=").append(clusterIp);
+        sb.append(", clusterHost=").append(clusterHost);
         sb.append(", clusterPort=").append(clusterPort);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");

@@ -4,14 +4,15 @@
 	<classPathEntry
 		location="/Users/xqy/.m2/repository/mysql/mysql-connector-java/6.0.5/mysql-connector-java-6.0.5.jar" />
 
-	<context id="context1" targetRuntime="MyBatis3">
+	<context id="context1" targetRuntime="MyBatis3" defaultModelType="conditional">
 		<!--<plugin type="com.softwareloop.mybatis.generator.plugins.LombokPlugin">-->
              <!--<property name="builder" value="true"/>-->
              <!--<property name="allArgsConstructor" value="true"/>-->
         <!--</plugin>-->
-		<plugin type="org.mybatis.generator.plugins.SerializablePlugin">
-		</plugin>
+
+		<plugin type="org.mybatis.generator.plugins.SerializablePlugin"></plugin>
 		<plugin type="org.mybatis.generator.plugins.ToStringPlugin"></plugin>
+		<plugin type="org.mybatis.generator.plugins.MapperAnnotationPlugin"></plugin>
         
 		<commentGenerator>
 			<property name="suppressAllComments" value="true" />
@@ -37,5 +38,14 @@
 		<table schema="mycat_eye" tableName="mycat_cluster" domainObjectName="MycatCluster"/>
 		<table schema="mycat_eye" tableName="mycat_server" domainObjectName="MycatServer"/>
 		<table schema="mycat_eye" tableName="mycat_server_status" domainObjectName="MycatServerStatus"/>
+		<table schema="mycat_eye" tableName="mycat_connections" domainObjectName="MycatConnection"/>
+		<table schema="mycat_eye" tableName="mycat_datanode" domainObjectName="MycatDataNode"/>
+		<table schema="mycat_eye" tableName="mycat_directmemory" domainObjectName="MycatDirectMemory"/>
+		<table schema="mycat_eye" tableName="mycat_sql" domainObjectName="MycatSql"/>
+		<table schema="mycat_eye" tableName="mycat_sql_execute" domainObjectName="MycatSqlExecute"/>
+		<table schema="mycat_eye" tableName="mycat_sql_detail" domainObjectName="MycatSqlDetail"/>
+		<table schema="mycat_eye" tableName="mycat_sql_high" domainObjectName="MycatSqlHigh"/>
+		<table schema="mycat_eye" tableName="mycat_sql_slow" domainObjectName="MycatSqlSlow"/>
+		<table schema="mycat_eye" tableName="mycat_sql_sum" domainObjectName="MycatSqlSum"/>
 	</context>
 </generatorConfiguration>

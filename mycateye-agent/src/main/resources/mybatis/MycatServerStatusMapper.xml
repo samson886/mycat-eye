@@ -5,13 +5,14 @@
     <result column="id" jdbcType="INTEGER" property="id" />
     <result column="mycat_id" jdbcType="INTEGER" property="mycatId" />
     <result column="uptime" jdbcType="VARCHAR" property="uptime" />
-    <result column="used_memory" jdbcType="INTEGER" property="usedMemory" />
-    <result column="total_memory" jdbcType="INTEGER" property="totalMemory" />
-    <result column="max_memory" jdbcType="INTEGER" property="maxMemory" />
-    <result column="reload_time" jdbcType="INTEGER" property="reloadTime" />
-    <result column="rollback_time" jdbcType="INTEGER" property="rollbackTime" />
+    <result column="used_memory" jdbcType="BIGINT" property="usedMemory" />
+    <result column="total_memory" jdbcType="BIGINT" property="totalMemory" />
+    <result column="max_memory" jdbcType="BIGINT" property="maxMemory" />
+    <result column="reload_time" jdbcType="BIGINT" property="reloadTime" />
+    <result column="rollback_time" jdbcType="BIGINT" property="rollbackTime" />
     <result column="charset" jdbcType="VARCHAR" property="charset" />
     <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="collect_time" jdbcType="BIGINT" property="collectTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -73,7 +74,7 @@
   </sql>
   <sql id="Base_Column_List">
     id, mycat_id, uptime, used_memory, total_memory, max_memory, reload_time, rollback_time, 
-    charset, status
+    charset, status, collect_time
   </sql>
   <select id="selectByExample" parameterType="io.mycat.eye.agent.bean.MycatServerStatusExample" resultMap="BaseResultMap">
     select
@@ -99,11 +100,11 @@
     insert into mycat_server_status (id, mycat_id, uptime, 
       used_memory, total_memory, max_memory, 
       reload_time, rollback_time, charset, 
-      status)
+      status, collect_time)
     values (#{id,jdbcType=INTEGER}, #{mycatId,jdbcType=INTEGER}, #{uptime,jdbcType=VARCHAR}, 
-      #{usedMemory,jdbcType=INTEGER}, #{totalMemory,jdbcType=INTEGER}, #{maxMemory,jdbcType=INTEGER}, 
-      #{reloadTime,jdbcType=INTEGER}, #{rollbackTime,jdbcType=INTEGER}, #{charset,jdbcType=VARCHAR}, 
-      #{status,jdbcType=VARCHAR})
+      #{usedMemory,jdbcType=BIGINT}, #{totalMemory,jdbcType=BIGINT}, #{maxMemory,jdbcType=BIGINT}, 
+      #{reloadTime,jdbcType=BIGINT}, #{rollbackTime,jdbcType=BIGINT}, #{charset,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{collectTime,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="io.mycat.eye.agent.bean.MycatServerStatus">
     insert into mycat_server_status
@@ -138,6 +139,9 @@
       <if test="status != null">
         status,
       </if>
+      <if test="collectTime != null">
+        collect_time,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -150,25 +154,28 @@
         #{uptime,jdbcType=VARCHAR},
       </if>
       <if test="usedMemory != null">
-        #{usedMemory,jdbcType=INTEGER},
+        #{usedMemory,jdbcType=BIGINT},
       </if>
       <if test="totalMemory != null">
-        #{totalMemory,jdbcType=INTEGER},
+        #{totalMemory,jdbcType=BIGINT},
       </if>
       <if test="maxMemory != null">
-        #{maxMemory,jdbcType=INTEGER},
+        #{maxMemory,jdbcType=BIGINT},
       </if>
       <if test="reloadTime != null">
-        #{reloadTime,jdbcType=INTEGER},
+        #{reloadTime,jdbcType=BIGINT},
       </if>
       <if test="rollbackTime != null">
-        #{rollbackTime,jdbcType=INTEGER},
+        #{rollbackTime,jdbcType=BIGINT},
       </if>
       <if test="charset != null">
         #{charset,jdbcType=VARCHAR},
       </if>
       <if test="status != null">
         #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="collectTime != null">
+        #{collectTime,jdbcType=BIGINT},
       </if>
     </trim>
   </insert>
@@ -191,25 +198,28 @@
         uptime = #{record.uptime,jdbcType=VARCHAR},
       </if>
       <if test="record.usedMemory != null">
-        used_memory = #{record.usedMemory,jdbcType=INTEGER},
+        used_memory = #{record.usedMemory,jdbcType=BIGINT},
       </if>
       <if test="record.totalMemory != null">
-        total_memory = #{record.totalMemory,jdbcType=INTEGER},
+        total_memory = #{record.totalMemory,jdbcType=BIGINT},
       </if>
       <if test="record.maxMemory != null">
-        max_memory = #{record.maxMemory,jdbcType=INTEGER},
+        max_memory = #{record.maxMemory,jdbcType=BIGINT},
       </if>
       <if test="record.reloadTime != null">
-        reload_time = #{record.reloadTime,jdbcType=INTEGER},
+        reload_time = #{record.reloadTime,jdbcType=BIGINT},
       </if>
       <if test="record.rollbackTime != null">
-        rollback_time = #{record.rollbackTime,jdbcType=INTEGER},
+        rollback_time = #{record.rollbackTime,jdbcType=BIGINT},
       </if>
       <if test="record.charset != null">
         charset = #{record.charset,jdbcType=VARCHAR},
       </if>
       <if test="record.status != null">
         status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.collectTime != null">
+        collect_time = #{record.collectTime,jdbcType=BIGINT},
       </if>
     </set>
     <if test="_parameter != null">
@@ -221,13 +231,14 @@
     set id = #{record.id,jdbcType=INTEGER},
       mycat_id = #{record.mycatId,jdbcType=INTEGER},
       uptime = #{record.uptime,jdbcType=VARCHAR},
-      used_memory = #{record.usedMemory,jdbcType=INTEGER},
-      total_memory = #{record.totalMemory,jdbcType=INTEGER},
-      max_memory = #{record.maxMemory,jdbcType=INTEGER},
-      reload_time = #{record.reloadTime,jdbcType=INTEGER},
-      rollback_time = #{record.rollbackTime,jdbcType=INTEGER},
+      used_memory = #{record.usedMemory,jdbcType=BIGINT},
+      total_memory = #{record.totalMemory,jdbcType=BIGINT},
+      max_memory = #{record.maxMemory,jdbcType=BIGINT},
+      reload_time = #{record.reloadTime,jdbcType=BIGINT},
+      rollback_time = #{record.rollbackTime,jdbcType=BIGINT},
       charset = #{record.charset,jdbcType=VARCHAR},
-      status = #{record.status,jdbcType=VARCHAR}
+      status = #{record.status,jdbcType=VARCHAR},
+      collect_time = #{record.collectTime,jdbcType=BIGINT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>

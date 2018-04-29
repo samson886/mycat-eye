@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.mycat.eye.agent.mapper.MycatDirectMemoryMapper">
+  <resultMap id="BaseResultMap" type="io.mycat.eye.agent.bean.MycatDirectMemory">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="MDIRECT_MEMORY_MAXED" jdbcType="VARCHAR" property="mdirectMemoryMaxed" />
+    <result column="DIRECT_MEMORY_USED" jdbcType="VARCHAR" property="directMemoryUsed" />
+    <result column="DIRECT_MEMORY_AVAILABLE" jdbcType="VARCHAR" property="directMemoryAvailable" />
+    <result column="SAFETY_FRACTION" jdbcType="REAL" property="safetyFraction" />
+    <result column="DIRECT_MEMORY_RESERVED" jdbcType="VARCHAR" property="directMemoryReserved" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, MDIRECT_MEMORY_MAXED, DIRECT_MEMORY_USED, DIRECT_MEMORY_AVAILABLE, SAFETY_FRACTION, 
+    DIRECT_MEMORY_RESERVED
+  </sql>
+  <select id="selectByExample" parameterType="io.mycat.eye.agent.bean.MycatDirectMemoryExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from mycat_directmemory
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="io.mycat.eye.agent.bean.MycatDirectMemoryExample">
+    delete from mycat_directmemory
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="io.mycat.eye.agent.bean.MycatDirectMemory">
+    insert into mycat_directmemory (id, MDIRECT_MEMORY_MAXED, DIRECT_MEMORY_USED, 
+      DIRECT_MEMORY_AVAILABLE, SAFETY_FRACTION, DIRECT_MEMORY_RESERVED
+      )
+    values (#{id,jdbcType=INTEGER}, #{mdirectMemoryMaxed,jdbcType=VARCHAR}, #{directMemoryUsed,jdbcType=VARCHAR}, 
+      #{directMemoryAvailable,jdbcType=VARCHAR}, #{safetyFraction,jdbcType=REAL}, #{directMemoryReserved,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="io.mycat.eye.agent.bean.MycatDirectMemory">
+    insert into mycat_directmemory
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="mdirectMemoryMaxed != null">
+        MDIRECT_MEMORY_MAXED,
+      </if>
+      <if test="directMemoryUsed != null">
+        DIRECT_MEMORY_USED,
+      </if>
+      <if test="directMemoryAvailable != null">
+        DIRECT_MEMORY_AVAILABLE,
+      </if>
+      <if test="safetyFraction != null">
+        SAFETY_FRACTION,
+      </if>
+      <if test="directMemoryReserved != null">
+        DIRECT_MEMORY_RESERVED,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="mdirectMemoryMaxed != null">
+        #{mdirectMemoryMaxed,jdbcType=VARCHAR},
+      </if>
+      <if test="directMemoryUsed != null">
+        #{directMemoryUsed,jdbcType=VARCHAR},
+      </if>
+      <if test="directMemoryAvailable != null">
+        #{directMemoryAvailable,jdbcType=VARCHAR},
+      </if>
+      <if test="safetyFraction != null">
+        #{safetyFraction,jdbcType=REAL},
+      </if>
+      <if test="directMemoryReserved != null">
+        #{directMemoryReserved,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="io.mycat.eye.agent.bean.MycatDirectMemoryExample" resultType="java.lang.Long">
+    select count(*) from mycat_directmemory
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update mycat_directmemory
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.mdirectMemoryMaxed != null">
+        MDIRECT_MEMORY_MAXED = #{record.mdirectMemoryMaxed,jdbcType=VARCHAR},
+      </if>
+      <if test="record.directMemoryUsed != null">
+        DIRECT_MEMORY_USED = #{record.directMemoryUsed,jdbcType=VARCHAR},
+      </if>
+      <if test="record.directMemoryAvailable != null">
+        DIRECT_MEMORY_AVAILABLE = #{record.directMemoryAvailable,jdbcType=VARCHAR},
+      </if>
+      <if test="record.safetyFraction != null">
+        SAFETY_FRACTION = #{record.safetyFraction,jdbcType=REAL},
+      </if>
+      <if test="record.directMemoryReserved != null">
+        DIRECT_MEMORY_RESERVED = #{record.directMemoryReserved,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update mycat_directmemory
+    set id = #{record.id,jdbcType=INTEGER},
+      MDIRECT_MEMORY_MAXED = #{record.mdirectMemoryMaxed,jdbcType=VARCHAR},
+      DIRECT_MEMORY_USED = #{record.directMemoryUsed,jdbcType=VARCHAR},
+      DIRECT_MEMORY_AVAILABLE = #{record.directMemoryAvailable,jdbcType=VARCHAR},
+      SAFETY_FRACTION = #{record.safetyFraction,jdbcType=REAL},
+      DIRECT_MEMORY_RESERVED = #{record.directMemoryReserved,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

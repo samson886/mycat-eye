@@ -10,7 +10,7 @@ mysql> show @@help;
 | show @@time.current                      | Report current timestamp                   |
 | show @@time.startup                      | Report startup timestamp                   |
 | show @@version                           | Report Mycat Server version                |
-| show @@server                            | Report server status                       |
+| show @@server                            | Report server status                       |√
 | show @@threadpool                        | Report threadPool status                   |
 | show @@database                          | Report databases                           |
 | show @@datanode                          | Report dataNodes                           |
@@ -22,20 +22,20 @@ mysql> show @@help;
 | show @@datasource.cluster                | Report datasource galary cluster variables |
 | show @@processor                         | Report processor status                    |
 | show @@command                           | Report commands status                     |
-| show @@connection                        | Report connection status                   |
-| show @@cache                             | Report system cache usage                  |
-| show @@backend                           | Report backend connection status           |
+| show @@connection                        | Report connection status                   |√
+| show @@cache                             | Report system cache usage                  |.
+| show @@backend                           | Report backend connection status           |√
 | show @@session                           | Report front session details               |
-| show @@connection.sql                    | Report connection sql                      |
-| show @@sql.execute                       | Report execute status                      |
-| show @@sql.detail where id = ?           | Report execute detail status               |
-| show @@sql                               | Report SQL list                            |
-| show @@sql.high                          | Report Hight Frequency SQL                 |
-| show @@sql.slow                          | Report slow SQL                            |
-| show @@sql.resultset                     | Report BIG RESULTSET SQL                   |
-| show @@sql.sum                           | Report  User RW Stat                       |
-| show @@sql.sum.user                      | Report  User RW Stat                       |
-| show @@sql.sum.table                     | Report  Table RW Stat                      |
+| show @@connection.sql                    | Report connection sql                      |√跟踪当前应用执行sql情况
+| show @@sql.execute                       | Report execute status                      |√
+| show @@sql.detail where id = ?           | Report execute detail status               |√
+| show @@sql                               | Report SQL list                            |√
+| show @@sql.high                          | Report Hight Frequency SQL                 |√
+| show @@sql.slow                          | Report slow SQL                            |√
+| show @@sql.resultset                     | Report BIG RESULTSET SQL                   |√
+| show @@sql.sum                           | Report  User RW Stat                       |√
+| show @@sql.sum.user                      | Report  User RW Stat                       |√
+| show @@sql.sum.table                     | Report  Table RW Stat                      |√
 | show @@parser                            | Report parser status                       |
 | show @@router                            | Report router status                       |
 | show @@heartbeat                         | Report heartbeat status                    |
@@ -51,7 +51,7 @@ mysql> show @@help;
 | kill @@connection id1,id2,...            | Kill the specified connections             |
 | stop @@heartbeat name:time               | Pause dataNode heartbeat                   |
 | reload @@config                          | Reload basic config from file              |
-| reload @@config_all                      | Reload all config from file                |
+| reload @@config_all                      | Reload all config from file                |*
 | reload @@route                           | Reload route config from file              |
 | reload @@user                            | Reload user config from file               |
 | reload @@sqlslow=                        | Set Slow SQL Time(ms)                      |
@@ -138,6 +138,11 @@ mysql> show @@datasource;
 | dn2      | hostS1 | mysql | 127.0.0.1 | 3308 | W    |      0 |    8 | 1000 |     895 |         0 |          0 |
 | dn2      | hostS2 | mysql | 127.0.0.1 | 3307 | R    |      0 |    8 | 1000 |     893 |         0 |          0 |
 +----------+--------+-------+---------------+------+------+--------+------+------+---------+-----------+------------+
+```
+
+### 数据节点
+```sql
+
 ```
 
 ### SQL 监控

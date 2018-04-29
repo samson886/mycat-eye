@@ -4,10 +4,13 @@
   <resultMap id="BaseResultMap" type="io.mycat.eye.agent.bean.MycatServer">
     <result column="id" jdbcType="INTEGER" property="id" />
     <result column="server_name" jdbcType="VARCHAR" property="serverName" />
-    <result column="ip_addr" jdbcType="VARCHAR" property="ipAddr" />
+    <result column="server_host" jdbcType="VARCHAR" property="serverHost" />
     <result column="manager_port" jdbcType="INTEGER" property="managerPort" />
     <result column="server_port" jdbcType="INTEGER" property="serverPort" />
     <result column="cluster_id" jdbcType="INTEGER" property="clusterId" />
+    <result column="startup" jdbcType="BIGINT" property="startup" />
+    <result column="user" jdbcType="VARCHAR" property="user" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -68,7 +71,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, server_name, ip_addr, manager_port, server_port, cluster_id
+    id, server_name, server_host, manager_port, server_port, cluster_id, startup, user, 
+    password
   </sql>
   <select id="selectByExample" parameterType="io.mycat.eye.agent.bean.MycatServerExample" resultMap="BaseResultMap">
     select
@@ -91,11 +95,13 @@
     </if>
   </delete>
   <insert id="insert" parameterType="io.mycat.eye.agent.bean.MycatServer">
-    insert into mycat_server (id, server_name, ip_addr, 
-      manager_port, server_port, cluster_id
+    insert into mycat_server (id, server_name, server_host, 
+      manager_port, server_port, cluster_id, 
+      startup, user, password
       )
-    values (#{id,jdbcType=INTEGER}, #{serverName,jdbcType=VARCHAR}, #{ipAddr,jdbcType=VARCHAR}, 
-      #{managerPort,jdbcType=INTEGER}, #{serverPort,jdbcType=INTEGER}, #{clusterId,jdbcType=INTEGER}
+    values (#{id,jdbcType=INTEGER}, #{serverName,jdbcType=VARCHAR}, #{serverHost,jdbcType=VARCHAR}, 
+      #{managerPort,jdbcType=INTEGER}, #{serverPort,jdbcType=INTEGER}, #{clusterId,jdbcType=INTEGER}, 
+      #{startup,jdbcType=BIGINT}, #{user,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="io.mycat.eye.agent.bean.MycatServer">
@@ -107,8 +113,8 @@
       <if test="serverName != null">
         server_name,
       </if>
-      <if test="ipAddr != null">
-        ip_addr,
+      <if test="serverHost != null">
+        server_host,
       </if>
       <if test="managerPort != null">
         manager_port,
@@ -119,6 +125,15 @@
       <if test="clusterId != null">
         cluster_id,
       </if>
+      <if test="startup != null">
+        startup,
+      </if>
+      <if test="user != null">
+        user,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -127,8 +142,8 @@
       <if test="serverName != null">
         #{serverName,jdbcType=VARCHAR},
       </if>
-      <if test="ipAddr != null">
-        #{ipAddr,jdbcType=VARCHAR},
+      <if test="serverHost != null">
+        #{serverHost,jdbcType=VARCHAR},
       </if>
       <if test="managerPort != null">
         #{managerPort,jdbcType=INTEGER},
@@ -138,6 +153,15 @@
       </if>
       <if test="clusterId != null">
         #{clusterId,jdbcType=INTEGER},
+      </if>
+      <if test="startup != null">
+        #{startup,jdbcType=BIGINT},
+      </if>
+      <if test="user != null">
+        #{user,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -156,8 +180,8 @@
       <if test="record.serverName != null">
         server_name = #{record.serverName,jdbcType=VARCHAR},
       </if>
-      <if test="record.ipAddr != null">
-        ip_addr = #{record.ipAddr,jdbcType=VARCHAR},
+      <if test="record.serverHost != null">
+        server_host = #{record.serverHost,jdbcType=VARCHAR},
       </if>
       <if test="record.managerPort != null">
         manager_port = #{record.managerPort,jdbcType=INTEGER},
@@ -168,6 +192,15 @@
       <if test="record.clusterId != null">
         cluster_id = #{record.clusterId,jdbcType=INTEGER},
       </if>
+      <if test="record.startup != null">
+        startup = #{record.startup,jdbcType=BIGINT},
+      </if>
+      <if test="record.user != null">
+        user = #{record.user,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null">
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -177,10 +210,13 @@
     update mycat_server
     set id = #{record.id,jdbcType=INTEGER},
       server_name = #{record.serverName,jdbcType=VARCHAR},
-      ip_addr = #{record.ipAddr,jdbcType=VARCHAR},
+      server_host = #{record.serverHost,jdbcType=VARCHAR},
       manager_port = #{record.managerPort,jdbcType=INTEGER},
       server_port = #{record.serverPort,jdbcType=INTEGER},
-      cluster_id = #{record.clusterId,jdbcType=INTEGER}
+      cluster_id = #{record.clusterId,jdbcType=INTEGER},
+      startup = #{record.startup,jdbcType=BIGINT},
+      user = #{record.user,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>

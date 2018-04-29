@@ -3,7 +3,6 @@ package io.mycat.eye.agent.mapper;
 import io.mycat.eye.agent.bean.MycatCluster;
 import io.mycat.eye.agent.bean.MycatClusterExample;
 import java.util.List;
-
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

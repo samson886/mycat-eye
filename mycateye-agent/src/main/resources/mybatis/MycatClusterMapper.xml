@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="io.mycat.eye.agent.bean.MycatCluster">
     <result column="id" jdbcType="INTEGER" property="id" />
     <result column="cluster_name" jdbcType="VARCHAR" property="clusterName" />
-    <result column="cluster_ip" jdbcType="VARCHAR" property="clusterIp" />
+    <result column="cluster_host" jdbcType="VARCHAR" property="clusterHost" />
     <result column="cluster_port" jdbcType="INTEGER" property="clusterPort" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -66,7 +66,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, cluster_name, cluster_ip, cluster_port
+    id, cluster_name, cluster_host, cluster_port
   </sql>
   <select id="selectByExample" parameterType="io.mycat.eye.agent.bean.MycatClusterExample" resultMap="BaseResultMap">
     select
@@ -89,9 +89,9 @@
     </if>
   </delete>
   <insert id="insert" parameterType="io.mycat.eye.agent.bean.MycatCluster">
-    insert into mycat_cluster (id, cluster_name, cluster_ip, 
+    insert into mycat_cluster (id, cluster_name, cluster_host, 
       cluster_port)
-    values (#{id,jdbcType=INTEGER}, #{clusterName,jdbcType=VARCHAR}, #{clusterIp,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{clusterName,jdbcType=VARCHAR}, #{clusterHost,jdbcType=VARCHAR}, 
       #{clusterPort,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="io.mycat.eye.agent.bean.MycatCluster">
@@ -103,8 +103,8 @@
       <if test="clusterName != null">
         cluster_name,
       </if>
-      <if test="clusterIp != null">
-        cluster_ip,
+      <if test="clusterHost != null">
+        cluster_host,
       </if>
       <if test="clusterPort != null">
         cluster_port,
@@ -117,8 +117,8 @@
       <if test="clusterName != null">
         #{clusterName,jdbcType=VARCHAR},
       </if>
-      <if test="clusterIp != null">
-        #{clusterIp,jdbcType=VARCHAR},
+      <if test="clusterHost != null">
+        #{clusterHost,jdbcType=VARCHAR},
       </if>
       <if test="clusterPort != null">
         #{clusterPort,jdbcType=INTEGER},
@@ -140,8 +140,8 @@
       <if test="record.clusterName != null">
         cluster_name = #{record.clusterName,jdbcType=VARCHAR},
       </if>
-      <if test="record.clusterIp != null">
-        cluster_ip = #{record.clusterIp,jdbcType=VARCHAR},
+      <if test="record.clusterHost != null">
+        cluster_host = #{record.clusterHost,jdbcType=VARCHAR},
       </if>
       <if test="record.clusterPort != null">
         cluster_port = #{record.clusterPort,jdbcType=INTEGER},
@@ -155,7 +155,7 @@
     update mycat_cluster
     set id = #{record.id,jdbcType=INTEGER},
       cluster_name = #{record.clusterName,jdbcType=VARCHAR},
-      cluster_ip = #{record.clusterIp,jdbcType=VARCHAR},
+      cluster_host = #{record.clusterHost,jdbcType=VARCHAR},
       cluster_port = #{record.clusterPort,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />

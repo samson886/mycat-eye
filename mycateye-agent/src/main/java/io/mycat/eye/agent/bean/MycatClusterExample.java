@@ -234,73 +234,73 @@ public class MycatClusterExample {
             return (Criteria) this;
         }
 
-        public Criteria andClusterIpIsNull() {
-            addCriterion("cluster_ip is null");
+        public Criteria andClusterHostIsNull() {
+            addCriterion("cluster_host is null");
             return (Criteria) this;
         }
 
-        public Criteria andClusterIpIsNotNull() {
-            addCriterion("cluster_ip is not null");
+        public Criteria andClusterHostIsNotNull() {
+            addCriterion("cluster_host is not null");
             return (Criteria) this;
         }
 
-        public Criteria andClusterIpEqualTo(String value) {
-            addCriterion("cluster_ip =", value, "clusterIp");
+        public Criteria andClusterHostEqualTo(String value) {
+            addCriterion("cluster_host =", value, "clusterHost");
             return (Criteria) this;
         }
 
-        public Criteria andClusterIpNotEqualTo(String value) {
-            addCriterion("cluster_ip <>", value, "clusterIp");
+        public Criteria andClusterHostNotEqualTo(String value) {
+            addCriterion("cluster_host <>", value, "clusterHost");
             return (Criteria) this;
         }
 
-        public Criteria andClusterIpGreaterThan(String value) {
-            addCriterion("cluster_ip >", value, "clusterIp");
+        public Criteria andClusterHostGreaterThan(String value) {
+            addCriterion("cluster_host >", value, "clusterHost");
             return (Criteria) this;
         }
 
-        public Criteria andClusterIpGreaterThanOrEqualTo(String value) {
-            addCriterion("cluster_ip >=", value, "clusterIp");
+        public Criteria andClusterHostGreaterThanOrEqualTo(String value) {
+            addCriterion("cluster_host >=", value, "clusterHost");
             return (Criteria) this;
         }
 
-        public Criteria andClusterIpLessThan(String value) {
-            addCriterion("cluster_ip <", value, "clusterIp");
+        public Criteria andClusterHostLessThan(String value) {
+            addCriterion("cluster_host <", value, "clusterHost");
             return (Criteria) this;
         }
 
-        public Criteria andClusterIpLessThanOrEqualTo(String value) {
-            addCriterion("cluster_ip <=", value, "clusterIp");
+        public Criteria andClusterHostLessThanOrEqualTo(String value) {
+            addCriterion("cluster_host <=", value, "clusterHost");
             return (Criteria) this;
         }
 
-        public Criteria andClusterIpLike(String value) {
-            addCriterion("cluster_ip like", value, "clusterIp");
+        public Criteria andClusterHostLike(String value) {
+            addCriterion("cluster_host like", value, "clusterHost");
             return (Criteria) this;
         }
 
-        public Criteria andClusterIpNotLike(String value) {
-            addCriterion("cluster_ip not like", value, "clusterIp");
+        public Criteria andClusterHostNotLike(String value) {
+            addCriterion("cluster_host not like", value, "clusterHost");
             return (Criteria) this;
         }
 
-        public Criteria andClusterIpIn(List<String> values) {
-            addCriterion("cluster_ip in", values, "clusterIp");
+        public Criteria andClusterHostIn(List<String> values) {
+            addCriterion("cluster_host in", values, "clusterHost");
             return (Criteria) this;
         }
 
-        public Criteria andClusterIpNotIn(List<String> values) {
-            addCriterion("cluster_ip not in", values, "clusterIp");
+        public Criteria andClusterHostNotIn(List<String> values) {
+            addCriterion("cluster_host not in", values, "clusterHost");
             return (Criteria) this;
         }
 
-        public Criteria andClusterIpBetween(String value1, String value2) {
-            addCriterion("cluster_ip between", value1, value2, "clusterIp");
+        public Criteria andClusterHostBetween(String value1, String value2) {
+            addCriterion("cluster_host between", value1, value2, "clusterHost");
             return (Criteria) this;
         }
 
-        public Criteria andClusterIpNotBetween(String value1, String value2) {
-            addCriterion("cluster_ip not between", value1, value2, "clusterIp");
+        public Criteria andClusterHostNotBetween(String value1, String value2) {
+            addCriterion("cluster_host not between", value1, value2, "clusterHost");
             return (Criteria) this;
         }
 

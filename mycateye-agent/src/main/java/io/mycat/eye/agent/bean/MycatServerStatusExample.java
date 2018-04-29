@@ -304,52 +304,52 @@ public class MycatServerStatusExample {
             return (Criteria) this;
         }
 
-        public Criteria andUsedMemoryEqualTo(Integer value) {
+        public Criteria andUsedMemoryEqualTo(Long value) {
             addCriterion("used_memory =", value, "usedMemory");
             return (Criteria) this;
         }
 
-        public Criteria andUsedMemoryNotEqualTo(Integer value) {
+        public Criteria andUsedMemoryNotEqualTo(Long value) {
             addCriterion("used_memory <>", value, "usedMemory");
             return (Criteria) this;
         }
 
-        public Criteria andUsedMemoryGreaterThan(Integer value) {
+        public Criteria andUsedMemoryGreaterThan(Long value) {
             addCriterion("used_memory >", value, "usedMemory");
             return (Criteria) this;
         }
 
-        public Criteria andUsedMemoryGreaterThanOrEqualTo(Integer value) {
+        public Criteria andUsedMemoryGreaterThanOrEqualTo(Long value) {
             addCriterion("used_memory >=", value, "usedMemory");
             return (Criteria) this;
         }
 
-        public Criteria andUsedMemoryLessThan(Integer value) {
+        public Criteria andUsedMemoryLessThan(Long value) {
             addCriterion("used_memory <", value, "usedMemory");
             return (Criteria) this;
         }
 
-        public Criteria andUsedMemoryLessThanOrEqualTo(Integer value) {
+        public Criteria andUsedMemoryLessThanOrEqualTo(Long value) {
             addCriterion("used_memory <=", value, "usedMemory");
             return (Criteria) this;
         }
 
-        public Criteria andUsedMemoryIn(List<Integer> values) {
+        public Criteria andUsedMemoryIn(List<Long> values) {
             addCriterion("used_memory in", values, "usedMemory");
             return (Criteria) this;
         }
 
-        public Criteria andUsedMemoryNotIn(List<Integer> values) {
+        public Criteria andUsedMemoryNotIn(List<Long> values) {
             addCriterion("used_memory not in", values, "usedMemory");
             return (Criteria) this;
         }
 
-        public Criteria andUsedMemoryBetween(Integer value1, Integer value2) {
+        public Criteria andUsedMemoryBetween(Long value1, Long value2) {
             addCriterion("used_memory between", value1, value2, "usedMemory");
             return (Criteria) this;
         }
 
-        public Criteria andUsedMemoryNotBetween(Integer value1, Integer value2) {
+        public Criteria andUsedMemoryNotBetween(Long value1, Long value2) {
             addCriterion("used_memory not between", value1, value2, "usedMemory");
             return (Criteria) this;
         }
@@ -364,52 +364,52 @@ public class MycatServerStatusExample {
             return (Criteria) this;
         }
 
-        public Criteria andTotalMemoryEqualTo(Integer value) {
+        public Criteria andTotalMemoryEqualTo(Long value) {
             addCriterion("total_memory =", value, "totalMemory");
             return (Criteria) this;
         }
 
-        public Criteria andTotalMemoryNotEqualTo(Integer value) {
+        public Criteria andTotalMemoryNotEqualTo(Long value) {
             addCriterion("total_memory <>", value, "totalMemory");
             return (Criteria) this;
         }
 
-        public Criteria andTotalMemoryGreaterThan(Integer value) {
+        public Criteria andTotalMemoryGreaterThan(Long value) {
             addCriterion("total_memory >", value, "totalMemory");
             return (Criteria) this;
         }
 
-        public Criteria andTotalMemoryGreaterThanOrEqualTo(Integer value) {
+        public Criteria andTotalMemoryGreaterThanOrEqualTo(Long value) {
             addCriterion("total_memory >=", value, "totalMemory");
             return (Criteria) this;
         }
 
-        public Criteria andTotalMemoryLessThan(Integer value) {
+        public Criteria andTotalMemoryLessThan(Long value) {
             addCriterion("total_memory <", value, "totalMemory");
             return (Criteria) this;
         }
 
-        public Criteria andTotalMemoryLessThanOrEqualTo(Integer value) {
+        public Criteria andTotalMemoryLessThanOrEqualTo(Long value) {
             addCriterion("total_memory <=", value, "totalMemory");
             return (Criteria) this;
         }
 
-        public Criteria andTotalMemoryIn(List<Integer> values) {
+        public Criteria andTotalMemoryIn(List<Long> values) {
             addCriterion("total_memory in", values, "totalMemory");
             return (Criteria) this;
         }
 
-        public Criteria andTotalMemoryNotIn(List<Integer> values) {
+        public Criteria andTotalMemoryNotIn(List<Long> values) {
             addCriterion("total_memory not in", values, "totalMemory");
             return (Criteria) this;
         }
 
-        public Criteria andTotalMemoryBetween(Integer value1, Integer value2) {
+        public Criteria andTotalMemoryBetween(Long value1, Long value2) {
             addCriterion("total_memory between", value1, value2, "totalMemory");
             return (Criteria) this;
         }
 
-        public Criteria andTotalMemoryNotBetween(Integer value1, Integer value2) {
+        public Criteria andTotalMemoryNotBetween(Long value1, Long value2) {
             addCriterion("total_memory not between", value1, value2, "totalMemory");
             return (Criteria) this;
         }
@@ -424,52 +424,52 @@ public class MycatServerStatusExample {
             return (Criteria) this;
         }
 
-        public Criteria andMaxMemoryEqualTo(Integer value) {
+        public Criteria andMaxMemoryEqualTo(Long value) {
             addCriterion("max_memory =", value, "maxMemory");
             return (Criteria) this;
         }
 
-        public Criteria andMaxMemoryNotEqualTo(Integer value) {
+        public Criteria andMaxMemoryNotEqualTo(Long value) {
             addCriterion("max_memory <>", value, "maxMemory");
             return (Criteria) this;
         }
 
-        public Criteria andMaxMemoryGreaterThan(Integer value) {
+        public Criteria andMaxMemoryGreaterThan(Long value) {
             addCriterion("max_memory >", value, "maxMemory");
             return (Criteria) this;
         }
 
-        public Criteria andMaxMemoryGreaterThanOrEqualTo(Integer value) {
+        public Criteria andMaxMemoryGreaterThanOrEqualTo(Long value) {
             addCriterion("max_memory >=", value, "maxMemory");
             return (Criteria) this;
         }
 
-        public Criteria andMaxMemoryLessThan(Integer value) {
+        public Criteria andMaxMemoryLessThan(Long value) {
             addCriterion("max_memory <", value, "maxMemory");
             return (Criteria) this;
         }
 
-        public Criteria andMaxMemoryLessThanOrEqualTo(Integer value) {
+        public Criteria andMaxMemoryLessThanOrEqualTo(Long value) {
             addCriterion("max_memory <=", value, "maxMemory");
             return (Criteria) this;
         }
 
-        public Criteria andMaxMemoryIn(List<Integer> values) {
+        public Criteria andMaxMemoryIn(List<Long> values) {
             addCriterion("max_memory in", values, "maxMemory");
             return (Criteria) this;
         }
 
-        public Criteria andMaxMemoryNotIn(List<Integer> values) {
+        public Criteria andMaxMemoryNotIn(List<Long> values) {
             addCriterion("max_memory not in", values, "maxMemory");
             return (Criteria) this;
         }
 
-        public Criteria andMaxMemoryBetween(Integer value1, Integer value2) {
+        public Criteria andMaxMemoryBetween(Long value1, Long value2) {
             addCriterion("max_memory between", value1, value2, "maxMemory");
             return (Criteria) this;
         }
 
-        public Criteria andMaxMemoryNotBetween(Integer value1, Integer value2) {
+        public Criteria andMaxMemoryNotBetween(Long value1, Long value2) {
             addCriterion("max_memory not between", value1, value2, "maxMemory");
             return (Criteria) this;
         }
@@ -484,52 +484,52 @@ public class MycatServerStatusExample {
             return (Criteria) this;
         }
 
-        public Criteria andReloadTimeEqualTo(Integer value) {
+        public Criteria andReloadTimeEqualTo(Long value) {
             addCriterion("reload_time =", value, "reloadTime");
             return (Criteria) this;
         }
 
-        public Criteria andReloadTimeNotEqualTo(Integer value) {
+        public Criteria andReloadTimeNotEqualTo(Long value) {
             addCriterion("reload_time <>", value, "reloadTime");
             return (Criteria) this;
         }
 
-        public Criteria andReloadTimeGreaterThan(Integer value) {
+        public Criteria andReloadTimeGreaterThan(Long value) {
             addCriterion("reload_time >", value, "reloadTime");
             return (Criteria) this;
         }
 
-        public Criteria andReloadTimeGreaterThanOrEqualTo(Integer value) {
+        public Criteria andReloadTimeGreaterThanOrEqualTo(Long value) {
             addCriterion("reload_time >=", value, "reloadTime");
             return (Criteria) this;
         }
 
-        public Criteria andReloadTimeLessThan(Integer value) {
+        public Criteria andReloadTimeLessThan(Long value) {
             addCriterion("reload_time <", value, "reloadTime");
             return (Criteria) this;
         }
 
-        public Criteria andReloadTimeLessThanOrEqualTo(Integer value) {
+        public Criteria andReloadTimeLessThanOrEqualTo(Long value) {
             addCriterion("reload_time <=", value, "reloadTime");
             return (Criteria) this;
         }
 
-        public Criteria andReloadTimeIn(List<Integer> values) {
+        public Criteria andReloadTimeIn(List<Long> values) {
             addCriterion("reload_time in", values, "reloadTime");
             return (Criteria) this;
         }
 
-        public Criteria andReloadTimeNotIn(List<Integer> values) {
+        public Criteria andReloadTimeNotIn(List<Long> values) {
             addCriterion("reload_time not in", values, "reloadTime");
             return (Criteria) this;
         }
 
-        public Criteria andReloadTimeBetween(Integer value1, Integer value2) {
+        public Criteria andReloadTimeBetween(Long value1, Long value2) {
             addCriterion("reload_time between", value1, value2, "reloadTime");
             return (Criteria) this;
         }
 
-        public Criteria andReloadTimeNotBetween(Integer value1, Integer value2) {
+        public Criteria andReloadTimeNotBetween(Long value1, Long value2) {
             addCriterion("reload_time not between", value1, value2, "reloadTime");
             return (Criteria) this;
         }
@@ -544,52 +544,52 @@ public class MycatServerStatusExample {
             return (Criteria) this;
         }
 
-        public Criteria andRollbackTimeEqualTo(Integer value) {
+        public Criteria andRollbackTimeEqualTo(Long value) {
             addCriterion("rollback_time =", value, "rollbackTime");
             return (Criteria) this;
         }
 
-        public Criteria andRollbackTimeNotEqualTo(Integer value) {
+        public Criteria andRollbackTimeNotEqualTo(Long value) {
             addCriterion("rollback_time <>", value, "rollbackTime");
             return (Criteria) this;
         }
 
-        public Criteria andRollbackTimeGreaterThan(Integer value) {
+        public Criteria andRollbackTimeGreaterThan(Long value) {
             addCriterion("rollback_time >", value, "rollbackTime");
             return (Criteria) this;
         }
 
-        public Criteria andRollbackTimeGreaterThanOrEqualTo(Integer value) {
+        public Criteria andRollbackTimeGreaterThanOrEqualTo(Long value) {
             addCriterion("rollback_time >=", value, "rollbackTime");
             return (Criteria) this;
         }
 
-        public Criteria andRollbackTimeLessThan(Integer value) {
+        public Criteria andRollbackTimeLessThan(Long value) {
             addCriterion("rollback_time <", value, "rollbackTime");
             return (Criteria) this;
         }
 
-        public Criteria andRollbackTimeLessThanOrEqualTo(Integer value) {
+        public Criteria andRollbackTimeLessThanOrEqualTo(Long value) {
             addCriterion("rollback_time <=", value, "rollbackTime");
             return (Criteria) this;
         }
 
-        public Criteria andRollbackTimeIn(List<Integer> values) {
+        public Criteria andRollbackTimeIn(List<Long> values) {
             addCriterion("rollback_time in", values, "rollbackTime");
             return (Criteria) this;
         }
 
-        public Criteria andRollbackTimeNotIn(List<Integer> values) {
+        public Criteria andRollbackTimeNotIn(List<Long> values) {
             addCriterion("rollback_time not in", values, "rollbackTime");
             return (Criteria) this;
         }
 
-        public Criteria andRollbackTimeBetween(Integer value1, Integer value2) {
+        public Criteria andRollbackTimeBetween(Long value1, Long value2) {
             addCriterion("rollback_time between", value1, value2, "rollbackTime");
             return (Criteria) this;
         }
 
-        public Criteria andRollbackTimeNotBetween(Integer value1, Integer value2) {
+        public Criteria andRollbackTimeNotBetween(Long value1, Long value2) {
             addCriterion("rollback_time not between", value1, value2, "rollbackTime");
             return (Criteria) this;
         }
@@ -731,6 +731,66 @@ public class MycatServerStatusExample {
 
         public Criteria andStatusNotBetween(String value1, String value2) {
             addCriterion("status not between", value1, value2, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andCollectTimeIsNull() {
+            addCriterion("collect_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCollectTimeIsNotNull() {
+            addCriterion("collect_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCollectTimeEqualTo(Long value) {
+            addCriterion("collect_time =", value, "collectTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCollectTimeNotEqualTo(Long value) {
+            addCriterion("collect_time <>", value, "collectTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCollectTimeGreaterThan(Long value) {
+            addCriterion("collect_time >", value, "collectTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCollectTimeGreaterThanOrEqualTo(Long value) {
+            addCriterion("collect_time >=", value, "collectTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCollectTimeLessThan(Long value) {
+            addCriterion("collect_time <", value, "collectTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCollectTimeLessThanOrEqualTo(Long value) {
+            addCriterion("collect_time <=", value, "collectTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCollectTimeIn(List<Long> values) {
+            addCriterion("collect_time in", values, "collectTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCollectTimeNotIn(List<Long> values) {
+            addCriterion("collect_time not in", values, "collectTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCollectTimeBetween(Long value1, Long value2) {
+            addCriterion("collect_time between", value1, value2, "collectTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCollectTimeNotBetween(Long value1, Long value2) {
+            addCriterion("collect_time not between", value1, value2, "collectTime");
             return (Criteria) this;
         }
     }
