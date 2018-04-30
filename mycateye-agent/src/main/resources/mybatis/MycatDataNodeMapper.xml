@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.mycat.eye.agent.mapper.MycatDataNodeMapper">
+  <resultMap id="BaseResultMap" type="io.mycat.eye.agent.bean.MycatDataNode">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="datahost" jdbcType="VARCHAR" property="datahost" />
+    <result column="d_index" jdbcType="INTEGER" property="dIndex" />
+    <result column="d_type" jdbcType="VARCHAR" property="dType" />
+    <result column="d_active" jdbcType="INTEGER" property="dActive" />
+    <result column="d_idle" jdbcType="INTEGER" property="dIdle" />
+    <result column="d_size" jdbcType="INTEGER" property="dSize" />
+    <result column="d_execute" jdbcType="BIGINT" property="dExecute" />
+    <result column="total_time" jdbcType="DOUBLE" property="totalTime" />
+    <result column="max_time" jdbcType="DOUBLE" property="maxTime" />
+    <result column="max_sql" jdbcType="BIGINT" property="maxSql" />
+    <result column="recovery_time" jdbcType="BIGINT" property="recoveryTime" />
+    <result column="collect_time" jdbcType="BIGINT" property="collectTime" />
+    <result column="server_id" jdbcType="INTEGER" property="serverId" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, name, datahost, d_index, d_type, d_active, d_idle, d_size, d_execute, total_time, 
+    max_time, max_sql, recovery_time, collect_time, server_id
+  </sql>
+  <select id="selectByExample" parameterType="io.mycat.eye.agent.bean.MycatDataNodeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from mycat_datanode
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="io.mycat.eye.agent.bean.MycatDataNodeExample">
+    delete from mycat_datanode
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="io.mycat.eye.agent.bean.MycatDataNode">
+    insert into mycat_datanode (id, name, datahost, 
+      d_index, d_type, d_active, 
+      d_idle, d_size, d_execute, 
+      total_time, max_time, max_sql, 
+      recovery_time, collect_time, server_id
+      )
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{datahost,jdbcType=VARCHAR}, 
+      #{dIndex,jdbcType=INTEGER}, #{dType,jdbcType=VARCHAR}, #{dActive,jdbcType=INTEGER}, 
+      #{dIdle,jdbcType=INTEGER}, #{dSize,jdbcType=INTEGER}, #{dExecute,jdbcType=BIGINT}, 
+      #{totalTime,jdbcType=DOUBLE}, #{maxTime,jdbcType=DOUBLE}, #{maxSql,jdbcType=BIGINT}, 
+      #{recoveryTime,jdbcType=BIGINT}, #{collectTime,jdbcType=BIGINT}, #{serverId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="io.mycat.eye.agent.bean.MycatDataNode">
+    insert into mycat_datanode
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="datahost != null">
+        datahost,
+      </if>
+      <if test="dIndex != null">
+        d_index,
+      </if>
+      <if test="dType != null">
+        d_type,
+      </if>
+      <if test="dActive != null">
+        d_active,
+      </if>
+      <if test="dIdle != null">
+        d_idle,
+      </if>
+      <if test="dSize != null">
+        d_size,
+      </if>
+      <if test="dExecute != null">
+        d_execute,
+      </if>
+      <if test="totalTime != null">
+        total_time,
+      </if>
+      <if test="maxTime != null">
+        max_time,
+      </if>
+      <if test="maxSql != null">
+        max_sql,
+      </if>
+      <if test="recoveryTime != null">
+        recovery_time,
+      </if>
+      <if test="collectTime != null">
+        collect_time,
+      </if>
+      <if test="serverId != null">
+        server_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="datahost != null">
+        #{datahost,jdbcType=VARCHAR},
+      </if>
+      <if test="dIndex != null">
+        #{dIndex,jdbcType=INTEGER},
+      </if>
+      <if test="dType != null">
+        #{dType,jdbcType=VARCHAR},
+      </if>
+      <if test="dActive != null">
+        #{dActive,jdbcType=INTEGER},
+      </if>
+      <if test="dIdle != null">
+        #{dIdle,jdbcType=INTEGER},
+      </if>
+      <if test="dSize != null">
+        #{dSize,jdbcType=INTEGER},
+      </if>
+      <if test="dExecute != null">
+        #{dExecute,jdbcType=BIGINT},
+      </if>
+      <if test="totalTime != null">
+        #{totalTime,jdbcType=DOUBLE},
+      </if>
+      <if test="maxTime != null">
+        #{maxTime,jdbcType=DOUBLE},
+      </if>
+      <if test="maxSql != null">
+        #{maxSql,jdbcType=BIGINT},
+      </if>
+      <if test="recoveryTime != null">
+        #{recoveryTime,jdbcType=BIGINT},
+      </if>
+      <if test="collectTime != null">
+        #{collectTime,jdbcType=BIGINT},
+      </if>
+      <if test="serverId != null">
+        #{serverId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="io.mycat.eye.agent.bean.MycatDataNodeExample" resultType="java.lang.Long">
+    select count(*) from mycat_datanode
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update mycat_datanode
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.datahost != null">
+        datahost = #{record.datahost,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dIndex != null">
+        d_index = #{record.dIndex,jdbcType=INTEGER},
+      </if>
+      <if test="record.dType != null">
+        d_type = #{record.dType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dActive != null">
+        d_active = #{record.dActive,jdbcType=INTEGER},
+      </if>
+      <if test="record.dIdle != null">
+        d_idle = #{record.dIdle,jdbcType=INTEGER},
+      </if>
+      <if test="record.dSize != null">
+        d_size = #{record.dSize,jdbcType=INTEGER},
+      </if>
+      <if test="record.dExecute != null">
+        d_execute = #{record.dExecute,jdbcType=BIGINT},
+      </if>
+      <if test="record.totalTime != null">
+        total_time = #{record.totalTime,jdbcType=DOUBLE},
+      </if>
+      <if test="record.maxTime != null">
+        max_time = #{record.maxTime,jdbcType=DOUBLE},
+      </if>
+      <if test="record.maxSql != null">
+        max_sql = #{record.maxSql,jdbcType=BIGINT},
+      </if>
+      <if test="record.recoveryTime != null">
+        recovery_time = #{record.recoveryTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.collectTime != null">
+        collect_time = #{record.collectTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.serverId != null">
+        server_id = #{record.serverId,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update mycat_datanode
+    set id = #{record.id,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      datahost = #{record.datahost,jdbcType=VARCHAR},
+      d_index = #{record.dIndex,jdbcType=INTEGER},
+      d_type = #{record.dType,jdbcType=VARCHAR},
+      d_active = #{record.dActive,jdbcType=INTEGER},
+      d_idle = #{record.dIdle,jdbcType=INTEGER},
+      d_size = #{record.dSize,jdbcType=INTEGER},
+      d_execute = #{record.dExecute,jdbcType=BIGINT},
+      total_time = #{record.totalTime,jdbcType=DOUBLE},
+      max_time = #{record.maxTime,jdbcType=DOUBLE},
+      max_sql = #{record.maxSql,jdbcType=BIGINT},
+      recovery_time = #{record.recoveryTime,jdbcType=BIGINT},
+      collect_time = #{record.collectTime,jdbcType=BIGINT},
+      server_id = #{record.serverId,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

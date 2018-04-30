@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.mycat.eye.agent.mapper.MycatConnectionMapper">
+  <resultMap id="BaseResultMap" type="io.mycat.eye.agent.bean.MycatConnection">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="c_type" jdbcType="VARCHAR" property="cType" />
+    <result column="processor" jdbcType="VARCHAR" property="processor" />
+    <result column="mysqlId" jdbcType="INTEGER" property="mysqlid" />
+    <result column="c_host" jdbcType="VARCHAR" property="cHost" />
+    <result column="c_port" jdbcType="INTEGER" property="cPort" />
+    <result column="l_port" jdbcType="INTEGER" property="lPort" />
+    <result column="net_in" jdbcType="BIGINT" property="netIn" />
+    <result column="net_out" jdbcType="BIGINT" property="netOut" />
+    <result column="c_user" jdbcType="VARCHAR" property="cUser" />
+    <result column="c_schema" jdbcType="VARCHAR" property="cSchema" />
+    <result column="c_charset" jdbcType="VARCHAR" property="cCharset" />
+    <result column="life" jdbcType="BIGINT" property="life" />
+    <result column="alive_time" jdbcType="BIGINT" property="aliveTime" />
+    <result column="recv_buffer" jdbcType="INTEGER" property="recvBuffer" />
+    <result column="closed" jdbcType="VARCHAR" property="closed" />
+    <result column="borrowed" jdbcType="VARCHAR" property="borrowed" />
+    <result column="send_queue" jdbcType="INTEGER" property="sendQueue" />
+    <result column="txlevel" jdbcType="VARCHAR" property="txlevel" />
+    <result column="autocommit" jdbcType="VARCHAR" property="autocommit" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, c_type, processor, mysqlId, c_host, c_port, l_port, net_in, net_out, c_user, 
+    c_schema, c_charset, life, alive_time, recv_buffer, closed, borrowed, send_queue, 
+    txlevel, autocommit
+  </sql>
+  <select id="selectByExample" parameterType="io.mycat.eye.agent.bean.MycatConnectionExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from mycat_connections
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="io.mycat.eye.agent.bean.MycatConnectionExample">
+    delete from mycat_connections
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="io.mycat.eye.agent.bean.MycatConnection">
+    insert into mycat_connections (id, c_type, processor, 
+      mysqlId, c_host, c_port, 
+      l_port, net_in, net_out, 
+      c_user, c_schema, c_charset, 
+      life, alive_time, recv_buffer, 
+      closed, borrowed, send_queue, 
+      txlevel, autocommit)
+    values (#{id,jdbcType=INTEGER}, #{cType,jdbcType=VARCHAR}, #{processor,jdbcType=VARCHAR}, 
+      #{mysqlid,jdbcType=INTEGER}, #{cHost,jdbcType=VARCHAR}, #{cPort,jdbcType=INTEGER}, 
+      #{lPort,jdbcType=INTEGER}, #{netIn,jdbcType=BIGINT}, #{netOut,jdbcType=BIGINT}, 
+      #{cUser,jdbcType=VARCHAR}, #{cSchema,jdbcType=VARCHAR}, #{cCharset,jdbcType=VARCHAR}, 
+      #{life,jdbcType=BIGINT}, #{aliveTime,jdbcType=BIGINT}, #{recvBuffer,jdbcType=INTEGER}, 
+      #{closed,jdbcType=VARCHAR}, #{borrowed,jdbcType=VARCHAR}, #{sendQueue,jdbcType=INTEGER}, 
+      #{txlevel,jdbcType=VARCHAR}, #{autocommit,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="io.mycat.eye.agent.bean.MycatConnection">
+    insert into mycat_connections
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="cType != null">
+        c_type,
+      </if>
+      <if test="processor != null">
+        processor,
+      </if>
+      <if test="mysqlid != null">
+        mysqlId,
+      </if>
+      <if test="cHost != null">
+        c_host,
+      </if>
+      <if test="cPort != null">
+        c_port,
+      </if>
+      <if test="lPort != null">
+        l_port,
+      </if>
+      <if test="netIn != null">
+        net_in,
+      </if>
+      <if test="netOut != null">
+        net_out,
+      </if>
+      <if test="cUser != null">
+        c_user,
+      </if>
+      <if test="cSchema != null">
+        c_schema,
+      </if>
+      <if test="cCharset != null">
+        c_charset,
+      </if>
+      <if test="life != null">
+        life,
+      </if>
+      <if test="aliveTime != null">
+        alive_time,
+      </if>
+      <if test="recvBuffer != null">
+        recv_buffer,
+      </if>
+      <if test="closed != null">
+        closed,
+      </if>
+      <if test="borrowed != null">
+        borrowed,
+      </if>
+      <if test="sendQueue != null">
+        send_queue,
+      </if>
+      <if test="txlevel != null">
+        txlevel,
+      </if>
+      <if test="autocommit != null">
+        autocommit,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="cType != null">
+        #{cType,jdbcType=VARCHAR},
+      </if>
+      <if test="processor != null">
+        #{processor,jdbcType=VARCHAR},
+      </if>
+      <if test="mysqlid != null">
+        #{mysqlid,jdbcType=INTEGER},
+      </if>
+      <if test="cHost != null">
+        #{cHost,jdbcType=VARCHAR},
+      </if>
+      <if test="cPort != null">
+        #{cPort,jdbcType=INTEGER},
+      </if>
+      <if test="lPort != null">
+        #{lPort,jdbcType=INTEGER},
+      </if>
+      <if test="netIn != null">
+        #{netIn,jdbcType=BIGINT},
+      </if>
+      <if test="netOut != null">
+        #{netOut,jdbcType=BIGINT},
+      </if>
+      <if test="cUser != null">
+        #{cUser,jdbcType=VARCHAR},
+      </if>
+      <if test="cSchema != null">
+        #{cSchema,jdbcType=VARCHAR},
+      </if>
+      <if test="cCharset != null">
+        #{cCharset,jdbcType=VARCHAR},
+      </if>
+      <if test="life != null">
+        #{life,jdbcType=BIGINT},
+      </if>
+      <if test="aliveTime != null">
+        #{aliveTime,jdbcType=BIGINT},
+      </if>
+      <if test="recvBuffer != null">
+        #{recvBuffer,jdbcType=INTEGER},
+      </if>
+      <if test="closed != null">
+        #{closed,jdbcType=VARCHAR},
+      </if>
+      <if test="borrowed != null">
+        #{borrowed,jdbcType=VARCHAR},
+      </if>
+      <if test="sendQueue != null">
+        #{sendQueue,jdbcType=INTEGER},
+      </if>
+      <if test="txlevel != null">
+        #{txlevel,jdbcType=VARCHAR},
+      </if>
+      <if test="autocommit != null">
+        #{autocommit,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="io.mycat.eye.agent.bean.MycatConnectionExample" resultType="java.lang.Long">
+    select count(*) from mycat_connections
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update mycat_connections
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.cType != null">
+        c_type = #{record.cType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.processor != null">
+        processor = #{record.processor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mysqlid != null">
+        mysqlId = #{record.mysqlid,jdbcType=INTEGER},
+      </if>
+      <if test="record.cHost != null">
+        c_host = #{record.cHost,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cPort != null">
+        c_port = #{record.cPort,jdbcType=INTEGER},
+      </if>
+      <if test="record.lPort != null">
+        l_port = #{record.lPort,jdbcType=INTEGER},
+      </if>
+      <if test="record.netIn != null">
+        net_in = #{record.netIn,jdbcType=BIGINT},
+      </if>
+      <if test="record.netOut != null">
+        net_out = #{record.netOut,jdbcType=BIGINT},
+      </if>
+      <if test="record.cUser != null">
+        c_user = #{record.cUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cSchema != null">
+        c_schema = #{record.cSchema,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cCharset != null">
+        c_charset = #{record.cCharset,jdbcType=VARCHAR},
+      </if>
+      <if test="record.life != null">
+        life = #{record.life,jdbcType=BIGINT},
+      </if>
+      <if test="record.aliveTime != null">
+        alive_time = #{record.aliveTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.recvBuffer != null">
+        recv_buffer = #{record.recvBuffer,jdbcType=INTEGER},
+      </if>
+      <if test="record.closed != null">
+        closed = #{record.closed,jdbcType=VARCHAR},
+      </if>
+      <if test="record.borrowed != null">
+        borrowed = #{record.borrowed,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sendQueue != null">
+        send_queue = #{record.sendQueue,jdbcType=INTEGER},
+      </if>
+      <if test="record.txlevel != null">
+        txlevel = #{record.txlevel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.autocommit != null">
+        autocommit = #{record.autocommit,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update mycat_connections
+    set id = #{record.id,jdbcType=INTEGER},
+      c_type = #{record.cType,jdbcType=VARCHAR},
+      processor = #{record.processor,jdbcType=VARCHAR},
+      mysqlId = #{record.mysqlid,jdbcType=INTEGER},
+      c_host = #{record.cHost,jdbcType=VARCHAR},
+      c_port = #{record.cPort,jdbcType=INTEGER},
+      l_port = #{record.lPort,jdbcType=INTEGER},
+      net_in = #{record.netIn,jdbcType=BIGINT},
+      net_out = #{record.netOut,jdbcType=BIGINT},
+      c_user = #{record.cUser,jdbcType=VARCHAR},
+      c_schema = #{record.cSchema,jdbcType=VARCHAR},
+      c_charset = #{record.cCharset,jdbcType=VARCHAR},
+      life = #{record.life,jdbcType=BIGINT},
+      alive_time = #{record.aliveTime,jdbcType=BIGINT},
+      recv_buffer = #{record.recvBuffer,jdbcType=INTEGER},
+      closed = #{record.closed,jdbcType=VARCHAR},
+      borrowed = #{record.borrowed,jdbcType=VARCHAR},
+      send_queue = #{record.sendQueue,jdbcType=INTEGER},
+      txlevel = #{record.txlevel,jdbcType=VARCHAR},
+      autocommit = #{record.autocommit,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.mycat.eye.agent.mapper.MycatServerMapper">
+  <resultMap id="BaseResultMap" type="io.mycat.eye.agent.bean.MycatServer">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="server_name" jdbcType="VARCHAR" property="serverName" />
+    <result column="server_host" jdbcType="VARCHAR" property="serverHost" />
+    <result column="manager_port" jdbcType="INTEGER" property="managerPort" />
+    <result column="server_port" jdbcType="INTEGER" property="serverPort" />
+    <result column="cluster_id" jdbcType="INTEGER" property="clusterId" />
+    <result column="startup" jdbcType="BIGINT" property="startup" />
+    <result column="user" jdbcType="VARCHAR" property="user" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, server_name, server_host, manager_port, server_port, cluster_id, startup, user, 
+    password
+  </sql>
+  <select id="selectByExample" parameterType="io.mycat.eye.agent.bean.MycatServerExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from mycat_server
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="io.mycat.eye.agent.bean.MycatServerExample">
+    delete from mycat_server
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="io.mycat.eye.agent.bean.MycatServer">
+    insert into mycat_server (id, server_name, server_host, 
+      manager_port, server_port, cluster_id, 
+      startup, user, password
+      )
+    values (#{id,jdbcType=INTEGER}, #{serverName,jdbcType=VARCHAR}, #{serverHost,jdbcType=VARCHAR}, 
+      #{managerPort,jdbcType=INTEGER}, #{serverPort,jdbcType=INTEGER}, #{clusterId,jdbcType=INTEGER}, 
+      #{startup,jdbcType=BIGINT}, #{user,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="io.mycat.eye.agent.bean.MycatServer">
+    insert into mycat_server
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="serverName != null">
+        server_name,
+      </if>
+      <if test="serverHost != null">
+        server_host,
+      </if>
+      <if test="managerPort != null">
+        manager_port,
+      </if>
+      <if test="serverPort != null">
+        server_port,
+      </if>
+      <if test="clusterId != null">
+        cluster_id,
+      </if>
+      <if test="startup != null">
+        startup,
+      </if>
+      <if test="user != null">
+        user,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="serverName != null">
+        #{serverName,jdbcType=VARCHAR},
+      </if>
+      <if test="serverHost != null">
+        #{serverHost,jdbcType=VARCHAR},
+      </if>
+      <if test="managerPort != null">
+        #{managerPort,jdbcType=INTEGER},
+      </if>
+      <if test="serverPort != null">
+        #{serverPort,jdbcType=INTEGER},
+      </if>
+      <if test="clusterId != null">
+        #{clusterId,jdbcType=INTEGER},
+      </if>
+      <if test="startup != null">
+        #{startup,jdbcType=BIGINT},
+      </if>
+      <if test="user != null">
+        #{user,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="io.mycat.eye.agent.bean.MycatServerExample" resultType="java.lang.Long">
+    select count(*) from mycat_server
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update mycat_server
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.serverName != null">
+        server_name = #{record.serverName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serverHost != null">
+        server_host = #{record.serverHost,jdbcType=VARCHAR},
+      </if>
+      <if test="record.managerPort != null">
+        manager_port = #{record.managerPort,jdbcType=INTEGER},
+      </if>
+      <if test="record.serverPort != null">
+        server_port = #{record.serverPort,jdbcType=INTEGER},
+      </if>
+      <if test="record.clusterId != null">
+        cluster_id = #{record.clusterId,jdbcType=INTEGER},
+      </if>
+      <if test="record.startup != null">
+        startup = #{record.startup,jdbcType=BIGINT},
+      </if>
+      <if test="record.user != null">
+        user = #{record.user,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null">
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update mycat_server
+    set id = #{record.id,jdbcType=INTEGER},
+      server_name = #{record.serverName,jdbcType=VARCHAR},
+      server_host = #{record.serverHost,jdbcType=VARCHAR},
+      manager_port = #{record.managerPort,jdbcType=INTEGER},
+      server_port = #{record.serverPort,jdbcType=INTEGER},
+      cluster_id = #{record.clusterId,jdbcType=INTEGER},
+      startup = #{record.startup,jdbcType=BIGINT},
+      user = #{record.user,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

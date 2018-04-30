@@ -22,7 +22,7 @@ import io.mycat.eye.agent.mapper.MysqlStatusHistoryMapper;
 public class UpdateMysqlStatusTask extends AbstractTask {
 	private static final String ZERO = "0";
 
-	public final static long DELAY_TIME = 2000;
+	public final static long DELAY_TIME = 200000;
 
 	// private static final String STATUS_SQL = "select * from global_status
 	// where VARIABLE_NAME
