@@ -51,10 +51,12 @@ public class MycatConnectionTask  extends AbstractTask{
 
             List<Map<Object, Object>> statusList = statusQueryResult.getData();
             logger.debug(String.valueOf(statusList.size()));
-            MycatConnectionExample example = new MycatConnectionExample();
+
+            long collect_time = System.currentTimeMillis();
             statusList.stream().forEach(o -> {
                 MycatConnection c = new MycatConnection();
-                c.setcType("frontend");
+
+
                 if(o.get("PROCESSOR")!=null){
                     c.setProcessor((String) o.get("PROCESSOR"));
                 }
@@ -80,15 +82,15 @@ public class MycatConnectionTask  extends AbstractTask{
                 if(o.get("CHARSET")!=null){
                     c.setcCharset((String) o.get("CHARSET"));
                 }
-                if(o.get("net_in")!=null){
-                    c.setNetIn((long) o.get("net_in"));
+                if(o.get("NET_IN")!=null){
+                    c.setNetIn((long) o.get("NET_IN"));
                 }
-                if(o.get("net_out")!=null){
-                    c.setNetOut((long) o.get("net_out"));
+                if(o.get("NET_OUT")!=null){
+                    c.setNetOut((long) o.get("NET_OUT"));
                 }
-                if(o.get("ALIVE_TIME(S)")!=null){
-                    c.setLife((long) o.get("ALIVE_TIME(S)"));
-                }
+//                if(o.get("ALIVE_TIME(S)")!=null){
+//                    c.setLife((long) o.get("ALIVE_TIME(S)"));
+//                }
                 if(o.get("RECV_BUFFER")!=null){
                     c.setRecvBuffer((int) o.get("RECV_BUFFER"));
                 }
@@ -103,13 +105,15 @@ public class MycatConnectionTask  extends AbstractTask{
                 if(o.get("autocommit")!=null){
                     c.setAutocommit((String) o.get("autocommit"));
                 }
+                c.setMycatId(server.getId());
+                c.setCollectTime(collect_time);
 //                mapper.insertSelective(c);
-                MycatConnectionExample.Criteria criteria = example.createCriteria();
-                criteria.andIdEqualTo(c.getId());
-                List<MycatConnection> cc = mapper.selectByExample(example);
-                if(cc.size()==0) {
+//                MycatConnectionExample.Criteria criteria = example.createCriteria();
+//                criteria.andIdEqualTo(c.getId());
+//                List<MycatConnection> cc = mapper.selectByExample(example);
+//                if(cc.size()==0) {
                     mapper.insertSelective(c);
-                }
+//                }
             });
         }
     }

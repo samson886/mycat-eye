@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.mycat.eye.web.mapper.MycatSqlDetailMapper">
+  <resultMap id="BaseResultMap" type="io.mycat.eye.web.bean.MycatSqlDetail">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="data_source" jdbcType="VARCHAR" property="dataSource" />
+    <result column="execute" jdbcType="BIGINT" property="execute" />
+    <result column="time" jdbcType="DOUBLE" property="time" />
+    <result column="last_execute_timestamp" jdbcType="BIGINT" property="lastExecuteTimestamp" />
+    <result column="last_time" jdbcType="DOUBLE" property="lastTime" />
+    <result column="sql_id" jdbcType="BIGINT" property="sqlId" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, data_source, execute, time, last_execute_timestamp, last_time, sql_id
+  </sql>
+  <select id="selectByExample" parameterType="io.mycat.eye.web.bean.MycatSqlDetailExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from mycat_sql_detail
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="io.mycat.eye.web.bean.MycatSqlDetailExample">
+    delete from mycat_sql_detail
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="io.mycat.eye.web.bean.MycatSqlDetail">
+    insert into mycat_sql_detail (id, data_source, execute, 
+      time, last_execute_timestamp, last_time, 
+      sql_id)
+    values (#{id,jdbcType=INTEGER}, #{dataSource,jdbcType=VARCHAR}, #{execute,jdbcType=BIGINT}, 
+      #{time,jdbcType=DOUBLE}, #{lastExecuteTimestamp,jdbcType=BIGINT}, #{lastTime,jdbcType=DOUBLE}, 
+      #{sqlId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="io.mycat.eye.web.bean.MycatSqlDetail">
+    insert into mycat_sql_detail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="dataSource != null">
+        data_source,
+      </if>
+      <if test="execute != null">
+        execute,
+      </if>
+      <if test="time != null">
+        time,
+      </if>
+      <if test="lastExecuteTimestamp != null">
+        last_execute_timestamp,
+      </if>
+      <if test="lastTime != null">
+        last_time,
+      </if>
+      <if test="sqlId != null">
+        sql_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="dataSource != null">
+        #{dataSource,jdbcType=VARCHAR},
+      </if>
+      <if test="execute != null">
+        #{execute,jdbcType=BIGINT},
+      </if>
+      <if test="time != null">
+        #{time,jdbcType=DOUBLE},
+      </if>
+      <if test="lastExecuteTimestamp != null">
+        #{lastExecuteTimestamp,jdbcType=BIGINT},
+      </if>
+      <if test="lastTime != null">
+        #{lastTime,jdbcType=DOUBLE},
+      </if>
+      <if test="sqlId != null">
+        #{sqlId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="io.mycat.eye.web.bean.MycatSqlDetailExample" resultType="java.lang.Long">
+    select count(*) from mycat_sql_detail
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update mycat_sql_detail
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.dataSource != null">
+        data_source = #{record.dataSource,jdbcType=VARCHAR},
+      </if>
+      <if test="record.execute != null">
+        execute = #{record.execute,jdbcType=BIGINT},
+      </if>
+      <if test="record.time != null">
+        time = #{record.time,jdbcType=DOUBLE},
+      </if>
+      <if test="record.lastExecuteTimestamp != null">
+        last_execute_timestamp = #{record.lastExecuteTimestamp,jdbcType=BIGINT},
+      </if>
+      <if test="record.lastTime != null">
+        last_time = #{record.lastTime,jdbcType=DOUBLE},
+      </if>
+      <if test="record.sqlId != null">
+        sql_id = #{record.sqlId,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update mycat_sql_detail
+    set id = #{record.id,jdbcType=INTEGER},
+      data_source = #{record.dataSource,jdbcType=VARCHAR},
+      execute = #{record.execute,jdbcType=BIGINT},
+      time = #{record.time,jdbcType=DOUBLE},
+      last_execute_timestamp = #{record.lastExecuteTimestamp,jdbcType=BIGINT},
+      last_time = #{record.lastTime,jdbcType=DOUBLE},
+      sql_id = #{record.sqlId,jdbcType=BIGINT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

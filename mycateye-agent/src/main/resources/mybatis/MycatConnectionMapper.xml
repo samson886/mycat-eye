@@ -3,9 +3,7 @@
 <mapper namespace="io.mycat.eye.agent.mapper.MycatConnectionMapper">
   <resultMap id="BaseResultMap" type="io.mycat.eye.agent.bean.MycatConnection">
     <result column="id" jdbcType="INTEGER" property="id" />
-    <result column="c_type" jdbcType="VARCHAR" property="cType" />
     <result column="processor" jdbcType="VARCHAR" property="processor" />
-    <result column="mysqlId" jdbcType="INTEGER" property="mysqlid" />
     <result column="c_host" jdbcType="VARCHAR" property="cHost" />
     <result column="c_port" jdbcType="INTEGER" property="cPort" />
     <result column="l_port" jdbcType="INTEGER" property="lPort" />
@@ -14,14 +12,13 @@
     <result column="c_user" jdbcType="VARCHAR" property="cUser" />
     <result column="c_schema" jdbcType="VARCHAR" property="cSchema" />
     <result column="c_charset" jdbcType="VARCHAR" property="cCharset" />
-    <result column="life" jdbcType="BIGINT" property="life" />
     <result column="alive_time" jdbcType="BIGINT" property="aliveTime" />
     <result column="recv_buffer" jdbcType="INTEGER" property="recvBuffer" />
-    <result column="closed" jdbcType="VARCHAR" property="closed" />
-    <result column="borrowed" jdbcType="VARCHAR" property="borrowed" />
     <result column="send_queue" jdbcType="INTEGER" property="sendQueue" />
     <result column="txlevel" jdbcType="VARCHAR" property="txlevel" />
     <result column="autocommit" jdbcType="VARCHAR" property="autocommit" />
+    <result column="mycat_id" jdbcType="INTEGER" property="mycatId" />
+    <result column="collect_time" jdbcType="BIGINT" property="collectTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -82,9 +79,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, c_type, processor, mysqlId, c_host, c_port, l_port, net_in, net_out, c_user, 
-    c_schema, c_charset, life, alive_time, recv_buffer, closed, borrowed, send_queue, 
-    txlevel, autocommit
+    id, processor, c_host, c_port, l_port, net_in, net_out, c_user, c_schema, c_charset, 
+    alive_time, recv_buffer, send_queue, txlevel, autocommit, mycat_id, collect_time
   </sql>
   <select id="selectByExample" parameterType="io.mycat.eye.agent.bean.MycatConnectionExample" resultMap="BaseResultMap">
     select
@@ -92,7 +88,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from mycat_connections
+    from mycat_connection
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -101,41 +97,33 @@
     </if>
   </select>
   <delete id="deleteByExample" parameterType="io.mycat.eye.agent.bean.MycatConnectionExample">
-    delete from mycat_connections
+    delete from mycat_connection
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="io.mycat.eye.agent.bean.MycatConnection">
-    insert into mycat_connections (id, c_type, processor, 
-      mysqlId, c_host, c_port, 
-      l_port, net_in, net_out, 
-      c_user, c_schema, c_charset, 
-      life, alive_time, recv_buffer, 
-      closed, borrowed, send_queue, 
-      txlevel, autocommit)
-    values (#{id,jdbcType=INTEGER}, #{cType,jdbcType=VARCHAR}, #{processor,jdbcType=VARCHAR}, 
-      #{mysqlid,jdbcType=INTEGER}, #{cHost,jdbcType=VARCHAR}, #{cPort,jdbcType=INTEGER}, 
-      #{lPort,jdbcType=INTEGER}, #{netIn,jdbcType=BIGINT}, #{netOut,jdbcType=BIGINT}, 
-      #{cUser,jdbcType=VARCHAR}, #{cSchema,jdbcType=VARCHAR}, #{cCharset,jdbcType=VARCHAR}, 
-      #{life,jdbcType=BIGINT}, #{aliveTime,jdbcType=BIGINT}, #{recvBuffer,jdbcType=INTEGER}, 
-      #{closed,jdbcType=VARCHAR}, #{borrowed,jdbcType=VARCHAR}, #{sendQueue,jdbcType=INTEGER}, 
-      #{txlevel,jdbcType=VARCHAR}, #{autocommit,jdbcType=VARCHAR})
+    insert into mycat_connection (id, processor, c_host, 
+      c_port, l_port, net_in, 
+      net_out, c_user, c_schema, 
+      c_charset, alive_time, recv_buffer, 
+      send_queue, txlevel, autocommit, 
+      mycat_id, collect_time)
+    values (#{id,jdbcType=INTEGER}, #{processor,jdbcType=VARCHAR}, #{cHost,jdbcType=VARCHAR}, 
+      #{cPort,jdbcType=INTEGER}, #{lPort,jdbcType=INTEGER}, #{netIn,jdbcType=BIGINT}, 
+      #{netOut,jdbcType=BIGINT}, #{cUser,jdbcType=VARCHAR}, #{cSchema,jdbcType=VARCHAR}, 
+      #{cCharset,jdbcType=VARCHAR}, #{aliveTime,jdbcType=BIGINT}, #{recvBuffer,jdbcType=INTEGER}, 
+      #{sendQueue,jdbcType=INTEGER}, #{txlevel,jdbcType=VARCHAR}, #{autocommit,jdbcType=VARCHAR}, 
+      #{mycatId,jdbcType=INTEGER}, #{collectTime,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="io.mycat.eye.agent.bean.MycatConnection">
-    insert into mycat_connections
+    insert into mycat_connection
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
       </if>
-      <if test="cType != null">
-        c_type,
-      </if>
       <if test="processor != null">
         processor,
-      </if>
-      <if test="mysqlid != null">
-        mysqlId,
       </if>
       <if test="cHost != null">
         c_host,
@@ -161,20 +149,11 @@
       <if test="cCharset != null">
         c_charset,
       </if>
-      <if test="life != null">
-        life,
-      </if>
       <if test="aliveTime != null">
         alive_time,
       </if>
       <if test="recvBuffer != null">
         recv_buffer,
-      </if>
-      <if test="closed != null">
-        closed,
-      </if>
-      <if test="borrowed != null">
-        borrowed,
       </if>
       <if test="sendQueue != null">
         send_queue,
@@ -185,19 +164,19 @@
       <if test="autocommit != null">
         autocommit,
       </if>
+      <if test="mycatId != null">
+        mycat_id,
+      </if>
+      <if test="collectTime != null">
+        collect_time,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="cType != null">
-        #{cType,jdbcType=VARCHAR},
-      </if>
       <if test="processor != null">
         #{processor,jdbcType=VARCHAR},
-      </if>
-      <if test="mysqlid != null">
-        #{mysqlid,jdbcType=INTEGER},
       </if>
       <if test="cHost != null">
         #{cHost,jdbcType=VARCHAR},
@@ -223,20 +202,11 @@
       <if test="cCharset != null">
         #{cCharset,jdbcType=VARCHAR},
       </if>
-      <if test="life != null">
-        #{life,jdbcType=BIGINT},
-      </if>
       <if test="aliveTime != null">
         #{aliveTime,jdbcType=BIGINT},
       </if>
       <if test="recvBuffer != null">
         #{recvBuffer,jdbcType=INTEGER},
-      </if>
-      <if test="closed != null">
-        #{closed,jdbcType=VARCHAR},
-      </if>
-      <if test="borrowed != null">
-        #{borrowed,jdbcType=VARCHAR},
       </if>
       <if test="sendQueue != null">
         #{sendQueue,jdbcType=INTEGER},
@@ -247,28 +217,28 @@
       <if test="autocommit != null">
         #{autocommit,jdbcType=VARCHAR},
       </if>
+      <if test="mycatId != null">
+        #{mycatId,jdbcType=INTEGER},
+      </if>
+      <if test="collectTime != null">
+        #{collectTime,jdbcType=BIGINT},
+      </if>
     </trim>
   </insert>
   <select id="countByExample" parameterType="io.mycat.eye.agent.bean.MycatConnectionExample" resultType="java.lang.Long">
-    select count(*) from mycat_connections
+    select count(*) from mycat_connection
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update mycat_connections
+    update mycat_connection
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.cType != null">
-        c_type = #{record.cType,jdbcType=VARCHAR},
-      </if>
       <if test="record.processor != null">
         processor = #{record.processor,jdbcType=VARCHAR},
-      </if>
-      <if test="record.mysqlid != null">
-        mysqlId = #{record.mysqlid,jdbcType=INTEGER},
       </if>
       <if test="record.cHost != null">
         c_host = #{record.cHost,jdbcType=VARCHAR},
@@ -294,20 +264,11 @@
       <if test="record.cCharset != null">
         c_charset = #{record.cCharset,jdbcType=VARCHAR},
       </if>
-      <if test="record.life != null">
-        life = #{record.life,jdbcType=BIGINT},
-      </if>
       <if test="record.aliveTime != null">
         alive_time = #{record.aliveTime,jdbcType=BIGINT},
       </if>
       <if test="record.recvBuffer != null">
         recv_buffer = #{record.recvBuffer,jdbcType=INTEGER},
-      </if>
-      <if test="record.closed != null">
-        closed = #{record.closed,jdbcType=VARCHAR},
-      </if>
-      <if test="record.borrowed != null">
-        borrowed = #{record.borrowed,jdbcType=VARCHAR},
       </if>
       <if test="record.sendQueue != null">
         send_queue = #{record.sendQueue,jdbcType=INTEGER},
@@ -318,17 +279,21 @@
       <if test="record.autocommit != null">
         autocommit = #{record.autocommit,jdbcType=VARCHAR},
       </if>
+      <if test="record.mycatId != null">
+        mycat_id = #{record.mycatId,jdbcType=INTEGER},
+      </if>
+      <if test="record.collectTime != null">
+        collect_time = #{record.collectTime,jdbcType=BIGINT},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update mycat_connections
+    update mycat_connection
     set id = #{record.id,jdbcType=INTEGER},
-      c_type = #{record.cType,jdbcType=VARCHAR},
       processor = #{record.processor,jdbcType=VARCHAR},
-      mysqlId = #{record.mysqlid,jdbcType=INTEGER},
       c_host = #{record.cHost,jdbcType=VARCHAR},
       c_port = #{record.cPort,jdbcType=INTEGER},
       l_port = #{record.lPort,jdbcType=INTEGER},
@@ -337,14 +302,13 @@
       c_user = #{record.cUser,jdbcType=VARCHAR},
       c_schema = #{record.cSchema,jdbcType=VARCHAR},
       c_charset = #{record.cCharset,jdbcType=VARCHAR},
-      life = #{record.life,jdbcType=BIGINT},
       alive_time = #{record.aliveTime,jdbcType=BIGINT},
       recv_buffer = #{record.recvBuffer,jdbcType=INTEGER},
-      closed = #{record.closed,jdbcType=VARCHAR},
-      borrowed = #{record.borrowed,jdbcType=VARCHAR},
       send_queue = #{record.sendQueue,jdbcType=INTEGER},
       txlevel = #{record.txlevel,jdbcType=VARCHAR},
-      autocommit = #{record.autocommit,jdbcType=VARCHAR}
+      autocommit = #{record.autocommit,jdbcType=VARCHAR},
+      mycat_id = #{record.mycatId,jdbcType=INTEGER},
+      collect_time = #{record.collectTime,jdbcType=BIGINT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>

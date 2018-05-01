@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.mycat.eye.web.mapper.MycatServerStatusMapper">
+  <resultMap id="BaseResultMap" type="io.mycat.eye.web.bean.MycatServerStatus">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="mycat_id" jdbcType="INTEGER" property="mycatId" />
+    <result column="uptime" jdbcType="VARCHAR" property="uptime" />
+    <result column="used_memory" jdbcType="BIGINT" property="usedMemory" />
+    <result column="total_memory" jdbcType="BIGINT" property="totalMemory" />
+    <result column="max_memory" jdbcType="BIGINT" property="maxMemory" />
+    <result column="reload_time" jdbcType="BIGINT" property="reloadTime" />
+    <result column="rollback_time" jdbcType="BIGINT" property="rollbackTime" />
+    <result column="charset" jdbcType="VARCHAR" property="charset" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="collect_time" jdbcType="BIGINT" property="collectTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, mycat_id, uptime, used_memory, total_memory, max_memory, reload_time, rollback_time, 
+    charset, status, collect_time
+  </sql>
+  <select id="selectByExample" parameterType="io.mycat.eye.web.bean.MycatServerStatusExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from mycat_server_status
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="io.mycat.eye.web.bean.MycatServerStatusExample">
+    delete from mycat_server_status
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="io.mycat.eye.web.bean.MycatServerStatus">
+    insert into mycat_server_status (id, mycat_id, uptime, 
+      used_memory, total_memory, max_memory, 
+      reload_time, rollback_time, charset, 
+      status, collect_time)
+    values (#{id,jdbcType=INTEGER}, #{mycatId,jdbcType=INTEGER}, #{uptime,jdbcType=VARCHAR}, 
+      #{usedMemory,jdbcType=BIGINT}, #{totalMemory,jdbcType=BIGINT}, #{maxMemory,jdbcType=BIGINT}, 
+      #{reloadTime,jdbcType=BIGINT}, #{rollbackTime,jdbcType=BIGINT}, #{charset,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{collectTime,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="io.mycat.eye.web.bean.MycatServerStatus">
+    insert into mycat_server_status
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="mycatId != null">
+        mycat_id,
+      </if>
+      <if test="uptime != null">
+        uptime,
+      </if>
+      <if test="usedMemory != null">
+        used_memory,
+      </if>
+      <if test="totalMemory != null">
+        total_memory,
+      </if>
+      <if test="maxMemory != null">
+        max_memory,
+      </if>
+      <if test="reloadTime != null">
+        reload_time,
+      </if>
+      <if test="rollbackTime != null">
+        rollback_time,
+      </if>
+      <if test="charset != null">
+        charset,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="collectTime != null">
+        collect_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="mycatId != null">
+        #{mycatId,jdbcType=INTEGER},
+      </if>
+      <if test="uptime != null">
+        #{uptime,jdbcType=VARCHAR},
+      </if>
+      <if test="usedMemory != null">
+        #{usedMemory,jdbcType=BIGINT},
+      </if>
+      <if test="totalMemory != null">
+        #{totalMemory,jdbcType=BIGINT},
+      </if>
+      <if test="maxMemory != null">
+        #{maxMemory,jdbcType=BIGINT},
+      </if>
+      <if test="reloadTime != null">
+        #{reloadTime,jdbcType=BIGINT},
+      </if>
+      <if test="rollbackTime != null">
+        #{rollbackTime,jdbcType=BIGINT},
+      </if>
+      <if test="charset != null">
+        #{charset,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="collectTime != null">
+        #{collectTime,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="io.mycat.eye.web.bean.MycatServerStatusExample" resultType="java.lang.Long">
+    select count(*) from mycat_server_status
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update mycat_server_status
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.mycatId != null">
+        mycat_id = #{record.mycatId,jdbcType=INTEGER},
+      </if>
+      <if test="record.uptime != null">
+        uptime = #{record.uptime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usedMemory != null">
+        used_memory = #{record.usedMemory,jdbcType=BIGINT},
+      </if>
+      <if test="record.totalMemory != null">
+        total_memory = #{record.totalMemory,jdbcType=BIGINT},
+      </if>
+      <if test="record.maxMemory != null">
+        max_memory = #{record.maxMemory,jdbcType=BIGINT},
+      </if>
+      <if test="record.reloadTime != null">
+        reload_time = #{record.reloadTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.rollbackTime != null">
+        rollback_time = #{record.rollbackTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.charset != null">
+        charset = #{record.charset,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.collectTime != null">
+        collect_time = #{record.collectTime,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update mycat_server_status
+    set id = #{record.id,jdbcType=INTEGER},
+      mycat_id = #{record.mycatId,jdbcType=INTEGER},
+      uptime = #{record.uptime,jdbcType=VARCHAR},
+      used_memory = #{record.usedMemory,jdbcType=BIGINT},
+      total_memory = #{record.totalMemory,jdbcType=BIGINT},
+      max_memory = #{record.maxMemory,jdbcType=BIGINT},
+      reload_time = #{record.reloadTime,jdbcType=BIGINT},
+      rollback_time = #{record.rollbackTime,jdbcType=BIGINT},
+      charset = #{record.charset,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=VARCHAR},
+      collect_time = #{record.collectTime,jdbcType=BIGINT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

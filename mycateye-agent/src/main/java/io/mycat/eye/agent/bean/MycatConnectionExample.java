@@ -164,76 +164,6 @@ public class MycatConnectionExample {
             return (Criteria) this;
         }
 
-        public Criteria andCTypeIsNull() {
-            addCriterion("c_type is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andCTypeIsNotNull() {
-            addCriterion("c_type is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andCTypeEqualTo(String value) {
-            addCriterion("c_type =", value, "cType");
-            return (Criteria) this;
-        }
-
-        public Criteria andCTypeNotEqualTo(String value) {
-            addCriterion("c_type <>", value, "cType");
-            return (Criteria) this;
-        }
-
-        public Criteria andCTypeGreaterThan(String value) {
-            addCriterion("c_type >", value, "cType");
-            return (Criteria) this;
-        }
-
-        public Criteria andCTypeGreaterThanOrEqualTo(String value) {
-            addCriterion("c_type >=", value, "cType");
-            return (Criteria) this;
-        }
-
-        public Criteria andCTypeLessThan(String value) {
-            addCriterion("c_type <", value, "cType");
-            return (Criteria) this;
-        }
-
-        public Criteria andCTypeLessThanOrEqualTo(String value) {
-            addCriterion("c_type <=", value, "cType");
-            return (Criteria) this;
-        }
-
-        public Criteria andCTypeLike(String value) {
-            addCriterion("c_type like", value, "cType");
-            return (Criteria) this;
-        }
-
-        public Criteria andCTypeNotLike(String value) {
-            addCriterion("c_type not like", value, "cType");
-            return (Criteria) this;
-        }
-
-        public Criteria andCTypeIn(List<String> values) {
-            addCriterion("c_type in", values, "cType");
-            return (Criteria) this;
-        }
-
-        public Criteria andCTypeNotIn(List<String> values) {
-            addCriterion("c_type not in", values, "cType");
-            return (Criteria) this;
-        }
-
-        public Criteria andCTypeBetween(String value1, String value2) {
-            addCriterion("c_type between", value1, value2, "cType");
-            return (Criteria) this;
-        }
-
-        public Criteria andCTypeNotBetween(String value1, String value2) {
-            addCriterion("c_type not between", value1, value2, "cType");
-            return (Criteria) this;
-        }
-
         public Criteria andProcessorIsNull() {
             addCriterion("processor is null");
             return (Criteria) this;
@@ -301,66 +231,6 @@ public class MycatConnectionExample {
 
         public Criteria andProcessorNotBetween(String value1, String value2) {
             addCriterion("processor not between", value1, value2, "processor");
-            return (Criteria) this;
-        }
-
-        public Criteria andMysqlidIsNull() {
-            addCriterion("mysqlId is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andMysqlidIsNotNull() {
-            addCriterion("mysqlId is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andMysqlidEqualTo(Integer value) {
-            addCriterion("mysqlId =", value, "mysqlid");
-            return (Criteria) this;
-        }
-
-        public Criteria andMysqlidNotEqualTo(Integer value) {
-            addCriterion("mysqlId <>", value, "mysqlid");
-            return (Criteria) this;
-        }
-
-        public Criteria andMysqlidGreaterThan(Integer value) {
-            addCriterion("mysqlId >", value, "mysqlid");
-            return (Criteria) this;
-        }
-
-        public Criteria andMysqlidGreaterThanOrEqualTo(Integer value) {
-            addCriterion("mysqlId >=", value, "mysqlid");
-            return (Criteria) this;
-        }
-
-        public Criteria andMysqlidLessThan(Integer value) {
-            addCriterion("mysqlId <", value, "mysqlid");
-            return (Criteria) this;
-        }
-
-        public Criteria andMysqlidLessThanOrEqualTo(Integer value) {
-            addCriterion("mysqlId <=", value, "mysqlid");
-            return (Criteria) this;
-        }
-
-        public Criteria andMysqlidIn(List<Integer> values) {
-            addCriterion("mysqlId in", values, "mysqlid");
-            return (Criteria) this;
-        }
-
-        public Criteria andMysqlidNotIn(List<Integer> values) {
-            addCriterion("mysqlId not in", values, "mysqlid");
-            return (Criteria) this;
-        }
-
-        public Criteria andMysqlidBetween(Integer value1, Integer value2) {
-            addCriterion("mysqlId between", value1, value2, "mysqlid");
-            return (Criteria) this;
-        }
-
-        public Criteria andMysqlidNotBetween(Integer value1, Integer value2) {
-            addCriterion("mysqlId not between", value1, value2, "mysqlid");
             return (Criteria) this;
         }
 
@@ -884,66 +754,6 @@ public class MycatConnectionExample {
             return (Criteria) this;
         }
 
-        public Criteria andLifeIsNull() {
-            addCriterion("life is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andLifeIsNotNull() {
-            addCriterion("life is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andLifeEqualTo(Long value) {
-            addCriterion("life =", value, "life");
-            return (Criteria) this;
-        }
-
-        public Criteria andLifeNotEqualTo(Long value) {
-            addCriterion("life <>", value, "life");
-            return (Criteria) this;
-        }
-
-        public Criteria andLifeGreaterThan(Long value) {
-            addCriterion("life >", value, "life");
-            return (Criteria) this;
-        }
-
-        public Criteria andLifeGreaterThanOrEqualTo(Long value) {
-            addCriterion("life >=", value, "life");
-            return (Criteria) this;
-        }
-
-        public Criteria andLifeLessThan(Long value) {
-            addCriterion("life <", value, "life");
-            return (Criteria) this;
-        }
-
-        public Criteria andLifeLessThanOrEqualTo(Long value) {
-            addCriterion("life <=", value, "life");
-            return (Criteria) this;
-        }
-
-        public Criteria andLifeIn(List<Long> values) {
-            addCriterion("life in", values, "life");
-            return (Criteria) this;
-        }
-
-        public Criteria andLifeNotIn(List<Long> values) {
-            addCriterion("life not in", values, "life");
-            return (Criteria) this;
-        }
-
-        public Criteria andLifeBetween(Long value1, Long value2) {
-            addCriterion("life between", value1, value2, "life");
-            return (Criteria) this;
-        }
-
-        public Criteria andLifeNotBetween(Long value1, Long value2) {
-            addCriterion("life not between", value1, value2, "life");
-            return (Criteria) this;
-        }
-
         public Criteria andAliveTimeIsNull() {
             addCriterion("alive_time is null");
             return (Criteria) this;
@@ -1061,146 +871,6 @@ public class MycatConnectionExample {
 
         public Criteria andRecvBufferNotBetween(Integer value1, Integer value2) {
             addCriterion("recv_buffer not between", value1, value2, "recvBuffer");
-            return (Criteria) this;
-        }
-
-        public Criteria andClosedIsNull() {
-            addCriterion("closed is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andClosedIsNotNull() {
-            addCriterion("closed is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andClosedEqualTo(String value) {
-            addCriterion("closed =", value, "closed");
-            return (Criteria) this;
-        }
-
-        public Criteria andClosedNotEqualTo(String value) {
-            addCriterion("closed <>", value, "closed");
-            return (Criteria) this;
-        }
-
-        public Criteria andClosedGreaterThan(String value) {
-            addCriterion("closed >", value, "closed");
-            return (Criteria) this;
-        }
-
-        public Criteria andClosedGreaterThanOrEqualTo(String value) {
-            addCriterion("closed >=", value, "closed");
-            return (Criteria) this;
-        }
-
-        public Criteria andClosedLessThan(String value) {
-            addCriterion("closed <", value, "closed");
-            return (Criteria) this;
-        }
-
-        public Criteria andClosedLessThanOrEqualTo(String value) {
-            addCriterion("closed <=", value, "closed");
-            return (Criteria) this;
-        }
-
-        public Criteria andClosedLike(String value) {
-            addCriterion("closed like", value, "closed");
-            return (Criteria) this;
-        }
-
-        public Criteria andClosedNotLike(String value) {
-            addCriterion("closed not like", value, "closed");
-            return (Criteria) this;
-        }
-
-        public Criteria andClosedIn(List<String> values) {
-            addCriterion("closed in", values, "closed");
-            return (Criteria) this;
-        }
-
-        public Criteria andClosedNotIn(List<String> values) {
-            addCriterion("closed not in", values, "closed");
-            return (Criteria) this;
-        }
-
-        public Criteria andClosedBetween(String value1, String value2) {
-            addCriterion("closed between", value1, value2, "closed");
-            return (Criteria) this;
-        }
-
-        public Criteria andClosedNotBetween(String value1, String value2) {
-            addCriterion("closed not between", value1, value2, "closed");
-            return (Criteria) this;
-        }
-
-        public Criteria andBorrowedIsNull() {
-            addCriterion("borrowed is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andBorrowedIsNotNull() {
-            addCriterion("borrowed is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andBorrowedEqualTo(String value) {
-            addCriterion("borrowed =", value, "borrowed");
-            return (Criteria) this;
-        }
-
-        public Criteria andBorrowedNotEqualTo(String value) {
-            addCriterion("borrowed <>", value, "borrowed");
-            return (Criteria) this;
-        }
-
-        public Criteria andBorrowedGreaterThan(String value) {
-            addCriterion("borrowed >", value, "borrowed");
-            return (Criteria) this;
-        }
-
-        public Criteria andBorrowedGreaterThanOrEqualTo(String value) {
-            addCriterion("borrowed >=", value, "borrowed");
-            return (Criteria) this;
-        }
-
-        public Criteria andBorrowedLessThan(String value) {
-            addCriterion("borrowed <", value, "borrowed");
-            return (Criteria) this;
-        }
-
-        public Criteria andBorrowedLessThanOrEqualTo(String value) {
-            addCriterion("borrowed <=", value, "borrowed");
-            return (Criteria) this;
-        }
-
-        public Criteria andBorrowedLike(String value) {
-            addCriterion("borrowed like", value, "borrowed");
-            return (Criteria) this;
-        }
-
-        public Criteria andBorrowedNotLike(String value) {
-            addCriterion("borrowed not like", value, "borrowed");
-            return (Criteria) this;
-        }
-
-        public Criteria andBorrowedIn(List<String> values) {
-            addCriterion("borrowed in", values, "borrowed");
-            return (Criteria) this;
-        }
-
-        public Criteria andBorrowedNotIn(List<String> values) {
-            addCriterion("borrowed not in", values, "borrowed");
-            return (Criteria) this;
-        }
-
-        public Criteria andBorrowedBetween(String value1, String value2) {
-            addCriterion("borrowed between", value1, value2, "borrowed");
-            return (Criteria) this;
-        }
-
-        public Criteria andBorrowedNotBetween(String value1, String value2) {
-            addCriterion("borrowed not between", value1, value2, "borrowed");
             return (Criteria) this;
         }
 
@@ -1401,6 +1071,126 @@ public class MycatConnectionExample {
 
         public Criteria andAutocommitNotBetween(String value1, String value2) {
             addCriterion("autocommit not between", value1, value2, "autocommit");
+            return (Criteria) this;
+        }
+
+        public Criteria andMycatIdIsNull() {
+            addCriterion("mycat_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMycatIdIsNotNull() {
+            addCriterion("mycat_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMycatIdEqualTo(Integer value) {
+            addCriterion("mycat_id =", value, "mycatId");
+            return (Criteria) this;
+        }
+
+        public Criteria andMycatIdNotEqualTo(Integer value) {
+            addCriterion("mycat_id <>", value, "mycatId");
+            return (Criteria) this;
+        }
+
+        public Criteria andMycatIdGreaterThan(Integer value) {
+            addCriterion("mycat_id >", value, "mycatId");
+            return (Criteria) this;
+        }
+
+        public Criteria andMycatIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("mycat_id >=", value, "mycatId");
+            return (Criteria) this;
+        }
+
+        public Criteria andMycatIdLessThan(Integer value) {
+            addCriterion("mycat_id <", value, "mycatId");
+            return (Criteria) this;
+        }
+
+        public Criteria andMycatIdLessThanOrEqualTo(Integer value) {
+            addCriterion("mycat_id <=", value, "mycatId");
+            return (Criteria) this;
+        }
+
+        public Criteria andMycatIdIn(List<Integer> values) {
+            addCriterion("mycat_id in", values, "mycatId");
+            return (Criteria) this;
+        }
+
+        public Criteria andMycatIdNotIn(List<Integer> values) {
+            addCriterion("mycat_id not in", values, "mycatId");
+            return (Criteria) this;
+        }
+
+        public Criteria andMycatIdBetween(Integer value1, Integer value2) {
+            addCriterion("mycat_id between", value1, value2, "mycatId");
+            return (Criteria) this;
+        }
+
+        public Criteria andMycatIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("mycat_id not between", value1, value2, "mycatId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCollectTimeIsNull() {
+            addCriterion("collect_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCollectTimeIsNotNull() {
+            addCriterion("collect_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCollectTimeEqualTo(Long value) {
+            addCriterion("collect_time =", value, "collectTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCollectTimeNotEqualTo(Long value) {
+            addCriterion("collect_time <>", value, "collectTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCollectTimeGreaterThan(Long value) {
+            addCriterion("collect_time >", value, "collectTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCollectTimeGreaterThanOrEqualTo(Long value) {
+            addCriterion("collect_time >=", value, "collectTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCollectTimeLessThan(Long value) {
+            addCriterion("collect_time <", value, "collectTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCollectTimeLessThanOrEqualTo(Long value) {
+            addCriterion("collect_time <=", value, "collectTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCollectTimeIn(List<Long> values) {
+            addCriterion("collect_time in", values, "collectTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCollectTimeNotIn(List<Long> values) {
+            addCriterion("collect_time not in", values, "collectTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCollectTimeBetween(Long value1, Long value2) {
+            addCriterion("collect_time between", value1, value2, "collectTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCollectTimeNotBetween(Long value1, Long value2) {
+            addCriterion("collect_time not between", value1, value2, "collectTime");
             return (Criteria) this;
         }
     }

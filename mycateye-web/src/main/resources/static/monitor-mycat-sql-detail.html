@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Mycat 主从同步监控</title>
+    <title>SQL执行详情</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Responsive Website Template">
@@ -10,10 +10,10 @@
     <link href="assets/css/bootstrap.css" rel="stylesheet" type="text/css">
     <link href="assets/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="assets/css/elegant-icons.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="assets/css/jquery.mloading.css" />
+    <link rel="stylesheet" href="assets/css/jquery.dataTables.min.css">
     <link href="assets/css/main.css" rel="stylesheet" type="text/css">
     <link href="assets/css/my-custom-styles.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="assets/css/dataTables.bootstrap.css">
-    <link rel="stylesheet" href="assets/css/jquery.mloading.css" />
 </head>
 <body>
     <div id="wrapper">
@@ -43,14 +43,14 @@
                             </a>
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="monitor-mycat.html">服务监控</a></li>
+                                <li class="active"><a href="monitor-mycat-sql-execute.html">SQL执行情况</a></li>
                                 <li><a href="monitor-mycat-sql.html">SQL性能监控</a></li>
-                                <li><a href="monitor-mycat-datanode.html">物理节点</a></li>
-                                <li><a href="monitor-mycat-synchronized.html">主从同步监控</a></li>
+                                <li><a href="monitor-mycat-datanode.html">数据节点</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                SQL监控 <i class="fa fa-angle-down"></i>
+                                Mysql监控 <i class="fa fa-angle-down"></i>
                             </a>
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="mysql-sql-monitor.html">SQL监控</a></li>
@@ -89,11 +89,26 @@
             <div class="container">
                 <ol class="breadcrumb" style="font-size: 14px;">
                     <li><a href="index.html">首页</a></li>
-                    <li>Mycat 监控</li>
-                    <li class="active">主从同步监控</li>
+                    <li><a href="monitor-mycat.html">Mycat 监控</a></li>
+                    <li><a id="prevPage" href="monitor-mycat-sql-execute.html">SQL执行情况</a></li>
+                    <li class="active">SQL执行详情</li>
                 </ol>
             </div>
 
+            <div class="container">
+                <table id="mycat-sql-execute" class="display mydatatable" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>DATA_SOURCE</th>
+                            <th>EXECUTE</th>
+                            <th>TIME</th>
+                            <th>LAST_EXECUTE_TIMESTAMP</th>
+                            <th>LAST_TIME</th>
+                        </tr>
+                    </thead>
+
+                </table>
+            </div>
         </section>
         <!-- END 内容 -->
 
@@ -125,14 +140,44 @@
     <!-- DataTables -->
     <script src="assets/js/jquery.dataTables.min.js"></script>
     <script src="assets/js/dataTables.bootstrap.min.js"></script>
-    <!-- 自定义JAVASCRIPT -->
-    <script src="assets/js/misc-util.js"></script>
-    <script src="assets/js/sql-monitor-init.js"></script>
-    <script src="assets/js/sql-monitor-analyze.js"></script>
+
     <!-- loading效果 -->
     <script src="assets/js/jquery.mloading.js"></script>
     <!-- 置顶悬浮图标 -->
     <div class="float-container float"><a href="javascript:$(window).scrollTop(0, 0);"><img src="assets/img/top.gif" style="border:0px;" /></a></div>
 
+    <!-- 自定义JAVASCRIPT -->
+    <script src="assets/js/misc-util.js"></script>
+    <script src="assets/js/utils.js"></script>
+    <script src="assets/js/monitor/mycat.js"></script>
+    <script>
+        $(function () {
+            var sql_id = getParameter('sql_id'),sid = getParameter('server_id'),tr = getParameter('timeRange'),backurl = 'monitor-mycat-sql-execute.html',backparam='';
+
+            if(sid){
+                backparam += '&server_id='+sid;
+            }
+            if(tr){
+                //tr = decodeURIComponent(tr);
+                backparam += '&timeRange='+tr;
+            }
+            if(backparam!='') {
+                backparam = '?'+backparam.slice(1);
+            }
+            $('#prevPage').attr('href',backurl+backparam);
+
+            $('#mycat-sql-execute').DataTable({
+                'ajax': '/mycat/sql/detail?server_id='+sid+'&sql_id='+sql_id,
+                'columns': [
+                    {'data': 'dataSource'},
+                    {'data': 'execute'},
+                    {'data': 'time'},
+                    {'data': 'lastExecuteTimestamp'},
+                    {'data': 'lastTime'}
+                ]
+            });
+
+        });
+    </script>
 </body>
 </html>

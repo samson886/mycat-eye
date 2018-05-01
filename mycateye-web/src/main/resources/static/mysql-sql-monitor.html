@@ -11,23 +11,11 @@
 	type="text/css">
 <link href="assets/css/elegant-icons.css" rel="stylesheet"
 	type="text/css">
-<link href="assets/css/main.css" rel="stylesheet" type="text/css">
-<link href="assets/css/my-custom-styles.css" rel="stylesheet"
-	type="text/css">
 <link rel="stylesheet" href="assets/css/dataTables.bootstrap.css">
 <link rel="stylesheet" href="assets/css/jquery.mloading.css" />
-<style>
-.selected {
-	background-color: #gray
-}
+<link href="assets/css/main.css" rel="stylesheet" type="text/css">
+<link href="assets/css/my-custom-styles.css" rel="stylesheet" type="text/css">
 
-pre {
-	white-space: pre-wrap;
-	word-wrap: break-word;
-}
-.float-container { position:absolute; right:0; width:50px; height:50px; }
-.float { top:300px; }
-</style>
 </head>
 
 <body>
@@ -52,9 +40,9 @@ pre {
 							</a>
 							<ul class="dropdown-menu" role="menu">
 								<li><a href="monitor-mycat.html">服务监控</a></li>
+								<li><a href="monitor-mycat-sql-execute.html">SQL执行情况</a></li>
 								<li><a href="monitor-mycat-sql.html">SQL性能监控</a></li>
-								<li><a href="monitor-mycat-datanode.html">物理节点</a></li>
-								<li><a href="monitor-mycat-synchronized.html">主从同步监控</a></li>
+								<li><a href="monitor-mycat-datanode.html">数据节点</a></li>
 							</ul>
 						</li>
 						<li class="dropdown active">
@@ -62,7 +50,7 @@ pre {
 								Mysql监控 <i class="fa fa-angle-down"></i>
 							</a>
 							<ul class="dropdown-menu" role="menu">
-								<li><a href="mysql-sql-monitor.html">SQL监控</a></li>
+								<li class="active"><a href="mysql-sql-monitor.html">SQL监控</a></li>
 								<li><a href="mysql-slow-monitor.html">慢查询SQL</a></li>
 								<li><a href="mysql-performance-monitor.html">性能监控</a></li>
 							</ul>

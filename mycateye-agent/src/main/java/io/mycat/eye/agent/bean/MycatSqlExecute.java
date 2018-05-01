@@ -13,6 +13,8 @@ public class MycatSqlExecute implements Serializable {
 
     private Double minTime;
 
+    private Integer serverId;
+
     private static final long serialVersionUID = 1L;
 
     public Long getSqlId() {
@@ -55,6 +57,14 @@ public class MycatSqlExecute implements Serializable {
         this.minTime = minTime;
     }
 
+    public Integer getServerId() {
+        return serverId;
+    }
+
+    public void setServerId(Integer serverId) {
+        this.serverId = serverId;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -66,6 +76,7 @@ public class MycatSqlExecute implements Serializable {
         sb.append(", sqlTime=").append(sqlTime);
         sb.append(", maxTime=").append(maxTime);
         sb.append(", minTime=").append(minTime);
+        sb.append(", serverId=").append(serverId);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

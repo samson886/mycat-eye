@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.mycat.eye.web.mapper.MycatSqlHighMapper">
+  <resultMap id="BaseResultMap" type="io.mycat.eye.web.bean.MycatSqlHigh">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="c_user" jdbcType="VARCHAR" property="cUser" />
+    <result column="frequency" jdbcType="INTEGER" property="frequency" />
+    <result column="avg_time" jdbcType="INTEGER" property="avgTime" />
+    <result column="max_time" jdbcType="INTEGER" property="maxTime" />
+    <result column="min_time" jdbcType="INTEGER" property="minTime" />
+    <result column="execute_time" jdbcType="INTEGER" property="executeTime" />
+    <result column="last_time" jdbcType="BIGINT" property="lastTime" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="io.mycat.eye.web.bean.MycatSqlHigh">
+    <result column="sql" jdbcType="LONGVARCHAR" property="sql" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, c_user, frequency, avg_time, max_time, min_time, execute_time, last_time
+  </sql>
+  <sql id="Blob_Column_List">
+    sql
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="io.mycat.eye.web.bean.MycatSqlHighExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from mycat_sql_high
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="io.mycat.eye.web.bean.MycatSqlHighExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from mycat_sql_high
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="io.mycat.eye.web.bean.MycatSqlHighExample">
+    delete from mycat_sql_high
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="io.mycat.eye.web.bean.MycatSqlHigh">
+    insert into mycat_sql_high (id, c_user, frequency, 
+      avg_time, max_time, min_time, 
+      execute_time, last_time, sql
+      )
+    values (#{id,jdbcType=INTEGER}, #{cUser,jdbcType=VARCHAR}, #{frequency,jdbcType=INTEGER}, 
+      #{avgTime,jdbcType=INTEGER}, #{maxTime,jdbcType=INTEGER}, #{minTime,jdbcType=INTEGER}, 
+      #{executeTime,jdbcType=INTEGER}, #{lastTime,jdbcType=BIGINT}, #{sql,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="io.mycat.eye.web.bean.MycatSqlHigh">
+    insert into mycat_sql_high
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="cUser != null">
+        c_user,
+      </if>
+      <if test="frequency != null">
+        frequency,
+      </if>
+      <if test="avgTime != null">
+        avg_time,
+      </if>
+      <if test="maxTime != null">
+        max_time,
+      </if>
+      <if test="minTime != null">
+        min_time,
+      </if>
+      <if test="executeTime != null">
+        execute_time,
+      </if>
+      <if test="lastTime != null">
+        last_time,
+      </if>
+      <if test="sql != null">
+        sql,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="cUser != null">
+        #{cUser,jdbcType=VARCHAR},
+      </if>
+      <if test="frequency != null">
+        #{frequency,jdbcType=INTEGER},
+      </if>
+      <if test="avgTime != null">
+        #{avgTime,jdbcType=INTEGER},
+      </if>
+      <if test="maxTime != null">
+        #{maxTime,jdbcType=INTEGER},
+      </if>
+      <if test="minTime != null">
+        #{minTime,jdbcType=INTEGER},
+      </if>
+      <if test="executeTime != null">
+        #{executeTime,jdbcType=INTEGER},
+      </if>
+      <if test="lastTime != null">
+        #{lastTime,jdbcType=BIGINT},
+      </if>
+      <if test="sql != null">
+        #{sql,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="io.mycat.eye.web.bean.MycatSqlHighExample" resultType="java.lang.Long">
+    select count(*) from mycat_sql_high
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update mycat_sql_high
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.cUser != null">
+        c_user = #{record.cUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.frequency != null">
+        frequency = #{record.frequency,jdbcType=INTEGER},
+      </if>
+      <if test="record.avgTime != null">
+        avg_time = #{record.avgTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.maxTime != null">
+        max_time = #{record.maxTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.minTime != null">
+        min_time = #{record.minTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.executeTime != null">
+        execute_time = #{record.executeTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.lastTime != null">
+        last_time = #{record.lastTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.sql != null">
+        sql = #{record.sql,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update mycat_sql_high
+    set id = #{record.id,jdbcType=INTEGER},
+      c_user = #{record.cUser,jdbcType=VARCHAR},
+      frequency = #{record.frequency,jdbcType=INTEGER},
+      avg_time = #{record.avgTime,jdbcType=INTEGER},
+      max_time = #{record.maxTime,jdbcType=INTEGER},
+      min_time = #{record.minTime,jdbcType=INTEGER},
+      execute_time = #{record.executeTime,jdbcType=INTEGER},
+      last_time = #{record.lastTime,jdbcType=BIGINT},
+      sql = #{record.sql,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update mycat_sql_high
+    set id = #{record.id,jdbcType=INTEGER},
+      c_user = #{record.cUser,jdbcType=VARCHAR},
+      frequency = #{record.frequency,jdbcType=INTEGER},
+      avg_time = #{record.avgTime,jdbcType=INTEGER},
+      max_time = #{record.maxTime,jdbcType=INTEGER},
+      min_time = #{record.minTime,jdbcType=INTEGER},
+      execute_time = #{record.executeTime,jdbcType=INTEGER},
+      last_time = #{record.lastTime,jdbcType=BIGINT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

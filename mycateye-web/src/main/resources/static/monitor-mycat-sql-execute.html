@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SQL执行情况</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Responsive Website Template">
+
+    <link href="assets/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="assets/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="assets/css/elegant-icons.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" media="all" href="assets/css/daterangepicker-bs3.css" />
+    <link rel="stylesheet" href="assets/css/jquery.mloading.css" />
+    <link rel="stylesheet" href="assets/css/jquery.dataTables.min.css">
+    <link href="assets/css/main.css" rel="stylesheet" type="text/css">
+    <link href="assets/css/my-custom-styles.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <div id="wrapper">
+        <!-- 导航 -->
+        <nav class="navbar navbar-default navbar-fixed-top ">
+            <div class="container">
+                <a href="index.html" class="navbar-brand">
+                    <img src="assets/img/logo/logo_80.png" style="width: 80px; height: 46px;">
+                </a>
+                <div id="main-nav-collapse" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav main-navbar-nav">
+                        <li class="dropdown">
+                            <a href="index.html" class="dropdown-toggle" data-toggle="dropdown">首页</a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="mysql-mycnf.html" class="dropdown-toggle" data-toggle="dropdown">my.cnf生成工具</a>
+                        </li>
+                        <li class="dropdown ">
+                            <a href="mysql-cluster.html" class="dropdown-toggle" data-toggle="dropdown">集群管理</a>
+                        </li>
+                        <!--<li class="dropdown">-->
+                            <!--<a href="mysql-performance-monitor.html" class="dropdown-toggle" data-toggle="dropdown">性能监控</a>-->
+                        <!--</li>-->
+                        <li class="dropdown active">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                Mycat监控 <i class="fa fa-angle-down"></i>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="monitor-mycat.html">服务监控</a></li>
+                                <li class="active"><a href="monitor-mycat-sql-execute.html">SQL执行情况</a></li>
+                                <li><a href="monitor-mycat-sql.html">SQL性能监控</a></li>
+                                <li><a href="monitor-mycat-datanode.html">数据节点</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                Mysql监控 <i class="fa fa-angle-down"></i>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="mysql-sql-monitor.html">SQL监控</a></li>
+                                <li><a href="mysql-slow-monitor.html">慢查询SQL</a></li>
+                                <li><a href="mysql-performance-monitor.html">性能监控</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="mysql-health-check.html" class="dropdown-toggle" data-toggle="dropdown">健康检查</a>
+                        </li>
+                        <li class="dropdown">
+                            <a target="_blank" href="admin/index.html" class="dropdown-toggle" data-toggle="dropdown">控制台</a>
+                        </li>
+                        <li class="dropdown">
+                            <div class="btn-group" style="margin-top: 18px; margin-left: 40px;">
+                                <button type="button" class="btn btn-default" id="defaultNode">选择节点</button>
+                                <button type="button" class="btn btn-default dropdown-toggle"
+                                        data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false">
+                                    <span class="caret"></span>
+                                    <span class="sr-only">Toggle Dropdown</span>
+                                </button>
+                                <ul class="dropdown-menu" id="nodeUl">
+                                </ul>
+                            </div>
+                            <input type="hidden" id="defaultServerId" value="" />
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- END 导航 -->
+
+        <!-- 内容 -->
+        <section>
+            <div class="container">
+                <ol class="breadcrumb" style="font-size: 14px;">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="monitor-mycat.html">Mycat 监控</a></li>
+                    <li class="active">SQL执行情况</li>
+                </ol>
+            </div>
+
+            <div class="container">
+                <form id="searchForm" class="form-inline bg-light form-toptool mb-1">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>
+                                    <i class="fa fa-calendar"></i> 查询时间：
+                                </label>
+                                <span>
+                                <input type="text" style="width: 320px;" name="reservation"
+                                       id="reservationtime" class="form-control"
+                                       value="2017/08/01 1:00:00 - 2017/08/02 13:30:00"
+                                       class="span4" />
+                            </span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                            <span>
+                                <i class="fa fa-cube"></i> 节点：
+                            </span>
+                                <select id="dataNodes" class="form-control">
+                                    <option value="1">9066</option>
+                                    <option value="2">9067</option>
+                                </select>
+                                <button type="button" class="btn btn-success" id="btn-search">查询</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <table id="mycat-sql-execute" class="display mydatatable" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>SQL_ID</th>
+                            <th>EXECUTE</th>
+                            <th>TIME</th>
+                            <th>MAX_TIME</th>
+                            <th>MIN_TIME</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+
+                </table>
+            </div>
+        </section>
+        <!-- END 内容 -->
+
+        <!-- 页脚 -->
+        <footer class="footer-newsletter">
+            <div class="container">
+
+                <div class="footer-bottom">
+                    <div class="left">
+                        <p class="copyright-text">&copy;2017 MyCAT EYE</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- END 页脚 -->
+    </div>
+
+    <div class="fakeloader"></div>
+    <!-- JAVASCRIPT -->
+    <script src="assets/js/jquery-2.1.1.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/plugins/easing/jquery.easing.min.js"></script>
+    <script src="assets/js/plugins/morphext/morphext.min.js"></script>
+    <script src="assets/js/plugins/owl-carousel/owl.carousel.min.js"></script>
+    <script src="assets/js/bravana-lite.js"></script>
+    <script src="assets/js/echarts.common.min.js"></script>
+    <!-- 时间区间组件 -->
+    <script type="text/javascript" src="assets/js/moment.js"></script>
+    <script type="text/javascript" src="assets/js/daterangepicker.js"></script>
+    <!-- DataTables -->
+    <script src="assets/js/jquery.dataTables.min.js"></script>
+    <script src="assets/js/dataTables.bootstrap.min.js"></script>
+
+    <!-- loading效果 -->
+    <script src="assets/js/jquery.mloading.js"></script>
+    <!-- 置顶悬浮图标 -->
+    <div class="float-container float"><a href="javascript:$(window).scrollTop(0, 0);"><img src="assets/img/top.gif" style="border:0px;" /></a></div>
+
+    <!-- 自定义JAVASCRIPT -->
+    <script src="assets/js/misc-util.js"></script>
+    <script src="assets/js/utils.js"></script>
+    <script src="assets/js/monitor/mycat.js"></script>
+    <script>
+        $(function () {
+            //初始化时间区间
+            var datetimerange = $("#reservationtime");
+            if (datetimerange && datetimerange.size() > 0) {
+                var timeRange,server_id;
+                timeRange = getParameter('timeRange');
+                server_id = getParameter('server_id');
+
+                var now = getMillisecondAgoFormatDate(0);
+                var halfAnHourAgo = getMillisecondAgoFormatDate(30 * 60 * 1000);
+                if(timeRange){
+                    timeRange = decodeURIComponent(timeRange);
+                }
+                if(!timeRange){
+                    timeRange = halfAnHourAgo + " - " + now;
+                }
+                if(server_id){
+                    $('#dataNodes').val(server_id);
+                    //server_id = $('#dataNodes').get(0).selectedOptions[0].value || '';
+                }
+                datetimerange.val(timeRange);
+
+                //定义时间选择事件
+                datetimerange.daterangepicker({
+                        timePicker: true,
+                        timePickerIncrement: 1,
+                        format: 'YYYY/MM/DD HH:mm:ss'
+                    },
+                    function (start, end, label) {
+                        var tr = datetimerange.val();
+                        console.log('start', start, 'end', end, 'label', label);
+                        console.log('timeRange',tr);
+                    });
+                var sid = $('#dataNodes').val();
+                var tr = $('#reservationtime').val();
+                doSearch(sid,tr);
+            }
+
+            $('#btn-search').on('click', function (e) {
+                var $btn = $(this).button('loading')
+                var sid = $('#dataNodes').val();
+                var tr = $("#reservationtime").val();
+                if(sid==''){
+                    notifi.warn('请选择服务节点！');
+                    $btn.button('reset');
+                    return;
+                }
+                if(tr==''){
+                    notifi.warn('请选择查询时间！');
+                    $btn.button('reset');
+                    return;
+                }
+                doSearch(sid,tr,$btn);
+            });
+
+            var table;
+            function doSearch(sid,tr,btn) {
+                if(table){
+                    table.destroy();
+                }
+                table = $('#mycat-sql-execute').DataTable({
+    //                "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                    'ajax': '/mycat/sql/execute?server_id='+sid+'&timeRange='+tr,
+    //                'ajax': {
+    //                    'url':'/data/sql_execute.json',
+    //                    'dataSrc':''
+    //                },
+    //                'columns': [
+    //                    { "data": "name" },
+    //                    { "data": "position" },
+    //                    { "data": "office" },
+    //                    { "data": "extn" },
+    //                    { "data": "start_date" },
+    //                    { "data": "salary" }
+    //                ]
+                    'columns': [
+                        {'data': 'sqlId'},
+                        {'data': 'sqlExecute'},
+                        {'data': 'sqlTime'},
+                        {'data': 'maxTime'},
+                        {'data': 'minTime'}
+                    ],
+                    'columnDefs': [
+                        {
+                            'render': function(data,type,row){
+                                console.log(data,type,row['sqlId'])
+                                return '<a href="monitor-mycat-sql-detail.html?server_id='+sid+'&sql_id='+(row['sqlId'] || '')+'&timeRange='+encodeURIComponent(tr)+'">查看详情</a>';
+                            },
+                            'targets': 5
+                        }
+                    ]
+                });
+                btn && btn.button('reset');
+            }
+
+        });
+    </script>
+</body>
+</html>
