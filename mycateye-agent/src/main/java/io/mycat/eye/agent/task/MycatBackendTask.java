@@ -1,10 +1,8 @@
 package io.mycat.eye.agent.task;
 
-import io.mycat.eye.agent.bean.MycatConnection;
-import io.mycat.eye.agent.bean.MycatConnectionExample;
-import io.mycat.eye.agent.bean.MycatServer;
-import io.mycat.eye.agent.bean.MycatServerExample;
+import io.mycat.eye.agent.bean.*;
 import io.mycat.eye.agent.dto.QueryResult;
+import io.mycat.eye.agent.mapper.MycatBackendMapper;
 import io.mycat.eye.agent.mapper.MycatConnectionMapper;
 import io.mycat.eye.agent.mapper.MycatServerMapper;
 import org.slf4j.Logger;
@@ -24,13 +22,13 @@ import java.util.Map;
 public class MycatBackendTask extends AbstractTask {
     private static final Logger logger = LoggerFactory.getLogger(MycatBackendTask.class);
     private static final String SHOW_SQL = "show @@backend";
-    public final static long DELAY_TIME = 30*1000;
+    public final static long DELAY_TIME = 1*60*1000;
 
     @Resource
     MycatServerMapper mycatServerMapper;
 
     @Resource
-    MycatConnectionMapper mapper;
+    MycatBackendMapper mapper;
 
     @Scheduled(fixedDelay = DELAY_TIME)
     public void execute(){
@@ -51,10 +49,11 @@ public class MycatBackendTask extends AbstractTask {
 
             List<Map<Object, Object>> statusList = statusQueryResult.getData();
             logger.debug(String.valueOf(statusList.size()));
-            MycatConnectionExample example = new MycatConnectionExample();
+
+            long collect_time = System.currentTimeMillis();
             statusList.stream().forEach(o -> {
-                MycatConnection c = new MycatConnection();
-                c.setcSchema("backend");
+                MycatBackend c = new MycatBackend();
+
                 if(o.get("processor")!=null){
                     c.setProcessor((String) o.get("processor"));
                 }
@@ -103,6 +102,8 @@ public class MycatBackendTask extends AbstractTask {
                 if(o.get("autocommit")!=null){
                     c.setAutocommit((String) o.get("autocommit"));
                 }
+                c.setMycatId(server.getId());
+                c.setCollectTime(collect_time);
                 mapper.insertSelective(c);
 //                MycatConnectionExample.Criteria criteria = example.createCriteria();
 //                criteria.andIdEqualTo(c.getId());

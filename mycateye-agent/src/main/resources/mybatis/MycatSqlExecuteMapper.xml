@@ -7,6 +7,7 @@
     <result column="sql_time" jdbcType="DOUBLE" property="sqlTime" />
     <result column="max_time" jdbcType="DOUBLE" property="maxTime" />
     <result column="min_time" jdbcType="DOUBLE" property="minTime" />
+    <result column="server_id" jdbcType="INTEGER" property="serverId" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -67,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    sql_id, sql_execute, sql_time, max_time, min_time
+    sql_id, sql_execute, sql_time, max_time, min_time, server_id
   </sql>
   <select id="selectByExample" parameterType="io.mycat.eye.agent.bean.MycatSqlExecuteExample" resultMap="BaseResultMap">
     select
@@ -91,9 +92,11 @@
   </delete>
   <insert id="insert" parameterType="io.mycat.eye.agent.bean.MycatSqlExecute">
     insert into mycat_sql_execute (sql_id, sql_execute, sql_time, 
-      max_time, min_time)
+      max_time, min_time, server_id
+      )
     values (#{sqlId,jdbcType=BIGINT}, #{sqlExecute,jdbcType=BIGINT}, #{sqlTime,jdbcType=DOUBLE}, 
-      #{maxTime,jdbcType=DOUBLE}, #{minTime,jdbcType=DOUBLE})
+      #{maxTime,jdbcType=DOUBLE}, #{minTime,jdbcType=DOUBLE}, #{serverId,jdbcType=INTEGER}
+      )
   </insert>
   <insert id="insertSelective" parameterType="io.mycat.eye.agent.bean.MycatSqlExecute">
     insert into mycat_sql_execute
@@ -113,6 +116,9 @@
       <if test="minTime != null">
         min_time,
       </if>
+      <if test="serverId != null">
+        server_id,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="sqlId != null">
@@ -129,6 +135,9 @@
       </if>
       <if test="minTime != null">
         #{minTime,jdbcType=DOUBLE},
+      </if>
+      <if test="serverId != null">
+        #{serverId,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -156,6 +165,9 @@
       <if test="record.minTime != null">
         min_time = #{record.minTime,jdbcType=DOUBLE},
       </if>
+      <if test="record.serverId != null">
+        server_id = #{record.serverId,jdbcType=INTEGER},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -167,7 +179,8 @@
       sql_execute = #{record.sqlExecute,jdbcType=BIGINT},
       sql_time = #{record.sqlTime,jdbcType=DOUBLE},
       max_time = #{record.maxTime,jdbcType=DOUBLE},
-      min_time = #{record.minTime,jdbcType=DOUBLE}
+      min_time = #{record.minTime,jdbcType=DOUBLE},
+      server_id = #{record.serverId,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>

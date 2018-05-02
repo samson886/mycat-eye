@@ -5,11 +5,7 @@ import java.io.Serializable;
 public class MycatConnection implements Serializable {
     private Integer id;
 
-    private String cType;
-
     private String processor;
-
-    private Integer mysqlid;
 
     private String cHost;
 
@@ -27,21 +23,19 @@ public class MycatConnection implements Serializable {
 
     private String cCharset;
 
-    private Long life;
-
     private Long aliveTime;
 
     private Integer recvBuffer;
-
-    private String closed;
-
-    private String borrowed;
 
     private Integer sendQueue;
 
     private String txlevel;
 
     private String autocommit;
+
+    private Integer mycatId;
+
+    private Long collectTime;
 
     private static final long serialVersionUID = 1L;
 
@@ -53,28 +47,12 @@ public class MycatConnection implements Serializable {
         this.id = id;
     }
 
-    public String getcType() {
-        return cType;
-    }
-
-    public void setcType(String cType) {
-        this.cType = cType;
-    }
-
     public String getProcessor() {
         return processor;
     }
 
     public void setProcessor(String processor) {
         this.processor = processor;
-    }
-
-    public Integer getMysqlid() {
-        return mysqlid;
-    }
-
-    public void setMysqlid(Integer mysqlid) {
-        this.mysqlid = mysqlid;
     }
 
     public String getcHost() {
@@ -141,14 +119,6 @@ public class MycatConnection implements Serializable {
         this.cCharset = cCharset;
     }
 
-    public Long getLife() {
-        return life;
-    }
-
-    public void setLife(Long life) {
-        this.life = life;
-    }
-
     public Long getAliveTime() {
         return aliveTime;
     }
@@ -163,22 +133,6 @@ public class MycatConnection implements Serializable {
 
     public void setRecvBuffer(Integer recvBuffer) {
         this.recvBuffer = recvBuffer;
-    }
-
-    public String getClosed() {
-        return closed;
-    }
-
-    public void setClosed(String closed) {
-        this.closed = closed;
-    }
-
-    public String getBorrowed() {
-        return borrowed;
-    }
-
-    public void setBorrowed(String borrowed) {
-        this.borrowed = borrowed;
     }
 
     public Integer getSendQueue() {
@@ -205,6 +159,22 @@ public class MycatConnection implements Serializable {
         this.autocommit = autocommit;
     }
 
+    public Integer getMycatId() {
+        return mycatId;
+    }
+
+    public void setMycatId(Integer mycatId) {
+        this.mycatId = mycatId;
+    }
+
+    public Long getCollectTime() {
+        return collectTime;
+    }
+
+    public void setCollectTime(Long collectTime) {
+        this.collectTime = collectTime;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -212,9 +182,7 @@ public class MycatConnection implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", cType=").append(cType);
         sb.append(", processor=").append(processor);
-        sb.append(", mysqlid=").append(mysqlid);
         sb.append(", cHost=").append(cHost);
         sb.append(", cPort=").append(cPort);
         sb.append(", lPort=").append(lPort);
@@ -223,14 +191,13 @@ public class MycatConnection implements Serializable {
         sb.append(", cUser=").append(cUser);
         sb.append(", cSchema=").append(cSchema);
         sb.append(", cCharset=").append(cCharset);
-        sb.append(", life=").append(life);
         sb.append(", aliveTime=").append(aliveTime);
         sb.append(", recvBuffer=").append(recvBuffer);
-        sb.append(", closed=").append(closed);
-        sb.append(", borrowed=").append(borrowed);
         sb.append(", sendQueue=").append(sendQueue);
         sb.append(", txlevel=").append(txlevel);
         sb.append(", autocommit=").append(autocommit);
+        sb.append(", mycatId=").append(mycatId);
+        sb.append(", collectTime=").append(collectTime);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

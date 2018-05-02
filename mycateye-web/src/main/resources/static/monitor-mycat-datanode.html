@@ -10,10 +10,10 @@
     <link href="assets/css/bootstrap.css" rel="stylesheet" type="text/css">
     <link href="assets/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="assets/css/elegant-icons.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="assets/css/jquery.mloading.css" />
+    <link rel="stylesheet" href="assets/css/jquery.dataTables.min.css">
     <link href="assets/css/main.css" rel="stylesheet" type="text/css">
     <link href="assets/css/my-custom-styles.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="assets/css/dataTables.bootstrap.css">
-    <link rel="stylesheet" href="assets/css/jquery.mloading.css" />
 </head>
 <body>
     <div id="wrapper">
@@ -43,9 +43,9 @@
                             </a>
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="monitor-mycat.html">服务监控</a></li>
+                                <li><a href="monitor-mycat-sql-execute.html">SQL执行情况</a></li>
                                 <li><a href="monitor-mycat-sql.html">SQL性能监控</a></li>
-                                <li><a href="monitor-mycat-datanode.html">物理节点</a></li>
-                                <li><a href="monitor-mycat-synchronized.html">主从同步监控</a></li>
+                                <li class="active"><a href="monitor-mycat-datanode.html">数据节点</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
@@ -92,7 +92,44 @@
                     <li>Mycat 监控</li>
                     <li class="active">Mycat 物理数据节点</li>
                 </ol>
+            </div>
+            <div class="container">
+                <form id="searchForm" class="form-inline bg-light form-toptool mb-1">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                            <span>
+                                <i class="fa fa-cube"></i> 节点：
+                            </span>
+                                <select id="dataNodes" class="form-control">
+                                    <option value="1">9066</option>
+                                    <option value="2">9067</option>
+                                </select>
+                                <button type="button" class="btn btn-success" id="btn-search">查询</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <table id="mycat-datanode" class="display mydatatable" style="width:100%">
+                    <thead>
+                    <tr>
+                        <th>NAME</th>
+                        <th>DATHOST</th>
+                        <th>INDEX</th>
+                        <th>INDEX</th>
+                        <th>ACTIVE</th>
+                        <th>IDLE</th>
+                        <th>SIZE</th>
+                        <th>EXECUTE</th>
+                        <th>TOTAL_TIME</th>
+                        <th>MAX_TIME</th>
+                        <th>MAX_SQL</th>
+                        <th>RECOVERY_TIME</th>
+                        <!-- <th>操作</th> -->
+                    </tr>
+                    </thead>
 
+                </table>
             </div>
         </section>
         <!-- END 内容 -->
@@ -125,14 +162,79 @@
     <!-- DataTables -->
     <script src="assets/js/jquery.dataTables.min.js"></script>
     <script src="assets/js/dataTables.bootstrap.min.js"></script>
-    <!-- 自定义JAVASCRIPT -->
-    <script src="assets/js/misc-util.js"></script>
-    <script src="assets/js/sql-monitor-init.js"></script>
-    <script src="assets/js/sql-monitor-analyze.js"></script>
     <!-- loading效果 -->
     <script src="assets/js/jquery.mloading.js"></script>
     <!-- 置顶悬浮图标 -->
     <div class="float-container float"><a href="javascript:$(window).scrollTop(0, 0);"><img src="assets/img/top.gif" style="border:0px;" /></a></div>
 
+    <!-- 自定义JAVASCRIPT -->
+    <script src="assets/js/misc-util.js"></script>
+    <script src="assets/js/utils.js"></script>
+    <script src="assets/js/sql-monitor-init.js"></script>
+    <script src="assets/js/monitor/mycat.js"></script>
+    <script>
+        $(function () {
+            //初始化时间区间
+            var datetimerange = $("#reservationtime");
+            if (datetimerange && datetimerange.size() > 0) {
+                var now = getMillisecondAgoFormatDate(0);
+                var halfAnHourAgo = getMillisecondAgoFormatDate(30 * 60 * 1000);
+                var timeRange = halfAnHourAgo + " - " + now;
+                datetimerange.val(timeRange);
+                //定义时间选择事件
+                datetimerange.daterangepicker({
+                        timePicker: true,
+                        timePickerIncrement: 1,
+                        format: 'YYYY/MM/DD HH:mm:ss'
+                    },
+                    function (start, end, label) {
+                        timeRange = datetimerange.val();
+                        console.log('start', start, 'end', end, 'label', label);
+                        //初始化图表
+                        // var serverId=$("#defaultServerId").val();
+                        // chartInit(serverId, timeRange);
+                    });
+            }
+
+            $('#btn-search').on('click', function (e) {
+                var $btn = $(this).button('loading')
+                var sid = $('#dataNodes').val();
+                if (sid == '') {
+                    notifi.warn('请选择服务节点！');
+                    $btn.button('reset');
+                    return;
+                }
+                doSearch(sid, $btn);
+            });
+            var mycat_id = $('#dataNodes').val();
+            doSearch(mycat_id);
+
+            var table;
+            function doSearch(server_id,btn){
+                if (table) {
+                    table.destroy();
+                }
+                table = $('#mycat-datanode').DataTable({
+                    'ajax': '/mycat/datanode/list?server_id=' + server_id,
+                    'columns':[
+                        { 'data': 'name' },
+                        { 'data': 'datahost' },
+                        { 'data': 'dIndex' },
+                        { 'data': 'dType' },
+                        { 'data': 'dActive' },
+                        { 'data': 'dIdle' },
+                        { 'data': 'dSize' },
+                        { 'data': 'dExecute' },
+                        { 'data': 'totalTime' },
+                        { 'data': 'maxTime' },
+                        { 'data': 'maxSql' },
+                        { 'data': 'recoveryTime' }
+                    ]
+                });
+                btn && btn.button('reset');
+            }
+
+        });
+    </script>
 </body>
 </html>

@@ -10,10 +10,10 @@
     <link href="assets/css/bootstrap.css" rel="stylesheet" type="text/css">
     <link href="assets/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="assets/css/elegant-icons.css" rel="stylesheet" type="text/css">
-    <link href="assets/css/main.css" rel="stylesheet" type="text/css">
-    <link href="assets/css/my-custom-styles.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="assets/css/dataTables.bootstrap.css">
     <link rel="stylesheet" href="assets/css/jquery.mloading.css" />
+    <link href="assets/css/main.css" rel="stylesheet" type="text/css">
+    <link href="assets/css/my-custom-styles.css" rel="stylesheet" type="text/css">
 </head>
 <body>
     <div id="wrapper">
@@ -43,9 +43,9 @@
                             </a>
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="monitor-mycat.html">服务监控</a></li>
-                                <li><a href="monitor-mycat-sql.html">SQL性能监控</a></li>
-                                <li><a href="monitor-mycat-datanode.html">物理节点</a></li>
-                                <li><a href="monitor-mycat-synchronized.html">主从同步监控</a></li>
+                                <li><a href="monitor-mycat-sql-execute.html">SQL执行情况</a></li>
+                                <li class="active"><a href="monitor-mycat-sql.html">SQL性能监控</a></li>
+                                <li><a href="monitor-mycat-datanode.html">数据节点</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
@@ -92,6 +92,9 @@
                     <li>Mycat 监控</li>
                     <li class="active">SQL性能监控</li>
                 </ol>
+            </div>
+
+            <div class="container">
 
             </div>
         </section>
@@ -125,14 +128,42 @@
     <!-- DataTables -->
     <script src="assets/js/jquery.dataTables.min.js"></script>
     <script src="assets/js/dataTables.bootstrap.min.js"></script>
-    <!-- 自定义JAVASCRIPT -->
-    <script src="assets/js/misc-util.js"></script>
-    <script src="assets/js/sql-monitor-init.js"></script>
-    <script src="assets/js/sql-monitor-analyze.js"></script>
     <!-- loading效果 -->
     <script src="assets/js/jquery.mloading.js"></script>
     <!-- 置顶悬浮图标 -->
     <div class="float-container float"><a href="javascript:$(window).scrollTop(0, 0);"><img src="assets/img/top.gif" style="border:0px;" /></a></div>
 
+    <!-- 自定义JAVASCRIPT -->
+    <script src="assets/js/misc-util.js"></script>
+    <script src="assets/js/utils.js"></script>
+    <script src="assets/js/sql-monitor-init.js"></script>
+    <script src="assets/js/monitor/mycat.js"></script>
+    <script>
+        $(function () {
+            //初始化时间区间
+            var datetimerange = $("#reservationtime");
+            if (datetimerange && datetimerange.size() > 0) {
+                var now = getMillisecondAgoFormatDate(0);
+                var halfAnHourAgo = getMillisecondAgoFormatDate(30 * 60 * 1000);
+                var timeRange = halfAnHourAgo + " - " + now;
+                datetimerange.val(timeRange);
+                //定义时间选择事件
+                datetimerange.daterangepicker({
+                        timePicker: true,
+                        timePickerIncrement: 1,
+                        format: 'YYYY/MM/DD HH:mm:ss'
+                    },
+                    function (start, end, label) {
+                        timeRange = datetimerange.val();
+                        console.log('start', start, 'end', end, 'label', label);
+                        //初始化图表
+                        // var serverId=$("#defaultServerId").val();
+                        // chartInit(serverId, timeRange);
+                    });
+            }
+
+
+        });
+    </script>
 </body>
 </html>

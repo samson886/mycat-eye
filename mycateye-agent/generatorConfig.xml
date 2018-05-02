@@ -38,7 +38,8 @@
 		<table schema="mycat_eye" tableName="mycat_cluster" domainObjectName="MycatCluster"/>
 		<table schema="mycat_eye" tableName="mycat_server" domainObjectName="MycatServer"/>
 		<table schema="mycat_eye" tableName="mycat_server_status" domainObjectName="MycatServerStatus"/>
-		<table schema="mycat_eye" tableName="mycat_connections" domainObjectName="MycatConnection"/>
+		<table schema="mycat_eye" tableName="mycat_connection" domainObjectName="MycatConnection"/>
+		<table schema="mycat_eye" tableName="mycat_backend" domainObjectName="MycatBackend"/>
 		<table schema="mycat_eye" tableName="mycat_datanode" domainObjectName="MycatDataNode"/>
 		<table schema="mycat_eye" tableName="mycat_directmemory" domainObjectName="MycatDirectMemory"/>
 		<table schema="mycat_eye" tableName="mycat_sql" domainObjectName="MycatSql"/>
