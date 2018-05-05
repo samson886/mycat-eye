@@ -12,13 +12,21 @@ public interface MycatBackendMapper {
 
     int deleteByExample(MycatBackendExample example);
 
+    int deleteByPrimaryKey(Integer id);
+
     int insert(MycatBackend record);
 
     int insertSelective(MycatBackend record);
 
     List<MycatBackend> selectByExample(MycatBackendExample example);
 
+    MycatBackend selectByPrimaryKey(Integer id);
+
     int updateByExampleSelective(@Param("record") MycatBackend record, @Param("example") MycatBackendExample example);
 
     int updateByExample(@Param("record") MycatBackend record, @Param("example") MycatBackendExample example);
+
+    int updateByPrimaryKeySelective(MycatBackend record);
+
+    int updateByPrimaryKey(MycatBackend record);
 }

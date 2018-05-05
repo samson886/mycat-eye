@@ -1,0 +1,10 @@
+{
+    "data":[
+        {"id":1, "user": "user", "frequency": 1, "avgTime":597, "maxTime":597, "minTime":597, "executeTime":597, "lastTime":1524583497587, "sql" :"INSERT INTO hotnews (id, nm) VALUES (?, ?) "},
+        {"id":2, "user": "root", "frequency": 1, "avgTime":597, "maxTime":597, "minTime":597, "executeTime":597, "lastTime":1524583497587, "sql" :"INSERT INTO hotnews (id, nm) VALUES (?, ?) "},
+        {"id":3, "user": "root", "frequency": 1, "avgTime":597, "maxTime":597, "minTime":597, "executeTime":597, "lastTime":1524583497587, "sql" :"UPDATE INTO hotnews (id, nm) VALUES (?, ?) "},
+        {"id":4, "user": "user", "frequency": 1, "avgTime":597, "maxTime":597, "minTime":597, "executeTime":597, "lastTime":1524583497587, "sql" :"INSERT INTO hotnews (id, nm) VALUES (?, ?) "},
+        {"id":5, "user": "root", "frequency": 1, "avgTime":597, "maxTime":597, "minTime":597, "executeTime":597, "lastTime":1524583497587, "sql" :"DELETE INTO hotnews (id, nm) VALUES (?, ?) "}
+    ],
+    "code": 200
+}

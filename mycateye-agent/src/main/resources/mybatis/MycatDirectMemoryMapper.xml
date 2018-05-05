@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="io.mycat.eye.agent.mapper.MycatDirectMemoryMapper">
   <resultMap id="BaseResultMap" type="io.mycat.eye.agent.bean.MycatDirectMemory">
-    <result column="id" jdbcType="INTEGER" property="id" />
+    <id column="id" jdbcType="INTEGER" property="id" />
     <result column="MDIRECT_MEMORY_MAXED" jdbcType="VARCHAR" property="mdirectMemoryMaxed" />
     <result column="DIRECT_MEMORY_USED" jdbcType="VARCHAR" property="directMemoryUsed" />
     <result column="DIRECT_MEMORY_AVAILABLE" jdbcType="VARCHAR" property="directMemoryAvailable" />
@@ -85,6 +85,16 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from mycat_directmemory
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from mycat_directmemory
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
   <delete id="deleteByExample" parameterType="io.mycat.eye.agent.bean.MycatDirectMemoryExample">
     delete from mycat_directmemory
     <if test="_parameter != null">
@@ -185,5 +195,35 @@
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="io.mycat.eye.agent.bean.MycatDirectMemory">
+    update mycat_directmemory
+    <set>
+      <if test="mdirectMemoryMaxed != null">
+        MDIRECT_MEMORY_MAXED = #{mdirectMemoryMaxed,jdbcType=VARCHAR},
+      </if>
+      <if test="directMemoryUsed != null">
+        DIRECT_MEMORY_USED = #{directMemoryUsed,jdbcType=VARCHAR},
+      </if>
+      <if test="directMemoryAvailable != null">
+        DIRECT_MEMORY_AVAILABLE = #{directMemoryAvailable,jdbcType=VARCHAR},
+      </if>
+      <if test="safetyFraction != null">
+        SAFETY_FRACTION = #{safetyFraction,jdbcType=REAL},
+      </if>
+      <if test="directMemoryReserved != null">
+        DIRECT_MEMORY_RESERVED = #{directMemoryReserved,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="io.mycat.eye.agent.bean.MycatDirectMemory">
+    update mycat_directmemory
+    set MDIRECT_MEMORY_MAXED = #{mdirectMemoryMaxed,jdbcType=VARCHAR},
+      DIRECT_MEMORY_USED = #{directMemoryUsed,jdbcType=VARCHAR},
+      DIRECT_MEMORY_AVAILABLE = #{directMemoryAvailable,jdbcType=VARCHAR},
+      SAFETY_FRACTION = #{safetyFraction,jdbcType=REAL},
+      DIRECT_MEMORY_RESERVED = #{directMemoryReserved,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

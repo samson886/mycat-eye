@@ -3,7 +3,7 @@ package io.mycat.eye.web.controller;
 import io.mycat.eye.web.bean.MycatSqlDetail;
 import io.mycat.eye.web.bean.MycatSqlExecute;
 import io.mycat.eye.web.dto.RestResponse;
-import io.mycat.eye.web.service.MycatSqlService;
+import io.mycat.eye.web.service.MycatSqlExecuteService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class MycatSqlController {
     Logger logger = LoggerFactory.getLogger(MycatSqlController.class);
 
     @Autowired
-    MycatSqlService mycatSqlService;
+    MycatSqlExecuteService mycatSqlService;
 
     @RequestMapping(value = "execute", method = RequestMethod.GET)
     public ResponseEntity getSqlExecute(int server_id, String timeRange){

@@ -424,66 +424,6 @@ public class MycatServerExample {
             return (Criteria) this;
         }
 
-        public Criteria andClusterIdIsNull() {
-            addCriterion("cluster_id is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andClusterIdIsNotNull() {
-            addCriterion("cluster_id is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andClusterIdEqualTo(Integer value) {
-            addCriterion("cluster_id =", value, "clusterId");
-            return (Criteria) this;
-        }
-
-        public Criteria andClusterIdNotEqualTo(Integer value) {
-            addCriterion("cluster_id <>", value, "clusterId");
-            return (Criteria) this;
-        }
-
-        public Criteria andClusterIdGreaterThan(Integer value) {
-            addCriterion("cluster_id >", value, "clusterId");
-            return (Criteria) this;
-        }
-
-        public Criteria andClusterIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("cluster_id >=", value, "clusterId");
-            return (Criteria) this;
-        }
-
-        public Criteria andClusterIdLessThan(Integer value) {
-            addCriterion("cluster_id <", value, "clusterId");
-            return (Criteria) this;
-        }
-
-        public Criteria andClusterIdLessThanOrEqualTo(Integer value) {
-            addCriterion("cluster_id <=", value, "clusterId");
-            return (Criteria) this;
-        }
-
-        public Criteria andClusterIdIn(List<Integer> values) {
-            addCriterion("cluster_id in", values, "clusterId");
-            return (Criteria) this;
-        }
-
-        public Criteria andClusterIdNotIn(List<Integer> values) {
-            addCriterion("cluster_id not in", values, "clusterId");
-            return (Criteria) this;
-        }
-
-        public Criteria andClusterIdBetween(Integer value1, Integer value2) {
-            addCriterion("cluster_id between", value1, value2, "clusterId");
-            return (Criteria) this;
-        }
-
-        public Criteria andClusterIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("cluster_id not between", value1, value2, "clusterId");
-            return (Criteria) this;
-        }
-
         public Criteria andStartupIsNull() {
             addCriterion("startup is null");
             return (Criteria) this;
@@ -681,6 +621,126 @@ public class MycatServerExample {
 
         public Criteria andPasswordNotBetween(String value1, String value2) {
             addCriterion("password not between", value1, value2, "password");
+            return (Criteria) this;
+        }
+
+        public Criteria andClusterIdIsNull() {
+            addCriterion("cluster_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andClusterIdIsNotNull() {
+            addCriterion("cluster_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andClusterIdEqualTo(Integer value) {
+            addCriterion("cluster_id =", value, "clusterId");
+            return (Criteria) this;
+        }
+
+        public Criteria andClusterIdNotEqualTo(Integer value) {
+            addCriterion("cluster_id <>", value, "clusterId");
+            return (Criteria) this;
+        }
+
+        public Criteria andClusterIdGreaterThan(Integer value) {
+            addCriterion("cluster_id >", value, "clusterId");
+            return (Criteria) this;
+        }
+
+        public Criteria andClusterIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("cluster_id >=", value, "clusterId");
+            return (Criteria) this;
+        }
+
+        public Criteria andClusterIdLessThan(Integer value) {
+            addCriterion("cluster_id <", value, "clusterId");
+            return (Criteria) this;
+        }
+
+        public Criteria andClusterIdLessThanOrEqualTo(Integer value) {
+            addCriterion("cluster_id <=", value, "clusterId");
+            return (Criteria) this;
+        }
+
+        public Criteria andClusterIdIn(List<Integer> values) {
+            addCriterion("cluster_id in", values, "clusterId");
+            return (Criteria) this;
+        }
+
+        public Criteria andClusterIdNotIn(List<Integer> values) {
+            addCriterion("cluster_id not in", values, "clusterId");
+            return (Criteria) this;
+        }
+
+        public Criteria andClusterIdBetween(Integer value1, Integer value2) {
+            addCriterion("cluster_id between", value1, value2, "clusterId");
+            return (Criteria) this;
+        }
+
+        public Criteria andClusterIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("cluster_id not between", value1, value2, "clusterId");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsClusterNodeIsNull() {
+            addCriterion("is_cluster_node is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsClusterNodeIsNotNull() {
+            addCriterion("is_cluster_node is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsClusterNodeEqualTo(Byte value) {
+            addCriterion("is_cluster_node =", value, "isClusterNode");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsClusterNodeNotEqualTo(Byte value) {
+            addCriterion("is_cluster_node <>", value, "isClusterNode");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsClusterNodeGreaterThan(Byte value) {
+            addCriterion("is_cluster_node >", value, "isClusterNode");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsClusterNodeGreaterThanOrEqualTo(Byte value) {
+            addCriterion("is_cluster_node >=", value, "isClusterNode");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsClusterNodeLessThan(Byte value) {
+            addCriterion("is_cluster_node <", value, "isClusterNode");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsClusterNodeLessThanOrEqualTo(Byte value) {
+            addCriterion("is_cluster_node <=", value, "isClusterNode");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsClusterNodeIn(List<Byte> values) {
+            addCriterion("is_cluster_node in", values, "isClusterNode");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsClusterNodeNotIn(List<Byte> values) {
+            addCriterion("is_cluster_node not in", values, "isClusterNode");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsClusterNodeBetween(Byte value1, Byte value2) {
+            addCriterion("is_cluster_node between", value1, value2, "isClusterNode");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsClusterNodeNotBetween(Byte value1, Byte value2) {
+            addCriterion("is_cluster_node not between", value1, value2, "isClusterNode");
             return (Criteria) this;
         }
     }

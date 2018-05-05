@@ -10,8 +10,9 @@
     <link href="assets/css/bootstrap.css" rel="stylesheet" type="text/css">
     <link href="assets/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="assets/css/elegant-icons.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="assets/css/dataTables.bootstrap.css">
+    <link rel="stylesheet" type="text/css" media="all" href="assets/css/daterangepicker-bs3.css" />
     <link rel="stylesheet" href="assets/css/jquery.mloading.css" />
+    <link rel="stylesheet" href="assets/css/jquery.dataTables.min.css">
     <link href="assets/css/main.css" rel="stylesheet" type="text/css">
     <link href="assets/css/my-custom-styles.css" rel="stylesheet" type="text/css">
 </head>
@@ -45,6 +46,7 @@
                                 <li><a href="monitor-mycat.html">服务监控</a></li>
                                 <li><a href="monitor-mycat-sql-execute.html">SQL执行情况</a></li>
                                 <li class="active"><a href="monitor-mycat-sql.html">SQL性能监控</a></li>
+                                <li><a href="monitor-mycat-sqlsum.html">SQL统计</a></li>
                                 <li><a href="monitor-mycat-datanode.html">数据节点</a></li>
                             </ul>
                         </li>
@@ -95,7 +97,113 @@
             </div>
 
             <div class="container">
+                <form id="searchForm" class="form-inline bg-light form-toptool mb-1">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>
+                                    <i class="fa fa-calendar"></i> 查询时间：
+                                </label>
+                                <span>
+                                <input type="text" style="width: 320px;" name="reservation"
+                                       id="reservationtime" class="form-control"
+                                       value="2017/08/01 1:00:00 - 2017/08/02 13:30:00"
+                                       class="span4" />
+                            </span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                            <span>
+                                <i class="fa fa-cube"></i> 节点：
+                            </span>
+                                <select id="dataNodes" class="form-control">
+                                    <option value="1">9066</option>
+                                    <option value="2">9067</option>
+                                </select>
+                                <button type="button" class="btn btn-success" id="btn-search">查询</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="container">
+                <ul class="nav nav-tabs bg-light radius3" role="tablist" id="monitor-mycat-tab">
+                    <li role="presentation" class="active">
+                        <a href="#tab1" aria-controls="tab1" role="tab" data-toggle="tab">SQL</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="tab1">
+                        <div class="mycat-chart">
+                            <table class="display mydatatable" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>USER</th>
+                                        <th>START_TIME</th>
+                                        <th>EXECUTE_TIME</th>
+                                        <th>SQL</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
+            <div class="container" style="margin-top:20px;">
+                <ul class="nav nav-tabs bg-light radius3" role="tablist">
+                    <li role="presentation" class="active">
+                        <a href="#tab2" aria-controls="tab2" role="tab" data-toggle="tab">高频查询SQL</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="tab2">
+                        <div class="mycat-chart" style="width:100%;overflow: auto;padding:20px 0px;">
+                            <table class="display mydatatable" style="width:100%">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>USER</th>
+                                    <th>FREQUENCY</th>
+                                    <th>AVG_TIME</th>
+                                    <th>MAX_TIME</th>
+                                    <th>MIN_TIME</th>
+                                    <th>EXECUTE_TIME</th>
+                                    <th>LAST_TIME</th>
+                                    <th>SQL</th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container" style="margin-top:20px;">
+                <ul class="nav nav-tabs bg-light radius3" role="tablist">
+                    <li role="presentation" class="active">
+                        <a href="#tab3" aria-controls="tab3" role="tab" data-toggle="tab">慢查询SQL</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="tab3">
+                        <div class="mycat-chart" style="width:100%;overflow: auto;padding:20px 0px;">
+                            <table class="display mydatatable" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>USER</th>
+                                        <th>DATASOURCE</th>
+                                        <th>START_TIME</th>
+                                        <th>EXECUTE_TIME</th>
+                                        <th>SQL</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
         <!-- END 内容 -->
@@ -103,13 +211,10 @@
         <!-- 页脚 -->
         <footer class="footer-newsletter">
             <div class="container">
-
                 <div class="footer-bottom">
                     <div class="left">
-
                         <p class="copyright-text">&copy;2017 MyCAT EYE</p>
                     </div>
-
                 </div>
             </div>
         </footer>
@@ -128,6 +233,9 @@
     <!-- DataTables -->
     <script src="assets/js/jquery.dataTables.min.js"></script>
     <script src="assets/js/dataTables.bootstrap.min.js"></script>
+    <!-- 时间区间组件 -->
+    <script type="text/javascript" src="assets/js/moment.js"></script>
+    <script type="text/javascript" src="assets/js/daterangepicker.js"></script>
     <!-- loading效果 -->
     <script src="assets/js/jquery.mloading.js"></script>
     <!-- 置顶悬浮图标 -->
@@ -136,7 +244,6 @@
     <!-- 自定义JAVASCRIPT -->
     <script src="assets/js/misc-util.js"></script>
     <script src="assets/js/utils.js"></script>
-    <script src="assets/js/sql-monitor-init.js"></script>
     <script src="assets/js/monitor/mycat.js"></script>
     <script>
         $(function () {
@@ -161,8 +268,60 @@
                         // chartInit(serverId, timeRange);
                     });
             }
-
-
+            
+            var table1,table2,table3;
+            function fetchSqlData(){
+                if(table1){
+                    table1.destroy();
+                }
+                table1 = $('#tab1').find('table').DataTable({
+                    'ajax':'data/sql.json',
+                    'columns':[
+                        {'data':'id'},
+                        {'data':'user'},
+                        {'data':'startTime'},
+                        {'data':'executeTime'},
+                        {'data':'sql'}
+                    ]
+                });
+            }
+            function fetchSqlHighData(){
+                if (table2) {
+                    table2.destroy();
+                }
+                table2 = $('#tab2').find('table').DataTable({
+                    'ajax': 'data/sql_high.json',
+                    'columns': [
+                        { 'data': 'id' },
+                        { 'data': 'user' },
+                        { 'data': 'frequency' },
+                        { 'data': 'avgTime' },
+                        { 'data': 'maxTime' },
+                        { 'data': 'minTime' },
+                        { 'data': 'executeTime' },
+                        { 'data': 'lastTime' },
+                        { 'data': 'sql' }
+                    ]
+                });
+            }
+            function fetchSqlSlowData(){
+                if (table3) {
+                    table3.destroy();
+                }
+                table3 = $('#tab3').find('table').DataTable({
+                    'ajax': 'data/sql_slow.json',
+                    'columns': [
+                        { 'data': 'user' },
+                        { 'data': 'datasource' },
+                        { 'data': 'startTime' },
+                        { 'data': 'executeTime' },
+                        { 'data': 'sql' }
+                    ]
+                });
+            }
+            fetchSqlData();
+            fetchSqlHighData();
+            fetchSqlSlowData();
         });
     </script>
 </body>

@@ -11,7 +11,7 @@ public class MycatSqlSlow implements Serializable {
 
     private Long startTime;
 
-    private Integer executeTime;
+    private Long executeTime;
 
     private String sql;
 
@@ -49,11 +49,11 @@ public class MycatSqlSlow implements Serializable {
         this.startTime = startTime;
     }
 
-    public Integer getExecuteTime() {
+    public Long getExecuteTime() {
         return executeTime;
     }
 
-    public void setExecuteTime(Integer executeTime) {
+    public void setExecuteTime(Long executeTime) {
         this.executeTime = executeTime;
     }
 

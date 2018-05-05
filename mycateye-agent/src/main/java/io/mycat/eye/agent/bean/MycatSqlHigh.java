@@ -7,15 +7,15 @@ public class MycatSqlHigh implements Serializable {
 
     private String cUser;
 
-    private Integer frequency;
+    private Long frequency;
 
-    private Integer avgTime;
+    private Long avgTime;
 
-    private Integer maxTime;
+    private Long maxTime;
 
-    private Integer minTime;
+    private Long minTime;
 
-    private Integer executeTime;
+    private Long executeTime;
 
     private Long lastTime;
 
@@ -39,43 +39,43 @@ public class MycatSqlHigh implements Serializable {
         this.cUser = cUser;
     }
 
-    public Integer getFrequency() {
+    public Long getFrequency() {
         return frequency;
     }
 
-    public void setFrequency(Integer frequency) {
+    public void setFrequency(Long frequency) {
         this.frequency = frequency;
     }
 
-    public Integer getAvgTime() {
+    public Long getAvgTime() {
         return avgTime;
     }
 
-    public void setAvgTime(Integer avgTime) {
+    public void setAvgTime(Long avgTime) {
         this.avgTime = avgTime;
     }
 
-    public Integer getMaxTime() {
+    public Long getMaxTime() {
         return maxTime;
     }
 
-    public void setMaxTime(Integer maxTime) {
+    public void setMaxTime(Long maxTime) {
         this.maxTime = maxTime;
     }
 
-    public Integer getMinTime() {
+    public Long getMinTime() {
         return minTime;
     }
 
-    public void setMinTime(Integer minTime) {
+    public void setMinTime(Long minTime) {
         this.minTime = minTime;
     }
 
-    public Integer getExecuteTime() {
+    public Long getExecuteTime() {
         return executeTime;
     }
 
-    public void setExecuteTime(Integer executeTime) {
+    public void setExecuteTime(Long executeTime) {
         this.executeTime = executeTime;
     }
 

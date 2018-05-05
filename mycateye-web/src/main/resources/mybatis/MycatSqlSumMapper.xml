@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="io.mycat.eye.web.mapper.MycatSqlSumMapper">
   <resultMap id="BaseResultMap" type="io.mycat.eye.web.bean.MycatSqlSum">
-    <result column="sid" jdbcType="INTEGER" property="sid" />
-    <result column="id" jdbcType="INTEGER" property="id" />
+    <id column="sid" jdbcType="INTEGER" property="sid" />
+    <id column="id" jdbcType="INTEGER" property="id" />
     <result column="c_user" jdbcType="VARCHAR" property="cUser" />
     <result column="r" jdbcType="INTEGER" property="r" />
     <result column="w" jdbcType="INTEGER" property="w" />
@@ -18,6 +18,14 @@
     <result column="relatable" jdbcType="VARCHAR" property="relatable" />
     <result column="relacount" jdbcType="VARCHAR" property="relacount" />
     <result column="collect_type" jdbcType="CHAR" property="collectType" />
+    <result column="time_count0" jdbcType="INTEGER" property="timeCount0" />
+    <result column="time_count1" jdbcType="INTEGER" property="timeCount1" />
+    <result column="time_count2" jdbcType="INTEGER" property="timeCount2" />
+    <result column="time_count3" jdbcType="INTEGER" property="timeCount3" />
+    <result column="ttl_count0" jdbcType="INTEGER" property="ttlCount0" />
+    <result column="ttl_count1" jdbcType="INTEGER" property="ttlCount1" />
+    <result column="ttl_count2" jdbcType="INTEGER" property="ttlCount2" />
+    <result column="ttl_count3" jdbcType="INTEGER" property="ttlCount3" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -79,7 +87,8 @@
   </sql>
   <sql id="Base_Column_List">
     sid, id, c_user, r, w, r_p, sql_max, net_in, net_out, time_count, ttl_count, last_time, 
-    sql_table, relatable, relacount, collect_type
+    sql_table, relatable, relacount, collect_type, time_count0, time_count1, time_count2, 
+    time_count3, ttl_count0, ttl_count1, ttl_count2, ttl_count3
   </sql>
   <select id="selectByExample" parameterType="io.mycat.eye.web.bean.MycatSqlSumExample" resultMap="BaseResultMap">
     select
@@ -95,6 +104,18 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="selectByPrimaryKey" parameterType="io.mycat.eye.web.bean.MycatSqlSumKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from mycat_sql_sum
+    where sid = #{sid,jdbcType=INTEGER}
+      and id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="io.mycat.eye.web.bean.MycatSqlSumKey">
+    delete from mycat_sql_sum
+    where sid = #{sid,jdbcType=INTEGER}
+      and id = #{id,jdbcType=INTEGER}
+  </delete>
   <delete id="deleteByExample" parameterType="io.mycat.eye.web.bean.MycatSqlSumExample">
     delete from mycat_sql_sum
     <if test="_parameter != null">
@@ -106,14 +127,18 @@
       r, w, r_p, sql_max, 
       net_in, net_out, time_count, 
       ttl_count, last_time, sql_table, 
-      relatable, relacount, collect_type
-      )
+      relatable, relacount, collect_type, 
+      time_count0, time_count1, time_count2, 
+      time_count3, ttl_count0, ttl_count1, 
+      ttl_count2, ttl_count3)
     values (#{sid,jdbcType=INTEGER}, #{id,jdbcType=INTEGER}, #{cUser,jdbcType=VARCHAR}, 
       #{r,jdbcType=INTEGER}, #{w,jdbcType=INTEGER}, #{rP,jdbcType=REAL}, #{sqlMax,jdbcType=INTEGER}, 
       #{netIn,jdbcType=INTEGER}, #{netOut,jdbcType=INTEGER}, #{timeCount,jdbcType=VARCHAR}, 
       #{ttlCount,jdbcType=VARCHAR}, #{lastTime,jdbcType=BIGINT}, #{sqlTable,jdbcType=VARCHAR}, 
-      #{relatable,jdbcType=VARCHAR}, #{relacount,jdbcType=VARCHAR}, #{collectType,jdbcType=CHAR}
-      )
+      #{relatable,jdbcType=VARCHAR}, #{relacount,jdbcType=VARCHAR}, #{collectType,jdbcType=CHAR}, 
+      #{timeCount0,jdbcType=INTEGER}, #{timeCount1,jdbcType=INTEGER}, #{timeCount2,jdbcType=INTEGER}, 
+      #{timeCount3,jdbcType=INTEGER}, #{ttlCount0,jdbcType=INTEGER}, #{ttlCount1,jdbcType=INTEGER}, 
+      #{ttlCount2,jdbcType=INTEGER}, #{ttlCount3,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="io.mycat.eye.web.bean.MycatSqlSum">
     insert into mycat_sql_sum
@@ -166,6 +191,30 @@
       <if test="collectType != null">
         collect_type,
       </if>
+      <if test="timeCount0 != null">
+        time_count0,
+      </if>
+      <if test="timeCount1 != null">
+        time_count1,
+      </if>
+      <if test="timeCount2 != null">
+        time_count2,
+      </if>
+      <if test="timeCount3 != null">
+        time_count3,
+      </if>
+      <if test="ttlCount0 != null">
+        ttl_count0,
+      </if>
+      <if test="ttlCount1 != null">
+        ttl_count1,
+      </if>
+      <if test="ttlCount2 != null">
+        ttl_count2,
+      </if>
+      <if test="ttlCount3 != null">
+        ttl_count3,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="sid != null">
@@ -215,6 +264,30 @@
       </if>
       <if test="collectType != null">
         #{collectType,jdbcType=CHAR},
+      </if>
+      <if test="timeCount0 != null">
+        #{timeCount0,jdbcType=INTEGER},
+      </if>
+      <if test="timeCount1 != null">
+        #{timeCount1,jdbcType=INTEGER},
+      </if>
+      <if test="timeCount2 != null">
+        #{timeCount2,jdbcType=INTEGER},
+      </if>
+      <if test="timeCount3 != null">
+        #{timeCount3,jdbcType=INTEGER},
+      </if>
+      <if test="ttlCount0 != null">
+        #{ttlCount0,jdbcType=INTEGER},
+      </if>
+      <if test="ttlCount1 != null">
+        #{ttlCount1,jdbcType=INTEGER},
+      </if>
+      <if test="ttlCount2 != null">
+        #{ttlCount2,jdbcType=INTEGER},
+      </if>
+      <if test="ttlCount3 != null">
+        #{ttlCount3,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -275,6 +348,30 @@
       <if test="record.collectType != null">
         collect_type = #{record.collectType,jdbcType=CHAR},
       </if>
+      <if test="record.timeCount0 != null">
+        time_count0 = #{record.timeCount0,jdbcType=INTEGER},
+      </if>
+      <if test="record.timeCount1 != null">
+        time_count1 = #{record.timeCount1,jdbcType=INTEGER},
+      </if>
+      <if test="record.timeCount2 != null">
+        time_count2 = #{record.timeCount2,jdbcType=INTEGER},
+      </if>
+      <if test="record.timeCount3 != null">
+        time_count3 = #{record.timeCount3,jdbcType=INTEGER},
+      </if>
+      <if test="record.ttlCount0 != null">
+        ttl_count0 = #{record.ttlCount0,jdbcType=INTEGER},
+      </if>
+      <if test="record.ttlCount1 != null">
+        ttl_count1 = #{record.ttlCount1,jdbcType=INTEGER},
+      </if>
+      <if test="record.ttlCount2 != null">
+        ttl_count2 = #{record.ttlCount2,jdbcType=INTEGER},
+      </if>
+      <if test="record.ttlCount3 != null">
+        ttl_count3 = #{record.ttlCount3,jdbcType=INTEGER},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -297,9 +394,117 @@
       sql_table = #{record.sqlTable,jdbcType=VARCHAR},
       relatable = #{record.relatable,jdbcType=VARCHAR},
       relacount = #{record.relacount,jdbcType=VARCHAR},
-      collect_type = #{record.collectType,jdbcType=CHAR}
+      collect_type = #{record.collectType,jdbcType=CHAR},
+      time_count0 = #{record.timeCount0,jdbcType=INTEGER},
+      time_count1 = #{record.timeCount1,jdbcType=INTEGER},
+      time_count2 = #{record.timeCount2,jdbcType=INTEGER},
+      time_count3 = #{record.timeCount3,jdbcType=INTEGER},
+      ttl_count0 = #{record.ttlCount0,jdbcType=INTEGER},
+      ttl_count1 = #{record.ttlCount1,jdbcType=INTEGER},
+      ttl_count2 = #{record.ttlCount2,jdbcType=INTEGER},
+      ttl_count3 = #{record.ttlCount3,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="io.mycat.eye.web.bean.MycatSqlSum">
+    update mycat_sql_sum
+    <set>
+      <if test="cUser != null">
+        c_user = #{cUser,jdbcType=VARCHAR},
+      </if>
+      <if test="r != null">
+        r = #{r,jdbcType=INTEGER},
+      </if>
+      <if test="w != null">
+        w = #{w,jdbcType=INTEGER},
+      </if>
+      <if test="rP != null">
+        r_p = #{rP,jdbcType=REAL},
+      </if>
+      <if test="sqlMax != null">
+        sql_max = #{sqlMax,jdbcType=INTEGER},
+      </if>
+      <if test="netIn != null">
+        net_in = #{netIn,jdbcType=INTEGER},
+      </if>
+      <if test="netOut != null">
+        net_out = #{netOut,jdbcType=INTEGER},
+      </if>
+      <if test="timeCount != null">
+        time_count = #{timeCount,jdbcType=VARCHAR},
+      </if>
+      <if test="ttlCount != null">
+        ttl_count = #{ttlCount,jdbcType=VARCHAR},
+      </if>
+      <if test="lastTime != null">
+        last_time = #{lastTime,jdbcType=BIGINT},
+      </if>
+      <if test="sqlTable != null">
+        sql_table = #{sqlTable,jdbcType=VARCHAR},
+      </if>
+      <if test="relatable != null">
+        relatable = #{relatable,jdbcType=VARCHAR},
+      </if>
+      <if test="relacount != null">
+        relacount = #{relacount,jdbcType=VARCHAR},
+      </if>
+      <if test="collectType != null">
+        collect_type = #{collectType,jdbcType=CHAR},
+      </if>
+      <if test="timeCount0 != null">
+        time_count0 = #{timeCount0,jdbcType=INTEGER},
+      </if>
+      <if test="timeCount1 != null">
+        time_count1 = #{timeCount1,jdbcType=INTEGER},
+      </if>
+      <if test="timeCount2 != null">
+        time_count2 = #{timeCount2,jdbcType=INTEGER},
+      </if>
+      <if test="timeCount3 != null">
+        time_count3 = #{timeCount3,jdbcType=INTEGER},
+      </if>
+      <if test="ttlCount0 != null">
+        ttl_count0 = #{ttlCount0,jdbcType=INTEGER},
+      </if>
+      <if test="ttlCount1 != null">
+        ttl_count1 = #{ttlCount1,jdbcType=INTEGER},
+      </if>
+      <if test="ttlCount2 != null">
+        ttl_count2 = #{ttlCount2,jdbcType=INTEGER},
+      </if>
+      <if test="ttlCount3 != null">
+        ttl_count3 = #{ttlCount3,jdbcType=INTEGER},
+      </if>
+    </set>
+    where sid = #{sid,jdbcType=INTEGER}
+      and id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="io.mycat.eye.web.bean.MycatSqlSum">
+    update mycat_sql_sum
+    set c_user = #{cUser,jdbcType=VARCHAR},
+      r = #{r,jdbcType=INTEGER},
+      w = #{w,jdbcType=INTEGER},
+      r_p = #{rP,jdbcType=REAL},
+      sql_max = #{sqlMax,jdbcType=INTEGER},
+      net_in = #{netIn,jdbcType=INTEGER},
+      net_out = #{netOut,jdbcType=INTEGER},
+      time_count = #{timeCount,jdbcType=VARCHAR},
+      ttl_count = #{ttlCount,jdbcType=VARCHAR},
+      last_time = #{lastTime,jdbcType=BIGINT},
+      sql_table = #{sqlTable,jdbcType=VARCHAR},
+      relatable = #{relatable,jdbcType=VARCHAR},
+      relacount = #{relacount,jdbcType=VARCHAR},
+      collect_type = #{collectType,jdbcType=CHAR},
+      time_count0 = #{timeCount0,jdbcType=INTEGER},
+      time_count1 = #{timeCount1,jdbcType=INTEGER},
+      time_count2 = #{timeCount2,jdbcType=INTEGER},
+      time_count3 = #{timeCount3,jdbcType=INTEGER},
+      ttl_count0 = #{ttlCount0,jdbcType=INTEGER},
+      ttl_count1 = #{ttlCount1,jdbcType=INTEGER},
+      ttl_count2 = #{ttlCount2,jdbcType=INTEGER},
+      ttl_count3 = #{ttlCount3,jdbcType=INTEGER}
+    where sid = #{sid,jdbcType=INTEGER}
+      and id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

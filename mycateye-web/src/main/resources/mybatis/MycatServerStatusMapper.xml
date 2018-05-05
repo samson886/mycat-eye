@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="io.mycat.eye.web.mapper.MycatServerStatusMapper">
   <resultMap id="BaseResultMap" type="io.mycat.eye.web.bean.MycatServerStatus">
-    <result column="id" jdbcType="INTEGER" property="id" />
+    <id column="id" jdbcType="INTEGER" property="id" />
     <result column="mycat_id" jdbcType="INTEGER" property="mycatId" />
     <result column="uptime" jdbcType="VARCHAR" property="uptime" />
     <result column="used_memory" jdbcType="BIGINT" property="usedMemory" />
@@ -90,6 +90,16 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from mycat_server_status
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from mycat_server_status
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
   <delete id="deleteByExample" parameterType="io.mycat.eye.web.bean.MycatServerStatusExample">
     delete from mycat_server_status
     <if test="_parameter != null">
@@ -242,5 +252,55 @@
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="io.mycat.eye.web.bean.MycatServerStatus">
+    update mycat_server_status
+    <set>
+      <if test="mycatId != null">
+        mycat_id = #{mycatId,jdbcType=INTEGER},
+      </if>
+      <if test="uptime != null">
+        uptime = #{uptime,jdbcType=VARCHAR},
+      </if>
+      <if test="usedMemory != null">
+        used_memory = #{usedMemory,jdbcType=BIGINT},
+      </if>
+      <if test="totalMemory != null">
+        total_memory = #{totalMemory,jdbcType=BIGINT},
+      </if>
+      <if test="maxMemory != null">
+        max_memory = #{maxMemory,jdbcType=BIGINT},
+      </if>
+      <if test="reloadTime != null">
+        reload_time = #{reloadTime,jdbcType=BIGINT},
+      </if>
+      <if test="rollbackTime != null">
+        rollback_time = #{rollbackTime,jdbcType=BIGINT},
+      </if>
+      <if test="charset != null">
+        charset = #{charset,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="collectTime != null">
+        collect_time = #{collectTime,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="io.mycat.eye.web.bean.MycatServerStatus">
+    update mycat_server_status
+    set mycat_id = #{mycatId,jdbcType=INTEGER},
+      uptime = #{uptime,jdbcType=VARCHAR},
+      used_memory = #{usedMemory,jdbcType=BIGINT},
+      total_memory = #{totalMemory,jdbcType=BIGINT},
+      max_memory = #{maxMemory,jdbcType=BIGINT},
+      reload_time = #{reloadTime,jdbcType=BIGINT},
+      rollback_time = #{rollbackTime,jdbcType=BIGINT},
+      charset = #{charset,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      collect_time = #{collectTime,jdbcType=BIGINT}
+    where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

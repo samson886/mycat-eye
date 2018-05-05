@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="io.mycat.eye.agent.mapper.MycatDataNodeMapper">
   <resultMap id="BaseResultMap" type="io.mycat.eye.agent.bean.MycatDataNode">
-    <result column="id" jdbcType="INTEGER" property="id" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <id column="name" jdbcType="VARCHAR" property="name" />
     <result column="datahost" jdbcType="VARCHAR" property="datahost" />
     <result column="d_index" jdbcType="INTEGER" property="dIndex" />
     <result column="d_type" jdbcType="VARCHAR" property="dType" />
@@ -94,6 +94,18 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="selectByPrimaryKey" parameterType="io.mycat.eye.agent.bean.MycatDataNodeKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from mycat_datanode
+    where id = #{id,jdbcType=INTEGER}
+      and name = #{name,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="io.mycat.eye.agent.bean.MycatDataNodeKey">
+    delete from mycat_datanode
+    where id = #{id,jdbcType=INTEGER}
+      and name = #{name,jdbcType=VARCHAR}
+  </delete>
   <delete id="deleteByExample" parameterType="io.mycat.eye.agent.bean.MycatDataNodeExample">
     delete from mycat_datanode
     <if test="_parameter != null">
@@ -290,5 +302,69 @@
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="io.mycat.eye.agent.bean.MycatDataNode">
+    update mycat_datanode
+    <set>
+      <if test="datahost != null">
+        datahost = #{datahost,jdbcType=VARCHAR},
+      </if>
+      <if test="dIndex != null">
+        d_index = #{dIndex,jdbcType=INTEGER},
+      </if>
+      <if test="dType != null">
+        d_type = #{dType,jdbcType=VARCHAR},
+      </if>
+      <if test="dActive != null">
+        d_active = #{dActive,jdbcType=INTEGER},
+      </if>
+      <if test="dIdle != null">
+        d_idle = #{dIdle,jdbcType=INTEGER},
+      </if>
+      <if test="dSize != null">
+        d_size = #{dSize,jdbcType=INTEGER},
+      </if>
+      <if test="dExecute != null">
+        d_execute = #{dExecute,jdbcType=BIGINT},
+      </if>
+      <if test="totalTime != null">
+        total_time = #{totalTime,jdbcType=DOUBLE},
+      </if>
+      <if test="maxTime != null">
+        max_time = #{maxTime,jdbcType=DOUBLE},
+      </if>
+      <if test="maxSql != null">
+        max_sql = #{maxSql,jdbcType=BIGINT},
+      </if>
+      <if test="recoveryTime != null">
+        recovery_time = #{recoveryTime,jdbcType=BIGINT},
+      </if>
+      <if test="collectTime != null">
+        collect_time = #{collectTime,jdbcType=BIGINT},
+      </if>
+      <if test="serverId != null">
+        server_id = #{serverId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+      and name = #{name,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="io.mycat.eye.agent.bean.MycatDataNode">
+    update mycat_datanode
+    set datahost = #{datahost,jdbcType=VARCHAR},
+      d_index = #{dIndex,jdbcType=INTEGER},
+      d_type = #{dType,jdbcType=VARCHAR},
+      d_active = #{dActive,jdbcType=INTEGER},
+      d_idle = #{dIdle,jdbcType=INTEGER},
+      d_size = #{dSize,jdbcType=INTEGER},
+      d_execute = #{dExecute,jdbcType=BIGINT},
+      total_time = #{totalTime,jdbcType=DOUBLE},
+      max_time = #{maxTime,jdbcType=DOUBLE},
+      max_sql = #{maxSql,jdbcType=BIGINT},
+      recovery_time = #{recoveryTime,jdbcType=BIGINT},
+      collect_time = #{collectTime,jdbcType=BIGINT},
+      server_id = #{serverId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+      and name = #{name,jdbcType=VARCHAR}
   </update>
 </mapper>

@@ -1,0 +1,64 @@
+{
+    "data": [
+        {
+            "id": 1,
+            "cUser": "",
+            "r": 2,
+            "w": 1,
+            "rP": 0.67,
+            "sqlMax": 1,
+            "netIn": 441,
+            "netOut": 779,
+            "lastTime": 1524583697975,
+            "time_count0": 3,
+            "time_count1": 0,
+            "time_count2": 0,
+            "time_count3": 0,
+            "ttl_count0": 0,
+            "ttl_count1": 2,
+            "ttl_count2": 1,
+            "ttl_count3": 0,
+            "rwChart": {
+                "type": "pie",
+                "series": [
+                    {"value": 2,"name": "Read"},
+                    {"value": 1,"name": "Write"}
+                ]
+            },
+            "sqlTable": "hotnews",
+            "relatable": "",
+            "relacount": "",
+            "collect_type": "0"
+        },
+        {
+            "id": 1,
+            "cUser": "",
+            "r": 4,
+            "w": 7,
+            "rP": 0.41,
+            "sqlMax": 1,
+            "netIn": 441,
+            "netOut": 779,
+            "lastTime": 1524583697975,
+            "time_count0": 3,
+            "time_count1": 0,
+            "time_count2": 0,
+            "time_count3": 0,
+            "ttl_count0": 0,
+            "ttl_count1": 2,
+            "ttl_count2": 1,
+            "ttl_count3": 0,
+            "rwChart": {
+                "type": "pie",
+                "series": [
+                    {"value": 2,"name": "Read"},
+                    {"value": 1,"name": "Write"}
+                ]
+            },
+            "sqlTable": "goods",
+            "relatable": "",
+            "relacount": "",
+            "collect_type": "0"
+        }
+    ]
+}

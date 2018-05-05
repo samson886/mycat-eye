@@ -12,13 +12,21 @@ public interface MycatConnectionMapper {
 
     int deleteByExample(MycatConnectionExample example);
 
+    int deleteByPrimaryKey(Integer id);
+
     int insert(MycatConnection record);
 
     int insertSelective(MycatConnection record);
 
     List<MycatConnection> selectByExample(MycatConnectionExample example);
 
+    MycatConnection selectByPrimaryKey(Integer id);
+
     int updateByExampleSelective(@Param("record") MycatConnection record, @Param("example") MycatConnectionExample example);
 
     int updateByExample(@Param("record") MycatConnection record, @Param("example") MycatConnectionExample example);
+
+    int updateByPrimaryKeySelective(MycatConnection record);
+
+    int updateByPrimaryKey(MycatConnection record);
 }

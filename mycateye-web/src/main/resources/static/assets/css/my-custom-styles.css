@@ -1,4 +1,7 @@
 /* your custom styles here */
+html,body{
+    font-size: 16px;
+}
 .selected {
     background-color: #gray
 }
@@ -13,6 +16,7 @@ pre {
 
 .mycat-chart{
     min-height: 400px;
+    padding: 10px 0;
 }
 .bg-light{
     background: #f0f0f0;
@@ -43,7 +47,9 @@ pre {
     margin-bottom:10px;
 }
 
-
+.dataTables_wrapper,.mydatatable{
+    font-size:0.875rem;
+}
 .dataTables_paginate .pagination{
     margin: 0;
 }
@@ -67,4 +73,30 @@ pre {
     min-height: 40px;
     z-index: 9999;
 }
+
+
+.mycat-chart{
+    font-size:14px;
+}
+.sparklines{
+    min-height: 42px;
+    position:relative;
+}
+.sparklines-tip1{
+    padding: 2px;
+    font-size: 12px;
+    position: absolute;
+}
+.sparklines-tip2{
+    padding: 2px;
+    font-size: 12px;
+}
+.jqsfield{
+    min-height:20px;
+    padding-right:2px;
+    font-size:12px;
+    margin:0px 10px 5px 0px;
+}
+
+
 

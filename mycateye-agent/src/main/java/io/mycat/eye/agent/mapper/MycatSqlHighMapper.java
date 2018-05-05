@@ -12,6 +12,8 @@ public interface MycatSqlHighMapper {
 
     int deleteByExample(MycatSqlHighExample example);
 
+    int deleteByPrimaryKey(Integer id);
+
     int insert(MycatSqlHigh record);
 
     int insertSelective(MycatSqlHigh record);
@@ -20,9 +22,17 @@ public interface MycatSqlHighMapper {
 
     List<MycatSqlHigh> selectByExample(MycatSqlHighExample example);
 
+    MycatSqlHigh selectByPrimaryKey(Integer id);
+
     int updateByExampleSelective(@Param("record") MycatSqlHigh record, @Param("example") MycatSqlHighExample example);
 
     int updateByExampleWithBLOBs(@Param("record") MycatSqlHigh record, @Param("example") MycatSqlHighExample example);
 
     int updateByExample(@Param("record") MycatSqlHigh record, @Param("example") MycatSqlHighExample example);
+
+    int updateByPrimaryKeySelective(MycatSqlHigh record);
+
+    int updateByPrimaryKeyWithBLOBs(MycatSqlHigh record);
+
+    int updateByPrimaryKey(MycatSqlHigh record);
 }

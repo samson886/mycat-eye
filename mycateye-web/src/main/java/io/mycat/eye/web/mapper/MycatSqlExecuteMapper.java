@@ -12,13 +12,21 @@ public interface MycatSqlExecuteMapper {
 
     int deleteByExample(MycatSqlExecuteExample example);
 
+    int deleteByPrimaryKey(Long sqlId);
+
     int insert(MycatSqlExecute record);
 
     int insertSelective(MycatSqlExecute record);
 
     List<MycatSqlExecute> selectByExample(MycatSqlExecuteExample example);
 
+    MycatSqlExecute selectByPrimaryKey(Long sqlId);
+
     int updateByExampleSelective(@Param("record") MycatSqlExecute record, @Param("example") MycatSqlExecuteExample example);
 
     int updateByExample(@Param("record") MycatSqlExecute record, @Param("example") MycatSqlExecuteExample example);
+
+    int updateByPrimaryKeySelective(MycatSqlExecute record);
+
+    int updateByPrimaryKey(MycatSqlExecute record);
 }
