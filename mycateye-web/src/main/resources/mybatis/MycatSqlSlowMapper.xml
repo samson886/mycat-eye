@@ -2,11 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="io.mycat.eye.web.mapper.MycatSqlSlowMapper">
   <resultMap id="BaseResultMap" type="io.mycat.eye.web.bean.MycatSqlSlow">
-    <result column="id" jdbcType="INTEGER" property="id" />
+    <id column="id" jdbcType="INTEGER" property="id" />
     <result column="c_user" jdbcType="VARCHAR" property="cUser" />
     <result column="datasource" jdbcType="VARCHAR" property="datasource" />
     <result column="start_time" jdbcType="BIGINT" property="startTime" />
-    <result column="execute_time" jdbcType="INTEGER" property="executeTime" />
+    <result column="execute_time" jdbcType="BIGINT" property="executeTime" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="io.mycat.eye.web.bean.MycatSqlSlow">
     <result column="sql" jdbcType="LONGVARCHAR" property="sql" />
@@ -105,6 +105,18 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from mycat_sql_slow
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from mycat_sql_slow
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
   <delete id="deleteByExample" parameterType="io.mycat.eye.web.bean.MycatSqlSlowExample">
     delete from mycat_sql_slow
     <if test="_parameter != null">
@@ -116,7 +128,7 @@
       start_time, execute_time, sql
       )
     values (#{id,jdbcType=INTEGER}, #{cUser,jdbcType=VARCHAR}, #{datasource,jdbcType=VARCHAR}, 
-      #{startTime,jdbcType=BIGINT}, #{executeTime,jdbcType=INTEGER}, #{sql,jdbcType=LONGVARCHAR}
+      #{startTime,jdbcType=BIGINT}, #{executeTime,jdbcType=BIGINT}, #{sql,jdbcType=LONGVARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="io.mycat.eye.web.bean.MycatSqlSlow">
@@ -155,7 +167,7 @@
         #{startTime,jdbcType=BIGINT},
       </if>
       <if test="executeTime != null">
-        #{executeTime,jdbcType=INTEGER},
+        #{executeTime,jdbcType=BIGINT},
       </if>
       <if test="sql != null">
         #{sql,jdbcType=LONGVARCHAR},
@@ -184,7 +196,7 @@
         start_time = #{record.startTime,jdbcType=BIGINT},
       </if>
       <if test="record.executeTime != null">
-        execute_time = #{record.executeTime,jdbcType=INTEGER},
+        execute_time = #{record.executeTime,jdbcType=BIGINT},
       </if>
       <if test="record.sql != null">
         sql = #{record.sql,jdbcType=LONGVARCHAR},
@@ -200,7 +212,7 @@
       c_user = #{record.cUser,jdbcType=VARCHAR},
       datasource = #{record.datasource,jdbcType=VARCHAR},
       start_time = #{record.startTime,jdbcType=BIGINT},
-      execute_time = #{record.executeTime,jdbcType=INTEGER},
+      execute_time = #{record.executeTime,jdbcType=BIGINT},
       sql = #{record.sql,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -212,9 +224,47 @@
       c_user = #{record.cUser,jdbcType=VARCHAR},
       datasource = #{record.datasource,jdbcType=VARCHAR},
       start_time = #{record.startTime,jdbcType=BIGINT},
-      execute_time = #{record.executeTime,jdbcType=INTEGER}
+      execute_time = #{record.executeTime,jdbcType=BIGINT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="io.mycat.eye.web.bean.MycatSqlSlow">
+    update mycat_sql_slow
+    <set>
+      <if test="cUser != null">
+        c_user = #{cUser,jdbcType=VARCHAR},
+      </if>
+      <if test="datasource != null">
+        datasource = #{datasource,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=BIGINT},
+      </if>
+      <if test="executeTime != null">
+        execute_time = #{executeTime,jdbcType=BIGINT},
+      </if>
+      <if test="sql != null">
+        sql = #{sql,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="io.mycat.eye.web.bean.MycatSqlSlow">
+    update mycat_sql_slow
+    set c_user = #{cUser,jdbcType=VARCHAR},
+      datasource = #{datasource,jdbcType=VARCHAR},
+      start_time = #{startTime,jdbcType=BIGINT},
+      execute_time = #{executeTime,jdbcType=BIGINT},
+      sql = #{sql,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="io.mycat.eye.web.bean.MycatSqlSlow">
+    update mycat_sql_slow
+    set c_user = #{cUser,jdbcType=VARCHAR},
+      datasource = #{datasource,jdbcType=VARCHAR},
+      start_time = #{startTime,jdbcType=BIGINT},
+      execute_time = #{executeTime,jdbcType=BIGINT}
+    where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

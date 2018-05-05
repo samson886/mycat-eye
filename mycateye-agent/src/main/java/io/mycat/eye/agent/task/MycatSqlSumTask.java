@@ -82,10 +82,24 @@ public class MycatSqlSumTask extends AbstractTask {
                     sql.setNetOut((int) o.get("NET_OUT"));
                 }
                 if(o.get("TIME_COUNT")!=null){
-                    sql.setTimeCount((String) o.get("TIME_COUNT"));
+                    String time_count = (String) o.get("TIME_COUNT");
+                    time_count = time_count.substring(1,time_count.length() -1);
+                    String[] time_counts = time_count.split(", ");
+                    sql.setTimeCount(time_count);
+                    sql.setTimeCount0(Integer.valueOf(time_counts[0]));
+                    sql.setTimeCount1(Integer.valueOf(time_counts[1]));
+                    sql.setTimeCount2(Integer.valueOf(time_counts[2]));
+                    sql.setTimeCount3(Integer.valueOf(time_counts[3]));
                 }
                 if(o.get("TTL_COUNT")!=null){
-                    sql.setTtlCount((String) o.get("TTL_COUNT"));
+                    String ttl_count = (String) o.get("TTL_COUNT");
+                    ttl_count = ttl_count.substring(1,ttl_count.length()-1);
+                    String[] ttl_counts = ttl_count.split(", ");
+                    sql.setTtlCount(ttl_count);
+                    sql.setTtlCount0(Integer.valueOf(ttl_counts[0]));
+                    sql.setTtlCount1(Integer.valueOf(ttl_counts[1]));
+                    sql.setTtlCount2(Integer.valueOf(ttl_counts[2]));
+                    sql.setTtlCount3(Integer.valueOf(ttl_counts[3]));
                 }
                 if(o.get("LAST_TIME")!=null){
                     sql.setLastTime((long) o.get("LAST_TIME"));

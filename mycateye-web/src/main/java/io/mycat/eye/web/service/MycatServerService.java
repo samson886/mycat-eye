@@ -18,7 +18,23 @@ public class MycatServerService {
     MycatServerMapper mycatServerMapper;
 
     public List<MycatServer> getMycatServer(){
-//        MycatServerExample example = new MycatServerExample();
-        return mycatServerMapper.selectByExample();
+        MycatServerExample example = new MycatServerExample();
+        return mycatServerMapper.selectByExample(example);
+    }
+
+    public MycatServer getServer(int id){
+        return mycatServerMapper.selectByPrimaryKey(id);
+    }
+
+    public void addServer(MycatServer server){
+        mycatServerMapper.insertSelective(server);
+    }
+
+    public void updateServer(MycatServer server){
+        mycatServerMapper.updateByPrimaryKey(server);
+    }
+
+    public void delete(int id){
+        mycatServerMapper.deleteByPrimaryKey(id);
     }
 }

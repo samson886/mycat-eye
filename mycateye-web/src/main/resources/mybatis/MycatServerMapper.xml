@@ -2,15 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="io.mycat.eye.web.mapper.MycatServerMapper">
   <resultMap id="BaseResultMap" type="io.mycat.eye.web.bean.MycatServer">
-    <result column="id" jdbcType="INTEGER" property="id" />
+    <id column="id" jdbcType="INTEGER" property="id" />
     <result column="server_name" jdbcType="VARCHAR" property="serverName" />
     <result column="server_host" jdbcType="VARCHAR" property="serverHost" />
     <result column="manager_port" jdbcType="INTEGER" property="managerPort" />
     <result column="server_port" jdbcType="INTEGER" property="serverPort" />
-    <result column="cluster_id" jdbcType="INTEGER" property="clusterId" />
     <result column="startup" jdbcType="BIGINT" property="startup" />
     <result column="user" jdbcType="VARCHAR" property="user" />
     <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="cluster_id" jdbcType="INTEGER" property="clusterId" />
+    <result column="is_cluster_node" jdbcType="TINYINT" property="isClusterNode" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -71,8 +72,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, server_name, server_host, manager_port, server_port, cluster_id, startup, user, 
-    password
+    id, server_name, server_host, manager_port, server_port, startup, user, password, 
+    cluster_id, is_cluster_node
   </sql>
   <select id="selectByExample" parameterType="io.mycat.eye.web.bean.MycatServerExample" resultMap="BaseResultMap">
     select
@@ -88,6 +89,16 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from mycat_server
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from mycat_server
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
   <delete id="deleteByExample" parameterType="io.mycat.eye.web.bean.MycatServerExample">
     delete from mycat_server
     <if test="_parameter != null">
@@ -96,13 +107,13 @@
   </delete>
   <insert id="insert" parameterType="io.mycat.eye.web.bean.MycatServer">
     insert into mycat_server (id, server_name, server_host, 
-      manager_port, server_port, cluster_id, 
-      startup, user, password
-      )
+      manager_port, server_port, startup, 
+      user, password, cluster_id, 
+      is_cluster_node)
     values (#{id,jdbcType=INTEGER}, #{serverName,jdbcType=VARCHAR}, #{serverHost,jdbcType=VARCHAR}, 
-      #{managerPort,jdbcType=INTEGER}, #{serverPort,jdbcType=INTEGER}, #{clusterId,jdbcType=INTEGER}, 
-      #{startup,jdbcType=BIGINT}, #{user,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}
-      )
+      #{managerPort,jdbcType=INTEGER}, #{serverPort,jdbcType=INTEGER}, #{startup,jdbcType=BIGINT}, 
+      #{user,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{clusterId,jdbcType=INTEGER}, 
+      #{isClusterNode,jdbcType=TINYINT})
   </insert>
   <insert id="insertSelective" parameterType="io.mycat.eye.web.bean.MycatServer">
     insert into mycat_server
@@ -122,9 +133,6 @@
       <if test="serverPort != null">
         server_port,
       </if>
-      <if test="clusterId != null">
-        cluster_id,
-      </if>
       <if test="startup != null">
         startup,
       </if>
@@ -133,6 +141,12 @@
       </if>
       <if test="password != null">
         password,
+      </if>
+      <if test="clusterId != null">
+        cluster_id,
+      </if>
+      <if test="isClusterNode != null">
+        is_cluster_node,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -151,9 +165,6 @@
       <if test="serverPort != null">
         #{serverPort,jdbcType=INTEGER},
       </if>
-      <if test="clusterId != null">
-        #{clusterId,jdbcType=INTEGER},
-      </if>
       <if test="startup != null">
         #{startup,jdbcType=BIGINT},
       </if>
@@ -162,6 +173,12 @@
       </if>
       <if test="password != null">
         #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="clusterId != null">
+        #{clusterId,jdbcType=INTEGER},
+      </if>
+      <if test="isClusterNode != null">
+        #{isClusterNode,jdbcType=TINYINT},
       </if>
     </trim>
   </insert>
@@ -189,9 +206,6 @@
       <if test="record.serverPort != null">
         server_port = #{record.serverPort,jdbcType=INTEGER},
       </if>
-      <if test="record.clusterId != null">
-        cluster_id = #{record.clusterId,jdbcType=INTEGER},
-      </if>
       <if test="record.startup != null">
         startup = #{record.startup,jdbcType=BIGINT},
       </if>
@@ -200,6 +214,12 @@
       </if>
       <if test="record.password != null">
         password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.clusterId != null">
+        cluster_id = #{record.clusterId,jdbcType=INTEGER},
+      </if>
+      <if test="record.isClusterNode != null">
+        is_cluster_node = #{record.isClusterNode,jdbcType=TINYINT},
       </if>
     </set>
     <if test="_parameter != null">
@@ -213,12 +233,59 @@
       server_host = #{record.serverHost,jdbcType=VARCHAR},
       manager_port = #{record.managerPort,jdbcType=INTEGER},
       server_port = #{record.serverPort,jdbcType=INTEGER},
-      cluster_id = #{record.clusterId,jdbcType=INTEGER},
       startup = #{record.startup,jdbcType=BIGINT},
       user = #{record.user,jdbcType=VARCHAR},
-      password = #{record.password,jdbcType=VARCHAR}
+      password = #{record.password,jdbcType=VARCHAR},
+      cluster_id = #{record.clusterId,jdbcType=INTEGER},
+      is_cluster_node = #{record.isClusterNode,jdbcType=TINYINT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="io.mycat.eye.web.bean.MycatServer">
+    update mycat_server
+    <set>
+      <if test="serverName != null">
+        server_name = #{serverName,jdbcType=VARCHAR},
+      </if>
+      <if test="serverHost != null">
+        server_host = #{serverHost,jdbcType=VARCHAR},
+      </if>
+      <if test="managerPort != null">
+        manager_port = #{managerPort,jdbcType=INTEGER},
+      </if>
+      <if test="serverPort != null">
+        server_port = #{serverPort,jdbcType=INTEGER},
+      </if>
+      <if test="startup != null">
+        startup = #{startup,jdbcType=BIGINT},
+      </if>
+      <if test="user != null">
+        user = #{user,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="clusterId != null">
+        cluster_id = #{clusterId,jdbcType=INTEGER},
+      </if>
+      <if test="isClusterNode != null">
+        is_cluster_node = #{isClusterNode,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="io.mycat.eye.web.bean.MycatServer">
+    update mycat_server
+    set server_name = #{serverName,jdbcType=VARCHAR},
+      server_host = #{serverHost,jdbcType=VARCHAR},
+      manager_port = #{managerPort,jdbcType=INTEGER},
+      server_port = #{serverPort,jdbcType=INTEGER},
+      startup = #{startup,jdbcType=BIGINT},
+      user = #{user,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      cluster_id = #{clusterId,jdbcType=INTEGER},
+      is_cluster_node = #{isClusterNode,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

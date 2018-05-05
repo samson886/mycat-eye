@@ -23,9 +23,20 @@ body{font-family: "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragin
 .w85 { width: 85%; }
 .w95 { width: 95%; }
 
+/* */
 
+.mt10{margin-top:10px;}
+.mt20{margin-top:20px;}
+.ml10{margin-left:10px;}
+.ml20{margin-right:20px;}
+.mr10{margin-left:10px;}
+.mr20{margin-right:20px;}
+.mb10{margin-bottom:10px;}
+.mb20{margin-bottom:20px;}
 
-
+.modal-header .close{
+    position: absolute;right: 5px;top: 5px;
+}
 
 
 
@@ -39,9 +50,10 @@ body{font-family: "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragin
 .sidebar-fold{ height: 30px;width: 100%;background: #394555;color: #aeb9c2;text-align: center; height:30px; font-size: 12px;cursor: pointer;}
 .sidebar-fold span{ line-height:30px;}
 /*.left-main{ bottom: 0px; top:0px; position:absolute; background-color:#293038;}*/
-.left-main{ bottom: 0px; top:50px; z-index:100; position:fixed; background-color:#293038;}
-.sBox ul li{ list-style-type:none; position:relative;}
-
+.left-main{ bottom: 0px; top:50px; z-index:100; position:fixed; background-color:#293038;overflow-y: auto;  padding-bottom: 44px;}
+.sBox ul li{ list-style-type:none; position:relative;font-size: .75rem;}
+.navContent{font-size:14px;}
+.navContent .fa{font-size:12px;}
 .sBox ul{ padding:0px; position: relative; margin:0px;}
 .sBox ul li a{display: block;width: 100%;height: 40px;line-height: 40px;overflow: hidden; text-decoration:none; color:#FFF;}
 .sBox .sublist-icon{ width:48px; text-align:center;}
@@ -65,7 +77,7 @@ body{font-family: "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragin
 .dropdown-menu .topbar-nav-col ul{ padding-top:5px; padding-left:0px;}
 .topbar-nav-col ul li a{display: block;height: 100%;padding: 0 10px;text-decoration: none;color: #333;}
 .topbar-nav-col ul li a:hover{ background-color:#f2f2f2;}
-.topbar-nav-col .topbar-nav-item{ border-bottom:solid 1px #f2f2f2;} 
+.topbar-nav-col .topbar-nav-item{ border-bottom:solid 1px #f2f2f2;}
 
 
 .dropdown-menu{ min-width:10px;}

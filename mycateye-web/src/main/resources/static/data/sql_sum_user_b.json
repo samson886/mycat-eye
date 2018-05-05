@@ -1,0 +1,66 @@
+{
+    "data":[
+        {"id":1,"cUser":"root","r":2,"w":1,"rP":0.67,"sqlMax":1,"netIn":441,"netOut":779,"lastTime":1524583697975,
+            "time_count0":3,"time_count1":0,"time_count2":0,"time_count3":0,"ttl_count0":0,"ttl_count1":2,"ttl_count2":1,"ttl_count3":0,
+            "rwChart":{
+                "type":"pie",
+                "series":[
+                    {"value":2,"name":"Read"},
+                    {"value":1,"name":"Write"}
+                ]
+            },
+            "tcChart":{
+                "type":"bar",
+                "yCategory":["22-06 夜间","06-13 上午","13-18下午","18-22 晚间"],
+                "series":[
+                    {"data":[200,3,400,33,666]},
+                    {"data":[33,344,88,33,233]},
+                    {"data":[999,653,34,33,78]},
+                    {"data":[120,22,400,33,96]}
+                ]
+            },
+            "ttlChart":{
+                "type": "bar",
+                "yCategory": ["10毫秒内", "10 - 200毫秒内", "1秒内", "超过 1秒"],
+                "series": [
+                    {"data":[3,3,88,33,0]},
+                    {"data":[14,32,9,33,1]},
+                    {"data":[55,34,34,33,22]},
+                    {"data":[120,22,400,86,96]}
+                ]
+            },
+            "sqlTable":"","relatable":"","relacount":"","collect_type":"0"
+        },
+        {"id":1,"cUser":"user","r":4,"w":7,"rP":0.41,"sqlMax":1,"netIn":441,"netOut":779,"lastTime":1524583697975,
+            "time_count0":3,"time_count1":0,"time_count2":0,"time_count3":0,"ttl_count0":0,"ttl_count1":2,"ttl_count2":1,"ttl_count3":0,
+            "rwChart": {
+                "type":"pie",
+                "series":[
+                    {"value":2,"name":"Read"},
+                    {"value":1,"name":"Write"}
+                ]
+            },
+            "tcChart":{
+                "type":"bar",
+                "yCategory":["22-06 夜间","06-13 上午","13-18下午","18-22 晚间"],
+                "series":[
+                    {"data":[200,3,400,33,666]},
+                    {"data":[33,344,88,33,233]},
+                    {"data":[999,653,34,33,78]},
+                    {"data":[120,22,400,33,96]}
+                ]
+            },
+            "ttlChart":{
+                "type": "bar",
+                "yCategory": ["10毫秒内", "10 - 200毫秒内", "1秒内", "超过 1秒"],
+                "series": [
+                    {"data":[3,3,88,33,0]},
+                    {"data":[14,32,9,33,1]},
+                    {"data":[55,34,34,33,22]},
+                    {"data":[120,22,400,86,96]}
+                ]
+            },
+            "sqlTable":"","relatable":"","relacount":"","collect_type":"0"
+        }
+    ]
+}

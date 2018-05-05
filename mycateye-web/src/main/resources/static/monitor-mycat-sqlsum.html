@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SQL汇总</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Responsive Website Template">
+
+    <link href="assets/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="assets/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="assets/css/elegant-icons.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" media="all" href="assets/css/daterangepicker-bs3.css" />
+    <link rel="stylesheet" href="assets/css/jquery.mloading.css" />
+    <link rel="stylesheet" href="assets/css/jquery.dataTables.min.css">
+    <link href="assets/css/main.css" rel="stylesheet" type="text/css">
+    <link href="assets/css/my-custom-styles.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <div id="wrapper">
+        <!-- 导航 -->
+        <nav class="navbar navbar-default navbar-fixed-top ">
+            <div class="container">
+                <a href="index.html" class="navbar-brand">
+                    <img src="assets/img/logo/logo_80.png" style="width: 80px; height: 46px;">
+                </a>
+                <div id="main-nav-collapse" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav main-navbar-nav">
+                        <li class="dropdown">
+                            <a href="index.html" class="dropdown-toggle" data-toggle="dropdown">首页</a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="mysql-mycnf.html" class="dropdown-toggle" data-toggle="dropdown">my.cnf生成工具</a>
+                        </li>
+                        <li class="dropdown ">
+                            <a href="mysql-cluster.html" class="dropdown-toggle" data-toggle="dropdown">集群管理</a>
+                        </li>
+                        <!--<li class="dropdown">-->
+                            <!--<a href="mysql-performance-monitor.html" class="dropdown-toggle" data-toggle="dropdown">性能监控</a>-->
+                        <!--</li>-->
+                        <li class="dropdown active">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                Mycat监控 <i class="fa fa-angle-down"></i>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="monitor-mycat.html">服务监控</a></li>
+                                <li><a href="monitor-mycat-sql-execute.html">SQL执行情况</a></li>
+                                <li><a href="monitor-mycat-sql.html">SQL性能监控</a></li>
+                                <li class="active"><a href="monitor-mycat-sqlsum.html">SQL统计</a></li>
+                                <li><a href="monitor-mycat-datanode.html">数据节点</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                Mysql监控 <i class="fa fa-angle-down"></i>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="mysql-sql-monitor.html">SQL监控</a></li>
+                                <li><a href="mysql-slow-monitor.html">慢查询SQL</a></li>
+                                <li><a href="mysql-performance-monitor.html">性能监控</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="mysql-health-check.html" class="dropdown-toggle" data-toggle="dropdown">健康检查</a>
+                        </li>
+                        <li class="dropdown">
+                            <a target="_blank" href="admin/index.html" class="dropdown-toggle" data-toggle="dropdown">控制台</a>
+                        </li>
+                        <li class="dropdown">
+                            <div class="btn-group" style="margin-top: 18px; margin-left: 40px;">
+                                <button type="button" class="btn btn-default" id="defaultNode">选择节点</button>
+                                <button type="button" class="btn btn-default dropdown-toggle"
+                                        data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false">
+                                    <span class="caret"></span>
+                                    <span class="sr-only">Toggle Dropdown</span>
+                                </button>
+                                <ul class="dropdown-menu" id="nodeUl">
+                                </ul>
+                            </div>
+                            <input type="hidden" id="defaultServerId" value="" />
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- END 导航 -->
+
+        <!-- 内容 -->
+        <section>
+            <div class="container">
+                <ol class="breadcrumb" style="font-size: 14px;">
+                    <li><a href="index.html">首页</a></li>
+                    <li>Mycat 监控</li>
+                    <li class="active">SQL统计</li>
+                </ol>
+            </div>
+
+            <div class="container">
+                <form id="searchForm" class="form-inline bg-light form-toptool mb-1">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>
+                                    <i class="fa fa-calendar"></i> 查询时间：
+                                </label>
+                                <span>
+                                <input type="text" style="width: 320px;" name="reservation"
+                                       id="reservationtime" class="form-control"
+                                       value="2017/08/01 1:00:00 - 2017/08/02 13:30:00"
+                                       class="span4" />
+                            </span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                            <span>
+                                <i class="fa fa-cube"></i> 节点：
+                            </span>
+                                <select id="dataNodes" class="form-control">
+                                    <option value="1">9066</option>
+                                    <option value="2">9067</option>
+                                </select>
+                                <button type="button" class="btn btn-success" id="btn-search">查询</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="container">
+                <ul class="nav nav-tabs bg-light radius3" role="tablist" id="monitor-mycat-tab">
+                    <li role="presentation" class="active">
+                        <a href="#tab1" aria-controls="tab1" role="tab" data-toggle="tab">用户执行SQL统计</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="tab1">
+                        <div class="mycat-chart">
+                            <table class="display mydatatable" style="width:100%;font-size:12px;">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>USER</th>
+                                    <th>MAX</th>
+                                    <th>NET_IN</th>
+                                    <th>NET_OUT</th>
+                                    <th>读写占比</th>
+                                    <th>时段：<br />
+                                        [22-06] [06-13] [13-18] [18-22]</th>
+                                    <th>响应时间：<br />
+                                        [<10ms] [10 - 200ms] [<1s] [>=1s]</th>
+                                    <th>LAST_TIME</th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container" style="margin-top:20px;">
+                <ul class="nav nav-tabs bg-light radius3" role="tablist">
+                    <li role="presentation" class="active">
+                        <a href="#tab2" aria-controls="tab2" role="tab" data-toggle="tab">表执行SQL统计</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="tab2">
+                        <div class="mycat-chart" style="width:100%;overflow: auto;padding:20px 0px;">
+                            <table class="display mydatatable" style="width:100%;font-size:12px;">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>TABLE</th>
+                                    <th>MAX</th>
+                                    <th>NET_IN</th>
+                                    <th>NET_OUT</th>
+                                    <th>读写占比</th>
+                                    <th>LAST_TIME</th>
+                                    <th>relatable</th>
+                                    <th>relacount</th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- END 内容 -->
+
+        <!-- 页脚 -->
+        <footer class="footer-newsletter">
+            <div class="container">
+                <div class="footer-bottom">
+                    <div class="left">
+                        <p class="copyright-text">&copy;2017 MyCAT EYE</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- END 页脚 -->
+    </div>
+
+    <div class="fakeloader"></div>
+    <!-- JAVASCRIPT -->
+    <script src="assets/js/jquery-3.1.1.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/plugins/easing/jquery.easing.min.js"></script>
+    <script src="assets/js/plugins/morphext/morphext.min.js"></script>
+    <script src="assets/js/plugins/owl-carousel/owl.carousel.min.js"></script>
+    <script src="assets/js/bravana-lite.js"></script>
+    <script src="assets/js/echarts.common.min.js"></script>
+    <script src="assets/js/jquery.sparkline.min.js"></script>
+    <!-- DataTables -->
+    <script src="assets/js/jquery.dataTables.min.js"></script>
+    <script src="assets/js/dataTables.bootstrap.min.js"></script>
+    <!-- 时间区间组件 -->
+    <script type="text/javascript" src="assets/js/moment.js"></script>
+    <script type="text/javascript" src="assets/js/daterangepicker.js"></script>
+    <!-- loading效果 -->
+    <script src="assets/js/jquery.mloading.js"></script>
+    <!-- 置顶悬浮图标 -->
+    <div class="float-container float"><a href="javascript:$(window).scrollTop(0, 0);"><img src="assets/img/top.gif" style="border:0px;" /></a></div>
+
+    <!-- 自定义JAVASCRIPT -->
+    <script src="assets/js/misc-util.js"></script>
+    <script src="assets/js/utils.js"></script>
+    <script src="assets/js/sql-monitor-init.js"></script>
+    <script src="assets/js/monitor/mycat.js"></script>
+    <script>
+        $(function () {
+            //初始化时间区间
+            var datetimerange = $("#reservationtime");
+            if (datetimerange && datetimerange.length > 0) {
+                var now = getMillisecondAgoFormatDate(0);
+                var halfAnHourAgo = getMillisecondAgoFormatDate(30 * 60 * 1000);
+                var timeRange = halfAnHourAgo + " - " + now;
+                datetimerange.val(timeRange);
+                //定义时间选择事件
+                datetimerange.daterangepicker({
+                        timePicker: true,
+                        timePickerIncrement: 1,
+                        format: 'YYYY/MM/DD HH:mm:ss'
+                    },
+                    function (start, end, label) {
+                        timeRange = datetimerange.val();
+                        console.log('start', start, 'end', end, 'label', label);
+                        //初始化图表
+                        // var serverId=$("#defaultServerId").val();
+                        // chartInit(serverId, timeRange);
+                    });
+            }
+
+            var table1,table2;
+            function fetchUserData(){
+                if(table1){
+                    table1.destroy();
+                }
+                table1 = $('#tab1').find('table').DataTable({
+                    'ajax':'data/sql_sum_user.json',
+                    'columns':[
+                        {'data':'id'},
+                        {'data':'cUser'},
+                        {'data':'sqlMax'},
+                        {'data':'netIn'},
+                        {'data':'netOut'}
+                    ],
+                    'columnDefs': [
+                        {
+                            'render': function(data,type,row){
+                                return '<span class="sparklines sparklines-pie" sparkType="pie" width="42px" height="42px"><!-- '+row['r']+','+row['w']+' --></span>';
+                            },
+                            'targets': 5
+                        },
+                        {
+                            'render': function(data,type,row){
+                                return '<span class="sparklines sparklines-bar" sparkType="bar" width="122px" height="42px"><!-- '+row['timeCount0']+','+row['timeCount1']+','+row['timeCount2']+','+row['timeCount3']+' --></span>';
+                            },
+                            'targets': 6
+                        },
+                        {
+                            'render': function(data,type,row){
+                                return '<span class="sparklines sparklines-bar" sparkType="bar" width="122px" height="42px"><!-- '+row['ttlCount0']+','+row['ttlCount1']+','+row['ttlCount2']+','+row['ttlCount3']+' --></span>';
+                            },
+                            'targets': 7
+                        },
+                        {
+                            'render': function(data,type,row){
+                                //console.log(data,type,row['lastTime'])
+                                return row['lastTime']+'';
+                            },
+                            'targets': 8
+                        }
+                    ]
+                });
+            }
+            function fetchTableData(){
+                if(table2){
+                    table2.destroy();
+                }
+                table2 = $('#tab2').find('table').DataTable({
+                    'ajax':'data/sql_sum_table.json',
+                    'columns':[
+                        {'data':'id'},
+                        {'data':'sqlTable'},
+                        {'data':'sqlMax'},
+                        {'data':'netIn'},
+                        {'data':'netOut'}
+                    ],
+                    'columnDefs': [
+                        {
+                            'render': function(data,type,row){
+                                return '<span class="sparklines sparklines-pie" sparkType="pie" width="42px" height="42px"><!-- '+row['r']+','+row['w']+' --></span>';
+                            },
+                            'targets': 5
+                        },
+                        {
+                            'render': function(data,type,row){
+                                return row['lastTime']+'';
+                            },
+                            'targets': 6
+                        },
+                        {
+                            'render': function(data,type,row){
+                                return row['relatable']+'';
+                            },
+                            'targets': 7
+                        },
+                        {
+                            'render': function(data,type,row){
+                                return row['relacount']+'';
+                            },
+                            'targets': 8
+                        }
+                    ]
+                });
+            }
+            fetchUserData();
+            fetchTableData();
+
+            setTimeout(function(){
+                $('.sparklines-pie').sparkline('html', {
+                    width: '42px',
+                    height: '42px',
+                    sliceColors:['#5ca0a7','#d78169','#53656f'],
+                    enableTagOptions: true
+                });
+                $('.sparklines-bar').sparkline('html', {
+                    widht: '100px',
+                    height: '60px',
+                    barWidth: '10px',
+                    barColor: '#5ca0a7',
+                    enableTagOptions: true
+                })
+            },100);
+        });
+    </script>
+</body>
+</html>

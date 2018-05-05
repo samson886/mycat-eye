@@ -244,52 +244,52 @@ public class MycatSqlHighExample {
             return (Criteria) this;
         }
 
-        public Criteria andFrequencyEqualTo(Integer value) {
+        public Criteria andFrequencyEqualTo(Long value) {
             addCriterion("frequency =", value, "frequency");
             return (Criteria) this;
         }
 
-        public Criteria andFrequencyNotEqualTo(Integer value) {
+        public Criteria andFrequencyNotEqualTo(Long value) {
             addCriterion("frequency <>", value, "frequency");
             return (Criteria) this;
         }
 
-        public Criteria andFrequencyGreaterThan(Integer value) {
+        public Criteria andFrequencyGreaterThan(Long value) {
             addCriterion("frequency >", value, "frequency");
             return (Criteria) this;
         }
 
-        public Criteria andFrequencyGreaterThanOrEqualTo(Integer value) {
+        public Criteria andFrequencyGreaterThanOrEqualTo(Long value) {
             addCriterion("frequency >=", value, "frequency");
             return (Criteria) this;
         }
 
-        public Criteria andFrequencyLessThan(Integer value) {
+        public Criteria andFrequencyLessThan(Long value) {
             addCriterion("frequency <", value, "frequency");
             return (Criteria) this;
         }
 
-        public Criteria andFrequencyLessThanOrEqualTo(Integer value) {
+        public Criteria andFrequencyLessThanOrEqualTo(Long value) {
             addCriterion("frequency <=", value, "frequency");
             return (Criteria) this;
         }
 
-        public Criteria andFrequencyIn(List<Integer> values) {
+        public Criteria andFrequencyIn(List<Long> values) {
             addCriterion("frequency in", values, "frequency");
             return (Criteria) this;
         }
 
-        public Criteria andFrequencyNotIn(List<Integer> values) {
+        public Criteria andFrequencyNotIn(List<Long> values) {
             addCriterion("frequency not in", values, "frequency");
             return (Criteria) this;
         }
 
-        public Criteria andFrequencyBetween(Integer value1, Integer value2) {
+        public Criteria andFrequencyBetween(Long value1, Long value2) {
             addCriterion("frequency between", value1, value2, "frequency");
             return (Criteria) this;
         }
 
-        public Criteria andFrequencyNotBetween(Integer value1, Integer value2) {
+        public Criteria andFrequencyNotBetween(Long value1, Long value2) {
             addCriterion("frequency not between", value1, value2, "frequency");
             return (Criteria) this;
         }
@@ -304,52 +304,52 @@ public class MycatSqlHighExample {
             return (Criteria) this;
         }
 
-        public Criteria andAvgTimeEqualTo(Integer value) {
+        public Criteria andAvgTimeEqualTo(Long value) {
             addCriterion("avg_time =", value, "avgTime");
             return (Criteria) this;
         }
 
-        public Criteria andAvgTimeNotEqualTo(Integer value) {
+        public Criteria andAvgTimeNotEqualTo(Long value) {
             addCriterion("avg_time <>", value, "avgTime");
             return (Criteria) this;
         }
 
-        public Criteria andAvgTimeGreaterThan(Integer value) {
+        public Criteria andAvgTimeGreaterThan(Long value) {
             addCriterion("avg_time >", value, "avgTime");
             return (Criteria) this;
         }
 
-        public Criteria andAvgTimeGreaterThanOrEqualTo(Integer value) {
+        public Criteria andAvgTimeGreaterThanOrEqualTo(Long value) {
             addCriterion("avg_time >=", value, "avgTime");
             return (Criteria) this;
         }
 
-        public Criteria andAvgTimeLessThan(Integer value) {
+        public Criteria andAvgTimeLessThan(Long value) {
             addCriterion("avg_time <", value, "avgTime");
             return (Criteria) this;
         }
 
-        public Criteria andAvgTimeLessThanOrEqualTo(Integer value) {
+        public Criteria andAvgTimeLessThanOrEqualTo(Long value) {
             addCriterion("avg_time <=", value, "avgTime");
             return (Criteria) this;
         }
 
-        public Criteria andAvgTimeIn(List<Integer> values) {
+        public Criteria andAvgTimeIn(List<Long> values) {
             addCriterion("avg_time in", values, "avgTime");
             return (Criteria) this;
         }
 
-        public Criteria andAvgTimeNotIn(List<Integer> values) {
+        public Criteria andAvgTimeNotIn(List<Long> values) {
             addCriterion("avg_time not in", values, "avgTime");
             return (Criteria) this;
         }
 
-        public Criteria andAvgTimeBetween(Integer value1, Integer value2) {
+        public Criteria andAvgTimeBetween(Long value1, Long value2) {
             addCriterion("avg_time between", value1, value2, "avgTime");
             return (Criteria) this;
         }
 
-        public Criteria andAvgTimeNotBetween(Integer value1, Integer value2) {
+        public Criteria andAvgTimeNotBetween(Long value1, Long value2) {
             addCriterion("avg_time not between", value1, value2, "avgTime");
             return (Criteria) this;
         }
@@ -364,52 +364,52 @@ public class MycatSqlHighExample {
             return (Criteria) this;
         }
 
-        public Criteria andMaxTimeEqualTo(Integer value) {
+        public Criteria andMaxTimeEqualTo(Long value) {
             addCriterion("max_time =", value, "maxTime");
             return (Criteria) this;
         }
 
-        public Criteria andMaxTimeNotEqualTo(Integer value) {
+        public Criteria andMaxTimeNotEqualTo(Long value) {
             addCriterion("max_time <>", value, "maxTime");
             return (Criteria) this;
         }
 
-        public Criteria andMaxTimeGreaterThan(Integer value) {
+        public Criteria andMaxTimeGreaterThan(Long value) {
             addCriterion("max_time >", value, "maxTime");
             return (Criteria) this;
         }
 
-        public Criteria andMaxTimeGreaterThanOrEqualTo(Integer value) {
+        public Criteria andMaxTimeGreaterThanOrEqualTo(Long value) {
             addCriterion("max_time >=", value, "maxTime");
             return (Criteria) this;
         }
 
-        public Criteria andMaxTimeLessThan(Integer value) {
+        public Criteria andMaxTimeLessThan(Long value) {
             addCriterion("max_time <", value, "maxTime");
             return (Criteria) this;
         }
 
-        public Criteria andMaxTimeLessThanOrEqualTo(Integer value) {
+        public Criteria andMaxTimeLessThanOrEqualTo(Long value) {
             addCriterion("max_time <=", value, "maxTime");
             return (Criteria) this;
         }
 
-        public Criteria andMaxTimeIn(List<Integer> values) {
+        public Criteria andMaxTimeIn(List<Long> values) {
             addCriterion("max_time in", values, "maxTime");
             return (Criteria) this;
         }
 
-        public Criteria andMaxTimeNotIn(List<Integer> values) {
+        public Criteria andMaxTimeNotIn(List<Long> values) {
             addCriterion("max_time not in", values, "maxTime");
             return (Criteria) this;
         }
 
-        public Criteria andMaxTimeBetween(Integer value1, Integer value2) {
+        public Criteria andMaxTimeBetween(Long value1, Long value2) {
             addCriterion("max_time between", value1, value2, "maxTime");
             return (Criteria) this;
         }
 
-        public Criteria andMaxTimeNotBetween(Integer value1, Integer value2) {
+        public Criteria andMaxTimeNotBetween(Long value1, Long value2) {
             addCriterion("max_time not between", value1, value2, "maxTime");
             return (Criteria) this;
         }
@@ -424,52 +424,52 @@ public class MycatSqlHighExample {
             return (Criteria) this;
         }
 
-        public Criteria andMinTimeEqualTo(Integer value) {
+        public Criteria andMinTimeEqualTo(Long value) {
             addCriterion("min_time =", value, "minTime");
             return (Criteria) this;
         }
 
-        public Criteria andMinTimeNotEqualTo(Integer value) {
+        public Criteria andMinTimeNotEqualTo(Long value) {
             addCriterion("min_time <>", value, "minTime");
             return (Criteria) this;
         }
 
-        public Criteria andMinTimeGreaterThan(Integer value) {
+        public Criteria andMinTimeGreaterThan(Long value) {
             addCriterion("min_time >", value, "minTime");
             return (Criteria) this;
         }
 
-        public Criteria andMinTimeGreaterThanOrEqualTo(Integer value) {
+        public Criteria andMinTimeGreaterThanOrEqualTo(Long value) {
             addCriterion("min_time >=", value, "minTime");
             return (Criteria) this;
         }
 
-        public Criteria andMinTimeLessThan(Integer value) {
+        public Criteria andMinTimeLessThan(Long value) {
             addCriterion("min_time <", value, "minTime");
             return (Criteria) this;
         }
 
-        public Criteria andMinTimeLessThanOrEqualTo(Integer value) {
+        public Criteria andMinTimeLessThanOrEqualTo(Long value) {
             addCriterion("min_time <=", value, "minTime");
             return (Criteria) this;
         }
 
-        public Criteria andMinTimeIn(List<Integer> values) {
+        public Criteria andMinTimeIn(List<Long> values) {
             addCriterion("min_time in", values, "minTime");
             return (Criteria) this;
         }
 
-        public Criteria andMinTimeNotIn(List<Integer> values) {
+        public Criteria andMinTimeNotIn(List<Long> values) {
             addCriterion("min_time not in", values, "minTime");
             return (Criteria) this;
         }
 
-        public Criteria andMinTimeBetween(Integer value1, Integer value2) {
+        public Criteria andMinTimeBetween(Long value1, Long value2) {
             addCriterion("min_time between", value1, value2, "minTime");
             return (Criteria) this;
         }
 
-        public Criteria andMinTimeNotBetween(Integer value1, Integer value2) {
+        public Criteria andMinTimeNotBetween(Long value1, Long value2) {
             addCriterion("min_time not between", value1, value2, "minTime");
             return (Criteria) this;
         }
@@ -484,52 +484,52 @@ public class MycatSqlHighExample {
             return (Criteria) this;
         }
 
-        public Criteria andExecuteTimeEqualTo(Integer value) {
+        public Criteria andExecuteTimeEqualTo(Long value) {
             addCriterion("execute_time =", value, "executeTime");
             return (Criteria) this;
         }
 
-        public Criteria andExecuteTimeNotEqualTo(Integer value) {
+        public Criteria andExecuteTimeNotEqualTo(Long value) {
             addCriterion("execute_time <>", value, "executeTime");
             return (Criteria) this;
         }
 
-        public Criteria andExecuteTimeGreaterThan(Integer value) {
+        public Criteria andExecuteTimeGreaterThan(Long value) {
             addCriterion("execute_time >", value, "executeTime");
             return (Criteria) this;
         }
 
-        public Criteria andExecuteTimeGreaterThanOrEqualTo(Integer value) {
+        public Criteria andExecuteTimeGreaterThanOrEqualTo(Long value) {
             addCriterion("execute_time >=", value, "executeTime");
             return (Criteria) this;
         }
 
-        public Criteria andExecuteTimeLessThan(Integer value) {
+        public Criteria andExecuteTimeLessThan(Long value) {
             addCriterion("execute_time <", value, "executeTime");
             return (Criteria) this;
         }
 
-        public Criteria andExecuteTimeLessThanOrEqualTo(Integer value) {
+        public Criteria andExecuteTimeLessThanOrEqualTo(Long value) {
             addCriterion("execute_time <=", value, "executeTime");
             return (Criteria) this;
         }
 
-        public Criteria andExecuteTimeIn(List<Integer> values) {
+        public Criteria andExecuteTimeIn(List<Long> values) {
             addCriterion("execute_time in", values, "executeTime");
             return (Criteria) this;
         }
 
-        public Criteria andExecuteTimeNotIn(List<Integer> values) {
+        public Criteria andExecuteTimeNotIn(List<Long> values) {
             addCriterion("execute_time not in", values, "executeTime");
             return (Criteria) this;
         }
 
-        public Criteria andExecuteTimeBetween(Integer value1, Integer value2) {
+        public Criteria andExecuteTimeBetween(Long value1, Long value2) {
             addCriterion("execute_time between", value1, value2, "executeTime");
             return (Criteria) this;
         }
 
-        public Criteria andExecuteTimeNotBetween(Integer value1, Integer value2) {
+        public Criteria andExecuteTimeNotBetween(Long value1, Long value2) {
             addCriterion("execute_time not between", value1, value2, "executeTime");
             return (Criteria) this;
         }

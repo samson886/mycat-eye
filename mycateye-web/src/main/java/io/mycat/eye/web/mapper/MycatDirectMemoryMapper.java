@@ -12,13 +12,21 @@ public interface MycatDirectMemoryMapper {
 
     int deleteByExample(MycatDirectMemoryExample example);
 
+    int deleteByPrimaryKey(Integer id);
+
     int insert(MycatDirectMemory record);
 
     int insertSelective(MycatDirectMemory record);
 
     List<MycatDirectMemory> selectByExample(MycatDirectMemoryExample example);
 
+    MycatDirectMemory selectByPrimaryKey(Integer id);
+
     int updateByExampleSelective(@Param("record") MycatDirectMemory record, @Param("example") MycatDirectMemoryExample example);
 
     int updateByExample(@Param("record") MycatDirectMemory record, @Param("example") MycatDirectMemoryExample example);
+
+    int updateByPrimaryKeySelective(MycatDirectMemory record);
+
+    int updateByPrimaryKey(MycatDirectMemory record);
 }

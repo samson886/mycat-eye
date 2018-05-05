@@ -37,6 +37,12 @@ public class DbeyeAgentApplicationTest {
         System.out.println(Arrays.toString(exes));
         char[] cs = {'f','a','l','s','e'};
         System.out.println(new String(cs)+" "+new String(cs).equals("false"));
+
+        String a = "[3, 0, 0, 0]";
+        a = a.substring(1,a.length()-1);
+        System.out.println(a);
+        String[] b = a.split(", ");
+        System.out.println(b.length + "-" + b[0] + "-" + b[1] + "-" + b[2] + "-" + b[3]);
     }
 
 }

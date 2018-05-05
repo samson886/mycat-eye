@@ -1,0 +1,13 @@
+{
+    "data": [
+        {"id":1,"user":"root","startTime":1524583496990,"executeTime":597,"sql":"insert into hotnews(id,nm) values(3,'nm')"},
+        {"id":2,"user":"root","startTime":1524583496990,"executeTime":597,"sql":"insert into hotnews(id,nm) values(6,'nm')"},
+        {"id":3,"user":"root","startTime":1524583496990,"executeTime":597,"sql":"update hotnews set nm='nm5' where id = 5"},
+        {"id":4,"user":"root","startTime":1524583496990,"executeTime":597,"sql":"insert into hotnews(id,nm) values(1,'nm')"},
+        {"id":5,"user":"user","startTime":1524583496990,"executeTime":597,"sql":"insert into hotnews(id,nm) values(2,'nm')"},
+        {"id":6,"user":"root","startTime":1524583496990,"executeTime":597,"sql":"update hotnews set nm = 'nm3' where id = 3"},
+        {"id":7,"user":"user","startTime":1524583496990,"executeTime":597,"sql":"insert into hotnews(id,nm) values(5,'nm')"},
+        {"id":8,"user":"root","startTime":1524583496990,"executeTime":597,"sql":"delete from hotnews where id = 6"}
+    ],
+    "code": 200
+}

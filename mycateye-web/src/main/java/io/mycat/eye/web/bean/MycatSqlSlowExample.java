@@ -374,52 +374,52 @@ public class MycatSqlSlowExample {
             return (Criteria) this;
         }
 
-        public Criteria andExecuteTimeEqualTo(Integer value) {
+        public Criteria andExecuteTimeEqualTo(Long value) {
             addCriterion("execute_time =", value, "executeTime");
             return (Criteria) this;
         }
 
-        public Criteria andExecuteTimeNotEqualTo(Integer value) {
+        public Criteria andExecuteTimeNotEqualTo(Long value) {
             addCriterion("execute_time <>", value, "executeTime");
             return (Criteria) this;
         }
 
-        public Criteria andExecuteTimeGreaterThan(Integer value) {
+        public Criteria andExecuteTimeGreaterThan(Long value) {
             addCriterion("execute_time >", value, "executeTime");
             return (Criteria) this;
         }
 
-        public Criteria andExecuteTimeGreaterThanOrEqualTo(Integer value) {
+        public Criteria andExecuteTimeGreaterThanOrEqualTo(Long value) {
             addCriterion("execute_time >=", value, "executeTime");
             return (Criteria) this;
         }
 
-        public Criteria andExecuteTimeLessThan(Integer value) {
+        public Criteria andExecuteTimeLessThan(Long value) {
             addCriterion("execute_time <", value, "executeTime");
             return (Criteria) this;
         }
 
-        public Criteria andExecuteTimeLessThanOrEqualTo(Integer value) {
+        public Criteria andExecuteTimeLessThanOrEqualTo(Long value) {
             addCriterion("execute_time <=", value, "executeTime");
             return (Criteria) this;
         }
 
-        public Criteria andExecuteTimeIn(List<Integer> values) {
+        public Criteria andExecuteTimeIn(List<Long> values) {
             addCriterion("execute_time in", values, "executeTime");
             return (Criteria) this;
         }
 
-        public Criteria andExecuteTimeNotIn(List<Integer> values) {
+        public Criteria andExecuteTimeNotIn(List<Long> values) {
             addCriterion("execute_time not in", values, "executeTime");
             return (Criteria) this;
         }
 
-        public Criteria andExecuteTimeBetween(Integer value1, Integer value2) {
+        public Criteria andExecuteTimeBetween(Long value1, Long value2) {
             addCriterion("execute_time between", value1, value2, "executeTime");
             return (Criteria) this;
         }
 
-        public Criteria andExecuteTimeNotBetween(Integer value1, Integer value2) {
+        public Criteria andExecuteTimeNotBetween(Long value1, Long value2) {
             addCriterion("execute_time not between", value1, value2, "executeTime");
             return (Criteria) this;
         }

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="io.mycat.eye.agent.mapper.MycatConnectionMapper">
   <resultMap id="BaseResultMap" type="io.mycat.eye.agent.bean.MycatConnection">
-    <result column="id" jdbcType="INTEGER" property="id" />
+    <id column="id" jdbcType="INTEGER" property="id" />
     <result column="processor" jdbcType="VARCHAR" property="processor" />
     <result column="c_host" jdbcType="VARCHAR" property="cHost" />
     <result column="c_port" jdbcType="INTEGER" property="cPort" />
@@ -96,6 +96,16 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from mycat_connection
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from mycat_connection
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
   <delete id="deleteByExample" parameterType="io.mycat.eye.agent.bean.MycatConnectionExample">
     delete from mycat_connection
     <if test="_parameter != null">
@@ -312,5 +322,79 @@
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="io.mycat.eye.agent.bean.MycatConnection">
+    update mycat_connection
+    <set>
+      <if test="processor != null">
+        processor = #{processor,jdbcType=VARCHAR},
+      </if>
+      <if test="cHost != null">
+        c_host = #{cHost,jdbcType=VARCHAR},
+      </if>
+      <if test="cPort != null">
+        c_port = #{cPort,jdbcType=INTEGER},
+      </if>
+      <if test="lPort != null">
+        l_port = #{lPort,jdbcType=INTEGER},
+      </if>
+      <if test="netIn != null">
+        net_in = #{netIn,jdbcType=BIGINT},
+      </if>
+      <if test="netOut != null">
+        net_out = #{netOut,jdbcType=BIGINT},
+      </if>
+      <if test="cUser != null">
+        c_user = #{cUser,jdbcType=VARCHAR},
+      </if>
+      <if test="cSchema != null">
+        c_schema = #{cSchema,jdbcType=VARCHAR},
+      </if>
+      <if test="cCharset != null">
+        c_charset = #{cCharset,jdbcType=VARCHAR},
+      </if>
+      <if test="aliveTime != null">
+        alive_time = #{aliveTime,jdbcType=BIGINT},
+      </if>
+      <if test="recvBuffer != null">
+        recv_buffer = #{recvBuffer,jdbcType=INTEGER},
+      </if>
+      <if test="sendQueue != null">
+        send_queue = #{sendQueue,jdbcType=INTEGER},
+      </if>
+      <if test="txlevel != null">
+        txlevel = #{txlevel,jdbcType=VARCHAR},
+      </if>
+      <if test="autocommit != null">
+        autocommit = #{autocommit,jdbcType=VARCHAR},
+      </if>
+      <if test="mycatId != null">
+        mycat_id = #{mycatId,jdbcType=INTEGER},
+      </if>
+      <if test="collectTime != null">
+        collect_time = #{collectTime,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="io.mycat.eye.agent.bean.MycatConnection">
+    update mycat_connection
+    set processor = #{processor,jdbcType=VARCHAR},
+      c_host = #{cHost,jdbcType=VARCHAR},
+      c_port = #{cPort,jdbcType=INTEGER},
+      l_port = #{lPort,jdbcType=INTEGER},
+      net_in = #{netIn,jdbcType=BIGINT},
+      net_out = #{netOut,jdbcType=BIGINT},
+      c_user = #{cUser,jdbcType=VARCHAR},
+      c_schema = #{cSchema,jdbcType=VARCHAR},
+      c_charset = #{cCharset,jdbcType=VARCHAR},
+      alive_time = #{aliveTime,jdbcType=BIGINT},
+      recv_buffer = #{recvBuffer,jdbcType=INTEGER},
+      send_queue = #{sendQueue,jdbcType=INTEGER},
+      txlevel = #{txlevel,jdbcType=VARCHAR},
+      autocommit = #{autocommit,jdbcType=VARCHAR},
+      mycat_id = #{mycatId,jdbcType=INTEGER},
+      collect_time = #{collectTime,jdbcType=BIGINT}
+    where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

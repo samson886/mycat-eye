@@ -69,7 +69,7 @@ public class MycatSqlSlowTask extends AbstractTask {
                     sql.setStartTime((long) o.get("START_TIME"));
                 }
                 if(o.get("EXECUTE_TIME")!=null){
-                    sql.setExecuteTime((int) o.get("EXECUTE_TIME"));
+                    sql.setExecuteTime((long) o.get("EXECUTE_TIME"));
                 }
                 if(o.get("SQL")!=null){
                     sql.setSql((String) o.get("SQL"));

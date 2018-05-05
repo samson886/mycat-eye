@@ -1133,6 +1133,486 @@ public class MycatSqlSumExample {
             addCriterion("collect_type not between", value1, value2, "collectType");
             return (Criteria) this;
         }
+
+        public Criteria andTimeCount0IsNull() {
+            addCriterion("time_count0 is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeCount0IsNotNull() {
+            addCriterion("time_count0 is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeCount0EqualTo(Integer value) {
+            addCriterion("time_count0 =", value, "timeCount0");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeCount0NotEqualTo(Integer value) {
+            addCriterion("time_count0 <>", value, "timeCount0");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeCount0GreaterThan(Integer value) {
+            addCriterion("time_count0 >", value, "timeCount0");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeCount0GreaterThanOrEqualTo(Integer value) {
+            addCriterion("time_count0 >=", value, "timeCount0");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeCount0LessThan(Integer value) {
+            addCriterion("time_count0 <", value, "timeCount0");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeCount0LessThanOrEqualTo(Integer value) {
+            addCriterion("time_count0 <=", value, "timeCount0");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeCount0In(List<Integer> values) {
+            addCriterion("time_count0 in", values, "timeCount0");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeCount0NotIn(List<Integer> values) {
+            addCriterion("time_count0 not in", values, "timeCount0");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeCount0Between(Integer value1, Integer value2) {
+            addCriterion("time_count0 between", value1, value2, "timeCount0");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeCount0NotBetween(Integer value1, Integer value2) {
+            addCriterion("time_count0 not between", value1, value2, "timeCount0");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeCount1IsNull() {
+            addCriterion("time_count1 is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeCount1IsNotNull() {
+            addCriterion("time_count1 is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeCount1EqualTo(Integer value) {
+            addCriterion("time_count1 =", value, "timeCount1");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeCount1NotEqualTo(Integer value) {
+            addCriterion("time_count1 <>", value, "timeCount1");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeCount1GreaterThan(Integer value) {
+            addCriterion("time_count1 >", value, "timeCount1");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeCount1GreaterThanOrEqualTo(Integer value) {
+            addCriterion("time_count1 >=", value, "timeCount1");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeCount1LessThan(Integer value) {
+            addCriterion("time_count1 <", value, "timeCount1");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeCount1LessThanOrEqualTo(Integer value) {
+            addCriterion("time_count1 <=", value, "timeCount1");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeCount1In(List<Integer> values) {
+            addCriterion("time_count1 in", values, "timeCount1");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeCount1NotIn(List<Integer> values) {
+            addCriterion("time_count1 not in", values, "timeCount1");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeCount1Between(Integer value1, Integer value2) {
+            addCriterion("time_count1 between", value1, value2, "timeCount1");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeCount1NotBetween(Integer value1, Integer value2) {
+            addCriterion("time_count1 not between", value1, value2, "timeCount1");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeCount2IsNull() {
+            addCriterion("time_count2 is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeCount2IsNotNull() {
+            addCriterion("time_count2 is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeCount2EqualTo(Integer value) {
+            addCriterion("time_count2 =", value, "timeCount2");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeCount2NotEqualTo(Integer value) {
+            addCriterion("time_count2 <>", value, "timeCount2");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeCount2GreaterThan(Integer value) {
+            addCriterion("time_count2 >", value, "timeCount2");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeCount2GreaterThanOrEqualTo(Integer value) {
+            addCriterion("time_count2 >=", value, "timeCount2");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeCount2LessThan(Integer value) {
+            addCriterion("time_count2 <", value, "timeCount2");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeCount2LessThanOrEqualTo(Integer value) {
+            addCriterion("time_count2 <=", value, "timeCount2");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeCount2In(List<Integer> values) {
+            addCriterion("time_count2 in", values, "timeCount2");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeCount2NotIn(List<Integer> values) {
+            addCriterion("time_count2 not in", values, "timeCount2");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeCount2Between(Integer value1, Integer value2) {
+            addCriterion("time_count2 between", value1, value2, "timeCount2");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeCount2NotBetween(Integer value1, Integer value2) {
+            addCriterion("time_count2 not between", value1, value2, "timeCount2");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeCount3IsNull() {
+            addCriterion("time_count3 is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeCount3IsNotNull() {
+            addCriterion("time_count3 is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeCount3EqualTo(Integer value) {
+            addCriterion("time_count3 =", value, "timeCount3");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeCount3NotEqualTo(Integer value) {
+            addCriterion("time_count3 <>", value, "timeCount3");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeCount3GreaterThan(Integer value) {
+            addCriterion("time_count3 >", value, "timeCount3");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeCount3GreaterThanOrEqualTo(Integer value) {
+            addCriterion("time_count3 >=", value, "timeCount3");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeCount3LessThan(Integer value) {
+            addCriterion("time_count3 <", value, "timeCount3");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeCount3LessThanOrEqualTo(Integer value) {
+            addCriterion("time_count3 <=", value, "timeCount3");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeCount3In(List<Integer> values) {
+            addCriterion("time_count3 in", values, "timeCount3");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeCount3NotIn(List<Integer> values) {
+            addCriterion("time_count3 not in", values, "timeCount3");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeCount3Between(Integer value1, Integer value2) {
+            addCriterion("time_count3 between", value1, value2, "timeCount3");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeCount3NotBetween(Integer value1, Integer value2) {
+            addCriterion("time_count3 not between", value1, value2, "timeCount3");
+            return (Criteria) this;
+        }
+
+        public Criteria andTtlCount0IsNull() {
+            addCriterion("ttl_count0 is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTtlCount0IsNotNull() {
+            addCriterion("ttl_count0 is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTtlCount0EqualTo(Integer value) {
+            addCriterion("ttl_count0 =", value, "ttlCount0");
+            return (Criteria) this;
+        }
+
+        public Criteria andTtlCount0NotEqualTo(Integer value) {
+            addCriterion("ttl_count0 <>", value, "ttlCount0");
+            return (Criteria) this;
+        }
+
+        public Criteria andTtlCount0GreaterThan(Integer value) {
+            addCriterion("ttl_count0 >", value, "ttlCount0");
+            return (Criteria) this;
+        }
+
+        public Criteria andTtlCount0GreaterThanOrEqualTo(Integer value) {
+            addCriterion("ttl_count0 >=", value, "ttlCount0");
+            return (Criteria) this;
+        }
+
+        public Criteria andTtlCount0LessThan(Integer value) {
+            addCriterion("ttl_count0 <", value, "ttlCount0");
+            return (Criteria) this;
+        }
+
+        public Criteria andTtlCount0LessThanOrEqualTo(Integer value) {
+            addCriterion("ttl_count0 <=", value, "ttlCount0");
+            return (Criteria) this;
+        }
+
+        public Criteria andTtlCount0In(List<Integer> values) {
+            addCriterion("ttl_count0 in", values, "ttlCount0");
+            return (Criteria) this;
+        }
+
+        public Criteria andTtlCount0NotIn(List<Integer> values) {
+            addCriterion("ttl_count0 not in", values, "ttlCount0");
+            return (Criteria) this;
+        }
+
+        public Criteria andTtlCount0Between(Integer value1, Integer value2) {
+            addCriterion("ttl_count0 between", value1, value2, "ttlCount0");
+            return (Criteria) this;
+        }
+
+        public Criteria andTtlCount0NotBetween(Integer value1, Integer value2) {
+            addCriterion("ttl_count0 not between", value1, value2, "ttlCount0");
+            return (Criteria) this;
+        }
+
+        public Criteria andTtlCount1IsNull() {
+            addCriterion("ttl_count1 is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTtlCount1IsNotNull() {
+            addCriterion("ttl_count1 is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTtlCount1EqualTo(Integer value) {
+            addCriterion("ttl_count1 =", value, "ttlCount1");
+            return (Criteria) this;
+        }
+
+        public Criteria andTtlCount1NotEqualTo(Integer value) {
+            addCriterion("ttl_count1 <>", value, "ttlCount1");
+            return (Criteria) this;
+        }
+
+        public Criteria andTtlCount1GreaterThan(Integer value) {
+            addCriterion("ttl_count1 >", value, "ttlCount1");
+            return (Criteria) this;
+        }
+
+        public Criteria andTtlCount1GreaterThanOrEqualTo(Integer value) {
+            addCriterion("ttl_count1 >=", value, "ttlCount1");
+            return (Criteria) this;
+        }
+
+        public Criteria andTtlCount1LessThan(Integer value) {
+            addCriterion("ttl_count1 <", value, "ttlCount1");
+            return (Criteria) this;
+        }
+
+        public Criteria andTtlCount1LessThanOrEqualTo(Integer value) {
+            addCriterion("ttl_count1 <=", value, "ttlCount1");
+            return (Criteria) this;
+        }
+
+        public Criteria andTtlCount1In(List<Integer> values) {
+            addCriterion("ttl_count1 in", values, "ttlCount1");
+            return (Criteria) this;
+        }
+
+        public Criteria andTtlCount1NotIn(List<Integer> values) {
+            addCriterion("ttl_count1 not in", values, "ttlCount1");
+            return (Criteria) this;
+        }
+
+        public Criteria andTtlCount1Between(Integer value1, Integer value2) {
+            addCriterion("ttl_count1 between", value1, value2, "ttlCount1");
+            return (Criteria) this;
+        }
+
+        public Criteria andTtlCount1NotBetween(Integer value1, Integer value2) {
+            addCriterion("ttl_count1 not between", value1, value2, "ttlCount1");
+            return (Criteria) this;
+        }
+
+        public Criteria andTtlCount2IsNull() {
+            addCriterion("ttl_count2 is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTtlCount2IsNotNull() {
+            addCriterion("ttl_count2 is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTtlCount2EqualTo(Integer value) {
+            addCriterion("ttl_count2 =", value, "ttlCount2");
+            return (Criteria) this;
+        }
+
+        public Criteria andTtlCount2NotEqualTo(Integer value) {
+            addCriterion("ttl_count2 <>", value, "ttlCount2");
+            return (Criteria) this;
+        }
+
+        public Criteria andTtlCount2GreaterThan(Integer value) {
+            addCriterion("ttl_count2 >", value, "ttlCount2");
+            return (Criteria) this;
+        }
+
+        public Criteria andTtlCount2GreaterThanOrEqualTo(Integer value) {
+            addCriterion("ttl_count2 >=", value, "ttlCount2");
+            return (Criteria) this;
+        }
+
+        public Criteria andTtlCount2LessThan(Integer value) {
+            addCriterion("ttl_count2 <", value, "ttlCount2");
+            return (Criteria) this;
+        }
+
+        public Criteria andTtlCount2LessThanOrEqualTo(Integer value) {
+            addCriterion("ttl_count2 <=", value, "ttlCount2");
+            return (Criteria) this;
+        }
+
+        public Criteria andTtlCount2In(List<Integer> values) {
+            addCriterion("ttl_count2 in", values, "ttlCount2");
+            return (Criteria) this;
+        }
+
+        public Criteria andTtlCount2NotIn(List<Integer> values) {
+            addCriterion("ttl_count2 not in", values, "ttlCount2");
+            return (Criteria) this;
+        }
+
+        public Criteria andTtlCount2Between(Integer value1, Integer value2) {
+            addCriterion("ttl_count2 between", value1, value2, "ttlCount2");
+            return (Criteria) this;
+        }
+
+        public Criteria andTtlCount2NotBetween(Integer value1, Integer value2) {
+            addCriterion("ttl_count2 not between", value1, value2, "ttlCount2");
+            return (Criteria) this;
+        }
+
+        public Criteria andTtlCount3IsNull() {
+            addCriterion("ttl_count3 is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTtlCount3IsNotNull() {
+            addCriterion("ttl_count3 is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTtlCount3EqualTo(Integer value) {
+            addCriterion("ttl_count3 =", value, "ttlCount3");
+            return (Criteria) this;
+        }
+
+        public Criteria andTtlCount3NotEqualTo(Integer value) {
+            addCriterion("ttl_count3 <>", value, "ttlCount3");
+            return (Criteria) this;
+        }
+
+        public Criteria andTtlCount3GreaterThan(Integer value) {
+            addCriterion("ttl_count3 >", value, "ttlCount3");
+            return (Criteria) this;
+        }
+
+        public Criteria andTtlCount3GreaterThanOrEqualTo(Integer value) {
+            addCriterion("ttl_count3 >=", value, "ttlCount3");
+            return (Criteria) this;
+        }
+
+        public Criteria andTtlCount3LessThan(Integer value) {
+            addCriterion("ttl_count3 <", value, "ttlCount3");
+            return (Criteria) this;
+        }
+
+        public Criteria andTtlCount3LessThanOrEqualTo(Integer value) {
+            addCriterion("ttl_count3 <=", value, "ttlCount3");
+            return (Criteria) this;
+        }
+
+        public Criteria andTtlCount3In(List<Integer> values) {
+            addCriterion("ttl_count3 in", values, "ttlCount3");
+            return (Criteria) this;
+        }
+
+        public Criteria andTtlCount3NotIn(List<Integer> values) {
+            addCriterion("ttl_count3 not in", values, "ttlCount3");
+            return (Criteria) this;
+        }
+
+        public Criteria andTtlCount3Between(Integer value1, Integer value2) {
+            addCriterion("ttl_count3 between", value1, value2, "ttlCount3");
+            return (Criteria) this;
+        }
+
+        public Criteria andTtlCount3NotBetween(Integer value1, Integer value2) {
+            addCriterion("ttl_count3 not between", value1, value2, "ttlCount3");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

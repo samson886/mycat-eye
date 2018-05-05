@@ -1,0 +1,22 @@
+{
+    "data": [
+        {
+            "id": 1,"cUser": "root","r": 2,"w": 1,"rP": 0.67,"sqlMax": 1,"netIn": 441,"netOut": 779,"lastTime": 1524583697975,
+            "timeCount0": 200,"timeCount1": 3,"timeCount2": 400,"timeCount3": 43,
+            "ttlCount0": 666,"ttlCount1": 233,"ttlCount2": 1000,"ttlCount3": 2,
+            "sqlTable": "",
+            "relatable": "",
+            "relacount": "",
+            "collect_type": "0"
+        },
+        {
+            "id": 1,"cUser": "user","r": 4,"w": 7,"rP": 0.41,"sqlMax": 1,"netIn": 441,"netOut": 779,"lastTime": 1524583697975,
+            "timeCount0": 120,"timeCount1":220,"timeCount2": 96,"timeCount3": 78,
+            "ttlCount0": 233,"ttlCount1": 666,"ttlCount2": 88,"ttlCount3": 653,
+            "sqlTable": "",
+            "relatable": "",
+            "relacount": "",
+            "collect_type": "0"
+        }
+    ]
+}

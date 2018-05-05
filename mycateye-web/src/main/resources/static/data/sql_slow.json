@@ -1,0 +1,6 @@
+{
+    "data": [
+        {"user":"root" ,"datasource":"" ,"startTime":1524583496990 ,"executeTime":597, "sql":"insert into hotnews(id,nm) values(6,'nm')"}
+    ],
+    "code": 200
+}

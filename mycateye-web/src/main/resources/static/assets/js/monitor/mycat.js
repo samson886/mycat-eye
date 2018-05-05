@@ -115,7 +115,7 @@
                     }
                 ]
             };
-            $.get('/mycat/server/status?server_id='+sid+'&timeRange='+tr, function(res,status) {
+            $.get('/mycat/status/all?server_id='+sid+'&timeRange='+tr, function(res,status) {
                 console.log(res,status)
                 option.xAxis[0].data = res.data.xAxisData;
                 option.series[0].data = res.data.seriesDatas.totalMemory;

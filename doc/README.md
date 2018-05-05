@@ -172,6 +172,7 @@ mysql> show @@sql.detail where id = 2000;
 
 
 #### 显示sql列表 √
+查询用户最近执行的SQL记录
 ```sql
 mysql> show @@sql;
 +------+------+---------------+--------------+-------------------------------------------+
@@ -180,8 +181,11 @@ mysql> show @@sql;
 |    1 | root | 1524583496990 |          597 | insert into hotnews(id,nm) values(6,'nm') |
 +------+------+---------------+--------------+-------------------------------------------+
 ```
+* START_TIME long
+* EXECUTE_TIME long
 
 #### Report Hight Frequency SQL √
+高频 SQL
 ```sql
 mysql> show @@sql.high;
 +------+------+-----------+----------+----------+----------+--------------+---------------+--------------------------------------------+
@@ -190,6 +194,12 @@ mysql> show @@sql.high;
 |    1 | root |         1 |      597 |      597 |      597 |          597 | 1524583497587 | INSERT INTO hotnews (id, nm) VALUES (?, ?) |
 +------+------+-----------+----------+----------+----------+--------------+---------------+--------------------------------------------+
 ```
+* ID long
+* FREQUENCY long
+* AVG_TIME long 
+* MAX_TIME long
+* MIN_TIME long
+* LAST_TIME long
 
 #### Report slow SQL √
 ```sql
@@ -201,10 +211,24 @@ mysql> show @@sql.slow;
 +------+------------+---------------+--------------+-------------------------------------------+
 ```
 
-#### Report BIG RESULTSET SQL 
+#### 大SQL
+```sql
+```
+* USER 
+* ROWS long
+* START_TIME long
+* EXECUTE_TIME long
+* SQL String
+
+#### Report BIG RESULTSET SQL `大SQL结果集`
 ```sql
 
 ```
+* ID long
+* USER
+* FREQUENCY long
+* SQL
+* RESULTSET_SIZE int
 
 #### Report RW Stat √
 ```sql
@@ -215,6 +239,10 @@ mysql> show @@sql.sum;
 |    1 | root |    2 |    1 | 0.67 | 1    |     41 |     779 | [3, 0, 0, 0] | [0, 2, 1, 0] | 1524583697975 |
 +------+------+------+------+------+------+--------+---------+--------------+--------------+---------------+
 ```
+* TIME_COUNT: `执行所在时段` | 22-06 夜间、 06-13 上午、 13-18下午、 18-22 晚间 -- new long[] { 6, 13, 18, 22 }
+* TTL_COUNT: `执行耗时` | 10毫秒内、 10 - 200毫秒内、 1秒内、 超过 1秒 -- new long[] { 10, 200, 1000, 2000 }
+* MAX: `最大的并发` | int
+* LAST_TIME: `最后执行时间` | long
 
 #### Report User RW Stat √
 ```sql
@@ -235,6 +263,10 @@ mysql> show @@sql.sum.table;
 |    1 | hotnews |    2 |    1 | 0.67 | NULL      | NULL      | 1524583697975 |
 +------+---------+------+------+------+-----------+-----------+---------------+
 ```
+* ID long
+* RELATABLE varchar 逗号分割多个关联表名
+* RELACOUNT varchar 逗号分割多个关联数量
+
 
 ## Mysql 监控
 

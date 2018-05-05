@@ -64,19 +64,19 @@ public class MycatSqlHighTask extends AbstractTask {
                     sql.setcUser((String) o.get("USER"));
                 }
                 if(o.get("FREQUENCY")!=null){
-                    sql.setFrequency((int) o.get("FREQUENCY"));
+                    sql.setFrequency((long) o.get("FREQUENCY"));
                 }
                 if(o.get("AVG_TIME")!=null){
-                    sql.setAvgTime((int) o.get("AVG_TIME"));
+                    sql.setAvgTime((long) o.get("AVG_TIME"));
                 }
                 if(o.get("MAX_TIME")!=null){
-                    sql.setMaxTime((int) o.get("MAX_TIME"));
+                    sql.setMaxTime((long) o.get("MAX_TIME"));
                 }
                 if(o.get("MIN_TIME")!=null){
-                    sql.setMinTime((int) o.get("MIN_TIME"));
+                    sql.setMinTime((long) o.get("MIN_TIME"));
                 }
                 if(o.get("EXECUTE_TIME")!=null){
-                    sql.setExecuteTime((int) o.get("EXECUTE_TIME"));
+                    sql.setExecuteTime((long) o.get("EXECUTE_TIME"));
                 }
                 if(o.get("LAST_TIME")!=null){
                     sql.setLastTime((long) o.get("LAST_TIME"));

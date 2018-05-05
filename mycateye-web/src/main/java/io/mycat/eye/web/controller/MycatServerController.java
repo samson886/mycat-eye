@@ -2,6 +2,8 @@ package io.mycat.eye.web.controller;
 
 import io.mycat.eye.web.bean.MycatBackend;
 import io.mycat.eye.web.bean.MycatConnection;
+import io.mycat.eye.web.bean.MycatServer;
+import io.mycat.eye.web.bean.MycatServerExample;
 import io.mycat.eye.web.dto.ChatDataDto;
 import io.mycat.eye.web.dto.RestResponse;
 import io.mycat.eye.web.service.MycatBackendService;
@@ -13,9 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -31,121 +31,77 @@ public class MycatServerController {
     @Autowired
     MycatServerService mycatServerService;
 
-    @Autowired
-    MycatStatusService mycatStatusService;
-
-    @Autowired
-    MycatConnectionService mycatConnectionService;
-
-    @Autowired
-    MycatBackendService mycatBackendService;
 
     @RequestMapping(value = "list", method = RequestMethod.GET)
     public ResponseEntity getServerList(){
         logger.debug("list");
         RestResponse<Object> response = RestResponse.buildExceptionResponse(200,"successful");
-        response.setData(mycatServerService.getMycatServer());
-        return new ResponseEntity(response,HttpStatus.OK);
-    }
-
-    @RequestMapping(value = "status", method = RequestMethod.GET)
-    public ResponseEntity getServerStatus(int server_id, String timeRange){
-        logger.debug("status === server_id:"+server_id+" time_range:"+timeRange);
-        RestResponse<Object> response = RestResponse.buildExceptionResponse(200,"successful");
-        if(server_id == 0){
-            response.setCode(401);
-            response.setMessage("节点ID不可为空");
-            return new ResponseEntity(response,HttpStatus.BAD_REQUEST);
-        }
-        if(timeRange==null){
-            response.setCode(401);
-            response.setMessage("日期范围不可为空");
-            return new ResponseEntity(response,HttpStatus.BAD_REQUEST);
-        }
-        String[] times = timeRange.split("-");
-        if(times.length<=1){
-            response.setCode(401);
-            response.setMessage("参数错误");
-            return new ResponseEntity(response,HttpStatus.BAD_REQUEST);
-        }
-        String beginTime = times[0].trim().replaceAll("/", "-");
-        String endTime = times[1].trim().replaceAll("/", "-");
-        try {
-            ChatDataDto dto = mycatStatusService.getServerStatus(server_id, beginTime, endTime);
-            response.setData(dto);
-            return new ResponseEntity(response,HttpStatus.OK);
-        }catch (Exception e){
-            response.setCode(500);
-            response.setMessage(e.getMessage());
-            return new ResponseEntity(response,HttpStatus.SERVICE_UNAVAILABLE);
-        }
-    }
-
-    @RequestMapping(value = "connection", method = RequestMethod.GET)
-    public ResponseEntity getMycatConnection(int server_id, String timeRange){
-        logger.debug("connection === server_id:"+server_id+" time_range:"+timeRange);
-        RestResponse<Object> response = RestResponse.buildExceptionResponse(200,"successful");
-        if(server_id == 0){
-            response.setCode(401);
-            response.setMessage("节点ID不可为空");
-            return new ResponseEntity(response,HttpStatus.BAD_REQUEST);
-        }
-        if(timeRange==null){
-            response.setCode(401);
-            response.setMessage("日期范围不可为空");
-            return new ResponseEntity(response,HttpStatus.BAD_REQUEST);
-        }
-        String[] times = timeRange.split("-");
-        if(times.length<=1){
-            response.setCode(401);
-            response.setMessage("参数错误");
-            return new ResponseEntity(response,HttpStatus.BAD_REQUEST);
-        }
-        String beginTime = times[0].trim().replaceAll("/", "-");
-        String endTime = times[1].trim().replaceAll("/", "-");
         try{
-            List<MycatConnection> list = mycatConnectionService.getConnection(server_id, Timestamp.valueOf(beginTime).getTime(),Timestamp.valueOf(endTime).getTime());
-            response.setData(list);
+            response.setData(mycatServerService.getMycatServer());
             return new ResponseEntity(response,HttpStatus.OK);
         }catch (Exception e){
-            response.setCode(500);
+            response.setCode(700);
             response.setMessage(e.getMessage());
-            return new ResponseEntity(response, HttpStatus.SERVICE_UNAVAILABLE);
+            return new ResponseEntity(response,HttpStatus.OK);
         }
     }
 
-    @RequestMapping(value = "backend", method = RequestMethod.GET)
-    public ResponseEntity getMycatBackend(int server_id, String timeRange){
-        logger.debug("backend === server_id:"+server_id+" time_range:"+timeRange);
-        RestResponse<Object> response = RestResponse.buildExceptionResponse(200,"successful");
-        if(server_id == 0){
-            response.setCode(401);
-            response.setMessage("节点ID不可为空");
-            return new ResponseEntity(response,HttpStatus.BAD_REQUEST);
-        }
-        if(timeRange==null){
-            response.setCode(401);
-            response.setMessage("日期范围不可为空");
-            return new ResponseEntity(response,HttpStatus.BAD_REQUEST);
-        }
-        String[] times = timeRange.split("-");
-        if(times.length<=1){
-            response.setCode(401);
-            response.setMessage("参数错误");
-            return new ResponseEntity(response,HttpStatus.BAD_REQUEST);
-        }
-        String beginTime = times[0].trim().replaceAll("/", "-");
-        String endTime = times[1].trim().replaceAll("/", "-");
+    // 编辑节点
+    @RequestMapping(value = "detail/{id}", method = RequestMethod.GET)
+    public ResponseEntity getServer(@PathVariable int id){
+        RestResponse<Object> response = RestResponse.buildExceptionResponse(200, "ok");
         try{
-            List<MycatBackend> list = mycatBackendService.getBackend(server_id,Timestamp.valueOf(beginTime).getTime(),Timestamp.valueOf(endTime).getTime());
-            response.setData(list);
+            response.setData(mycatServerService.getServer(id));
             return new ResponseEntity(response,HttpStatus.OK);
         }catch (Exception e){
-            response.setCode(500);
+            response.setCode(700);
             response.setMessage(e.getMessage());
-            return new ResponseEntity(response,HttpStatus.SERVICE_UNAVAILABLE);
+            return new ResponseEntity(response,HttpStatus.OK);
         }
     }
+
+    // 新增节点
+    @RequestMapping(value = "detail", method = RequestMethod.POST)
+    public ResponseEntity updateServer(@RequestBody MycatServer server){
+        RestResponse<Object> response = RestResponse.buildExceptionResponse(200, "ok");
+        try{
+            mycatServerService.addServer(server);
+            return new ResponseEntity(response,HttpStatus.OK);
+        }catch (Exception e){
+            response.setCode(700);
+            response.setMessage(e.getMessage());
+            return new ResponseEntity(response,HttpStatus.OK);
+        }
+    }
+
+    // 编辑节点
+    @RequestMapping(value = "detail/{id}", method = RequestMethod.PUT)
+    public ResponseEntity getServer(@PathVariable int id, @RequestBody MycatServer server){
+        RestResponse<Object> response = RestResponse.buildExceptionResponse(200, "ok");
+        try{
+            mycatServerService.updateServer(server);
+            return new ResponseEntity(response,HttpStatus.OK);
+        }catch (Exception e){
+            response.setCode(700);
+            response.setMessage(e.getMessage());
+            return new ResponseEntity(response,HttpStatus.OK);
+        }
+    }
+
+    // 删除节点
+    @RequestMapping(value = "detail/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity deleteServer(@PathVariable int id){
+        RestResponse<Object> response = RestResponse.buildExceptionResponse(200, "ok");
+        try{
+            mycatServerService.delete(id);
+            return new ResponseEntity(response,HttpStatus.OK);
+        }catch (Exception e){
+            response.setCode(700);
+            response.setMessage(e.getMessage());
+            return new ResponseEntity(response,HttpStatus.OK);
+        }
+    }
+
 
 
 }

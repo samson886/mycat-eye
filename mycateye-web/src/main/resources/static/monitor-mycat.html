@@ -46,6 +46,7 @@
                                 <li class="active"><a href="monitor-mycat.html">服务监控</a></li>
                                 <li><a href="monitor-mycat-sql-execute.html">SQL执行情况</a></li>
                                 <li><a href="monitor-mycat-sql.html">SQL性能监控</a></li>
+                                <li><a href="monitor-mycat-sqlsum.html">SQL统计</a></li>
                                 <li><a href="monitor-mycat-datanode.html">数据节点</a></li>
                             </ul>
                         </li>
@@ -306,7 +307,7 @@
                     tb1.destroy();
                 }
                 tb1 = $('#mycat-connection').DataTable({
-                    'ajax': '/mycat/server/connection?server_id=' + sid + '&timeRange=' + tr,
+                    'ajax': '/mycat/status/connection?server_id=' + sid + '&timeRange=' + tr,
                     'columns':[
                         { 'data':'id'},
                         { 'data':'processor'},
@@ -330,7 +331,7 @@
                     tb2.destroy();
                 }
                 tb2 = $('#mycat-backend').DataTable({
-                    'ajax': '/mycat/server/backend?server_id=' + sid + '&timeRange=' + tr,
+                    'ajax': '/mycat/status/backend?server_id=' + sid + '&timeRange=' + tr,
                     'columns': [
                         { 'data': 'id' },
                         { 'data': 'processor' },

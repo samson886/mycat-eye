@@ -12,13 +12,21 @@ public interface MycatServerMapper {
 
     int deleteByExample(MycatServerExample example);
 
+    int deleteByPrimaryKey(Integer id);
+
     int insert(MycatServer record);
 
     int insertSelective(MycatServer record);
 
-    List<MycatServer> selectByExample();
+    List<MycatServer> selectByExample(MycatServerExample example);
+
+    MycatServer selectByPrimaryKey(Integer id);
 
     int updateByExampleSelective(@Param("record") MycatServer record, @Param("example") MycatServerExample example);
 
     int updateByExample(@Param("record") MycatServer record, @Param("example") MycatServerExample example);
+
+    int updateByPrimaryKeySelective(MycatServer record);
+
+    int updateByPrimaryKey(MycatServer record);
 }

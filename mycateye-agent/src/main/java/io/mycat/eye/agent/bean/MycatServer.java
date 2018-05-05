@@ -13,13 +13,15 @@ public class MycatServer implements Serializable {
 
     private Integer serverPort;
 
-    private Integer clusterId;
-
     private Long startup;
 
     private String user;
 
     private String password;
+
+    private Integer clusterId;
+
+    private Byte isClusterNode;
 
     private static final long serialVersionUID = 1L;
 
@@ -63,14 +65,6 @@ public class MycatServer implements Serializable {
         this.serverPort = serverPort;
     }
 
-    public Integer getClusterId() {
-        return clusterId;
-    }
-
-    public void setClusterId(Integer clusterId) {
-        this.clusterId = clusterId;
-    }
-
     public Long getStartup() {
         return startup;
     }
@@ -95,6 +89,22 @@ public class MycatServer implements Serializable {
         this.password = password;
     }
 
+    public Integer getClusterId() {
+        return clusterId;
+    }
+
+    public void setClusterId(Integer clusterId) {
+        this.clusterId = clusterId;
+    }
+
+    public Byte getIsClusterNode() {
+        return isClusterNode;
+    }
+
+    public void setIsClusterNode(Byte isClusterNode) {
+        this.isClusterNode = isClusterNode;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -106,10 +116,11 @@ public class MycatServer implements Serializable {
         sb.append(", serverHost=").append(serverHost);
         sb.append(", managerPort=").append(managerPort);
         sb.append(", serverPort=").append(serverPort);
-        sb.append(", clusterId=").append(clusterId);
         sb.append(", startup=").append(startup);
         sb.append(", user=").append(user);
         sb.append(", password=").append(password);
+        sb.append(", clusterId=").append(clusterId);
+        sb.append(", isClusterNode=").append(isClusterNode);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
