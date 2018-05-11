@@ -5,17 +5,17 @@ import java.io.Serializable;
 public class MycatSqlSum extends MycatSqlSumKey implements Serializable {
     private String cUser;
 
-    private Integer r;
+    private Long r;
 
-    private Integer w;
+    private Long w;
 
     private Float rP;
 
-    private Integer sqlMax;
+    private Long sqlMax;
 
-    private Integer netIn;
+    private Long netIn;
 
-    private Integer netOut;
+    private Long netOut;
 
     private String timeCount;
 
@@ -31,21 +31,9 @@ public class MycatSqlSum extends MycatSqlSumKey implements Serializable {
 
     private String collectType;
 
-    private Integer timeCount0;
+    private Integer serverId;
 
-    private Integer timeCount1;
-
-    private Integer timeCount2;
-
-    private Integer timeCount3;
-
-    private Integer ttlCount0;
-
-    private Integer ttlCount1;
-
-    private Integer ttlCount2;
-
-    private Integer ttlCount3;
+    private Long collectTime;
 
     private static final long serialVersionUID = 1L;
 
@@ -57,19 +45,19 @@ public class MycatSqlSum extends MycatSqlSumKey implements Serializable {
         this.cUser = cUser;
     }
 
-    public Integer getR() {
+    public Long getR() {
         return r;
     }
 
-    public void setR(Integer r) {
+    public void setR(Long r) {
         this.r = r;
     }
 
-    public Integer getW() {
+    public Long getW() {
         return w;
     }
 
-    public void setW(Integer w) {
+    public void setW(Long w) {
         this.w = w;
     }
 
@@ -81,27 +69,27 @@ public class MycatSqlSum extends MycatSqlSumKey implements Serializable {
         this.rP = rP;
     }
 
-    public Integer getSqlMax() {
+    public Long getSqlMax() {
         return sqlMax;
     }
 
-    public void setSqlMax(Integer sqlMax) {
+    public void setSqlMax(Long sqlMax) {
         this.sqlMax = sqlMax;
     }
 
-    public Integer getNetIn() {
+    public Long getNetIn() {
         return netIn;
     }
 
-    public void setNetIn(Integer netIn) {
+    public void setNetIn(Long netIn) {
         this.netIn = netIn;
     }
 
-    public Integer getNetOut() {
+    public Long getNetOut() {
         return netOut;
     }
 
-    public void setNetOut(Integer netOut) {
+    public void setNetOut(Long netOut) {
         this.netOut = netOut;
     }
 
@@ -161,68 +149,20 @@ public class MycatSqlSum extends MycatSqlSumKey implements Serializable {
         this.collectType = collectType;
     }
 
-    public Integer getTimeCount0() {
-        return timeCount0;
+    public Integer getServerId() {
+        return serverId;
     }
 
-    public void setTimeCount0(Integer timeCount0) {
-        this.timeCount0 = timeCount0;
+    public void setServerId(Integer serverId) {
+        this.serverId = serverId;
     }
 
-    public Integer getTimeCount1() {
-        return timeCount1;
+    public Long getCollectTime() {
+        return collectTime;
     }
 
-    public void setTimeCount1(Integer timeCount1) {
-        this.timeCount1 = timeCount1;
-    }
-
-    public Integer getTimeCount2() {
-        return timeCount2;
-    }
-
-    public void setTimeCount2(Integer timeCount2) {
-        this.timeCount2 = timeCount2;
-    }
-
-    public Integer getTimeCount3() {
-        return timeCount3;
-    }
-
-    public void setTimeCount3(Integer timeCount3) {
-        this.timeCount3 = timeCount3;
-    }
-
-    public Integer getTtlCount0() {
-        return ttlCount0;
-    }
-
-    public void setTtlCount0(Integer ttlCount0) {
-        this.ttlCount0 = ttlCount0;
-    }
-
-    public Integer getTtlCount1() {
-        return ttlCount1;
-    }
-
-    public void setTtlCount1(Integer ttlCount1) {
-        this.ttlCount1 = ttlCount1;
-    }
-
-    public Integer getTtlCount2() {
-        return ttlCount2;
-    }
-
-    public void setTtlCount2(Integer ttlCount2) {
-        this.ttlCount2 = ttlCount2;
-    }
-
-    public Integer getTtlCount3() {
-        return ttlCount3;
-    }
-
-    public void setTtlCount3(Integer ttlCount3) {
-        this.ttlCount3 = ttlCount3;
+    public void setCollectTime(Long collectTime) {
+        this.collectTime = collectTime;
     }
 
     @Override
@@ -245,14 +185,8 @@ public class MycatSqlSum extends MycatSqlSumKey implements Serializable {
         sb.append(", relatable=").append(relatable);
         sb.append(", relacount=").append(relacount);
         sb.append(", collectType=").append(collectType);
-        sb.append(", timeCount0=").append(timeCount0);
-        sb.append(", timeCount1=").append(timeCount1);
-        sb.append(", timeCount2=").append(timeCount2);
-        sb.append(", timeCount3=").append(timeCount3);
-        sb.append(", ttlCount0=").append(ttlCount0);
-        sb.append(", ttlCount1=").append(ttlCount1);
-        sb.append(", ttlCount2=").append(ttlCount2);
-        sb.append(", ttlCount3=").append(ttlCount3);
+        sb.append(", serverId=").append(serverId);
+        sb.append(", collectTime=").append(collectTime);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

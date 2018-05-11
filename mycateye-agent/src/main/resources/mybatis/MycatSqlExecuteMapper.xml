@@ -8,6 +8,7 @@
     <result column="max_time" jdbcType="DOUBLE" property="maxTime" />
     <result column="min_time" jdbcType="DOUBLE" property="minTime" />
     <result column="server_id" jdbcType="INTEGER" property="serverId" />
+    <result column="collect_time" jdbcType="BIGINT" property="collectTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -68,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    sql_id, sql_execute, sql_time, max_time, min_time, server_id
+    sql_id, sql_execute, sql_time, max_time, min_time, server_id, collect_time
   </sql>
   <select id="selectByExample" parameterType="io.mycat.eye.agent.bean.MycatSqlExecuteExample" resultMap="BaseResultMap">
     select
@@ -102,11 +103,11 @@
   </delete>
   <insert id="insert" parameterType="io.mycat.eye.agent.bean.MycatSqlExecute">
     insert into mycat_sql_execute (sql_id, sql_execute, sql_time, 
-      max_time, min_time, server_id
-      )
+      max_time, min_time, server_id, 
+      collect_time)
     values (#{sqlId,jdbcType=BIGINT}, #{sqlExecute,jdbcType=BIGINT}, #{sqlTime,jdbcType=DOUBLE}, 
-      #{maxTime,jdbcType=DOUBLE}, #{minTime,jdbcType=DOUBLE}, #{serverId,jdbcType=INTEGER}
-      )
+      #{maxTime,jdbcType=DOUBLE}, #{minTime,jdbcType=DOUBLE}, #{serverId,jdbcType=INTEGER}, 
+      #{collectTime,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="io.mycat.eye.agent.bean.MycatSqlExecute">
     insert into mycat_sql_execute
@@ -129,6 +130,9 @@
       <if test="serverId != null">
         server_id,
       </if>
+      <if test="collectTime != null">
+        collect_time,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="sqlId != null">
@@ -148,6 +152,9 @@
       </if>
       <if test="serverId != null">
         #{serverId,jdbcType=INTEGER},
+      </if>
+      <if test="collectTime != null">
+        #{collectTime,jdbcType=BIGINT},
       </if>
     </trim>
   </insert>
@@ -178,6 +185,9 @@
       <if test="record.serverId != null">
         server_id = #{record.serverId,jdbcType=INTEGER},
       </if>
+      <if test="record.collectTime != null">
+        collect_time = #{record.collectTime,jdbcType=BIGINT},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -190,7 +200,8 @@
       sql_time = #{record.sqlTime,jdbcType=DOUBLE},
       max_time = #{record.maxTime,jdbcType=DOUBLE},
       min_time = #{record.minTime,jdbcType=DOUBLE},
-      server_id = #{record.serverId,jdbcType=INTEGER}
+      server_id = #{record.serverId,jdbcType=INTEGER},
+      collect_time = #{record.collectTime,jdbcType=BIGINT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -213,6 +224,9 @@
       <if test="serverId != null">
         server_id = #{serverId,jdbcType=INTEGER},
       </if>
+      <if test="collectTime != null">
+        collect_time = #{collectTime,jdbcType=BIGINT},
+      </if>
     </set>
     where sql_id = #{sqlId,jdbcType=BIGINT}
   </update>
@@ -222,7 +236,8 @@
       sql_time = #{sqlTime,jdbcType=DOUBLE},
       max_time = #{maxTime,jdbcType=DOUBLE},
       min_time = #{minTime,jdbcType=DOUBLE},
-      server_id = #{serverId,jdbcType=INTEGER}
+      server_id = #{serverId,jdbcType=INTEGER},
+      collect_time = #{collectTime,jdbcType=BIGINT}
     where sql_id = #{sqlId,jdbcType=BIGINT}
   </update>
 </mapper>

@@ -90,6 +90,7 @@ public class MycatDataNodeTask extends AbstractTask {
                     dataNode.setRecoveryTime((long) o.get("RECOVERY_TIME"));
                 }
                 dataNode.setServerId(server.getId());
+                dataNode.setCollectTime(System.currentTimeMillis());
                 mycatDataNodeMapper.insertSelective(dataNode);
             });
         }

@@ -31,7 +31,7 @@ public class MycatServerService {
     }
 
     public void updateServer(MycatServer server){
-        mycatServerMapper.updateByPrimaryKey(server);
+        mycatServerMapper.updateByPrimaryKeySelective(server);
     }
 
     public void delete(int id){

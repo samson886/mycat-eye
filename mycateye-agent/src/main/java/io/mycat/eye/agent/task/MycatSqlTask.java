@@ -7,6 +7,7 @@ import io.mycat.eye.agent.dto.QueryResult;
 import io.mycat.eye.agent.mapper.MycatServerMapper;
 import io.mycat.eye.agent.mapper.MycatSqlExecuteMapper;
 import io.mycat.eye.agent.mapper.MycatSqlMapper;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -67,8 +68,13 @@ public class MycatSqlTask extends AbstractTask{
                     sql.setExecuteTime((long) o.get("EXECUTE_TIME"));
                 }
                 if(o.get("SQL")!=null){
-                    sql.setSql((String) o.get("SQL"));
+                    String s = (String) o.get("SQL");
+                    s = StringEscapeUtils.escapeCsv(s);
+                    sql.setcSql(s);
                 }
+                sql.setServerId(server.getId());
+                sql.setCollectTime(System.currentTimeMillis());
+                sql.setStartupTime(server.getStartup());
                 mapper.insertSelective(sql);
             });
         }

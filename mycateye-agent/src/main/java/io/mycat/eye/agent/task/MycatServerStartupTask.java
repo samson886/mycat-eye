@@ -54,6 +54,11 @@ public class MycatServerStartupTask extends AbstractTask {
                     if(server.getStartup() == null || server.getStartup() != ts){
                         logger.debug("=========="+server.getStartup()+" "+o.get("TIMESTAMP")+" -- \n");
                         mycatServer.setStartup(ts);
+                        if(mycatServer.getStartupHistory()!=null) {
+                            mycatServer.setStartupHistory(mycatServer.getStartupHistory() + "," + String.valueOf(ts));
+                        }else{
+                            mycatServer.setStartupHistory(String.valueOf(ts));
+                        }
                         Criteria criteria = mycatServerExample.createCriteria();
                         criteria.andIdEqualTo(server.getId());
                         mycatServerMapper.updateByExampleSelective(mycatServer,mycatServerExample);

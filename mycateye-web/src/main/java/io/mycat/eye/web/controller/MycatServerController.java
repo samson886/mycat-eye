@@ -14,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -61,10 +62,13 @@ public class MycatServerController {
     }
 
     // 新增节点
-    @RequestMapping(value = "detail", method = RequestMethod.POST)
+    @RequestMapping(value = "detail", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity updateServer(@RequestBody MycatServer server){
         RestResponse<Object> response = RestResponse.buildExceptionResponse(200, "ok");
         try{
+            long curTime = System.currentTimeMillis();
+            server.setCreateTime(curTime);
+            server.setLastUpdateTime(curTime);
             mycatServerService.addServer(server);
             return new ResponseEntity(response,HttpStatus.OK);
         }catch (Exception e){
@@ -75,10 +79,13 @@ public class MycatServerController {
     }
 
     // 编辑节点
-    @RequestMapping(value = "detail/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "detail/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity getServer(@PathVariable int id, @RequestBody MycatServer server){
         RestResponse<Object> response = RestResponse.buildExceptionResponse(200, "ok");
         try{
+            if(server.getId() == null){
+                server.setId(id);
+            }
             mycatServerService.updateServer(server);
             return new ResponseEntity(response,HttpStatus.OK);
         }catch (Exception e){

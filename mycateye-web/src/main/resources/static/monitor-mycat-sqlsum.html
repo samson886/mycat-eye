@@ -173,9 +173,6 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>TABLE</th>
-                                    <th>MAX</th>
-                                    <th>NET_IN</th>
-                                    <th>NET_OUT</th>
                                     <th>读写占比</th>
                                     <th>LAST_TIME</th>
                                     <th>relatable</th>
@@ -255,91 +252,208 @@
 
             var table1,table2;
             function fetchUserData(){
-                if(table1){
-                    table1.destroy();
-                }
-                table1 = $('#tab1').find('table').DataTable({
-                    'ajax':'data/sql_sum_user.json',
-                    'columns':[
-                        {'data':'id'},
-                        {'data':'cUser'},
-                        {'data':'sqlMax'},
-                        {'data':'netIn'},
-                        {'data':'netOut'}
-                    ],
-                    'columnDefs': [
-                        {
-                            'render': function(data,type,row){
-                                return '<span class="sparklines sparklines-pie" sparkType="pie" width="42px" height="42px"><!-- '+row['r']+','+row['w']+' --></span>';
-                            },
-                            'targets': 5
-                        },
-                        {
-                            'render': function(data,type,row){
-                                return '<span class="sparklines sparklines-bar" sparkType="bar" width="122px" height="42px"><!-- '+row['timeCount0']+','+row['timeCount1']+','+row['timeCount2']+','+row['timeCount3']+' --></span>';
-                            },
-                            'targets': 6
-                        },
-                        {
-                            'render': function(data,type,row){
-                                return '<span class="sparklines sparklines-bar" sparkType="bar" width="122px" height="42px"><!-- '+row['ttlCount0']+','+row['ttlCount1']+','+row['ttlCount2']+','+row['ttlCount3']+' --></span>';
-                            },
-                            'targets': 7
-                        },
-                        {
-                            'render': function(data,type,row){
-                                //console.log(data,type,row['lastTime'])
-                                return row['lastTime']+'';
-                            },
-                            'targets': 8
+                var server_id = $('#dataNodes').val();
+                $.ajax({
+                    url: '/mycat/sql/sum/user?server_id='+server_id,
+                    method: 'GET',
+                    dataType: 'json',
+                    success: function (res,textStatus) {
+                        // console.log(res.data, textStatus);
+                        var data = res.data || [];
+                        if (res.code == 200) {
+                            if(table1){
+                                table1.destroy();
+                            }
+                            table1 = $('#tab1').find('table').DataTable({
+                                // 'ajax':'/mycat/sql/sum/user?server_id='+server_id,
+                                //'ajax':'data/sql_sum_user.json',
+                                data: data,
+                                'columns': [
+                                    {'data': 'id'},
+                                    {'data': 'cUser'},
+                                    {'data': 'sqlMax'},
+                                    {'data': 'netIn'},
+                                    {'data': 'netOut'}
+                                ],
+                                'columnDefs': [
+                                    {
+                                        'render': function (data, type, row) {
+                                            return '<span class="sparklines sparklines-pie" sparkType="pie" width="42px" height="42px" id="pie1-'+row['sid']+'"><!-- ' + row['r'] + ',' + row['w'] + ' --></span>';
+                                        },
+                                        'targets': 5
+                                    },
+                                    {
+                                        'render': function (data, type, row) {
+                                            var tc = row['timeCount'].replace(' ', '');
+                                            return '<span class="sparklines sparklines-bar" sparkType="bar" width="122px" height="42px" id="bar-'+row['sid']+'"><!-- ' + tc + ' --></span>';
+                                        },
+                                        'targets': 6
+                                    },
+                                    {
+                                        'render': function (data, type, row) {
+                                            var ttl = row['ttlCount'].replace(' ', '');
+                                            return '<span class="sparklines sparklines-bar" sparkType="bar" width="122px" height="42px"><!-- ' + ttl + ' --></span>';
+                                        },
+                                        'targets': 7
+                                    },
+                                    {
+                                        'render': function (data, type, row) {
+                                            //console.log(data,type,row['lastTime'])
+                                            return row['lastTime'] + '';
+                                        },
+                                        'targets': 8
+                                    }
+                                ]
+                            });
+                            drawTable1(data,table1);
                         }
-                    ]
+                    },
+                    error: function (jqXhr,status) {
+                        console.log('err',jqXhr,status);
+                    }
                 });
             }
+
             function fetchTableData(){
-                if(table2){
-                    table2.destroy();
-                }
-                table2 = $('#tab2').find('table').DataTable({
-                    'ajax':'data/sql_sum_table.json',
-                    'columns':[
-                        {'data':'id'},
-                        {'data':'sqlTable'},
-                        {'data':'sqlMax'},
-                        {'data':'netIn'},
-                        {'data':'netOut'}
-                    ],
-                    'columnDefs': [
-                        {
-                            'render': function(data,type,row){
-                                return '<span class="sparklines sparklines-pie" sparkType="pie" width="42px" height="42px"><!-- '+row['r']+','+row['w']+' --></span>';
-                            },
-                            'targets': 5
-                        },
-                        {
-                            'render': function(data,type,row){
-                                return row['lastTime']+'';
-                            },
-                            'targets': 6
-                        },
-                        {
-                            'render': function(data,type,row){
-                                return row['relatable']+'';
-                            },
-                            'targets': 7
-                        },
-                        {
-                            'render': function(data,type,row){
-                                return row['relacount']+'';
-                            },
-                            'targets': 8
+                var server_id = $('#dataNodes').val();
+                $.ajax({
+                    url: '/mycat/sql/sum/table?server_id='+server_id,
+                    method: 'GET',
+                    dataType: 'json',
+                    success: function (res,textStatus) {
+                        // console.log(res.data,textStatus);
+                        var data = res.data || [];
+                        if(res.code == 200){
+                            if(table2){
+                                table2.destroy();
+                            }
+                            table2 = $('#tab2').find('table').DataTable({
+                                //'ajax':'/mycat/sql/sum/table?server_id='+server_id,
+                                //'ajax':'data/sql_sum_table.json',
+                                data: data,
+                                'columns':[
+                                    {'data':'id'},
+                                    {'data':'sqlTable'}
+                                ],
+                                'columnDefs': [
+                                    {
+                                        'render': function(data,type,row){
+                                            return '<span class="sparklines sparklines-pie" sparkType="pie" width="42px" height="42px" id="pie2-'+row['sid']+'"><!-- '+row['r']+','+row['w']+' --></span>';
+                                        },
+                                        'targets': 2
+                                    },
+                                    {
+                                        'render': function(data,type,row){
+                                            return row['lastTime']+'';
+                                        },
+                                        'targets': 3
+                                    },
+                                    {
+                                        'render': function(data,type,row){
+                                            return row['relatable']+'';
+                                        },
+                                        'targets': 4
+                                    },
+                                    {
+                                        'render': function(data,type,row){
+                                            return row['relacount']+'';
+                                        },
+                                        'targets': 5
+                                    }
+                                ]
+                            });
+                            drawTable2(data,table2);
                         }
-                    ]
+                    },
+                    error: function (jqXhr,status) {
+                        console.log('err',jqXhr,status);
+                    }
                 });
             }
+
+            function drawTable1() {
+                $('#tab1').find('.sparklines-pie').each(function (e) {
+                    _this = $(this);
+                    var isSpark = _this.attr('data-spark');
+                    if(!isSpark) {
+                        _this.sparkline('html', {
+                            width: '42px',
+                            height: '42px',
+                            sliceColors: ['#5ca0a7', '#d78169', '#53656f'],
+                            enableTagOptions: true
+                        });
+                        _this.attr('data-spark','1');
+                    }
+                });
+                $('#tab1').find('.sparklines-bar').each(function (e) {
+                    _this = $(this);
+                    var isSpark = _this.attr('data-spark');
+                    if(!isSpark) {
+                        _this.sparkline('html', {
+                            widht: '100px',
+                            height: '60px',
+                            barWidth: '10px',
+                            barColor: '#5ca0a7',
+                            enableTagOptions: true
+                        });
+                        _this.attr('data-spark','1');
+                    }
+                });
+                /*
+                $('#tab1').find('.sparklines-pie').sparkline('html', {
+                    width: '42px',
+                    height: '42px',
+                    sliceColors:['#5ca0a7','#d78169','#53656f'],
+                    enableTagOptions: true
+                });
+                $('#tab1').find('.sparklines-bar').sparkline('html', {
+                    widht: '100px',
+                    height: '60px',
+                    barWidth: '10px',
+                    barColor: '#5ca0a7',
+                    enableTagOptions: true
+                });
+                */
+            }
+            function drawTable2() {
+                $('#tab2').find('.sparklines-pie').each(function (e) {
+                    _this = $(this);
+                    var isSpark = _this.attr('data-spark');
+                    console.log(!isSpark);
+                    if(!isSpark) {
+                        _this.sparkline('html', {
+                            width: '42px',
+                            height: '42px',
+                            sliceColors: ['#5ca0a7', '#d78169', '#53656f'],
+                            enableTagOptions: true
+                        });
+                        _this.attr('data-spark','1');
+                    }
+                });
+                /*
+                $('#tab2').find('.sparklines-pie').sparkline('html', {
+                    width: '42px',
+                    height: '42px',
+                    sliceColors:['#5ca0a7','#d78169','#53656f'],
+                    enableTagOptions: true
+                });
+                */
+            }
+
+            $('#tab1').find('table').on('page.dt', function () {
+                console.log('User redraw',table1.page.info());
+                setTimeout(function(){drawTable1();},300);
+            });
+            $('#tab2').find('table').on('page.dt', function () {
+                console.log('Table redraw' );
+                setTimeout(function(){drawTable2();},300);
+            });
+
+
             fetchUserData();
             fetchTableData();
 
+            /*
             setTimeout(function(){
                 $('.sparklines-pie').sparkline('html', {
                     width: '42px',
@@ -354,7 +468,8 @@
                     barColor: '#5ca0a7',
                     enableTagOptions: true
                 })
-            },100);
+            },500);
+            */
         });
     </script>
 </body>

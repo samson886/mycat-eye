@@ -19,9 +19,9 @@ public class MycatSqlSumService {
     @Autowired
     MycatSqlSumMapper mycatSqlSumMapper;
 
-    public List<MycatSqlSum> getSumUser(MycatSqlSumExample example){
+    public List<MycatSqlSum> getSumList(MycatSqlSumExample example){
         List<MycatSqlSum> list = mycatSqlSumMapper.selectByExample(example);
-
         return list;
     }
+
 }

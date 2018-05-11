@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.mycat.eye.agent.mapper.MycatSqlLargeRsMapper">
+  <resultMap id="BaseResultMap" type="io.mycat.eye.agent.bean.MycatSqlLargeRs">
+    <id column="sid" jdbcType="BIGINT" property="sid" />
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="sql_user" jdbcType="VARCHAR" property="sqlUser" />
+    <result column="frequency" jdbcType="BIGINT" property="frequency" />
+    <result column="resultset_size" jdbcType="BIGINT" property="resultsetSize" />
+    <result column="server_id" jdbcType="INTEGER" property="serverId" />
+    <result column="collect_time" jdbcType="BIGINT" property="collectTime" />
+    <result column="startup_time" jdbcType="BIGINT" property="startupTime" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="io.mycat.eye.agent.bean.MycatSqlLargeRs">
+    <result column="c_sql" jdbcType="LONGVARCHAR" property="cSql" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    sid, id, sql_user, frequency, resultset_size, server_id, collect_time, startup_time
+  </sql>
+  <sql id="Blob_Column_List">
+    c_sql
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="io.mycat.eye.agent.bean.MycatSqlLargeRsExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from mycat_sql_large_rs
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="io.mycat.eye.agent.bean.MycatSqlLargeRsExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from mycat_sql_large_rs
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="io.mycat.eye.agent.bean.MycatSqlLargeRsKey" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from mycat_sql_large_rs
+    where sid = #{sid,jdbcType=BIGINT}
+      and id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="io.mycat.eye.agent.bean.MycatSqlLargeRsKey">
+    delete from mycat_sql_large_rs
+    where sid = #{sid,jdbcType=BIGINT}
+      and id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="io.mycat.eye.agent.bean.MycatSqlLargeRsExample">
+    delete from mycat_sql_large_rs
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="io.mycat.eye.agent.bean.MycatSqlLargeRs">
+    insert into mycat_sql_large_rs (sid, id, sql_user, 
+      frequency, resultset_size, server_id, 
+      collect_time, startup_time, c_sql
+      )
+    values (#{sid,jdbcType=BIGINT}, #{id,jdbcType=BIGINT}, #{sqlUser,jdbcType=VARCHAR}, 
+      #{frequency,jdbcType=BIGINT}, #{resultsetSize,jdbcType=BIGINT}, #{serverId,jdbcType=INTEGER}, 
+      #{collectTime,jdbcType=BIGINT}, #{startupTime,jdbcType=BIGINT}, #{cSql,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="io.mycat.eye.agent.bean.MycatSqlLargeRs">
+    insert into mycat_sql_large_rs
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sid != null">
+        sid,
+      </if>
+      <if test="id != null">
+        id,
+      </if>
+      <if test="sqlUser != null">
+        sql_user,
+      </if>
+      <if test="frequency != null">
+        frequency,
+      </if>
+      <if test="resultsetSize != null">
+        resultset_size,
+      </if>
+      <if test="serverId != null">
+        server_id,
+      </if>
+      <if test="collectTime != null">
+        collect_time,
+      </if>
+      <if test="startupTime != null">
+        startup_time,
+      </if>
+      <if test="cSql != null">
+        c_sql,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sid != null">
+        #{sid,jdbcType=BIGINT},
+      </if>
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="sqlUser != null">
+        #{sqlUser,jdbcType=VARCHAR},
+      </if>
+      <if test="frequency != null">
+        #{frequency,jdbcType=BIGINT},
+      </if>
+      <if test="resultsetSize != null">
+        #{resultsetSize,jdbcType=BIGINT},
+      </if>
+      <if test="serverId != null">
+        #{serverId,jdbcType=INTEGER},
+      </if>
+      <if test="collectTime != null">
+        #{collectTime,jdbcType=BIGINT},
+      </if>
+      <if test="startupTime != null">
+        #{startupTime,jdbcType=BIGINT},
+      </if>
+      <if test="cSql != null">
+        #{cSql,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="io.mycat.eye.agent.bean.MycatSqlLargeRsExample" resultType="java.lang.Long">
+    select count(*) from mycat_sql_large_rs
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update mycat_sql_large_rs
+    <set>
+      <if test="record.sid != null">
+        sid = #{record.sid,jdbcType=BIGINT},
+      </if>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.sqlUser != null">
+        sql_user = #{record.sqlUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.frequency != null">
+        frequency = #{record.frequency,jdbcType=BIGINT},
+      </if>
+      <if test="record.resultsetSize != null">
+        resultset_size = #{record.resultsetSize,jdbcType=BIGINT},
+      </if>
+      <if test="record.serverId != null">
+        server_id = #{record.serverId,jdbcType=INTEGER},
+      </if>
+      <if test="record.collectTime != null">
+        collect_time = #{record.collectTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.startupTime != null">
+        startup_time = #{record.startupTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.cSql != null">
+        c_sql = #{record.cSql,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update mycat_sql_large_rs
+    set sid = #{record.sid,jdbcType=BIGINT},
+      id = #{record.id,jdbcType=BIGINT},
+      sql_user = #{record.sqlUser,jdbcType=VARCHAR},
+      frequency = #{record.frequency,jdbcType=BIGINT},
+      resultset_size = #{record.resultsetSize,jdbcType=BIGINT},
+      server_id = #{record.serverId,jdbcType=INTEGER},
+      collect_time = #{record.collectTime,jdbcType=BIGINT},
+      startup_time = #{record.startupTime,jdbcType=BIGINT},
+      c_sql = #{record.cSql,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update mycat_sql_large_rs
+    set sid = #{record.sid,jdbcType=BIGINT},
+      id = #{record.id,jdbcType=BIGINT},
+      sql_user = #{record.sqlUser,jdbcType=VARCHAR},
+      frequency = #{record.frequency,jdbcType=BIGINT},
+      resultset_size = #{record.resultsetSize,jdbcType=BIGINT},
+      server_id = #{record.serverId,jdbcType=INTEGER},
+      collect_time = #{record.collectTime,jdbcType=BIGINT},
+      startup_time = #{record.startupTime,jdbcType=BIGINT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="io.mycat.eye.agent.bean.MycatSqlLargeRs">
+    update mycat_sql_large_rs
+    <set>
+      <if test="sqlUser != null">
+        sql_user = #{sqlUser,jdbcType=VARCHAR},
+      </if>
+      <if test="frequency != null">
+        frequency = #{frequency,jdbcType=BIGINT},
+      </if>
+      <if test="resultsetSize != null">
+        resultset_size = #{resultsetSize,jdbcType=BIGINT},
+      </if>
+      <if test="serverId != null">
+        server_id = #{serverId,jdbcType=INTEGER},
+      </if>
+      <if test="collectTime != null">
+        collect_time = #{collectTime,jdbcType=BIGINT},
+      </if>
+      <if test="startupTime != null">
+        startup_time = #{startupTime,jdbcType=BIGINT},
+      </if>
+      <if test="cSql != null">
+        c_sql = #{cSql,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where sid = #{sid,jdbcType=BIGINT}
+      and id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="io.mycat.eye.agent.bean.MycatSqlLargeRs">
+    update mycat_sql_large_rs
+    set sql_user = #{sqlUser,jdbcType=VARCHAR},
+      frequency = #{frequency,jdbcType=BIGINT},
+      resultset_size = #{resultsetSize,jdbcType=BIGINT},
+      server_id = #{serverId,jdbcType=INTEGER},
+      collect_time = #{collectTime,jdbcType=BIGINT},
+      startup_time = #{startupTime,jdbcType=BIGINT},
+      c_sql = #{cSql,jdbcType=LONGVARCHAR}
+    where sid = #{sid,jdbcType=BIGINT}
+      and id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="io.mycat.eye.agent.bean.MycatSqlLargeRs">
+    update mycat_sql_large_rs
+    set sql_user = #{sqlUser,jdbcType=VARCHAR},
+      frequency = #{frequency,jdbcType=BIGINT},
+      resultset_size = #{resultsetSize,jdbcType=BIGINT},
+      server_id = #{serverId,jdbcType=INTEGER},
+      collect_time = #{collectTime,jdbcType=BIGINT},
+      startup_time = #{startupTime,jdbcType=BIGINT}
+    where sid = #{sid,jdbcType=BIGINT}
+      and id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -12,7 +12,7 @@ public interface MycatSqlSlowMapper {
 
     int deleteByExample(MycatSqlSlowExample example);
 
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(Long id);
 
     int insert(MycatSqlSlow record);
 
@@ -22,7 +22,7 @@ public interface MycatSqlSlowMapper {
 
     List<MycatSqlSlow> selectByExample(MycatSqlSlowExample example);
 
-    MycatSqlSlow selectByPrimaryKey(Integer id);
+    MycatSqlSlow selectByPrimaryKey(Long id);
 
     int updateByExampleSelective(@Param("record") MycatSqlSlow record, @Param("example") MycatSqlSlowExample example);
 

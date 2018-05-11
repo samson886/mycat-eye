@@ -62,7 +62,7 @@
 			<property name="virtualKeyColumns" value="id" />
 		</table>
 		<table schema="mycat_eye" tableName="mycat_sql" domainObjectName="MycatSql">
-			<property name="virtualKeyColumns" value="id" />
+			<property name="virtualKeyColumns" value="sid,id" />
 		</table>
 		<table schema="mycat_eye" tableName="mycat_sql_execute" domainObjectName="MycatSqlExecute">
 			<property name="virtualKeyColumns" value="sql_id" />
@@ -71,13 +71,22 @@
 			<property name="virtualKeyColumns" value="id" />
 		</table>
 		<table schema="mycat_eye" tableName="mycat_sql_high" domainObjectName="MycatSqlHigh">
-			<property name="virtualKeyColumns" value="id" />
+			<property name="virtualKeyColumns" value="sid,id" />
 		</table>
 		<table schema="mycat_eye" tableName="mycat_sql_slow" domainObjectName="MycatSqlSlow">
 			<property name="virtualKeyColumns" value="id" />
 		</table>
+		<table schema="mycat_eye" tableName="mycat_sql_large" domainObjectName="MycatSqlLarge">
+			<property name="virtualKeyColumns" value="id" />
+		</table>
+		<table schema="mycat_eye" tableName="mycat_sql_large_rs" domainObjectName="MycatSqlLargeRs">
+			<property name="virtualKeyColumns" value="sid,id" />
+		</table>
 		<table schema="mycat_eye" tableName="mycat_sql_sum" domainObjectName="MycatSqlSum">
 			<property name="virtualKeyColumns" value="sid,id" />
+		</table>
+		<table schema="mycat_eye" tableName="mycat_cache" domainObjectName="MycatCache">
+			<property name="virtualKeyColumns" value="id" />
 		</table>
 	</context>
 </generatorConfiguration>

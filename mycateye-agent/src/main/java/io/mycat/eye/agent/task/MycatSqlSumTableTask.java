@@ -58,19 +58,19 @@ public class MycatSqlSumTableTask extends AbstractTask {
             statusList.stream().forEach(o -> {
                 MycatSqlSum sql = new MycatSqlSum();
                 if(o.get("ID")!=null){
-                    sql.setId((int) o.get("ID"));
+                    sql.setId((long) o.get("ID"));
                 }
                 if(o.get("TABLE")!=null){
                     sql.setSqlTable((String) o.get("TABLE"));
                 }
                 if(o.get("R")!=null){
-                    sql.setR((int) o.get("R"));
+                    sql.setR((long) o.get("R"));
                 }
                 if(o.get("W")!=null){
-                    sql.setW((int) o.get("W"));
+                    sql.setW((long) o.get("W"));
                 }
                 if(o.get("R%")!=null){
-                    sql.setrP((float) o.get("R%"));
+                    sql.setrP(Float.valueOf((String) o.get("R%")));
                 }
 
                 if(o.get("RELATABLE")!=null){
@@ -83,6 +83,8 @@ public class MycatSqlSumTableTask extends AbstractTask {
                     sql.setLastTime((long) o.get("LAST_TIME"));
                 }
                 sql.setCollectType("2");
+                sql.setServerId(server.getId());
+                sql.setCollectTime(System.currentTimeMillis());
                 mapper.insertSelective(sql);
             });
         }

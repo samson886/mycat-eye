@@ -6,6 +6,8 @@
     <result column="cluster_name" jdbcType="VARCHAR" property="clusterName" />
     <result column="cluster_host" jdbcType="VARCHAR" property="clusterHost" />
     <result column="cluster_port" jdbcType="INTEGER" property="clusterPort" />
+    <result column="create_time" jdbcType="BIGINT" property="createTime" />
+    <result column="last_update_time" jdbcType="BIGINT" property="lastUpdateTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -66,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, cluster_name, cluster_host, cluster_port
+    id, cluster_name, cluster_host, cluster_port, create_time, last_update_time
   </sql>
   <select id="selectByExample" parameterType="io.mycat.eye.web.bean.MycatClusterExample" resultMap="BaseResultMap">
     select
@@ -100,9 +102,11 @@
   </delete>
   <insert id="insert" parameterType="io.mycat.eye.web.bean.MycatCluster">
     insert into mycat_cluster (id, cluster_name, cluster_host, 
-      cluster_port)
+      cluster_port, create_time, last_update_time
+      )
     values (#{id,jdbcType=INTEGER}, #{clusterName,jdbcType=VARCHAR}, #{clusterHost,jdbcType=VARCHAR}, 
-      #{clusterPort,jdbcType=INTEGER})
+      #{clusterPort,jdbcType=INTEGER}, #{createTime,jdbcType=BIGINT}, #{lastUpdateTime,jdbcType=BIGINT}
+      )
   </insert>
   <insert id="insertSelective" parameterType="io.mycat.eye.web.bean.MycatCluster">
     insert into mycat_cluster
@@ -119,6 +123,12 @@
       <if test="clusterPort != null">
         cluster_port,
       </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="lastUpdateTime != null">
+        last_update_time,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -132,6 +142,12 @@
       </if>
       <if test="clusterPort != null">
         #{clusterPort,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="lastUpdateTime != null">
+        #{lastUpdateTime,jdbcType=BIGINT},
       </if>
     </trim>
   </insert>
@@ -156,6 +172,12 @@
       <if test="record.clusterPort != null">
         cluster_port = #{record.clusterPort,jdbcType=INTEGER},
       </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.lastUpdateTime != null">
+        last_update_time = #{record.lastUpdateTime,jdbcType=BIGINT},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -166,7 +188,9 @@
     set id = #{record.id,jdbcType=INTEGER},
       cluster_name = #{record.clusterName,jdbcType=VARCHAR},
       cluster_host = #{record.clusterHost,jdbcType=VARCHAR},
-      cluster_port = #{record.clusterPort,jdbcType=INTEGER}
+      cluster_port = #{record.clusterPort,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=BIGINT},
+      last_update_time = #{record.lastUpdateTime,jdbcType=BIGINT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -183,6 +207,12 @@
       <if test="clusterPort != null">
         cluster_port = #{clusterPort,jdbcType=INTEGER},
       </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="lastUpdateTime != null">
+        last_update_time = #{lastUpdateTime,jdbcType=BIGINT},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -190,7 +220,9 @@
     update mycat_cluster
     set cluster_name = #{clusterName,jdbcType=VARCHAR},
       cluster_host = #{clusterHost,jdbcType=VARCHAR},
-      cluster_port = #{clusterPort,jdbcType=INTEGER}
+      cluster_port = #{clusterPort,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=BIGINT},
+      last_update_time = #{lastUpdateTime,jdbcType=BIGINT}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

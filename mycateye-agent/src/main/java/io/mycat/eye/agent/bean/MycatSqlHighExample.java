@@ -104,6 +104,66 @@ public class MycatSqlHighExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
+        public Criteria andSidIsNull() {
+            addCriterion("sid is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSidIsNotNull() {
+            addCriterion("sid is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSidEqualTo(Long value) {
+            addCriterion("sid =", value, "sid");
+            return (Criteria) this;
+        }
+
+        public Criteria andSidNotEqualTo(Long value) {
+            addCriterion("sid <>", value, "sid");
+            return (Criteria) this;
+        }
+
+        public Criteria andSidGreaterThan(Long value) {
+            addCriterion("sid >", value, "sid");
+            return (Criteria) this;
+        }
+
+        public Criteria andSidGreaterThanOrEqualTo(Long value) {
+            addCriterion("sid >=", value, "sid");
+            return (Criteria) this;
+        }
+
+        public Criteria andSidLessThan(Long value) {
+            addCriterion("sid <", value, "sid");
+            return (Criteria) this;
+        }
+
+        public Criteria andSidLessThanOrEqualTo(Long value) {
+            addCriterion("sid <=", value, "sid");
+            return (Criteria) this;
+        }
+
+        public Criteria andSidIn(List<Long> values) {
+            addCriterion("sid in", values, "sid");
+            return (Criteria) this;
+        }
+
+        public Criteria andSidNotIn(List<Long> values) {
+            addCriterion("sid not in", values, "sid");
+            return (Criteria) this;
+        }
+
+        public Criteria andSidBetween(Long value1, Long value2) {
+            addCriterion("sid between", value1, value2, "sid");
+            return (Criteria) this;
+        }
+
+        public Criteria andSidNotBetween(Long value1, Long value2) {
+            addCriterion("sid not between", value1, value2, "sid");
+            return (Criteria) this;
+        }
+
         public Criteria andIdIsNull() {
             addCriterion("id is null");
             return (Criteria) this;
@@ -114,52 +174,52 @@ public class MycatSqlHighExample {
             return (Criteria) this;
         }
 
-        public Criteria andIdEqualTo(Integer value) {
+        public Criteria andIdEqualTo(Long value) {
             addCriterion("id =", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdNotEqualTo(Integer value) {
+        public Criteria andIdNotEqualTo(Long value) {
             addCriterion("id <>", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdGreaterThan(Integer value) {
+        public Criteria andIdGreaterThan(Long value) {
             addCriterion("id >", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdGreaterThanOrEqualTo(Integer value) {
+        public Criteria andIdGreaterThanOrEqualTo(Long value) {
             addCriterion("id >=", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdLessThan(Integer value) {
+        public Criteria andIdLessThan(Long value) {
             addCriterion("id <", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdLessThanOrEqualTo(Integer value) {
+        public Criteria andIdLessThanOrEqualTo(Long value) {
             addCriterion("id <=", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdIn(List<Integer> values) {
+        public Criteria andIdIn(List<Long> values) {
             addCriterion("id in", values, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdNotIn(List<Integer> values) {
+        public Criteria andIdNotIn(List<Long> values) {
             addCriterion("id not in", values, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdBetween(Integer value1, Integer value2) {
+        public Criteria andIdBetween(Long value1, Long value2) {
             addCriterion("id between", value1, value2, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdNotBetween(Integer value1, Integer value2) {
+        public Criteria andIdNotBetween(Long value1, Long value2) {
             addCriterion("id not between", value1, value2, "id");
             return (Criteria) this;
         }
@@ -591,6 +651,186 @@ public class MycatSqlHighExample {
 
         public Criteria andLastTimeNotBetween(Long value1, Long value2) {
             addCriterion("last_time not between", value1, value2, "lastTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerIdIsNull() {
+            addCriterion("server_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerIdIsNotNull() {
+            addCriterion("server_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerIdEqualTo(Integer value) {
+            addCriterion("server_id =", value, "serverId");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerIdNotEqualTo(Integer value) {
+            addCriterion("server_id <>", value, "serverId");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerIdGreaterThan(Integer value) {
+            addCriterion("server_id >", value, "serverId");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("server_id >=", value, "serverId");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerIdLessThan(Integer value) {
+            addCriterion("server_id <", value, "serverId");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerIdLessThanOrEqualTo(Integer value) {
+            addCriterion("server_id <=", value, "serverId");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerIdIn(List<Integer> values) {
+            addCriterion("server_id in", values, "serverId");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerIdNotIn(List<Integer> values) {
+            addCriterion("server_id not in", values, "serverId");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerIdBetween(Integer value1, Integer value2) {
+            addCriterion("server_id between", value1, value2, "serverId");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("server_id not between", value1, value2, "serverId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCollectTimeIsNull() {
+            addCriterion("collect_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCollectTimeIsNotNull() {
+            addCriterion("collect_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCollectTimeEqualTo(Long value) {
+            addCriterion("collect_time =", value, "collectTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCollectTimeNotEqualTo(Long value) {
+            addCriterion("collect_time <>", value, "collectTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCollectTimeGreaterThan(Long value) {
+            addCriterion("collect_time >", value, "collectTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCollectTimeGreaterThanOrEqualTo(Long value) {
+            addCriterion("collect_time >=", value, "collectTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCollectTimeLessThan(Long value) {
+            addCriterion("collect_time <", value, "collectTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCollectTimeLessThanOrEqualTo(Long value) {
+            addCriterion("collect_time <=", value, "collectTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCollectTimeIn(List<Long> values) {
+            addCriterion("collect_time in", values, "collectTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCollectTimeNotIn(List<Long> values) {
+            addCriterion("collect_time not in", values, "collectTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCollectTimeBetween(Long value1, Long value2) {
+            addCriterion("collect_time between", value1, value2, "collectTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCollectTimeNotBetween(Long value1, Long value2) {
+            addCriterion("collect_time not between", value1, value2, "collectTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andStartupTimeIsNull() {
+            addCriterion("startup_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStartupTimeIsNotNull() {
+            addCriterion("startup_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStartupTimeEqualTo(Long value) {
+            addCriterion("startup_time =", value, "startupTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andStartupTimeNotEqualTo(Long value) {
+            addCriterion("startup_time <>", value, "startupTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andStartupTimeGreaterThan(Long value) {
+            addCriterion("startup_time >", value, "startupTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andStartupTimeGreaterThanOrEqualTo(Long value) {
+            addCriterion("startup_time >=", value, "startupTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andStartupTimeLessThan(Long value) {
+            addCriterion("startup_time <", value, "startupTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andStartupTimeLessThanOrEqualTo(Long value) {
+            addCriterion("startup_time <=", value, "startupTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andStartupTimeIn(List<Long> values) {
+            addCriterion("startup_time in", values, "startupTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andStartupTimeNotIn(List<Long> values) {
+            addCriterion("startup_time not in", values, "startupTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andStartupTimeBetween(Long value1, Long value2) {
+            addCriterion("startup_time between", value1, value2, "startupTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andStartupTimeNotBetween(Long value1, Long value2) {
+            addCriterion("startup_time not between", value1, value2, "startupTime");
             return (Criteria) this;
         }
     }

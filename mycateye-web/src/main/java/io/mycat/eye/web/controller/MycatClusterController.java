@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -50,10 +51,14 @@ public class MycatClusterController {
         }
     }
 
-    @RequestMapping(value = "detail", method = RequestMethod.POST)
+    @RequestMapping(value = "detail", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity addCluster(@RequestBody MycatCluster cluster){
+        logger.info(cluster.toString());
         RestResponse<Object> response = RestResponse.buildExceptionResponse(200,"successful");
         try{
+            long curTime = System.currentTimeMillis();
+            cluster.setCreateTime(curTime);
+            cluster.setLastUpdateTime(curTime);
             service.addCluster(cluster);
             return new ResponseEntity(response, HttpStatus.OK);
         }catch (Exception e){
@@ -63,10 +68,13 @@ public class MycatClusterController {
         }
     }
 
-    @RequestMapping(value = "detail/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "detail/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity updateCluster(@PathVariable int id,@RequestBody MycatCluster cluster){
         RestResponse<Object> response = RestResponse.buildExceptionResponse(200,"successful");
         try{
+            if(cluster.getId() == null){
+                cluster.setId(id);
+            }
             service.updateCluster(cluster);
             return new ResponseEntity(response, HttpStatus.OK);
         }catch (Exception e){
