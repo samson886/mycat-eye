@@ -2,7 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="io.mycat.eye.agent.mapper.MycatSqlHighMapper">
   <resultMap id="BaseResultMap" type="io.mycat.eye.agent.bean.MycatSqlHigh">
-    <id column="id" jdbcType="INTEGER" property="id" />
+    <id column="sid" jdbcType="BIGINT" property="sid" />
+    <id column="id" jdbcType="BIGINT" property="id" />
     <result column="c_user" jdbcType="VARCHAR" property="cUser" />
     <result column="frequency" jdbcType="BIGINT" property="frequency" />
     <result column="avg_time" jdbcType="BIGINT" property="avgTime" />
@@ -10,9 +11,12 @@
     <result column="min_time" jdbcType="BIGINT" property="minTime" />
     <result column="execute_time" jdbcType="BIGINT" property="executeTime" />
     <result column="last_time" jdbcType="BIGINT" property="lastTime" />
+    <result column="server_id" jdbcType="INTEGER" property="serverId" />
+    <result column="collect_time" jdbcType="BIGINT" property="collectTime" />
+    <result column="startup_time" jdbcType="BIGINT" property="startupTime" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="io.mycat.eye.agent.bean.MycatSqlHigh">
-    <result column="sql" jdbcType="LONGVARCHAR" property="sql" />
+    <result column="c_sql" jdbcType="LONGVARCHAR" property="cSql" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -73,10 +77,11 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, c_user, frequency, avg_time, max_time, min_time, execute_time, last_time
+    sid, id, c_user, frequency, avg_time, max_time, min_time, execute_time, last_time, 
+    server_id, collect_time, startup_time
   </sql>
   <sql id="Blob_Column_List">
-    sql
+    c_sql
   </sql>
   <select id="selectByExampleWithBLOBs" parameterType="io.mycat.eye.agent.bean.MycatSqlHighExample" resultMap="ResultMapWithBLOBs">
     select
@@ -108,17 +113,19 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+  <select id="selectByPrimaryKey" parameterType="io.mycat.eye.agent.bean.MycatSqlHighKey" resultMap="ResultMapWithBLOBs">
     select 
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
     from mycat_sql_high
-    where id = #{id,jdbcType=INTEGER}
+    where sid = #{sid,jdbcType=BIGINT}
+      and id = #{id,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <delete id="deleteByPrimaryKey" parameterType="io.mycat.eye.agent.bean.MycatSqlHighKey">
     delete from mycat_sql_high
-    where id = #{id,jdbcType=INTEGER}
+    where sid = #{sid,jdbcType=BIGINT}
+      and id = #{id,jdbcType=BIGINT}
   </delete>
   <delete id="deleteByExample" parameterType="io.mycat.eye.agent.bean.MycatSqlHighExample">
     delete from mycat_sql_high
@@ -127,18 +134,23 @@
     </if>
   </delete>
   <insert id="insert" parameterType="io.mycat.eye.agent.bean.MycatSqlHigh">
-    insert into mycat_sql_high (id, c_user, frequency, 
-      avg_time, max_time, min_time, 
-      execute_time, last_time, sql
-      )
-    values (#{id,jdbcType=INTEGER}, #{cUser,jdbcType=VARCHAR}, #{frequency,jdbcType=BIGINT}, 
-      #{avgTime,jdbcType=BIGINT}, #{maxTime,jdbcType=BIGINT}, #{minTime,jdbcType=BIGINT}, 
-      #{executeTime,jdbcType=BIGINT}, #{lastTime,jdbcType=BIGINT}, #{sql,jdbcType=LONGVARCHAR}
-      )
+    insert into mycat_sql_high (sid, id, c_user, 
+      frequency, avg_time, max_time, 
+      min_time, execute_time, last_time, 
+      server_id, collect_time, startup_time, 
+      c_sql)
+    values (#{sid,jdbcType=BIGINT}, #{id,jdbcType=BIGINT}, #{cUser,jdbcType=VARCHAR}, 
+      #{frequency,jdbcType=BIGINT}, #{avgTime,jdbcType=BIGINT}, #{maxTime,jdbcType=BIGINT}, 
+      #{minTime,jdbcType=BIGINT}, #{executeTime,jdbcType=BIGINT}, #{lastTime,jdbcType=BIGINT}, 
+      #{serverId,jdbcType=INTEGER}, #{collectTime,jdbcType=BIGINT}, #{startupTime,jdbcType=BIGINT}, 
+      #{cSql,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="io.mycat.eye.agent.bean.MycatSqlHigh">
     insert into mycat_sql_high
     <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sid != null">
+        sid,
+      </if>
       <if test="id != null">
         id,
       </if>
@@ -163,13 +175,25 @@
       <if test="lastTime != null">
         last_time,
       </if>
-      <if test="sql != null">
-        sql,
+      <if test="serverId != null">
+        server_id,
+      </if>
+      <if test="collectTime != null">
+        collect_time,
+      </if>
+      <if test="startupTime != null">
+        startup_time,
+      </if>
+      <if test="cSql != null">
+        c_sql,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sid != null">
+        #{sid,jdbcType=BIGINT},
+      </if>
       <if test="id != null">
-        #{id,jdbcType=INTEGER},
+        #{id,jdbcType=BIGINT},
       </if>
       <if test="cUser != null">
         #{cUser,jdbcType=VARCHAR},
@@ -192,8 +216,17 @@
       <if test="lastTime != null">
         #{lastTime,jdbcType=BIGINT},
       </if>
-      <if test="sql != null">
-        #{sql,jdbcType=LONGVARCHAR},
+      <if test="serverId != null">
+        #{serverId,jdbcType=INTEGER},
+      </if>
+      <if test="collectTime != null">
+        #{collectTime,jdbcType=BIGINT},
+      </if>
+      <if test="startupTime != null">
+        #{startupTime,jdbcType=BIGINT},
+      </if>
+      <if test="cSql != null">
+        #{cSql,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -206,8 +239,11 @@
   <update id="updateByExampleSelective" parameterType="map">
     update mycat_sql_high
     <set>
+      <if test="record.sid != null">
+        sid = #{record.sid,jdbcType=BIGINT},
+      </if>
       <if test="record.id != null">
-        id = #{record.id,jdbcType=INTEGER},
+        id = #{record.id,jdbcType=BIGINT},
       </if>
       <if test="record.cUser != null">
         c_user = #{record.cUser,jdbcType=VARCHAR},
@@ -230,8 +266,17 @@
       <if test="record.lastTime != null">
         last_time = #{record.lastTime,jdbcType=BIGINT},
       </if>
-      <if test="record.sql != null">
-        sql = #{record.sql,jdbcType=LONGVARCHAR},
+      <if test="record.serverId != null">
+        server_id = #{record.serverId,jdbcType=INTEGER},
+      </if>
+      <if test="record.collectTime != null">
+        collect_time = #{record.collectTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.startupTime != null">
+        startup_time = #{record.startupTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.cSql != null">
+        c_sql = #{record.cSql,jdbcType=LONGVARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -240,7 +285,8 @@
   </update>
   <update id="updateByExampleWithBLOBs" parameterType="map">
     update mycat_sql_high
-    set id = #{record.id,jdbcType=INTEGER},
+    set sid = #{record.sid,jdbcType=BIGINT},
+      id = #{record.id,jdbcType=BIGINT},
       c_user = #{record.cUser,jdbcType=VARCHAR},
       frequency = #{record.frequency,jdbcType=BIGINT},
       avg_time = #{record.avgTime,jdbcType=BIGINT},
@@ -248,21 +294,28 @@
       min_time = #{record.minTime,jdbcType=BIGINT},
       execute_time = #{record.executeTime,jdbcType=BIGINT},
       last_time = #{record.lastTime,jdbcType=BIGINT},
-      sql = #{record.sql,jdbcType=LONGVARCHAR}
+      server_id = #{record.serverId,jdbcType=INTEGER},
+      collect_time = #{record.collectTime,jdbcType=BIGINT},
+      startup_time = #{record.startupTime,jdbcType=BIGINT},
+      c_sql = #{record.cSql,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
     update mycat_sql_high
-    set id = #{record.id,jdbcType=INTEGER},
+    set sid = #{record.sid,jdbcType=BIGINT},
+      id = #{record.id,jdbcType=BIGINT},
       c_user = #{record.cUser,jdbcType=VARCHAR},
       frequency = #{record.frequency,jdbcType=BIGINT},
       avg_time = #{record.avgTime,jdbcType=BIGINT},
       max_time = #{record.maxTime,jdbcType=BIGINT},
       min_time = #{record.minTime,jdbcType=BIGINT},
       execute_time = #{record.executeTime,jdbcType=BIGINT},
-      last_time = #{record.lastTime,jdbcType=BIGINT}
+      last_time = #{record.lastTime,jdbcType=BIGINT},
+      server_id = #{record.serverId,jdbcType=INTEGER},
+      collect_time = #{record.collectTime,jdbcType=BIGINT},
+      startup_time = #{record.startupTime,jdbcType=BIGINT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -291,11 +344,21 @@
       <if test="lastTime != null">
         last_time = #{lastTime,jdbcType=BIGINT},
       </if>
-      <if test="sql != null">
-        sql = #{sql,jdbcType=LONGVARCHAR},
+      <if test="serverId != null">
+        server_id = #{serverId,jdbcType=INTEGER},
+      </if>
+      <if test="collectTime != null">
+        collect_time = #{collectTime,jdbcType=BIGINT},
+      </if>
+      <if test="startupTime != null">
+        startup_time = #{startupTime,jdbcType=BIGINT},
+      </if>
+      <if test="cSql != null">
+        c_sql = #{cSql,jdbcType=LONGVARCHAR},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where sid = #{sid,jdbcType=BIGINT}
+      and id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="io.mycat.eye.agent.bean.MycatSqlHigh">
     update mycat_sql_high
@@ -306,8 +369,12 @@
       min_time = #{minTime,jdbcType=BIGINT},
       execute_time = #{executeTime,jdbcType=BIGINT},
       last_time = #{lastTime,jdbcType=BIGINT},
-      sql = #{sql,jdbcType=LONGVARCHAR}
-    where id = #{id,jdbcType=INTEGER}
+      server_id = #{serverId,jdbcType=INTEGER},
+      collect_time = #{collectTime,jdbcType=BIGINT},
+      startup_time = #{startupTime,jdbcType=BIGINT},
+      c_sql = #{cSql,jdbcType=LONGVARCHAR}
+    where sid = #{sid,jdbcType=BIGINT}
+      and id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="io.mycat.eye.agent.bean.MycatSqlHigh">
     update mycat_sql_high
@@ -317,7 +384,11 @@
       max_time = #{maxTime,jdbcType=BIGINT},
       min_time = #{minTime,jdbcType=BIGINT},
       execute_time = #{executeTime,jdbcType=BIGINT},
-      last_time = #{lastTime,jdbcType=BIGINT}
-    where id = #{id,jdbcType=INTEGER}
+      last_time = #{lastTime,jdbcType=BIGINT},
+      server_id = #{serverId,jdbcType=INTEGER},
+      collect_time = #{collectTime,jdbcType=BIGINT},
+      startup_time = #{startupTime,jdbcType=BIGINT}
+    where sid = #{sid,jdbcType=BIGINT}
+      and id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

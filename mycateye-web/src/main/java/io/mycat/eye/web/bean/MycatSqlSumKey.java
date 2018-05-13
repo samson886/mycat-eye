@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class MycatSqlSumKey implements Serializable {
     private Integer sid;
 
-    private Integer id;
+    private Long id;
 
     private static final long serialVersionUID = 1L;
 
@@ -17,11 +17,11 @@ public class MycatSqlSumKey implements Serializable {
         this.sid = sid;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

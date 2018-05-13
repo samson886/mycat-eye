@@ -29,7 +29,7 @@ public class MycatClusterService {
     }
 
     public void updateCluster(MycatCluster cluster){
-        mapper.updateByPrimaryKey(cluster);
+        mapper.updateByPrimaryKeySelective(cluster);
     }
 
     public void deleteCluster(int id){

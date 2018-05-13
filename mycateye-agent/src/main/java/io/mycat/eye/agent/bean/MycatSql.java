@@ -2,26 +2,22 @@ package io.mycat.eye.agent.bean;
 
 import java.io.Serializable;
 
-public class MycatSql implements Serializable {
-    private Long id;
-
+public class MycatSql extends MycatSqlKey implements Serializable {
     private String cUser;
 
     private Long startTime;
 
     private Long executeTime;
 
-    private String sql;
+    private Integer serverId;
+
+    private Long collectTime;
+
+    private Long startupTime;
+
+    private String cSql;
 
     private static final long serialVersionUID = 1L;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getcUser() {
         return cUser;
@@ -47,12 +43,36 @@ public class MycatSql implements Serializable {
         this.executeTime = executeTime;
     }
 
-    public String getSql() {
-        return sql;
+    public Integer getServerId() {
+        return serverId;
     }
 
-    public void setSql(String sql) {
-        this.sql = sql;
+    public void setServerId(Integer serverId) {
+        this.serverId = serverId;
+    }
+
+    public Long getCollectTime() {
+        return collectTime;
+    }
+
+    public void setCollectTime(Long collectTime) {
+        this.collectTime = collectTime;
+    }
+
+    public Long getStartupTime() {
+        return startupTime;
+    }
+
+    public void setStartupTime(Long startupTime) {
+        this.startupTime = startupTime;
+    }
+
+    public String getcSql() {
+        return cSql;
+    }
+
+    public void setcSql(String cSql) {
+        this.cSql = cSql;
     }
 
     @Override
@@ -61,11 +81,13 @@ public class MycatSql implements Serializable {
         sb.append(getClass().getSimpleName());
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
         sb.append(", cUser=").append(cUser);
         sb.append(", startTime=").append(startTime);
         sb.append(", executeTime=").append(executeTime);
-        sb.append(", sql=").append(sql);
+        sb.append(", serverId=").append(serverId);
+        sb.append(", collectTime=").append(collectTime);
+        sb.append(", startupTime=").append(startupTime);
+        sb.append(", cSql=").append(cSql);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

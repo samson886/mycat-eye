@@ -164,343 +164,663 @@ public class MycatDirectMemoryExample {
             return (Criteria) this;
         }
 
+        public Criteria andThreadIdIsNull() {
+            addCriterion("thread_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andThreadIdIsNotNull() {
+            addCriterion("thread_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andThreadIdEqualTo(Long value) {
+            addCriterion("thread_id =", value, "threadId");
+            return (Criteria) this;
+        }
+
+        public Criteria andThreadIdNotEqualTo(Long value) {
+            addCriterion("thread_id <>", value, "threadId");
+            return (Criteria) this;
+        }
+
+        public Criteria andThreadIdGreaterThan(Long value) {
+            addCriterion("thread_id >", value, "threadId");
+            return (Criteria) this;
+        }
+
+        public Criteria andThreadIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("thread_id >=", value, "threadId");
+            return (Criteria) this;
+        }
+
+        public Criteria andThreadIdLessThan(Long value) {
+            addCriterion("thread_id <", value, "threadId");
+            return (Criteria) this;
+        }
+
+        public Criteria andThreadIdLessThanOrEqualTo(Long value) {
+            addCriterion("thread_id <=", value, "threadId");
+            return (Criteria) this;
+        }
+
+        public Criteria andThreadIdIn(List<Long> values) {
+            addCriterion("thread_id in", values, "threadId");
+            return (Criteria) this;
+        }
+
+        public Criteria andThreadIdNotIn(List<Long> values) {
+            addCriterion("thread_id not in", values, "threadId");
+            return (Criteria) this;
+        }
+
+        public Criteria andThreadIdBetween(Long value1, Long value2) {
+            addCriterion("thread_id between", value1, value2, "threadId");
+            return (Criteria) this;
+        }
+
+        public Criteria andThreadIdNotBetween(Long value1, Long value2) {
+            addCriterion("thread_id not between", value1, value2, "threadId");
+            return (Criteria) this;
+        }
+
+        public Criteria andMemUseTypeIsNull() {
+            addCriterion("mem_use_type is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMemUseTypeIsNotNull() {
+            addCriterion("mem_use_type is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMemUseTypeEqualTo(String value) {
+            addCriterion("mem_use_type =", value, "memUseType");
+            return (Criteria) this;
+        }
+
+        public Criteria andMemUseTypeNotEqualTo(String value) {
+            addCriterion("mem_use_type <>", value, "memUseType");
+            return (Criteria) this;
+        }
+
+        public Criteria andMemUseTypeGreaterThan(String value) {
+            addCriterion("mem_use_type >", value, "memUseType");
+            return (Criteria) this;
+        }
+
+        public Criteria andMemUseTypeGreaterThanOrEqualTo(String value) {
+            addCriterion("mem_use_type >=", value, "memUseType");
+            return (Criteria) this;
+        }
+
+        public Criteria andMemUseTypeLessThan(String value) {
+            addCriterion("mem_use_type <", value, "memUseType");
+            return (Criteria) this;
+        }
+
+        public Criteria andMemUseTypeLessThanOrEqualTo(String value) {
+            addCriterion("mem_use_type <=", value, "memUseType");
+            return (Criteria) this;
+        }
+
+        public Criteria andMemUseTypeLike(String value) {
+            addCriterion("mem_use_type like", value, "memUseType");
+            return (Criteria) this;
+        }
+
+        public Criteria andMemUseTypeNotLike(String value) {
+            addCriterion("mem_use_type not like", value, "memUseType");
+            return (Criteria) this;
+        }
+
+        public Criteria andMemUseTypeIn(List<String> values) {
+            addCriterion("mem_use_type in", values, "memUseType");
+            return (Criteria) this;
+        }
+
+        public Criteria andMemUseTypeNotIn(List<String> values) {
+            addCriterion("mem_use_type not in", values, "memUseType");
+            return (Criteria) this;
+        }
+
+        public Criteria andMemUseTypeBetween(String value1, String value2) {
+            addCriterion("mem_use_type between", value1, value2, "memUseType");
+            return (Criteria) this;
+        }
+
+        public Criteria andMemUseTypeNotBetween(String value1, String value2) {
+            addCriterion("mem_use_type not between", value1, value2, "memUseType");
+            return (Criteria) this;
+        }
+
+        public Criteria andMSizeIsNull() {
+            addCriterion("m_size is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMSizeIsNotNull() {
+            addCriterion("m_size is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMSizeEqualTo(String value) {
+            addCriterion("m_size =", value, "mSize");
+            return (Criteria) this;
+        }
+
+        public Criteria andMSizeNotEqualTo(String value) {
+            addCriterion("m_size <>", value, "mSize");
+            return (Criteria) this;
+        }
+
+        public Criteria andMSizeGreaterThan(String value) {
+            addCriterion("m_size >", value, "mSize");
+            return (Criteria) this;
+        }
+
+        public Criteria andMSizeGreaterThanOrEqualTo(String value) {
+            addCriterion("m_size >=", value, "mSize");
+            return (Criteria) this;
+        }
+
+        public Criteria andMSizeLessThan(String value) {
+            addCriterion("m_size <", value, "mSize");
+            return (Criteria) this;
+        }
+
+        public Criteria andMSizeLessThanOrEqualTo(String value) {
+            addCriterion("m_size <=", value, "mSize");
+            return (Criteria) this;
+        }
+
+        public Criteria andMSizeLike(String value) {
+            addCriterion("m_size like", value, "mSize");
+            return (Criteria) this;
+        }
+
+        public Criteria andMSizeNotLike(String value) {
+            addCriterion("m_size not like", value, "mSize");
+            return (Criteria) this;
+        }
+
+        public Criteria andMSizeIn(List<String> values) {
+            addCriterion("m_size in", values, "mSize");
+            return (Criteria) this;
+        }
+
+        public Criteria andMSizeNotIn(List<String> values) {
+            addCriterion("m_size not in", values, "mSize");
+            return (Criteria) this;
+        }
+
+        public Criteria andMSizeBetween(String value1, String value2) {
+            addCriterion("m_size between", value1, value2, "mSize");
+            return (Criteria) this;
+        }
+
+        public Criteria andMSizeNotBetween(String value1, String value2) {
+            addCriterion("m_size not between", value1, value2, "mSize");
+            return (Criteria) this;
+        }
+
         public Criteria andMdirectMemoryMaxedIsNull() {
-            addCriterion("MDIRECT_MEMORY_MAXED is null");
+            addCriterion("mdirect_memory_maxed is null");
             return (Criteria) this;
         }
 
         public Criteria andMdirectMemoryMaxedIsNotNull() {
-            addCriterion("MDIRECT_MEMORY_MAXED is not null");
+            addCriterion("mdirect_memory_maxed is not null");
             return (Criteria) this;
         }
 
         public Criteria andMdirectMemoryMaxedEqualTo(String value) {
-            addCriterion("MDIRECT_MEMORY_MAXED =", value, "mdirectMemoryMaxed");
+            addCriterion("mdirect_memory_maxed =", value, "mdirectMemoryMaxed");
             return (Criteria) this;
         }
 
         public Criteria andMdirectMemoryMaxedNotEqualTo(String value) {
-            addCriterion("MDIRECT_MEMORY_MAXED <>", value, "mdirectMemoryMaxed");
+            addCriterion("mdirect_memory_maxed <>", value, "mdirectMemoryMaxed");
             return (Criteria) this;
         }
 
         public Criteria andMdirectMemoryMaxedGreaterThan(String value) {
-            addCriterion("MDIRECT_MEMORY_MAXED >", value, "mdirectMemoryMaxed");
+            addCriterion("mdirect_memory_maxed >", value, "mdirectMemoryMaxed");
             return (Criteria) this;
         }
 
         public Criteria andMdirectMemoryMaxedGreaterThanOrEqualTo(String value) {
-            addCriterion("MDIRECT_MEMORY_MAXED >=", value, "mdirectMemoryMaxed");
+            addCriterion("mdirect_memory_maxed >=", value, "mdirectMemoryMaxed");
             return (Criteria) this;
         }
 
         public Criteria andMdirectMemoryMaxedLessThan(String value) {
-            addCriterion("MDIRECT_MEMORY_MAXED <", value, "mdirectMemoryMaxed");
+            addCriterion("mdirect_memory_maxed <", value, "mdirectMemoryMaxed");
             return (Criteria) this;
         }
 
         public Criteria andMdirectMemoryMaxedLessThanOrEqualTo(String value) {
-            addCriterion("MDIRECT_MEMORY_MAXED <=", value, "mdirectMemoryMaxed");
+            addCriterion("mdirect_memory_maxed <=", value, "mdirectMemoryMaxed");
             return (Criteria) this;
         }
 
         public Criteria andMdirectMemoryMaxedLike(String value) {
-            addCriterion("MDIRECT_MEMORY_MAXED like", value, "mdirectMemoryMaxed");
+            addCriterion("mdirect_memory_maxed like", value, "mdirectMemoryMaxed");
             return (Criteria) this;
         }
 
         public Criteria andMdirectMemoryMaxedNotLike(String value) {
-            addCriterion("MDIRECT_MEMORY_MAXED not like", value, "mdirectMemoryMaxed");
+            addCriterion("mdirect_memory_maxed not like", value, "mdirectMemoryMaxed");
             return (Criteria) this;
         }
 
         public Criteria andMdirectMemoryMaxedIn(List<String> values) {
-            addCriterion("MDIRECT_MEMORY_MAXED in", values, "mdirectMemoryMaxed");
+            addCriterion("mdirect_memory_maxed in", values, "mdirectMemoryMaxed");
             return (Criteria) this;
         }
 
         public Criteria andMdirectMemoryMaxedNotIn(List<String> values) {
-            addCriterion("MDIRECT_MEMORY_MAXED not in", values, "mdirectMemoryMaxed");
+            addCriterion("mdirect_memory_maxed not in", values, "mdirectMemoryMaxed");
             return (Criteria) this;
         }
 
         public Criteria andMdirectMemoryMaxedBetween(String value1, String value2) {
-            addCriterion("MDIRECT_MEMORY_MAXED between", value1, value2, "mdirectMemoryMaxed");
+            addCriterion("mdirect_memory_maxed between", value1, value2, "mdirectMemoryMaxed");
             return (Criteria) this;
         }
 
         public Criteria andMdirectMemoryMaxedNotBetween(String value1, String value2) {
-            addCriterion("MDIRECT_MEMORY_MAXED not between", value1, value2, "mdirectMemoryMaxed");
+            addCriterion("mdirect_memory_maxed not between", value1, value2, "mdirectMemoryMaxed");
             return (Criteria) this;
         }
 
         public Criteria andDirectMemoryUsedIsNull() {
-            addCriterion("DIRECT_MEMORY_USED is null");
+            addCriterion("direct_memory_used is null");
             return (Criteria) this;
         }
 
         public Criteria andDirectMemoryUsedIsNotNull() {
-            addCriterion("DIRECT_MEMORY_USED is not null");
+            addCriterion("direct_memory_used is not null");
             return (Criteria) this;
         }
 
         public Criteria andDirectMemoryUsedEqualTo(String value) {
-            addCriterion("DIRECT_MEMORY_USED =", value, "directMemoryUsed");
+            addCriterion("direct_memory_used =", value, "directMemoryUsed");
             return (Criteria) this;
         }
 
         public Criteria andDirectMemoryUsedNotEqualTo(String value) {
-            addCriterion("DIRECT_MEMORY_USED <>", value, "directMemoryUsed");
+            addCriterion("direct_memory_used <>", value, "directMemoryUsed");
             return (Criteria) this;
         }
 
         public Criteria andDirectMemoryUsedGreaterThan(String value) {
-            addCriterion("DIRECT_MEMORY_USED >", value, "directMemoryUsed");
+            addCriterion("direct_memory_used >", value, "directMemoryUsed");
             return (Criteria) this;
         }
 
         public Criteria andDirectMemoryUsedGreaterThanOrEqualTo(String value) {
-            addCriterion("DIRECT_MEMORY_USED >=", value, "directMemoryUsed");
+            addCriterion("direct_memory_used >=", value, "directMemoryUsed");
             return (Criteria) this;
         }
 
         public Criteria andDirectMemoryUsedLessThan(String value) {
-            addCriterion("DIRECT_MEMORY_USED <", value, "directMemoryUsed");
+            addCriterion("direct_memory_used <", value, "directMemoryUsed");
             return (Criteria) this;
         }
 
         public Criteria andDirectMemoryUsedLessThanOrEqualTo(String value) {
-            addCriterion("DIRECT_MEMORY_USED <=", value, "directMemoryUsed");
+            addCriterion("direct_memory_used <=", value, "directMemoryUsed");
             return (Criteria) this;
         }
 
         public Criteria andDirectMemoryUsedLike(String value) {
-            addCriterion("DIRECT_MEMORY_USED like", value, "directMemoryUsed");
+            addCriterion("direct_memory_used like", value, "directMemoryUsed");
             return (Criteria) this;
         }
 
         public Criteria andDirectMemoryUsedNotLike(String value) {
-            addCriterion("DIRECT_MEMORY_USED not like", value, "directMemoryUsed");
+            addCriterion("direct_memory_used not like", value, "directMemoryUsed");
             return (Criteria) this;
         }
 
         public Criteria andDirectMemoryUsedIn(List<String> values) {
-            addCriterion("DIRECT_MEMORY_USED in", values, "directMemoryUsed");
+            addCriterion("direct_memory_used in", values, "directMemoryUsed");
             return (Criteria) this;
         }
 
         public Criteria andDirectMemoryUsedNotIn(List<String> values) {
-            addCriterion("DIRECT_MEMORY_USED not in", values, "directMemoryUsed");
+            addCriterion("direct_memory_used not in", values, "directMemoryUsed");
             return (Criteria) this;
         }
 
         public Criteria andDirectMemoryUsedBetween(String value1, String value2) {
-            addCriterion("DIRECT_MEMORY_USED between", value1, value2, "directMemoryUsed");
+            addCriterion("direct_memory_used between", value1, value2, "directMemoryUsed");
             return (Criteria) this;
         }
 
         public Criteria andDirectMemoryUsedNotBetween(String value1, String value2) {
-            addCriterion("DIRECT_MEMORY_USED not between", value1, value2, "directMemoryUsed");
+            addCriterion("direct_memory_used not between", value1, value2, "directMemoryUsed");
             return (Criteria) this;
         }
 
         public Criteria andDirectMemoryAvailableIsNull() {
-            addCriterion("DIRECT_MEMORY_AVAILABLE is null");
+            addCriterion("direct_memory_available is null");
             return (Criteria) this;
         }
 
         public Criteria andDirectMemoryAvailableIsNotNull() {
-            addCriterion("DIRECT_MEMORY_AVAILABLE is not null");
+            addCriterion("direct_memory_available is not null");
             return (Criteria) this;
         }
 
         public Criteria andDirectMemoryAvailableEqualTo(String value) {
-            addCriterion("DIRECT_MEMORY_AVAILABLE =", value, "directMemoryAvailable");
+            addCriterion("direct_memory_available =", value, "directMemoryAvailable");
             return (Criteria) this;
         }
 
         public Criteria andDirectMemoryAvailableNotEqualTo(String value) {
-            addCriterion("DIRECT_MEMORY_AVAILABLE <>", value, "directMemoryAvailable");
+            addCriterion("direct_memory_available <>", value, "directMemoryAvailable");
             return (Criteria) this;
         }
 
         public Criteria andDirectMemoryAvailableGreaterThan(String value) {
-            addCriterion("DIRECT_MEMORY_AVAILABLE >", value, "directMemoryAvailable");
+            addCriterion("direct_memory_available >", value, "directMemoryAvailable");
             return (Criteria) this;
         }
 
         public Criteria andDirectMemoryAvailableGreaterThanOrEqualTo(String value) {
-            addCriterion("DIRECT_MEMORY_AVAILABLE >=", value, "directMemoryAvailable");
+            addCriterion("direct_memory_available >=", value, "directMemoryAvailable");
             return (Criteria) this;
         }
 
         public Criteria andDirectMemoryAvailableLessThan(String value) {
-            addCriterion("DIRECT_MEMORY_AVAILABLE <", value, "directMemoryAvailable");
+            addCriterion("direct_memory_available <", value, "directMemoryAvailable");
             return (Criteria) this;
         }
 
         public Criteria andDirectMemoryAvailableLessThanOrEqualTo(String value) {
-            addCriterion("DIRECT_MEMORY_AVAILABLE <=", value, "directMemoryAvailable");
+            addCriterion("direct_memory_available <=", value, "directMemoryAvailable");
             return (Criteria) this;
         }
 
         public Criteria andDirectMemoryAvailableLike(String value) {
-            addCriterion("DIRECT_MEMORY_AVAILABLE like", value, "directMemoryAvailable");
+            addCriterion("direct_memory_available like", value, "directMemoryAvailable");
             return (Criteria) this;
         }
 
         public Criteria andDirectMemoryAvailableNotLike(String value) {
-            addCriterion("DIRECT_MEMORY_AVAILABLE not like", value, "directMemoryAvailable");
+            addCriterion("direct_memory_available not like", value, "directMemoryAvailable");
             return (Criteria) this;
         }
 
         public Criteria andDirectMemoryAvailableIn(List<String> values) {
-            addCriterion("DIRECT_MEMORY_AVAILABLE in", values, "directMemoryAvailable");
+            addCriterion("direct_memory_available in", values, "directMemoryAvailable");
             return (Criteria) this;
         }
 
         public Criteria andDirectMemoryAvailableNotIn(List<String> values) {
-            addCriterion("DIRECT_MEMORY_AVAILABLE not in", values, "directMemoryAvailable");
+            addCriterion("direct_memory_available not in", values, "directMemoryAvailable");
             return (Criteria) this;
         }
 
         public Criteria andDirectMemoryAvailableBetween(String value1, String value2) {
-            addCriterion("DIRECT_MEMORY_AVAILABLE between", value1, value2, "directMemoryAvailable");
+            addCriterion("direct_memory_available between", value1, value2, "directMemoryAvailable");
             return (Criteria) this;
         }
 
         public Criteria andDirectMemoryAvailableNotBetween(String value1, String value2) {
-            addCriterion("DIRECT_MEMORY_AVAILABLE not between", value1, value2, "directMemoryAvailable");
+            addCriterion("direct_memory_available not between", value1, value2, "directMemoryAvailable");
             return (Criteria) this;
         }
 
         public Criteria andSafetyFractionIsNull() {
-            addCriterion("SAFETY_FRACTION is null");
+            addCriterion("safety_fraction is null");
             return (Criteria) this;
         }
 
         public Criteria andSafetyFractionIsNotNull() {
-            addCriterion("SAFETY_FRACTION is not null");
+            addCriterion("safety_fraction is not null");
             return (Criteria) this;
         }
 
         public Criteria andSafetyFractionEqualTo(Float value) {
-            addCriterion("SAFETY_FRACTION =", value, "safetyFraction");
+            addCriterion("safety_fraction =", value, "safetyFraction");
             return (Criteria) this;
         }
 
         public Criteria andSafetyFractionNotEqualTo(Float value) {
-            addCriterion("SAFETY_FRACTION <>", value, "safetyFraction");
+            addCriterion("safety_fraction <>", value, "safetyFraction");
             return (Criteria) this;
         }
 
         public Criteria andSafetyFractionGreaterThan(Float value) {
-            addCriterion("SAFETY_FRACTION >", value, "safetyFraction");
+            addCriterion("safety_fraction >", value, "safetyFraction");
             return (Criteria) this;
         }
 
         public Criteria andSafetyFractionGreaterThanOrEqualTo(Float value) {
-            addCriterion("SAFETY_FRACTION >=", value, "safetyFraction");
+            addCriterion("safety_fraction >=", value, "safetyFraction");
             return (Criteria) this;
         }
 
         public Criteria andSafetyFractionLessThan(Float value) {
-            addCriterion("SAFETY_FRACTION <", value, "safetyFraction");
+            addCriterion("safety_fraction <", value, "safetyFraction");
             return (Criteria) this;
         }
 
         public Criteria andSafetyFractionLessThanOrEqualTo(Float value) {
-            addCriterion("SAFETY_FRACTION <=", value, "safetyFraction");
+            addCriterion("safety_fraction <=", value, "safetyFraction");
             return (Criteria) this;
         }
 
         public Criteria andSafetyFractionIn(List<Float> values) {
-            addCriterion("SAFETY_FRACTION in", values, "safetyFraction");
+            addCriterion("safety_fraction in", values, "safetyFraction");
             return (Criteria) this;
         }
 
         public Criteria andSafetyFractionNotIn(List<Float> values) {
-            addCriterion("SAFETY_FRACTION not in", values, "safetyFraction");
+            addCriterion("safety_fraction not in", values, "safetyFraction");
             return (Criteria) this;
         }
 
         public Criteria andSafetyFractionBetween(Float value1, Float value2) {
-            addCriterion("SAFETY_FRACTION between", value1, value2, "safetyFraction");
+            addCriterion("safety_fraction between", value1, value2, "safetyFraction");
             return (Criteria) this;
         }
 
         public Criteria andSafetyFractionNotBetween(Float value1, Float value2) {
-            addCriterion("SAFETY_FRACTION not between", value1, value2, "safetyFraction");
+            addCriterion("safety_fraction not between", value1, value2, "safetyFraction");
             return (Criteria) this;
         }
 
         public Criteria andDirectMemoryReservedIsNull() {
-            addCriterion("DIRECT_MEMORY_RESERVED is null");
+            addCriterion("direct_memory_reserved is null");
             return (Criteria) this;
         }
 
         public Criteria andDirectMemoryReservedIsNotNull() {
-            addCriterion("DIRECT_MEMORY_RESERVED is not null");
+            addCriterion("direct_memory_reserved is not null");
             return (Criteria) this;
         }
 
         public Criteria andDirectMemoryReservedEqualTo(String value) {
-            addCriterion("DIRECT_MEMORY_RESERVED =", value, "directMemoryReserved");
+            addCriterion("direct_memory_reserved =", value, "directMemoryReserved");
             return (Criteria) this;
         }
 
         public Criteria andDirectMemoryReservedNotEqualTo(String value) {
-            addCriterion("DIRECT_MEMORY_RESERVED <>", value, "directMemoryReserved");
+            addCriterion("direct_memory_reserved <>", value, "directMemoryReserved");
             return (Criteria) this;
         }
 
         public Criteria andDirectMemoryReservedGreaterThan(String value) {
-            addCriterion("DIRECT_MEMORY_RESERVED >", value, "directMemoryReserved");
+            addCriterion("direct_memory_reserved >", value, "directMemoryReserved");
             return (Criteria) this;
         }
 
         public Criteria andDirectMemoryReservedGreaterThanOrEqualTo(String value) {
-            addCriterion("DIRECT_MEMORY_RESERVED >=", value, "directMemoryReserved");
+            addCriterion("direct_memory_reserved >=", value, "directMemoryReserved");
             return (Criteria) this;
         }
 
         public Criteria andDirectMemoryReservedLessThan(String value) {
-            addCriterion("DIRECT_MEMORY_RESERVED <", value, "directMemoryReserved");
+            addCriterion("direct_memory_reserved <", value, "directMemoryReserved");
             return (Criteria) this;
         }
 
         public Criteria andDirectMemoryReservedLessThanOrEqualTo(String value) {
-            addCriterion("DIRECT_MEMORY_RESERVED <=", value, "directMemoryReserved");
+            addCriterion("direct_memory_reserved <=", value, "directMemoryReserved");
             return (Criteria) this;
         }
 
         public Criteria andDirectMemoryReservedLike(String value) {
-            addCriterion("DIRECT_MEMORY_RESERVED like", value, "directMemoryReserved");
+            addCriterion("direct_memory_reserved like", value, "directMemoryReserved");
             return (Criteria) this;
         }
 
         public Criteria andDirectMemoryReservedNotLike(String value) {
-            addCriterion("DIRECT_MEMORY_RESERVED not like", value, "directMemoryReserved");
+            addCriterion("direct_memory_reserved not like", value, "directMemoryReserved");
             return (Criteria) this;
         }
 
         public Criteria andDirectMemoryReservedIn(List<String> values) {
-            addCriterion("DIRECT_MEMORY_RESERVED in", values, "directMemoryReserved");
+            addCriterion("direct_memory_reserved in", values, "directMemoryReserved");
             return (Criteria) this;
         }
 
         public Criteria andDirectMemoryReservedNotIn(List<String> values) {
-            addCriterion("DIRECT_MEMORY_RESERVED not in", values, "directMemoryReserved");
+            addCriterion("direct_memory_reserved not in", values, "directMemoryReserved");
             return (Criteria) this;
         }
 
         public Criteria andDirectMemoryReservedBetween(String value1, String value2) {
-            addCriterion("DIRECT_MEMORY_RESERVED between", value1, value2, "directMemoryReserved");
+            addCriterion("direct_memory_reserved between", value1, value2, "directMemoryReserved");
             return (Criteria) this;
         }
 
         public Criteria andDirectMemoryReservedNotBetween(String value1, String value2) {
-            addCriterion("DIRECT_MEMORY_RESERVED not between", value1, value2, "directMemoryReserved");
+            addCriterion("direct_memory_reserved not between", value1, value2, "directMemoryReserved");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerIdIsNull() {
+            addCriterion("server_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerIdIsNotNull() {
+            addCriterion("server_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerIdEqualTo(Integer value) {
+            addCriterion("server_id =", value, "serverId");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerIdNotEqualTo(Integer value) {
+            addCriterion("server_id <>", value, "serverId");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerIdGreaterThan(Integer value) {
+            addCriterion("server_id >", value, "serverId");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("server_id >=", value, "serverId");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerIdLessThan(Integer value) {
+            addCriterion("server_id <", value, "serverId");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerIdLessThanOrEqualTo(Integer value) {
+            addCriterion("server_id <=", value, "serverId");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerIdIn(List<Integer> values) {
+            addCriterion("server_id in", values, "serverId");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerIdNotIn(List<Integer> values) {
+            addCriterion("server_id not in", values, "serverId");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerIdBetween(Integer value1, Integer value2) {
+            addCriterion("server_id between", value1, value2, "serverId");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("server_id not between", value1, value2, "serverId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCollectTimeIsNull() {
+            addCriterion("collect_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCollectTimeIsNotNull() {
+            addCriterion("collect_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCollectTimeEqualTo(Long value) {
+            addCriterion("collect_time =", value, "collectTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCollectTimeNotEqualTo(Long value) {
+            addCriterion("collect_time <>", value, "collectTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCollectTimeGreaterThan(Long value) {
+            addCriterion("collect_time >", value, "collectTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCollectTimeGreaterThanOrEqualTo(Long value) {
+            addCriterion("collect_time >=", value, "collectTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCollectTimeLessThan(Long value) {
+            addCriterion("collect_time <", value, "collectTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCollectTimeLessThanOrEqualTo(Long value) {
+            addCriterion("collect_time <=", value, "collectTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCollectTimeIn(List<Long> values) {
+            addCriterion("collect_time in", values, "collectTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCollectTimeNotIn(List<Long> values) {
+            addCriterion("collect_time not in", values, "collectTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCollectTimeBetween(Long value1, Long value2) {
+            addCriterion("collect_time between", value1, value2, "collectTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCollectTimeNotBetween(Long value1, Long value2) {
+            addCriterion("collect_time not between", value1, value2, "collectTime");
             return (Criteria) this;
         }
     }

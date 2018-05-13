@@ -1,9 +1,10 @@
 var ajaxUrlPrefix = "";
 $(function($) {
+	var serverId = $('currentServerId').attr('data-value');
 	// 获取agent地址
 	$.get("/agent-url", function(data) {
 		ajaxUrlPrefix = data;
-		var serverId = window.localStorage.getItem("currentServerId");
+		//var serverId = window.localStorage.getItem("currentServerId");
 		if (serverId != null) {
 			// 初始化控制台概要数据
 			fnDashboardOverviewInit(serverId);
@@ -189,7 +190,7 @@ var fnLoadQueryChatData = function(queryChartData) {
 	};
 	fnSetChartWidth(document.getElementById('queryChart'));
 	var myChart = echarts.init(document.getElementById('queryChart'));
-	
+
 	myChart.setOption(option);
 }
 //设置图表宽度

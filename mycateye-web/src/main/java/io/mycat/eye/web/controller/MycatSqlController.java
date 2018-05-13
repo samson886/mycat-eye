@@ -1,9 +1,10 @@
 package io.mycat.eye.web.controller;
 
-import io.mycat.eye.web.bean.MycatSqlDetail;
-import io.mycat.eye.web.bean.MycatSqlExecute;
+import io.mycat.eye.web.bean.*;
 import io.mycat.eye.web.dto.RestResponse;
 import io.mycat.eye.web.service.MycatSqlExecuteService;
+import io.mycat.eye.web.service.MycatSqlService;
+import io.mycat.eye.web.service.MycatSqlSumService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,107 @@ public class MycatSqlController {
 
     @Autowired
     MycatSqlExecuteService mycatSqlService;
+    @Autowired
+    MycatSqlService sqlService;
+
+    @Autowired
+    MycatSqlSumService mycatSqlSumService;
+
+    @RequestMapping(value = "all", method = RequestMethod.GET)
+    public ResponseEntity getSql(int server_id, String timeRange){
+        RestResponse<Object> response = RestResponse.buildExceptionResponse(200,"successful");
+        if(server_id == 0){
+            response.setCode(401);
+            response.setMessage("节点ID不可为空");
+            return new ResponseEntity(response, HttpStatus.BAD_REQUEST);
+        }
+        if(timeRange==null){
+            response.setCode(401);
+            response.setMessage("日期范围不可为空");
+            return new ResponseEntity(response,HttpStatus.BAD_REQUEST);
+        }
+        String[] times = timeRange.split("-");
+        if(times.length<=1){
+            response.setCode(401);
+            response.setMessage("参数错误");
+            return new ResponseEntity(response,HttpStatus.BAD_REQUEST);
+        }
+        String beginTime = times[0].trim().replaceAll("/", "-");
+        String endTime = times[1].trim().replaceAll("/", "-");
+        try{
+            List<MycatSql> list = sqlService.getAll(server_id, Timestamp.valueOf(beginTime).getTime(),Timestamp.valueOf(endTime).getTime());
+            response.setData(list);
+            return new ResponseEntity(response,HttpStatus.OK);
+        }catch (Exception e){
+            response.setCode(500);
+            response.setMessage(e.getMessage());
+            return new ResponseEntity(response,HttpStatus.SERVICE_UNAVAILABLE);
+        }
+    }
+
+    @RequestMapping(value = "high", method = RequestMethod.GET)
+    public ResponseEntity getSqlHigh(int server_id, String timeRange){
+        RestResponse<Object> response = RestResponse.buildExceptionResponse(200,"successful");
+        if(server_id == 0){
+            response.setCode(401);
+            response.setMessage("节点ID不可为空");
+            return new ResponseEntity(response, HttpStatus.BAD_REQUEST);
+        }
+        if(timeRange==null){
+            response.setCode(401);
+            response.setMessage("日期范围不可为空");
+            return new ResponseEntity(response,HttpStatus.BAD_REQUEST);
+        }
+        String[] times = timeRange.split("-");
+        if(times.length<=1){
+            response.setCode(401);
+            response.setMessage("参数错误");
+            return new ResponseEntity(response,HttpStatus.BAD_REQUEST);
+        }
+        String beginTime = times[0].trim().replaceAll("/", "-");
+        String endTime = times[1].trim().replaceAll("/", "-");
+        try{
+            List<MycatSqlHigh> list = sqlService.getHigh(server_id, Timestamp.valueOf(beginTime).getTime(),Timestamp.valueOf(endTime).getTime());
+            response.setData(list);
+            return new ResponseEntity(response,HttpStatus.OK);
+        }catch (Exception e){
+            response.setCode(500);
+            response.setMessage(e.getMessage());
+            return new ResponseEntity(response,HttpStatus.SERVICE_UNAVAILABLE);
+        }
+    }
+
+    @RequestMapping(value = "slow", method = RequestMethod.GET)
+    public ResponseEntity getSqlSlow(int server_id, String timeRange){
+        RestResponse<Object> response = RestResponse.buildExceptionResponse(200,"successful");
+        if(server_id == 0){
+            response.setCode(401);
+            response.setMessage("节点ID不可为空");
+            return new ResponseEntity(response, HttpStatus.BAD_REQUEST);
+        }
+        if(timeRange==null){
+            response.setCode(401);
+            response.setMessage("日期范围不可为空");
+            return new ResponseEntity(response,HttpStatus.BAD_REQUEST);
+        }
+        String[] times = timeRange.split("-");
+        if(times.length<=1){
+            response.setCode(401);
+            response.setMessage("参数错误");
+            return new ResponseEntity(response,HttpStatus.BAD_REQUEST);
+        }
+        String beginTime = times[0].trim().replaceAll("/", "-");
+        String endTime = times[1].trim().replaceAll("/", "-");
+        try{
+            List<MycatSqlSlow> list = sqlService.getSlow(server_id, Timestamp.valueOf(beginTime).getTime(),Timestamp.valueOf(endTime).getTime());
+            response.setData(list);
+            return new ResponseEntity(response,HttpStatus.OK);
+        }catch (Exception e){
+            response.setCode(500);
+            response.setMessage(e.getMessage());
+            return new ResponseEntity(response,HttpStatus.SERVICE_UNAVAILABLE);
+        }
+    }
 
     @RequestMapping(value = "execute", method = RequestMethod.GET)
     public ResponseEntity getSqlExecute(int server_id, String timeRange){
@@ -71,6 +173,46 @@ public class MycatSqlController {
         }
         try{
             List<MycatSqlDetail> list = mycatSqlService.getSqlDetail(sql_id,server_id);
+            response.setData(list);
+            return new ResponseEntity(response,HttpStatus.OK);
+        }catch (Exception e){
+            response.setCode(500);
+            response.setMessage(e.getMessage());
+            return new ResponseEntity(response,HttpStatus.SERVICE_UNAVAILABLE);
+        }
+    }
+
+    @RequestMapping(value = "sum/user", method = RequestMethod.GET)
+    public ResponseEntity getSqlSumUser(int server_id){
+        logger.debug("sql/sum/user === server_id:"+server_id);
+        RestResponse<Object> response = RestResponse.buildExceptionResponse(200,"successful");
+
+        try{
+            MycatSqlSumExample example = new MycatSqlSumExample();
+            MycatSqlSumExample.Criteria criteria = example.createCriteria();
+            criteria.andServerIdEqualTo(server_id);
+            criteria.andCollectTypeEqualTo("1");
+            List<MycatSqlSum> list = mycatSqlSumService.getSumList(example);
+            response.setData(list);
+            return new ResponseEntity(response,HttpStatus.OK);
+        }catch (Exception e){
+            response.setCode(500);
+            response.setMessage(e.getMessage());
+            return new ResponseEntity(response,HttpStatus.SERVICE_UNAVAILABLE);
+        }
+    }
+
+    @RequestMapping(value = "sum/table", method = RequestMethod.GET)
+    public ResponseEntity getSqlSumTable(int server_id){
+        logger.debug("sql/sum/user === server_id:"+server_id);
+        RestResponse<Object> response = RestResponse.buildExceptionResponse(200,"successful");
+
+        try{
+            MycatSqlSumExample example = new MycatSqlSumExample();
+            MycatSqlSumExample.Criteria criteria = example.createCriteria();
+            criteria.andServerIdEqualTo(server_id);
+            criteria.andCollectTypeEqualTo("2");
+            List<MycatSqlSum> list = mycatSqlSumService.getSumList(example);
             response.setData(list);
             return new ResponseEntity(response,HttpStatus.OK);
         }catch (Exception e){

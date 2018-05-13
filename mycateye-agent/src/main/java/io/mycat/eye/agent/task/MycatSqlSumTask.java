@@ -1,5 +1,6 @@
 package io.mycat.eye.agent.task;
 
+import com.sun.tools.javac.comp.Flow;
 import io.mycat.eye.agent.bean.MycatServer;
 import io.mycat.eye.agent.bean.MycatServerExample;
 import io.mycat.eye.agent.bean.MycatSqlExecuteExample;
@@ -58,53 +59,59 @@ public class MycatSqlSumTask extends AbstractTask {
             statusList.stream().forEach(o -> {
                 MycatSqlSum sql = new MycatSqlSum();
                 if(o.get("ID")!=null){
-                    sql.setId((int) o.get("ID"));
+                    sql.setId((long) o.get("ID"));
                 }
                 if(o.get("USER")!=null){
                     sql.setcUser((String) o.get("USER"));
                 }
                 if(o.get("R")!=null){
-                    sql.setR((int) o.get("R"));
+                    sql.setR((long) o.get("R"));
                 }
                 if(o.get("W")!=null){
-                    sql.setW((int) o.get("W"));
+                    sql.setW((long) o.get("W"));
                 }
                 if(o.get("R%")!=null){
-                    sql.setrP((float) o.get("R%"));
+                    sql.setrP(Float.valueOf((String) o.get("R%")));
                 }
                 if(o.get("MAX")!=null){
-                    sql.setSqlMax((int) o.get("MAX"));
+                    sql.setSqlMax(Long.valueOf((String) o.get("MAX")));
                 }
                 if(o.get("NET_IN")!=null){
-                    sql.setNetIn((int) o.get("NET_IN"));
+                    sql.setNetIn((long) o.get("NET_IN"));
                 }
                 if(o.get("NET_OUT")!=null){
-                    sql.setNetOut((int) o.get("NET_OUT"));
+                    sql.setNetOut((long) o.get("NET_OUT"));
                 }
                 if(o.get("TIME_COUNT")!=null){
                     String time_count = (String) o.get("TIME_COUNT");
                     time_count = time_count.substring(1,time_count.length() -1);
-                    String[] time_counts = time_count.split(", ");
                     sql.setTimeCount(time_count);
+                    /*
+                    String[] time_counts = time_count.split(", ");
                     sql.setTimeCount0(Integer.valueOf(time_counts[0]));
                     sql.setTimeCount1(Integer.valueOf(time_counts[1]));
                     sql.setTimeCount2(Integer.valueOf(time_counts[2]));
                     sql.setTimeCount3(Integer.valueOf(time_counts[3]));
+                    */
                 }
                 if(o.get("TTL_COUNT")!=null){
                     String ttl_count = (String) o.get("TTL_COUNT");
                     ttl_count = ttl_count.substring(1,ttl_count.length()-1);
-                    String[] ttl_counts = ttl_count.split(", ");
                     sql.setTtlCount(ttl_count);
+                    /*
+                    String[] ttl_counts = ttl_count.split(", ");
                     sql.setTtlCount0(Integer.valueOf(ttl_counts[0]));
                     sql.setTtlCount1(Integer.valueOf(ttl_counts[1]));
                     sql.setTtlCount2(Integer.valueOf(ttl_counts[2]));
                     sql.setTtlCount3(Integer.valueOf(ttl_counts[3]));
+                    */
                 }
                 if(o.get("LAST_TIME")!=null){
                     sql.setLastTime((long) o.get("LAST_TIME"));
                 }
                 sql.setCollectType("0");
+                sql.setServerId(server.getId());
+                sql.setCollectTime(System.currentTimeMillis());
                 mapper.insertSelective(sql);
             });
         }

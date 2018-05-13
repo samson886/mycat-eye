@@ -3,11 +3,16 @@
 <mapper namespace="io.mycat.eye.agent.mapper.MycatDirectMemoryMapper">
   <resultMap id="BaseResultMap" type="io.mycat.eye.agent.bean.MycatDirectMemory">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="MDIRECT_MEMORY_MAXED" jdbcType="VARCHAR" property="mdirectMemoryMaxed" />
-    <result column="DIRECT_MEMORY_USED" jdbcType="VARCHAR" property="directMemoryUsed" />
-    <result column="DIRECT_MEMORY_AVAILABLE" jdbcType="VARCHAR" property="directMemoryAvailable" />
-    <result column="SAFETY_FRACTION" jdbcType="REAL" property="safetyFraction" />
-    <result column="DIRECT_MEMORY_RESERVED" jdbcType="VARCHAR" property="directMemoryReserved" />
+    <result column="thread_id" jdbcType="BIGINT" property="threadId" />
+    <result column="mem_use_type" jdbcType="VARCHAR" property="memUseType" />
+    <result column="m_size" jdbcType="VARCHAR" property="mSize" />
+    <result column="mdirect_memory_maxed" jdbcType="VARCHAR" property="mdirectMemoryMaxed" />
+    <result column="direct_memory_used" jdbcType="VARCHAR" property="directMemoryUsed" />
+    <result column="direct_memory_available" jdbcType="VARCHAR" property="directMemoryAvailable" />
+    <result column="safety_fraction" jdbcType="REAL" property="safetyFraction" />
+    <result column="direct_memory_reserved" jdbcType="VARCHAR" property="directMemoryReserved" />
+    <result column="server_id" jdbcType="INTEGER" property="serverId" />
+    <result column="collect_time" jdbcType="BIGINT" property="collectTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -68,8 +73,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, MDIRECT_MEMORY_MAXED, DIRECT_MEMORY_USED, DIRECT_MEMORY_AVAILABLE, SAFETY_FRACTION, 
-    DIRECT_MEMORY_RESERVED
+    id, thread_id, mem_use_type, m_size, mdirect_memory_maxed, direct_memory_used, direct_memory_available, 
+    safety_fraction, direct_memory_reserved, server_id, collect_time
   </sql>
   <select id="selectByExample" parameterType="io.mycat.eye.agent.bean.MycatDirectMemoryExample" resultMap="BaseResultMap">
     select
@@ -102,12 +107,14 @@
     </if>
   </delete>
   <insert id="insert" parameterType="io.mycat.eye.agent.bean.MycatDirectMemory">
-    insert into mycat_directmemory (id, MDIRECT_MEMORY_MAXED, DIRECT_MEMORY_USED, 
-      DIRECT_MEMORY_AVAILABLE, SAFETY_FRACTION, DIRECT_MEMORY_RESERVED
-      )
-    values (#{id,jdbcType=INTEGER}, #{mdirectMemoryMaxed,jdbcType=VARCHAR}, #{directMemoryUsed,jdbcType=VARCHAR}, 
-      #{directMemoryAvailable,jdbcType=VARCHAR}, #{safetyFraction,jdbcType=REAL}, #{directMemoryReserved,jdbcType=VARCHAR}
-      )
+    insert into mycat_directmemory (id, thread_id, mem_use_type, 
+      m_size, mdirect_memory_maxed, direct_memory_used, 
+      direct_memory_available, safety_fraction, direct_memory_reserved, 
+      server_id, collect_time)
+    values (#{id,jdbcType=INTEGER}, #{threadId,jdbcType=BIGINT}, #{memUseType,jdbcType=VARCHAR}, 
+      #{mSize,jdbcType=VARCHAR}, #{mdirectMemoryMaxed,jdbcType=VARCHAR}, #{directMemoryUsed,jdbcType=VARCHAR}, 
+      #{directMemoryAvailable,jdbcType=VARCHAR}, #{safetyFraction,jdbcType=REAL}, #{directMemoryReserved,jdbcType=VARCHAR}, 
+      #{serverId,jdbcType=INTEGER}, #{collectTime,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="io.mycat.eye.agent.bean.MycatDirectMemory">
     insert into mycat_directmemory
@@ -115,25 +122,49 @@
       <if test="id != null">
         id,
       </if>
+      <if test="threadId != null">
+        thread_id,
+      </if>
+      <if test="memUseType != null">
+        mem_use_type,
+      </if>
+      <if test="mSize != null">
+        m_size,
+      </if>
       <if test="mdirectMemoryMaxed != null">
-        MDIRECT_MEMORY_MAXED,
+        mdirect_memory_maxed,
       </if>
       <if test="directMemoryUsed != null">
-        DIRECT_MEMORY_USED,
+        direct_memory_used,
       </if>
       <if test="directMemoryAvailable != null">
-        DIRECT_MEMORY_AVAILABLE,
+        direct_memory_available,
       </if>
       <if test="safetyFraction != null">
-        SAFETY_FRACTION,
+        safety_fraction,
       </if>
       <if test="directMemoryReserved != null">
-        DIRECT_MEMORY_RESERVED,
+        direct_memory_reserved,
+      </if>
+      <if test="serverId != null">
+        server_id,
+      </if>
+      <if test="collectTime != null">
+        collect_time,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
         #{id,jdbcType=INTEGER},
+      </if>
+      <if test="threadId != null">
+        #{threadId,jdbcType=BIGINT},
+      </if>
+      <if test="memUseType != null">
+        #{memUseType,jdbcType=VARCHAR},
+      </if>
+      <if test="mSize != null">
+        #{mSize,jdbcType=VARCHAR},
       </if>
       <if test="mdirectMemoryMaxed != null">
         #{mdirectMemoryMaxed,jdbcType=VARCHAR},
@@ -150,6 +181,12 @@
       <if test="directMemoryReserved != null">
         #{directMemoryReserved,jdbcType=VARCHAR},
       </if>
+      <if test="serverId != null">
+        #{serverId,jdbcType=INTEGER},
+      </if>
+      <if test="collectTime != null">
+        #{collectTime,jdbcType=BIGINT},
+      </if>
     </trim>
   </insert>
   <select id="countByExample" parameterType="io.mycat.eye.agent.bean.MycatDirectMemoryExample" resultType="java.lang.Long">
@@ -164,20 +201,35 @@
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
       </if>
+      <if test="record.threadId != null">
+        thread_id = #{record.threadId,jdbcType=BIGINT},
+      </if>
+      <if test="record.memUseType != null">
+        mem_use_type = #{record.memUseType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mSize != null">
+        m_size = #{record.mSize,jdbcType=VARCHAR},
+      </if>
       <if test="record.mdirectMemoryMaxed != null">
-        MDIRECT_MEMORY_MAXED = #{record.mdirectMemoryMaxed,jdbcType=VARCHAR},
+        mdirect_memory_maxed = #{record.mdirectMemoryMaxed,jdbcType=VARCHAR},
       </if>
       <if test="record.directMemoryUsed != null">
-        DIRECT_MEMORY_USED = #{record.directMemoryUsed,jdbcType=VARCHAR},
+        direct_memory_used = #{record.directMemoryUsed,jdbcType=VARCHAR},
       </if>
       <if test="record.directMemoryAvailable != null">
-        DIRECT_MEMORY_AVAILABLE = #{record.directMemoryAvailable,jdbcType=VARCHAR},
+        direct_memory_available = #{record.directMemoryAvailable,jdbcType=VARCHAR},
       </if>
       <if test="record.safetyFraction != null">
-        SAFETY_FRACTION = #{record.safetyFraction,jdbcType=REAL},
+        safety_fraction = #{record.safetyFraction,jdbcType=REAL},
       </if>
       <if test="record.directMemoryReserved != null">
-        DIRECT_MEMORY_RESERVED = #{record.directMemoryReserved,jdbcType=VARCHAR},
+        direct_memory_reserved = #{record.directMemoryReserved,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serverId != null">
+        server_id = #{record.serverId,jdbcType=INTEGER},
+      </if>
+      <if test="record.collectTime != null">
+        collect_time = #{record.collectTime,jdbcType=BIGINT},
       </if>
     </set>
     <if test="_parameter != null">
@@ -187,11 +239,16 @@
   <update id="updateByExample" parameterType="map">
     update mycat_directmemory
     set id = #{record.id,jdbcType=INTEGER},
-      MDIRECT_MEMORY_MAXED = #{record.mdirectMemoryMaxed,jdbcType=VARCHAR},
-      DIRECT_MEMORY_USED = #{record.directMemoryUsed,jdbcType=VARCHAR},
-      DIRECT_MEMORY_AVAILABLE = #{record.directMemoryAvailable,jdbcType=VARCHAR},
-      SAFETY_FRACTION = #{record.safetyFraction,jdbcType=REAL},
-      DIRECT_MEMORY_RESERVED = #{record.directMemoryReserved,jdbcType=VARCHAR}
+      thread_id = #{record.threadId,jdbcType=BIGINT},
+      mem_use_type = #{record.memUseType,jdbcType=VARCHAR},
+      m_size = #{record.mSize,jdbcType=VARCHAR},
+      mdirect_memory_maxed = #{record.mdirectMemoryMaxed,jdbcType=VARCHAR},
+      direct_memory_used = #{record.directMemoryUsed,jdbcType=VARCHAR},
+      direct_memory_available = #{record.directMemoryAvailable,jdbcType=VARCHAR},
+      safety_fraction = #{record.safetyFraction,jdbcType=REAL},
+      direct_memory_reserved = #{record.directMemoryReserved,jdbcType=VARCHAR},
+      server_id = #{record.serverId,jdbcType=INTEGER},
+      collect_time = #{record.collectTime,jdbcType=BIGINT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -199,31 +256,51 @@
   <update id="updateByPrimaryKeySelective" parameterType="io.mycat.eye.agent.bean.MycatDirectMemory">
     update mycat_directmemory
     <set>
+      <if test="threadId != null">
+        thread_id = #{threadId,jdbcType=BIGINT},
+      </if>
+      <if test="memUseType != null">
+        mem_use_type = #{memUseType,jdbcType=VARCHAR},
+      </if>
+      <if test="mSize != null">
+        m_size = #{mSize,jdbcType=VARCHAR},
+      </if>
       <if test="mdirectMemoryMaxed != null">
-        MDIRECT_MEMORY_MAXED = #{mdirectMemoryMaxed,jdbcType=VARCHAR},
+        mdirect_memory_maxed = #{mdirectMemoryMaxed,jdbcType=VARCHAR},
       </if>
       <if test="directMemoryUsed != null">
-        DIRECT_MEMORY_USED = #{directMemoryUsed,jdbcType=VARCHAR},
+        direct_memory_used = #{directMemoryUsed,jdbcType=VARCHAR},
       </if>
       <if test="directMemoryAvailable != null">
-        DIRECT_MEMORY_AVAILABLE = #{directMemoryAvailable,jdbcType=VARCHAR},
+        direct_memory_available = #{directMemoryAvailable,jdbcType=VARCHAR},
       </if>
       <if test="safetyFraction != null">
-        SAFETY_FRACTION = #{safetyFraction,jdbcType=REAL},
+        safety_fraction = #{safetyFraction,jdbcType=REAL},
       </if>
       <if test="directMemoryReserved != null">
-        DIRECT_MEMORY_RESERVED = #{directMemoryReserved,jdbcType=VARCHAR},
+        direct_memory_reserved = #{directMemoryReserved,jdbcType=VARCHAR},
+      </if>
+      <if test="serverId != null">
+        server_id = #{serverId,jdbcType=INTEGER},
+      </if>
+      <if test="collectTime != null">
+        collect_time = #{collectTime,jdbcType=BIGINT},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="io.mycat.eye.agent.bean.MycatDirectMemory">
     update mycat_directmemory
-    set MDIRECT_MEMORY_MAXED = #{mdirectMemoryMaxed,jdbcType=VARCHAR},
-      DIRECT_MEMORY_USED = #{directMemoryUsed,jdbcType=VARCHAR},
-      DIRECT_MEMORY_AVAILABLE = #{directMemoryAvailable,jdbcType=VARCHAR},
-      SAFETY_FRACTION = #{safetyFraction,jdbcType=REAL},
-      DIRECT_MEMORY_RESERVED = #{directMemoryReserved,jdbcType=VARCHAR}
+    set thread_id = #{threadId,jdbcType=BIGINT},
+      mem_use_type = #{memUseType,jdbcType=VARCHAR},
+      m_size = #{mSize,jdbcType=VARCHAR},
+      mdirect_memory_maxed = #{mdirectMemoryMaxed,jdbcType=VARCHAR},
+      direct_memory_used = #{directMemoryUsed,jdbcType=VARCHAR},
+      direct_memory_available = #{directMemoryAvailable,jdbcType=VARCHAR},
+      safety_fraction = #{safetyFraction,jdbcType=REAL},
+      direct_memory_reserved = #{directMemoryReserved,jdbcType=VARCHAR},
+      server_id = #{serverId,jdbcType=INTEGER},
+      collect_time = #{collectTime,jdbcType=BIGINT}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

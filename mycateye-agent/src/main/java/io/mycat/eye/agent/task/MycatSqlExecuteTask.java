@@ -71,7 +71,8 @@ public class MycatSqlExecuteTask extends AbstractTask {
                 if(o.get("MIN_TIME")!=null){
                     sqlExecute.setMinTime((double) o.get("MIN_TIME"));
                 }
-
+                sqlExecute.setServerId(server.getId());
+                sqlExecute.setCollectTime(System.currentTimeMillis());
                 mapper.insertSelective(sqlExecute);
             });
         }

@@ -43,6 +43,11 @@ public class DbeyeAgentApplicationTest {
         System.out.println(a);
         String[] b = a.split(", ");
         System.out.println(b.length + "-" + b[0] + "-" + b[1] + "-" + b[2] + "-" + b[3]);
+
+        String sql = "show @@sql 1;";
+        int sql2 = 3 >>> 8;
+        System.out.println(sql2);
+        System.out.println(sql2 >>> 8);
     }
 
 }

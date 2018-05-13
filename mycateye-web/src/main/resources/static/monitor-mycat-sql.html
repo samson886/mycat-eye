@@ -78,7 +78,6 @@
                                 <ul class="dropdown-menu" id="nodeUl">
                                 </ul>
                             </div>
-                            <input type="hidden" id="defaultServerId" value="" />
                         </li>
                     </ul>
                 </div>
@@ -118,8 +117,7 @@
                                 <i class="fa fa-cube"></i> 节点：
                             </span>
                                 <select id="dataNodes" class="form-control">
-                                    <option value="1">9066</option>
-                                    <option value="2">9067</option>
+                                    <option value="">请选择mycat节点</option>
                                 </select>
                                 <button type="button" class="btn btn-success" id="btn-search">查询</button>
                             </div>
@@ -268,60 +266,97 @@
                         // chartInit(serverId, timeRange);
                     });
             }
-            
+
             var table1,table2,table3;
             function fetchSqlData(){
-                if(table1){
-                    table1.destroy();
-                }
-                table1 = $('#tab1').find('table').DataTable({
-                    'ajax':'data/sql.json',
-                    'columns':[
-                        {'data':'id'},
-                        {'data':'user'},
-                        {'data':'startTime'},
-                        {'data':'executeTime'},
-                        {'data':'sql'}
-                    ]
-                });
+                var sid = $('#dataNodes').val();
+                var tr = $("#reservationtime").val();
+                $.get('/mycat/sql/all?server_id='+sid+'&timeRange='+tr).then(function(res){
+                    var data = res.data || [];
+                    if(table1){
+                        table1.destroy();
+                    }
+                    table1 = $('#tab1').find('table').DataTable({
+                        'data': data,
+                        // 'ajax':'data/sql.json',
+                        'columns':[
+                            {'data':'id'},
+                            {'data':'cUser'},
+                            {'data':'startTime'},
+                            {'data':'executeTime'},
+                            {'data':'cSql'}
+                        ]
+                    });
+
+                })
             }
             function fetchSqlHighData(){
-                if (table2) {
-                    table2.destroy();
-                }
-                table2 = $('#tab2').find('table').DataTable({
-                    'ajax': 'data/sql_high.json',
-                    'columns': [
-                        { 'data': 'id' },
-                        { 'data': 'user' },
-                        { 'data': 'frequency' },
-                        { 'data': 'avgTime' },
-                        { 'data': 'maxTime' },
-                        { 'data': 'minTime' },
-                        { 'data': 'executeTime' },
-                        { 'data': 'lastTime' },
-                        { 'data': 'sql' }
-                    ]
-                });
+                var sid = $('#dataNodes').val();
+                var tr = $("#reservationtime").val();
+                $.get('/mycat/sql/high?server_id='+sid+'&timeRange='+tr).then(function(res){
+                    var data = res.data || [];
+                    if (table2) {
+                        table2.destroy();
+                    }
+                    table2 = $('#tab2').find('table').DataTable({
+                        'data': data,
+                        // 'ajax': 'data/sql_high.json',
+                        'columns': [
+                            { 'data': 'id' },
+                            { 'data': 'cUser' },
+                            { 'data': 'frequency' },
+                            { 'data': 'avgTime' },
+                            { 'data': 'maxTime' },
+                            { 'data': 'minTime' },
+                            { 'data': 'executeTime' },
+                            { 'data': 'lastTime' },
+                            { 'data': 'cSql' }
+                        ]
+                    });
+
+                })
             }
             function fetchSqlSlowData(){
-                if (table3) {
-                    table3.destroy();
-                }
-                table3 = $('#tab3').find('table').DataTable({
-                    'ajax': 'data/sql_slow.json',
-                    'columns': [
-                        { 'data': 'user' },
-                        { 'data': 'datasource' },
-                        { 'data': 'startTime' },
-                        { 'data': 'executeTime' },
-                        { 'data': 'sql' }
-                    ]
+                var sid = $('#dataNodes').val();
+                var tr = $("#reservationtime").val();
+                $.get('/mycat/sql/slow?server_id='+sid+'&timeRange='+tr).then(function(res){
+                    var data = res.data || [];
+                    if (table3) {
+                        table3.destroy();
+                    }
+                    table3 = $('#tab3').find('table').DataTable({
+                        'data': data,
+                        // 'ajax': 'data/sql_slow.json',
+                        'columns': [
+                            { 'data': 'cUser' },
+                            { 'data': 'datasource' },
+                            { 'data': 'startTime' },
+                            { 'data': 'executeTime' },
+                            { 'data': 'cSql' }
+                        ]
+                    });
                 });
             }
-            fetchSqlData();
-            fetchSqlHighData();
-            fetchSqlSlowData();
+            var sid = $('#dataNodes').val();
+            if(sid && sid!= ''){
+                setTimeout(function(){
+                    fetchSqlData();
+                    fetchSqlHighData();
+                    fetchSqlSlowData();
+                },300);
+            }
+            $('#btn-search').on('click', function (e) {
+                // var $btn = $(this).button('loading')
+                var sid = $('#dataNodes').val();
+                if (sid == '') {
+                    notifi.warn('请选择服务节点！');
+                    // $btn.button('reset');
+                    return;
+                }
+                fetchSqlData();
+                fetchSqlHighData();
+                fetchSqlSlowData();
+            });
         });
     </script>
 </body>

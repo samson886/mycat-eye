@@ -12,6 +12,9 @@
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="cluster_id" jdbcType="INTEGER" property="clusterId" />
     <result column="is_cluster_node" jdbcType="TINYINT" property="isClusterNode" />
+    <result column="create_time" jdbcType="BIGINT" property="createTime" />
+    <result column="last_update_time" jdbcType="BIGINT" property="lastUpdateTime" />
+    <result column="startup_history" jdbcType="VARCHAR" property="startupHistory" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -73,7 +76,7 @@
   </sql>
   <sql id="Base_Column_List">
     id, server_name, server_host, manager_port, server_port, startup, user, password, 
-    cluster_id, is_cluster_node
+    cluster_id, is_cluster_node, create_time, last_update_time, startup_history
   </sql>
   <select id="selectByExample" parameterType="io.mycat.eye.agent.bean.MycatServerExample" resultMap="BaseResultMap">
     select
@@ -109,11 +112,13 @@
     insert into mycat_server (id, server_name, server_host, 
       manager_port, server_port, startup, 
       user, password, cluster_id, 
-      is_cluster_node)
+      is_cluster_node, create_time, last_update_time, 
+      startup_history)
     values (#{id,jdbcType=INTEGER}, #{serverName,jdbcType=VARCHAR}, #{serverHost,jdbcType=VARCHAR}, 
       #{managerPort,jdbcType=INTEGER}, #{serverPort,jdbcType=INTEGER}, #{startup,jdbcType=BIGINT}, 
       #{user,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{clusterId,jdbcType=INTEGER}, 
-      #{isClusterNode,jdbcType=TINYINT})
+      #{isClusterNode,jdbcType=TINYINT}, #{createTime,jdbcType=BIGINT}, #{lastUpdateTime,jdbcType=BIGINT}, 
+      #{startupHistory,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="io.mycat.eye.agent.bean.MycatServer">
     insert into mycat_server
@@ -148,6 +153,15 @@
       <if test="isClusterNode != null">
         is_cluster_node,
       </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="lastUpdateTime != null">
+        last_update_time,
+      </if>
+      <if test="startupHistory != null">
+        startup_history,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -179,6 +193,15 @@
       </if>
       <if test="isClusterNode != null">
         #{isClusterNode,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="lastUpdateTime != null">
+        #{lastUpdateTime,jdbcType=BIGINT},
+      </if>
+      <if test="startupHistory != null">
+        #{startupHistory,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -221,6 +244,15 @@
       <if test="record.isClusterNode != null">
         is_cluster_node = #{record.isClusterNode,jdbcType=TINYINT},
       </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.lastUpdateTime != null">
+        last_update_time = #{record.lastUpdateTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.startupHistory != null">
+        startup_history = #{record.startupHistory,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -237,7 +269,10 @@
       user = #{record.user,jdbcType=VARCHAR},
       password = #{record.password,jdbcType=VARCHAR},
       cluster_id = #{record.clusterId,jdbcType=INTEGER},
-      is_cluster_node = #{record.isClusterNode,jdbcType=TINYINT}
+      is_cluster_node = #{record.isClusterNode,jdbcType=TINYINT},
+      create_time = #{record.createTime,jdbcType=BIGINT},
+      last_update_time = #{record.lastUpdateTime,jdbcType=BIGINT},
+      startup_history = #{record.startupHistory,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -272,6 +307,15 @@
       <if test="isClusterNode != null">
         is_cluster_node = #{isClusterNode,jdbcType=TINYINT},
       </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="lastUpdateTime != null">
+        last_update_time = #{lastUpdateTime,jdbcType=BIGINT},
+      </if>
+      <if test="startupHistory != null">
+        startup_history = #{startupHistory,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -285,7 +329,10 @@
       user = #{user,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
       cluster_id = #{clusterId,jdbcType=INTEGER},
-      is_cluster_node = #{isClusterNode,jdbcType=TINYINT}
+      is_cluster_node = #{isClusterNode,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=BIGINT},
+      last_update_time = #{lastUpdateTime,jdbcType=BIGINT},
+      startup_history = #{startupHistory,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -463,6 +463,66 @@ public class MycatSqlExecuteExample {
             addCriterion("server_id not between", value1, value2, "serverId");
             return (Criteria) this;
         }
+
+        public Criteria andCollectTimeIsNull() {
+            addCriterion("collect_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCollectTimeIsNotNull() {
+            addCriterion("collect_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCollectTimeEqualTo(Long value) {
+            addCriterion("collect_time =", value, "collectTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCollectTimeNotEqualTo(Long value) {
+            addCriterion("collect_time <>", value, "collectTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCollectTimeGreaterThan(Long value) {
+            addCriterion("collect_time >", value, "collectTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCollectTimeGreaterThanOrEqualTo(Long value) {
+            addCriterion("collect_time >=", value, "collectTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCollectTimeLessThan(Long value) {
+            addCriterion("collect_time <", value, "collectTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCollectTimeLessThanOrEqualTo(Long value) {
+            addCriterion("collect_time <=", value, "collectTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCollectTimeIn(List<Long> values) {
+            addCriterion("collect_time in", values, "collectTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCollectTimeNotIn(List<Long> values) {
+            addCriterion("collect_time not in", values, "collectTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCollectTimeBetween(Long value1, Long value2) {
+            addCriterion("collect_time between", value1, value2, "collectTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCollectTimeNotBetween(Long value1, Long value2) {
+            addCriterion("collect_time not between", value1, value2, "collectTime");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

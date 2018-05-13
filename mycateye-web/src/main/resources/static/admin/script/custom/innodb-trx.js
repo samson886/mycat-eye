@@ -1,9 +1,10 @@
 var ajaxUrlPrefix = "";
 $(function($) {
+	var serverId = $('currentServerId').attr('data-value');
 	// 获取agent地址
 	$.get("/agent-url", function(data) {
 		ajaxUrlPrefix = data;
-		var serverId = window.localStorage.getItem("currentServerId");
+		//var serverId = window.localStorage.getItem("currentServerId");
 		if (serverId != null) {
 			// 加载集群列表
 			fnLoadTrxList(serverId);
@@ -66,8 +67,8 @@ var fnLoadTrxList = function(serverId) {
 			"data" : "trxIsolationLevel"
 		} ]
 	});
-	
-	
+
+
 	// Array to track the ids of the details displayed rows
 	var detailRows = [];
 

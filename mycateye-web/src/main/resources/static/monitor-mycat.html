@@ -78,7 +78,6 @@
                                 <ul class="dropdown-menu" id="nodeUl">
                                 </ul>
                             </div>
-                            <input type="hidden" id="defaultServerId" value="" />
                         </li>
                     </ul>
                 </div>
@@ -118,8 +117,7 @@
                                 <i class="fa fa-cube"></i> 节点：
                             </span>
                             <select id="dataNodes" class="form-control">
-                                <option value="1">9066</option>
-                                <option value="2">9067</option>
+                                <option value="">请选择mycat节点</option>
                             </select>
                             <button type="button" class="btn btn-success" id="btn-search">查询</button>
                         </div>
@@ -172,13 +170,13 @@
                                         <!-- <th>操作</th> -->
                                     </tr>
                                 </thead>
-            
+
                             </table>
                         </div>
                     </div>
                 </div>
             </div>
-            
+
             <div class="container" style="margin-top:20px;">
                 <ul class="nav nav-tabs bg-light radius3" role="tablist">
                     <li role="presentation" class="active">
@@ -210,7 +208,7 @@
                                         <th>autocommit</th>
                                     </tr>
                                 </thead>
-            
+
                             </table>
                         </div>
                     </div>
@@ -280,21 +278,23 @@
                         //$('#timeRange').val(tr);
                     });
             }
-            
+
             $('#btn-search').on('click', function(e){
                 var action = $('#monitor-mycat-tab').find('.active').find('a').attr('data-action');
                 //mycatEye[action] && typeof (mycatEye[action] == 'function') ? mycatEye[action]() : null;
                 doSearch();
             });
-            
+
             doSearch();
 
             function doSearch(){
                 var sid = $('#dataNodes').val();
                 var tr = $('#reservationtime').val();
-                showMemory(sid,tr);
-                showConnection(sid,tr);
-                showBackend(sid,tr);
+                if(sid && sid!=''){
+                    showMemory(sid,tr);
+                    showConnection(sid,tr);
+                    showBackend(sid,tr);
+                }
             }
             function showMemory() {
                 return mycatEye.showMemory();

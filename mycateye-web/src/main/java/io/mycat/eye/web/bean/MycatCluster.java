@@ -11,6 +11,10 @@ public class MycatCluster implements Serializable {
 
     private Integer clusterPort;
 
+    private Long createTime;
+
+    private Long lastUpdateTime;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {
@@ -45,6 +49,22 @@ public class MycatCluster implements Serializable {
         this.clusterPort = clusterPort;
     }
 
+    public Long getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Long createTime) {
+        this.createTime = createTime;
+    }
+
+    public Long getLastUpdateTime() {
+        return lastUpdateTime;
+    }
+
+    public void setLastUpdateTime(Long lastUpdateTime) {
+        this.lastUpdateTime = lastUpdateTime;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -55,6 +75,8 @@ public class MycatCluster implements Serializable {
         sb.append(", clusterName=").append(clusterName);
         sb.append(", clusterHost=").append(clusterHost);
         sb.append(", clusterPort=").append(clusterPort);
+        sb.append(", createTime=").append(createTime);
+        sb.append(", lastUpdateTime=").append(lastUpdateTime);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

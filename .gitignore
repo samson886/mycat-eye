@@ -34,5 +34,8 @@ Thumbs.db
 **/*.sml#
 #*.sml#
 
+# node #
+node_modules
+**/node_modules
 
 

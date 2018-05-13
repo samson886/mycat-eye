@@ -77,6 +77,8 @@ public class MycatSqlExecuteDetailTask extends AbstractTask {
                         sql.setLastTime((double) o.get("LAST_TIME"));
                     }
                     sql.setSqlId(exec.getSqlId());
+                    sql.setServerId(server.getId());
+                    sql.setCollectTime(System.currentTimeMillis());
                     mapper.insertSelective(sql);
                 });
             }

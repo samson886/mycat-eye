@@ -2,6 +2,7 @@ package io.mycat.eye.web.mapper;
 
 import io.mycat.eye.web.bean.MycatSqlHigh;
 import io.mycat.eye.web.bean.MycatSqlHighExample;
+import io.mycat.eye.web.bean.MycatSqlHighKey;
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -12,7 +13,7 @@ public interface MycatSqlHighMapper {
 
     int deleteByExample(MycatSqlHighExample example);
 
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(MycatSqlHighKey key);
 
     int insert(MycatSqlHigh record);
 
@@ -22,7 +23,7 @@ public interface MycatSqlHighMapper {
 
     List<MycatSqlHigh> selectByExample(MycatSqlHighExample example);
 
-    MycatSqlHigh selectByPrimaryKey(Integer id);
+    MycatSqlHigh selectByPrimaryKey(MycatSqlHighKey key);
 
     int updateByExampleSelective(@Param("record") MycatSqlHigh record, @Param("example") MycatSqlHighExample example);
 

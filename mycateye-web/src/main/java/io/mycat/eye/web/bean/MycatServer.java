@@ -23,6 +23,12 @@ public class MycatServer implements Serializable {
 
     private Byte isClusterNode;
 
+    private Long createTime;
+
+    private Long lastUpdateTime;
+
+    private String startupHistory;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {
@@ -105,6 +111,30 @@ public class MycatServer implements Serializable {
         this.isClusterNode = isClusterNode;
     }
 
+    public Long getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Long createTime) {
+        this.createTime = createTime;
+    }
+
+    public Long getLastUpdateTime() {
+        return lastUpdateTime;
+    }
+
+    public void setLastUpdateTime(Long lastUpdateTime) {
+        this.lastUpdateTime = lastUpdateTime;
+    }
+
+    public String getStartupHistory() {
+        return startupHistory;
+    }
+
+    public void setStartupHistory(String startupHistory) {
+        this.startupHistory = startupHistory;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -121,6 +151,9 @@ public class MycatServer implements Serializable {
         sb.append(", password=").append(password);
         sb.append(", clusterId=").append(clusterId);
         sb.append(", isClusterNode=").append(isClusterNode);
+        sb.append(", createTime=").append(createTime);
+        sb.append(", lastUpdateTime=").append(lastUpdateTime);
+        sb.append(", startupHistory=").append(startupHistory);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

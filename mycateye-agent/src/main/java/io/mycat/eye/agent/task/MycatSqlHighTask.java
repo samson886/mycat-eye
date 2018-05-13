@@ -7,6 +7,7 @@ import io.mycat.eye.agent.bean.MycatSqlHigh;
 import io.mycat.eye.agent.dto.QueryResult;
 import io.mycat.eye.agent.mapper.MycatServerMapper;
 import io.mycat.eye.agent.mapper.MycatSqlHighMapper;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -57,8 +58,9 @@ public class MycatSqlHighTask extends AbstractTask {
 
             statusList.stream().forEach(o -> {
                 MycatSqlHigh sql = new MycatSqlHigh();
+
                 if(o.get("ID")!=null){
-                    sql.setId((int) o.get("ID"));
+                    sql.setId((long) o.get("ID"));
                 }
                 if(o.get("USER")!=null){
                     sql.setcUser((String) o.get("USER"));
@@ -82,8 +84,13 @@ public class MycatSqlHighTask extends AbstractTask {
                     sql.setLastTime((long) o.get("LAST_TIME"));
                 }
                 if(o.get("SQL")!=null){
-                    sql.setSql((String) o.get("SQL"));
+                    String s = (String) o.get("SQL");
+                    s = StringEscapeUtils.escapeCsv(s);
+                    sql.setcSql(s);
                 }
+                sql.setServerId(server.getId());
+                sql.setCollectTime(System.currentTimeMillis());
+                sql.setStartupTime(server.getStartup());
                 mapper.insertSelective(sql);
             });
         }
