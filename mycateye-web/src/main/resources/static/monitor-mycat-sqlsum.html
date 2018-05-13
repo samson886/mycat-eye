@@ -78,7 +78,6 @@
                                 <ul class="dropdown-menu" id="nodeUl">
                                 </ul>
                             </div>
-                            <input type="hidden" id="defaultServerId" value="" />
                         </li>
                     </ul>
                 </div>
@@ -118,8 +117,7 @@
                                 <i class="fa fa-cube"></i> 节点：
                             </span>
                                 <select id="dataNodes" class="form-control">
-                                    <option value="1">9066</option>
-                                    <option value="2">9067</option>
+                                    <option value="">请选择mycat节点</option>
                                 </select>
                                 <button type="button" class="btn btn-success" id="btn-search">查询</button>
                             </div>
@@ -449,9 +447,24 @@
                 setTimeout(function(){drawTable2();},300);
             });
 
-
-            fetchUserData();
-            fetchTableData();
+            var sid = $('#dataNodes').val();
+            if(sid && sid!= ''){
+                setTimeout(function(){
+                    fetchUserData();
+                    fetchTableData();
+                },300);
+            }
+            $('#btn-search').on('click', function (e) {
+                // var $btn = $(this).button('loading')
+                var sid = $('#dataNodes').val();
+                if (sid == '') {
+                    notifi.warn('请选择服务节点！');
+                    // $btn.button('reset');
+                    return;
+                }
+                fetchUserData();
+                fetchTableData();
+            });
 
             /*
             setTimeout(function(){

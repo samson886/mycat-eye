@@ -20,42 +20,43 @@
 <body>
 	<nav class="nav navbar-default navbar-mystyle navbar-fixed-top">
 		<div class="navbar-header">
-			<button class="navbar-toggle" data-toggle="collapse"
-				data-target=".navbar-collapse">
-				<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-					class="icon-bar"></span>
+			<button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+				<span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand mystyle-brand"><span
-				class="glyphicon glyphicon-home"></span></a>
+			<a class="navbar-brand mystyle-brand"><span class="glyphicon glyphicon-home"></span></a>
 		</div>
 		<div class="collapse navbar-collapse">
 			<ul class="nav navbar-nav">
-				<li class=""><a class="mystyle-color" href="../index.html">MyCAT
-						EYE&nbsp;&nbsp;&nbsp;</a></li>
+				<li class=""><a class="mystyle-color" href="../index.html">MyCAT EYE&nbsp;&nbsp;&nbsp;</a></li>
 			</ul>
 			<ul class="nav navbar-nav pull-right">
-				<li class="dropdown"><a href="#"
-					class="dropdown-toggle mystyle-color" data-toggle="dropdown">&nbsp;当前节点：<span
-						id="currentServerId"></span><span class="caret"></span></a>
+				<li class="dropdown" style="min-width:165px;">
+					<a href="#" class="dropdown-toggle mystyle-color" data-toggle="dropdown">&nbsp;当前Mysql：
+						<span id="currentServerId" data-value="">所属节点</span>
+						<span class="caret"></span>
+					</a>
 					<ul class="dropdown-menu" id="ulNodeList">
-
-					</ul></li>
-				<li class="dropdown"><a href="#"
-					class="dropdown-toggle mystyle-color" data-toggle="dropdown">&nbsp;集群管理<span
-						class="caret"></span></a>
-					<ul class="dropdown-menu changecolor">
-						<li id="blue"><a href="cluster-manage.html">集群管理</a></li>
-						<li id="blue"><a href="node-manage.html">节点管理</a></li>
-						<!-- <li class="divider"></li>
-						<li id="green"><a href="#">MongoDB集群</a></li> -->
-					</ul></li>
-				<li class="dropdown li-border"><a href="#"
-					class="dropdown-toggle mystyle-color" data-toggle="dropdown">&nbsp;<span
-						id="login_admin"></span><span class="caret"></span></a>
+						<li class="dropdown-item"><a class="dropdown-item" data-name="所属节点" data-value="">所属节点</a></li>
+					</ul>
+				</li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle mystyle-color" data-toggle="dropdown">&nbsp;当前Mycat：
+						<span id="mycat_server" data-value="">所属节点</span>
+						<span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu" id="ulMycatList">
+						<li class="dropdown-item"><a class="dropdown-item" data-name="所属节点" data-value="">所属节点</a></li>
+					</ul>
+				</li>
+				<li class="dropdown li-border">
+					<a href="#" class="dropdown-toggle mystyle-color" data-toggle="dropdown">&nbsp;
+						<span id="login_admin"></span><span class="caret"></span>
+					</a>
 					<ul class="dropdown-menu">
 						<li><a href="javascript:void(0)" id="modifyPassword">修改密码</a></li>
 						<li><a href="javascript:void(0)" id="logout">退出</a></li>
-					</ul></li>
+					</ul>
+				</li>
 			</ul>
 		</div>
 	</nav>

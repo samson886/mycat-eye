@@ -78,7 +78,6 @@
                                 <ul class="dropdown-menu" id="nodeUl">
                                 </ul>
                             </div>
-                            <input type="hidden" id="defaultServerId" value="" />
                         </li>
                     </ul>
                 </div>
@@ -118,8 +117,7 @@
                                 <i class="fa fa-cube"></i> 节点：
                             </span>
                                 <select id="dataNodes" class="form-control">
-                                    <option value="1">9066</option>
-                                    <option value="2">9067</option>
+                                    <option value="">请选择mycat节点</option>
                                 </select>
                                 <button type="button" class="btn btn-success" id="btn-search">查询</button>
                             </div>
@@ -216,10 +214,14 @@
                         console.log('start', start, 'end', end, 'label', label);
                         console.log('timeRange',tr);
                     });
+            }
+            setTimeout(function(){
                 var sid = $('#dataNodes').val();
                 var tr = $('#reservationtime').val();
-                doSearch(sid,tr);
-            }
+                if(sid && sid!=''){
+                    doSearch(sid,tr);
+                }
+            },300);
 
             $('#btn-search').on('click', function (e) {
                 var $btn = $(this).button('loading')

@@ -1,23 +1,64 @@
 (function ($,global) {
+    var mycatNodes = $('#dataNodes');
+    var currentMysql = $('#defaultNode');
+    var currentNodes = window.sessionStorage.getItem('nodes');
+    var curMysql='',curMycat='';
+    if(currentNodes){
+        try{
+            currentNodes = JSON.parse(currentNodes);
+            curMysql = currentNodes['mysql']?currentNodes['mysql']['value']||'':'';
+            curMycat = currentNodes['mycat']?currentNodes['mycat']['value']||'':'';
+            currentMysql.text(currentNodes['mysql']?currentNodes['mysql']['name']||'':'');
+            currentMysql.attr('data-value',curMysql);
+            //mycatNodes.val(curMycat);
+        }catch(e){
+            console.log(currentNodes);
+            currentNodes = null;
+        }
+    }
+    if(mycatNodes){
+        $.get('/mycat/server/list',function(res){
+            var data = res.data || [];
+            var html = ['<option value="">请选择mycat节点</option>'];
+            for(var i=0;i<data.length;i++){
+                html.push('<option value="'+data[i]['id']+'">'+data[i]['serverName']+'</option>');
+            }
+            mycatNodes.html(html.join(''));
+            mycatNodes.val(curMycat);
+        });
+        mycatNodes.on('change',function(e){
+            var _this = $(this);
+            //console.log($(this).val(),$(this).find(':selected').text());
+            var n = currentNodes || {mysql:{name:'',value:''},mycat:{name:'',value:''}};
+            n.mycat.name = _this.find(':selected').text();
+            n.mycat.value = _this.val();
+            window.sessionStorage.setItem('nodes',JSON.stringify(n));
+        });
+    }
+
     // 初始化节点列表
     $.getJSON("/mysql/node/all", function(data) {
         var li = "";
-        $.each(data, function(n, value) {
-            if (n == 0) {
-                $("#defaultNode").text(value.tags);
-                // 保存当前serverId
-                $("#defaultServerId").val(value.id);
-                // 保存sql详细数据到本地
-                saveSqlDataLocalStorage(value.id);
-            }
-            li += "<li><a href='javascript:reloadChart(" + value.id + ",\""
-                + value.tags + "\")'>" + value.tags + "</a></li>";
-        });
+        var d = data || [];
+        if(d.length>0){
+            $.each(data, function(n, value) {
+                if (curMycat == '' && n == 0) {
+                    $("#defaultNode").text(value.tags);
+                    // 保存当前serverId
+                    $("#defaultServerId").val(value.id);
+                    // 保存sql详细数据到本地
+                    saveSqlDataLocalStorage(value.id);
+                }
+                li += "<li><a href='javascript:reloadChart(" + value.id + ",\""
+                    + value.tags + "\")'>" + value.tags + "</a></li>";
+            });
+        }
         if (li == "") {
             li = "<li><a href='javascript:void(0)'>暂未添加任何节点</a></li>";
         }
         $("#nodeUl").append(li);
     });
+
 
     // 保存sql详细数据到本地
     var saveSqlDataLocalStorage = function(serverId) {
@@ -25,8 +66,7 @@
         $.getJSON("/mysql/statement/getAllSqlStatement?server_id=" + serverId
             + "&limit=100&offset=0&key=last_seen&order=desc", function(json) {
             $.each(json.data, function(index, content) {
-                window.localStorage
-                    .setItem(content.digest, JSON.stringify(content));
+                window.localStorage.setItem(content.digest, JSON.stringify(content));
             });
         });
     };
@@ -147,5 +187,3 @@
     global.mycatEye = mycatEye;
 
 })(jQuery,window,undefined);
-
-

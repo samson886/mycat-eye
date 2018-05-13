@@ -1,5 +1,6 @@
 var ajaxUrlPrefix = "";
 $(function($) {
+	var serverId = $('currentServerId').attr('data-value');
 	// 获取agent地址
 	$.get("/agent-url", function(data) {
 		ajaxUrlPrefix = data;
@@ -10,7 +11,7 @@ $(function($) {
 
 // 加载变量列表
 var fnLoadVariables = function(filter) {
-	var serverId = window.localStorage.getItem("currentServerId");
+	//var serverId = window.localStorage.getItem("currentServerId");
 	var ajaxUrl = ajaxUrlPrefix + "/mysql/" + serverId
 			+ "/globalVariables?filter=" + filter;
 
@@ -66,7 +67,7 @@ $("#input_variables").keyup(function() {
 });
 // 编辑变量
 var fnEditVariables = function(variableName, variableValue) {
-	var serverId = window.localStorage.getItem("currentServerId");
+	//var serverId = window.localStorage.getItem("currentServerId");
 	bootbox.setLocale("zh_CN");
 	bootbox.prompt({
 		title : "编辑变量：" + variableName,

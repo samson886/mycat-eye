@@ -31,25 +31,22 @@
             </li>
         </ul>
         <ul class="nav navbar-nav pull-right">
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle mystyle-color" data-toggle="dropdown">
-                    &nbsp;当前节点：
-                    <span id="currentServerId"></span>
+            <li class="dropdown" style="min-width:165px;">
+                <a href="#" class="dropdown-toggle mystyle-color" data-toggle="dropdown">&nbsp;当前Mysql：
+                    <span id="currentServerId" data-value="">所属节点</span>
                     <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu" id="ulNodeList">
+                    <li class="dropdown-item"><a class="dropdown-item" data-name="所属节点" data-value="">所属节点</a></li>
                 </ul>
             </li>
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle mystyle-color" data-toggle="dropdown">
-                    &nbsp;集群管理
+                <a href="#" class="dropdown-toggle mystyle-color" data-toggle="dropdown">&nbsp;当前Mycat：
+                    <span id="mycat_server" data-value="">所属节点</span>
                     <span class="caret"></span>
                 </a>
-                <ul class="dropdown-menu changecolor">
-                    <li id="blue"><a href="cluster-manage.html">集群管理</a></li>
-                    <li id="blue"><a href="node-manage.html">节点管理</a></li>
-                    <!-- <li class="divider"></li>
-                    <li id="green"><a href="#">MongoDB集群</a></li> -->
+                <ul class="dropdown-menu" id="ulMycatList">
+                    <li class="dropdown-item"><a class="dropdown-item" data-name="所属节点" data-value="">所属节点</a></li>
                 </ul>
             </li>
             <li class="dropdown li-border">

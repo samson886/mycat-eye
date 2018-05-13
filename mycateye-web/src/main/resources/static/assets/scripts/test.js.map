@@ -1,1 +1,0 @@
-{"version":3,"sources":["test.js"],"names":["define","a","console","log"],"mappings":";AAAAA,SAAO,EAAP,EAAW,YAAY;;AAErB,QAAIC,IAAI,KAAR;AACAC,YAAQC,GAAR,CAAYF,CAAZ;AACD,GAJD;AAKA","file":"test.js","sourcesContent":["define([], function () {\n\n  var a = 'aaa';\n  console.log(a);\n});\n//# sourceMappingURL=test.js.map"]}
