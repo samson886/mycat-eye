@@ -2,29 +2,69 @@
 var nodeIds, shadowState, nodesArray, nodes, edgesArray, edges, network;
 
 $(function($) {
+	var defaultCluster = $("#defaultCluster");
+	var clusters = $('#clusterUl');
+	var agent='';
+
 	//获取agent地址
 	$.get("agent-url", function(agentUrl) {
-		// 获取所有集群信息
-		$.getJSON(agentUrl + "/mysql/cluster/all", function(data) {
-			var li = "";
-			$.each(data, function(n, value) {
-				if (n == 0) {
-					$("#defaultCluster").text(value.name);
-					// 保存当前clusterId
-					$("#defaultClusterId").val(value.id);
-				}
-				li += "<li><a href='javascript:reloadNetWork(" + value.id
-						+ ",\"" + value.name + "\")'>" + value.name
-						+ "</a></li>";
-			});
-			if (li == "") {
-				li = "<li><a href='javascript:void(0)'>暂未添加任何节点</a></li>";
+		agent = agentUrl || '';
+		$.get('/mysql/cluster/all',function(res){
+			//console.log(data);
+			var li = [];
+			var d = res.data || [];
+			for(var i=0;i<d.length;i++){
+				li.push('<li data-name="'+d[i]['name']+'" data-value="'+d[i]['id']+'"><a href="javascript:void(0);"></a></li>');
 			}
-			$("#clusterUl").append(li);
-			clusterId = $("#defaultClusterId").val();
-			loadClusterNetwork(agentUrl, clusterId);
+			clusters.html(li.join(''));
+			if(d.length>0){
+				$('#defaultClusterId').val(d[0]['id']);
+				defaultCluster.text(d[0]['name']);
+				defaultCluster.attr('data-value',d[0]['id']);
+			}
+			var clusterId = $("#defaultClusterId").val() || '';
+			if(clusterId!=''){
+				loadClusterNetwork(agent, clusterId);
+			}
 		});
+
+		// // 获取所有集群信息
+		// $.getJSON(agentUrl + "/mysql/cluster/all", function(data) {
+		// 	var li = "";
+		// 	$.each(data, function(n, value) {
+		// 		if (n == 0) {
+		// 			$("#defaultCluster").text(value.name);
+		// 			// 保存当前clusterId
+		// 			$("#defaultClusterId").val(value.id);
+		// 		}
+		// 		li += "<li><a href='javascript:reloadNetWork(" + value.id
+		// 				+ ",\"" + value.name + "\")'>" + value.name
+		// 				+ "</a></li>";
+		// 	});
+		// 	if (li == "") {
+		// 		li = "<li><a href='javascript:void(0)'>暂未添加任何节点</a></li>";
+		// 	}
+		// 	$("#clusterUl").append(li);
+		// 	clusterId = $("#defaultClusterId").val();
+		// 	loadClusterNetwork(agent, clusterId);
+		// });
+
 	});
+
+	// 绑定集群列表事件
+	clusters.on('click','li',function(){
+		var _this = $(this);
+		var defId = $("#defaultClusterId");
+		var name = _this.attr('data-name') || '';
+		var value = _this.attr('data-value') || '';
+		if(defId.val() != value){
+			defaultCluster.text(name);
+			defaultCluster.attr('data-value',value);
+			defId.val(value);
+			loadClusterNetwork(agent,value);
+		}
+	});
+
 });
 // 显示当前集群的拓扑结构
 var loadClusterNetwork = function(agentUrl, clusterId) {
@@ -70,6 +110,8 @@ var loadClusterNetwork = function(agentUrl, clusterId) {
 
 		startNetwork();
 		// 加载数据完毕关闭loading图标
+		$("body").mLoading("hide");
+	}).fail(function(){
 		$("body").mLoading("hide");
 	});
 }

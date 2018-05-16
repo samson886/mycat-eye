@@ -26,13 +26,13 @@
                 <div id="main-nav-collapse" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav main-navbar-nav">
                         <li class="dropdown">
-                            <a href="index.html" class="dropdown-toggle" data-toggle="dropdown">首页</a>
+                            <a href="index.html" class="dropdown-toggle">首页</a>
                         </li>
                         <li class="dropdown">
-                            <a href="mysql-mycnf.html" class="dropdown-toggle" data-toggle="dropdown">my.cnf生成工具</a>
+                            <a href="mysql-mycnf.html" class="dropdown-toggle">my.cnf生成工具</a>
                         </li>
                         <li class="dropdown ">
-                            <a href="mysql-cluster.html" class="dropdown-toggle" data-toggle="dropdown">集群管理</a>
+                            <a href="mysql-cluster.html" class="dropdown-toggle">集群管理</a>
                         </li>
                         <!--<li class="dropdown">-->
                             <!--<a href="mysql-performance-monitor.html" class="dropdown-toggle" data-toggle="dropdown">性能监控</a>-->
@@ -60,10 +60,10 @@
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a href="mysql-health-check.html" class="dropdown-toggle" data-toggle="dropdown">健康检查</a>
+                            <a href="mysql-health-check.html" class="dropdown-toggle">健康检查</a>
                         </li>
                         <li class="dropdown">
-                            <a target="_blank" href="admin/index.html" class="dropdown-toggle" data-toggle="dropdown">控制台</a>
+                            <a target="_blank" href="admin/index.html" class="dropdown-toggle">控制台</a>
                         </li>
                         <li class="dropdown">
                             <div class="btn-group" style="margin-top: 18px; margin-left: 40px;">
@@ -130,54 +130,22 @@
 
     <div class="fakeloader"></div>
     <!-- JAVASCRIPT -->
-    <script src="assets/js/jquery-3.1.1.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/plugins/easing/jquery.easing.min.js"></script>
-    <script src="assets/js/plugins/morphext/morphext.min.js"></script>
-    <script src="assets/js/plugins/owl-carousel/owl.carousel.min.js"></script>
-    <script src="assets/js/bravana-lite.js"></script>
-    <script src="assets/js/echarts.common.min.js"></script>
+    <script src="assets/js/lib/jquery-3.1.1.min.js"></script>
+    <script src="assets/js/lib/bootstrap.min.js"></script>
+    <script src="assets/js/lib/echarts.common.min.js"></script>
     <!-- DataTables -->
-    <script src="assets/js/jquery.dataTables.min.js"></script>
-    <script src="assets/js/dataTables.bootstrap.min.js"></script>
+    <script src="assets/js/lib/jquery.dataTables.min.js"></script>
+    <!-- <script src="assets/js/dataTables.bootstrap.min.js"></script> -->
 
     <!-- loading效果 -->
-    <script src="assets/js/jquery.mloading.js"></script>
+    <script src="assets/js/lib/jquery.mloading.js"></script>
     <!-- 置顶悬浮图标 -->
     <div class="float-container float"><a href="javascript:$(window).scrollTop(0, 0);"><img src="assets/img/top.gif" style="border:0px;" /></a></div>
 
     <!-- 自定义JAVASCRIPT -->
-    <script src="assets/js/misc-util.js"></script>
     <script src="assets/js/utils.js"></script>
-    <script src="assets/js/monitor/mycat.js"></script>
-    <script>
-        $(function () {
-            var sql_id = getParameter('sql_id'),sid = getParameter('server_id'),tr = getParameter('timeRange'),backurl = 'monitor-mycat-sql-execute.html',backparam='';
+    <script src="assets/js/common.js"></script>
+    <script src="assets/js/monitor/mycat-sql-detail.js"></script>
 
-            if(sid){
-                backparam += '&server_id='+sid;
-            }
-            if(tr){
-                //tr = decodeURIComponent(tr);
-                backparam += '&timeRange='+tr;
-            }
-            if(backparam!='') {
-                backparam = '?'+backparam.slice(1);
-            }
-            $('#prevPage').attr('href',backurl+backparam);
-
-            $('#mycat-sql-execute').DataTable({
-                'ajax': '/mycat/sql/detail?server_id='+sid+'&sql_id='+sql_id,
-                'columns': [
-                    {'data': 'dataSource'},
-                    {'data': 'execute'},
-                    {'data': 'time'},
-                    {'data': 'lastExecuteTimestamp'},
-                    {'data': 'lastTime'}
-                ]
-            });
-
-        });
-    </script>
 </body>
 </html>

@@ -58,6 +58,9 @@ pre {
     padding: 0;
 }
 
+#wrapper{
+    padding-top:77px;
+}
 
 /* notify */
 .myeye-notify{
@@ -97,6 +100,3 @@ pre {
     font-size:12px;
     margin:0px 10px 5px 0px;
 }
-
-
-
