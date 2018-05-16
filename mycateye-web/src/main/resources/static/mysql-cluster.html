@@ -21,17 +21,20 @@
 		<!-- 导航菜单 -->
 		<nav class="navbar navbar-default navbar-fixed-top ">
 			<div class="container">
-				<a href="index.html" class="navbar-brand"> <img
-					src="assets/img/logo/logo_80.png" style="width: 80; height: 46px;">
+				<a href="index.html" class="navbar-brand">
+					<img src="assets/img/logo/logo_80.png" style="width: 80; height: 46px;">
 				</a>
 				<div id="main-nav-collapse" class="collapse navbar-collapse">
 					<ul class="nav navbar-nav main-navbar-nav">
-						<li class="dropdown"><a href="index.html"
-							class="dropdown-toggle" data-toggle="dropdown">首页</a></li>
-						<li class="dropdown"><a href="mysql-mycnf.html"
-							class="dropdown-toggle" data-toggle="dropdown">my.cnf生成工具</a></li>
-						<li class="dropdown active"><a href="mysql-cluster.html"
-							class="dropdown-toggle" data-toggle="dropdown">集群管理</a></li>
+						<li class="dropdown">
+							<a href="index.html" class="dropdown-toggle">首页</a>
+						</li>
+						<li class="dropdown">
+							<a href="mysql-mycnf.html" class="dropdown-toggle">my.cnf生成工具</a>
+						</li>
+						<li class="dropdown active">
+							<a href="mysql-cluster.html" class="dropdown-toggle">集群管理</a>
+						</li>
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 								Mycat监控 <i class="fa fa-angle-down"></i>
@@ -54,10 +57,12 @@
 								<li><a href="mysql-performance-monitor.html">性能监控</a></li>
 							</ul>
 						</li>
-						<li class="dropdown "><a href="mysql-health-check.html"
-							class="dropdown-toggle" data-toggle="dropdown">健康检查</a></li>
-							<li class="dropdown "><a target="_blank" href="admin/index.html"
-							class="dropdown-toggle" data-toggle="dropdown">控制台</a></li>
+						<li class="dropdown ">
+							<a href="mysql-health-check.html" class="dropdown-toggle">健康检查</a>
+						</li>
+						<li class="dropdown ">
+							<a target="_blank" href="admin/index.html" class="dropdown-toggle">控制台</a>
+						</li>
 					</ul>
 				</div>
 			</div>
@@ -102,7 +107,7 @@
 						    <li role="presentation"><a href="#replication" aria-controls="replication" role="tab" data-toggle="tab">复制</a></li>
 						    <li role="presentation"><a href="#variables" aria-controls="variables" role="tab" data-toggle="tab">变量</a></li>
 						  </ul>
-						
+
 						  <!-- Tab panes -->
 						  <div class="tab-content">
 						    <div role="tabpanel" class="tab-pane active" id="overview">
@@ -218,7 +223,7 @@
 						    <div role="tabpanel" class="tab-pane" id="replication">
 						    	<div class="panel panel-default" style="margin-top:20px;">
 								  <div class="panel-heading">
-								 	<h3 class="panel-title">主复制</h3> 
+								 	<h3 class="panel-title">主复制</h3>
 								  </div>
 								  <div class="panel-body">
 								  	<div class="alert" role="alert" id="alert_master" style="margin-bottom: 5px;">此服务器已被配置为一个复制进程中的主服务器。</div>
@@ -252,7 +257,7 @@
 								</div>
 								<div class="panel panel-default">
 								  <div class="panel-heading">
-								  	<h3 class="panel-title">从复制</h3> 
+								  	<h3 class="panel-title">从复制</h3>
 								  </div>
 								  <div class="panel-body">
 								    <div class="alert alert-success" role="alert" id="alert_slave" style="margin-bottom: 5px;">服务器已被配置为一个复制进程中的从服务器。</div>
@@ -312,27 +317,27 @@
 			<a href="#top"><i class="fa fa-chevron-up"></i></a>
 		</div>
 	</div>
+
 	<!-- JAVASCRIPT -->
-	<script src="assets/js/jquery-2.1.1.min.js"></script>
-	<script src="assets/js/bootstrap.min.js"></script>
+	<script src="assets/js/lib/jquery-3.1.1.min.js"></script>
+	<script src="assets/js/lib/bootstrap.min.js"></script>
 	<script src="assets/js/plugins/easing/jquery.easing.min.js"></script>
-	<script src="assets/js/plugins/morphext/morphext.min.js"></script>
-	<script src="assets/js/plugins/owl-carousel/owl.carousel.min.js"></script>
-	<script src="assets/js/bravana-lite.js"></script>
-	<script type="text/javascript" src="assets/js/vis.min.js"></script>
+	<!-- <script src="assets/js/plugins/morphext/morphext.min.js"></script> -->
+	<!-- <script src="assets/js/plugins/owl-carousel/owl.carousel.min.js"></script> -->
+	<!-- <script src="assets/js/bravana-lite.js"></script> -->
+	<script type="text/javascript" src="assets/js/lib/vis.min.js"></script>
 	<!-- loading效果 -->
-	<script src="assets/js/jquery.mloading.js"></script>
-	<!-- 工具 -->
-	<script src="assets/js/misc-util.js"></script>
-	<!-- 初始化拓扑图 -->
-	<script src="assets/js/cluster-init.js"></script>
+	<script src="assets/js/lib/jquery.mloading.js"></script>
 	<!-- 显示json视图 -->
-	<script type="text/javascript" src="/assets/js/jquery.jsonview.js"></script>
-	
-	<script type="text/javascript" src="/assets/js/mysql-cluster.js"></script>
-	
+	<script type="text/javascript" src="/assets/js/lib/jquery.jsonview.js"></script>
 	<!-- 置顶悬浮图标 -->
 	<div class="float-container float"><a href="javascript:$(window).scrollTop(0, 0);"><img src="assets/img/top.gif" style="border:0px;" /></a></div>
+	<!-- 工具 -->
+	<script src="assets/js/utils.js"></script>
+	<!-- 初始化拓扑图 -->
+	<script src="assets/js/mysql/cluster-init.js"></script>
+	<script type="text/javascript" src="/assets/js/mysql/mysql-cluster.js"></script>
+
 </body>
 
 </html>

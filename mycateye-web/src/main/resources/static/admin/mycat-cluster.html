@@ -324,7 +324,7 @@
     <script src="script/custom/login-auth.js"></script>
     <script src="script/custom/modify-password.js"></script>
     <script src="script/custom/current-node.js"></script>
-    <script src="../assets/js/misc-util.js"></script>
+    <script src="../assets/js/utils.js"></script>
     <script type="text/javascript">
         // list
         var table;
@@ -333,6 +333,7 @@
                 table.destroy();
             }
             table = $('#mycatTable').DataTable({
+                'oLanguage': dtb.oLanguage,
                 'ajax': '/mycat/cluster/list',
                 'columns': [
                     {'data': 'id'},

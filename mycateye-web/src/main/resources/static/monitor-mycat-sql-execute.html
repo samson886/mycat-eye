@@ -27,13 +27,13 @@
                 <div id="main-nav-collapse" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav main-navbar-nav">
                         <li class="dropdown">
-                            <a href="index.html" class="dropdown-toggle" data-toggle="dropdown">首页</a>
+                            <a href="index.html" class="dropdown-toggle">首页</a>
                         </li>
                         <li class="dropdown">
-                            <a href="mysql-mycnf.html" class="dropdown-toggle" data-toggle="dropdown">my.cnf生成工具</a>
+                            <a href="mysql-mycnf.html" class="dropdown-toggle">my.cnf生成工具</a>
                         </li>
                         <li class="dropdown ">
-                            <a href="mysql-cluster.html" class="dropdown-toggle" data-toggle="dropdown">集群管理</a>
+                            <a href="mysql-cluster.html" class="dropdown-toggle">集群管理</a>
                         </li>
                         <!--<li class="dropdown">-->
                             <!--<a href="mysql-performance-monitor.html" class="dropdown-toggle" data-toggle="dropdown">性能监控</a>-->
@@ -61,10 +61,10 @@
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a href="mysql-health-check.html" class="dropdown-toggle" data-toggle="dropdown">健康检查</a>
+                            <a href="mysql-health-check.html" class="dropdown-toggle">健康检查</a>
                         </li>
                         <li class="dropdown">
-                            <a target="_blank" href="admin/index.html" class="dropdown-toggle" data-toggle="dropdown">控制台</a>
+                            <a target="_blank" href="admin/index.html" class="dropdown-toggle">控制台</a>
                         </li>
                         <li class="dropdown">
                             <div class="btn-group" style="margin-top: 18px; margin-left: 40px;">
@@ -157,130 +157,25 @@
 
     <div class="fakeloader"></div>
     <!-- JAVASCRIPT -->
-    <script src="assets/js/jquery-2.1.1.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/plugins/easing/jquery.easing.min.js"></script>
-    <script src="assets/js/plugins/morphext/morphext.min.js"></script>
-    <script src="assets/js/plugins/owl-carousel/owl.carousel.min.js"></script>
-    <script src="assets/js/bravana-lite.js"></script>
-    <script src="assets/js/echarts.common.min.js"></script>
+    <script src="assets/js/lib/jquery-3.1.1.min.js"></script>
+    <script src="assets/js/lib/bootstrap.min.js"></script>
+    <script src="assets/js/lib/echarts.common.min.js"></script>
     <!-- 时间区间组件 -->
-    <script type="text/javascript" src="assets/js/moment.js"></script>
-    <script type="text/javascript" src="assets/js/daterangepicker.js"></script>
+    <script type="text/javascript" src="assets/js/lib/moment.js"></script>
+    <script type="text/javascript" src="assets/js/lib/daterangepicker.js"></script>
     <!-- DataTables -->
-    <script src="assets/js/jquery.dataTables.min.js"></script>
-    <script src="assets/js/dataTables.bootstrap.min.js"></script>
+    <script src="assets/js/lib/jquery.dataTables.min.js"></script>
+    <!-- <script src="assets/js/dataTables.bootstrap.min.js"></script> -->
 
     <!-- loading效果 -->
-    <script src="assets/js/jquery.mloading.js"></script>
+    <script src="assets/js/lib/jquery.mloading.js"></script>
     <!-- 置顶悬浮图标 -->
     <div class="float-container float"><a href="javascript:$(window).scrollTop(0, 0);"><img src="assets/img/top.gif" style="border:0px;" /></a></div>
 
     <!-- 自定义JAVASCRIPT -->
-    <script src="assets/js/misc-util.js"></script>
     <script src="assets/js/utils.js"></script>
-    <script src="assets/js/monitor/mycat.js"></script>
-    <script>
-        $(function () {
-            //初始化时间区间
-            var datetimerange = $("#reservationtime");
-            if (datetimerange && datetimerange.size() > 0) {
-                var timeRange,server_id;
-                timeRange = getParameter('timeRange');
-                server_id = getParameter('server_id');
+    <script src="assets/js/common.js"></script>
+    <script src="assets/js/monitor/mycat-sql-execute.js"></script>
 
-                var now = getMillisecondAgoFormatDate(0);
-                var halfAnHourAgo = getMillisecondAgoFormatDate(30 * 60 * 1000);
-                if(timeRange){
-                    timeRange = decodeURIComponent(timeRange);
-                }
-                if(!timeRange){
-                    timeRange = halfAnHourAgo + " - " + now;
-                }
-                if(server_id){
-                    $('#dataNodes').val(server_id);
-                    //server_id = $('#dataNodes').get(0).selectedOptions[0].value || '';
-                }
-                datetimerange.val(timeRange);
-
-                //定义时间选择事件
-                datetimerange.daterangepicker({
-                        timePicker: true,
-                        timePickerIncrement: 1,
-                        format: 'YYYY/MM/DD HH:mm:ss'
-                    },
-                    function (start, end, label) {
-                        var tr = datetimerange.val();
-                        console.log('start', start, 'end', end, 'label', label);
-                        console.log('timeRange',tr);
-                    });
-            }
-            setTimeout(function(){
-                var sid = $('#dataNodes').val();
-                var tr = $('#reservationtime').val();
-                if(sid && sid!=''){
-                    doSearch(sid,tr);
-                }
-            },300);
-
-            $('#btn-search').on('click', function (e) {
-                var $btn = $(this).button('loading')
-                var sid = $('#dataNodes').val();
-                var tr = $("#reservationtime").val();
-                if(sid==''){
-                    notifi.warn('请选择服务节点！');
-                    $btn.button('reset');
-                    return;
-                }
-                if(tr==''){
-                    notifi.warn('请选择查询时间！');
-                    $btn.button('reset');
-                    return;
-                }
-                doSearch(sid,tr,$btn);
-            });
-
-            var table;
-            function doSearch(sid,tr,btn) {
-                if(table){
-                    table.destroy();
-                }
-                table = $('#mycat-sql-execute').DataTable({
-    //                "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
-                    'ajax': '/mycat/sql/execute?server_id='+sid+'&timeRange='+tr,
-    //                'ajax': {
-    //                    'url':'/data/sql_execute.json',
-    //                    'dataSrc':''
-    //                },
-    //                'columns': [
-    //                    { "data": "name" },
-    //                    { "data": "position" },
-    //                    { "data": "office" },
-    //                    { "data": "extn" },
-    //                    { "data": "start_date" },
-    //                    { "data": "salary" }
-    //                ]
-                    'columns': [
-                        {'data': 'sqlId'},
-                        {'data': 'sqlExecute'},
-                        {'data': 'sqlTime'},
-                        {'data': 'maxTime'},
-                        {'data': 'minTime'}
-                    ],
-                    'columnDefs': [
-                        {
-                            'render': function(data,type,row){
-                                console.log(data,type,row['sqlId'])
-                                return '<a href="monitor-mycat-sql-detail.html?server_id='+sid+'&sql_id='+(row['sqlId'] || '')+'&timeRange='+encodeURIComponent(tr)+'">查看详情</a>';
-                            },
-                            'targets': 5
-                        }
-                    ]
-                });
-                btn && btn.button('reset');
-            }
-
-        });
-    </script>
 </body>
 </html>

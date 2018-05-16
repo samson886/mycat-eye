@@ -1,6 +1,6 @@
 
 /* ---------------
- * Global Styles 
+ * Global Styles
  * --------------- */
 body {
   font-family: Lato, sans-serif;
@@ -53,7 +53,7 @@ section {
   color: #fff;
 }
 
-/* ------------- 
+/* -------------
  * Typography
  * -------------*/
 h1, h2, h3, h4, h5, h6 {
@@ -3262,7 +3262,7 @@ ul.list-image-icons > li {
   display: inline-block;
 }
 
-/* 
+/*
  * 	Core Owl Carousel CSS File
  *	v1.3.3
  */
@@ -3339,7 +3339,7 @@ ul.list-image-icons > li {
 }
 
 /*
-* 	Owl Carousel Owl Demo Theme 
+* 	Owl Carousel Owl Demo Theme
 *	v1.3.3
 */
 .owl-theme .owl-controls {
@@ -3422,8 +3422,8 @@ ul.list-image-icons > li {
   background: url(AjaxLoader.gif) no-repeat center center;
 }
 
-/* 
- *  Owl Carousel CSS3 Transitions 
+/*
+ *  Owl Carousel CSS3 Transitions
  *  v1.3.2
  */
 .owl-origin {
@@ -5252,7 +5252,7 @@ div[class*="col-"] .icon-info-center {
 }
 
 /* -------------------------------
- * list of clients or brand logo 
+ * list of clients or brand logo
  * -------------------------------*/
 .list-logo {
   text-align: center;
@@ -5526,7 +5526,7 @@ div[class*="col-"] .icon-info-center {
   line-height: 42px;
 }
 
-/* -------------------------------------- 
+/* --------------------------------------
  * Blog post list and single post item
  * --------------------------------------*/
 .entry-post {
@@ -6145,7 +6145,7 @@ html.fullscreen-bg #wrapper {
 }
 
 /* ----------------------
- * Global layout styles 
+ * Global layout styles
  * ---------------------*/
 html, body {
   height: 100%;
@@ -6382,7 +6382,7 @@ html, body {
 
 .navbar-brand {
   height: auto;
-  
+
 }
 
 @media screen and (max-width: 992px) {
@@ -6427,7 +6427,7 @@ html, body {
 }
 
 /* ------------
- * Page header 
+ * Page header
  * ------------*/
 .page-header {
   padding: 5px 0;
