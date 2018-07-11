@@ -17,20 +17,59 @@ public class ZkConfigService {
     final static String templeate = "/mycat/%s/%s";
     protected Logger logger;
 
-   public byte[] getData(String cluster) throws Exception {
-        return client.getData().forPath(String.format(templeate, cluster, path));
+    public void setData(String path,String str)throws Exception{
+        client.transactionOp().setData().forPath(path,str.getBytes());
     }
 
-    public void saveData(String cluster, String data) throws Exception {
-        client.setData().forPath(String.format(templeate, cluster, path),data.getBytes());
+    /**
+     * 根据绝对路径获取字符串数据
+     * @param path
+     * @return
+     * @throws Exception
+     */
+    public String getData(String path)throws Exception{
+       return new String(client.getData().forPath(path));
     }
 
-    public List<String> getChildren(String cluster) throws Exception {
+    /**
+     * 根据模板拼接集群路径获取字符串数据
+     * @param cluster
+     * @return
+     * @throws Exception
+     */
+    public String getDataInCluster(String cluster) throws Exception {
+        return new String(client.getData().forPath(String.format(templeate, cluster, path)));
+    }
+
+    /**
+     * 根据模板拼接集群路径设置字符串数据
+     * @param cluster
+     * @param data
+     * @throws Exception
+     */
+    public void saveDataInCluster(String cluster, String data) throws Exception {
+        client.transactionOp().setData().forPath(String.format(templeate, cluster, path), data.getBytes());
+    }
+
+    /**
+     * 根据模板拼接集群路径设置子节点
+     * @param cluster
+     * @return
+     * @throws Exception
+     */
+    public List<String> getChildrenInCluster(String cluster) throws Exception {
         String format = String.format(templeate, cluster, path);
         return client.getChildren()
                 .forPath(format);
     }
-    public List<String> getChildrenWithPath(String cluster) throws Exception {
+
+    /**
+     * 根据模板拼接集群路径获取带有子节点的路径
+     * @param cluster
+     * @return
+     * @throws Exception
+     */
+    public List<String> getChildrenInClusterWithPath(String cluster) throws Exception {
         String format = String.format(templeate, cluster, path);
         return client.getChildren()
                 .forPath(format)
@@ -38,7 +77,15 @@ public class ZkConfigService {
                 .map(i -> format + "/" + i)
                 .collect(Collectors.toList());
     }
-    public Optional<String> getChildrenWithPath(String cluster, Predicate<String> predicate) throws Exception {
+
+    /**
+     * 根据模板拼接集群路径获取唯一的带有子节点的路径,使用predicate过滤
+     * @param cluster
+     * @param predicate
+     * @return
+     * @throws Exception
+     */
+    public Optional<String> getChildrenInClusterWithPath(String cluster, Predicate<String> predicate) throws Exception {
         String format = String.format(templeate, cluster, path);
         return client.getChildren()
                 .forPath(format)
@@ -47,21 +94,38 @@ public class ZkConfigService {
                 .map(i -> format + "/" + i)
                 .findFirst();
     }
-    public void setChildren(String key, String text) throws Exception {
+
+    /**
+     * 根据模板拼接集群路径设置子节点
+     * @param key
+     * @param text
+     * @throws Exception
+     */
+    public void setChildrenInCluster(String key, String text) throws Exception {
         String format = String.format(templeate, client, path);
-        client.setData().forPath(format + "/" + key, text.getBytes());
+        client.transactionOp().setData().forPath(format + "/" + key, text.getBytes());
     }
 
-    public Optional<String> getChildren(String cluster,Predicate<String> predicate) throws Exception {
+    /**
+     * 根据模板拼接集群路径获取唯一的带有不带有路径的子节点,使用predicate过滤
+     * @param cluster
+     * @param predicate
+     * @return
+     * @throws Exception
+     */
+    public Optional<String> getChildrenInCluster(String cluster, Predicate<String> predicate) throws Exception {
         String format = String.format(templeate, cluster, path);
         return client.getChildren()
                 .forPath(format)
                 .stream()
                 .filter(predicate)
-                .map(i -> format + "/" + i)
                 .findFirst();
     }
 
+    /**
+     * 获取该服务的路径
+     * @return
+     */
     public String getPath() {
         return path;
     }
@@ -85,15 +149,33 @@ public class ZkConfigService {
         this.logger = LoggerFactory.getLogger(serviceName);
     }
 
+    /**
+     * 根据模板拼接集群路径设置json
+     * @param cluster
+     * @param json
+     * @throws Exception
+     */
+    public void updateAsJson(String cluster, JSON json) throws Exception {
+        this.saveDataInCluster(cluster, json.toJSONString());
+    }
+    /**
+     * 根据模板拼接集群路径设置字符串
+     * @param cluster
+     * @param str
+     * @throws Exception
+     */
+    public void updateAsString(String cluster, String str) throws Exception {
+        this.saveDataInCluster(cluster, str);
+    }
 
-    public void updateServerConfigAsJson(String cluster, JSON json) throws Exception {
-        this.saveData(cluster, json.toJSONString());
-    }
-    public void updateServerConfigAsString(String cluster, String str) throws Exception {
-        this.saveData(cluster, str);
-    }
-    public String getServerConfigAsString(String cluster) throws Exception {
-        return new String(getData(cluster));
+    /**
+     * 根据模板拼接集群路径获取字符串
+     * @param cluster
+     * @return
+     * @throws Exception
+     */
+    public String getAsString(String cluster) throws Exception {
+        return getDataInCluster(cluster);
     }
 
     public CuratorFramework getClient() {

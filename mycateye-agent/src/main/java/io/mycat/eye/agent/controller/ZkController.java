@@ -44,7 +44,7 @@ public class ZkController {
     public RestResponse<Object> getClusterAll(@PathVariable String cluster) throws Exception {
         RestResponse<Object> restResponse = new RestResponse<>();
         try {
-            List<String> children = clusterJson.getChildren(cluster);
+            List<String> children = clusterJson.getChildrenInCluster(cluster);
             restResponse.setData(children);
             restResponse.setCode(Constant.SUCCESS_CODE);
             restResponse.setMessage(Constant.SUCCESS_MESSAGE);
@@ -78,9 +78,9 @@ public class ZkController {
         restResponse.setMessage(Constant.FAIL_MESSAGE);
         final String finalClusterName = clusterName;
         try {
-            Optional<String> children = clusterJson.getChildren(cluster, finalClusterName::equals);
+            Optional<String> children = clusterJson.getChildrenInClusterWithPath(cluster, finalClusterName::equals);
             if (children.isPresent()) {
-                String data = new String(clusterJson.getClient().getData().forPath(children.get()));
+                String data = clusterJson.getData(children.get());
                 restResponse.setData(data);
                 restResponse.setCode(Constant.SUCCESS_CODE);
                 restResponse.setMessage(Constant.SUCCESS_MESSAGE);
@@ -147,12 +147,9 @@ public class ZkController {
         //todo check
         final String finalClusterName = clusterName.trim();
         try {
-            Optional<String> path = clusterJson.getChildrenWithPath(cluster, finalClusterName::equals);
+            Optional<String> path = clusterJson.getChildrenInClusterWithPath(cluster, finalClusterName::equals);
             if (path.isPresent()) {
-                clusterJson.getClient()
-                        .transactionOp()
-                        .setData()
-                        .forPath(path.get(), jsonObject.toJSONString().getBytes());
+                clusterJson.setData(path.get(),jsonObject.toJSONString());
                 restResponse.setCode(Constant.SUCCESS_CODE);
                 restResponse.setMessage(Constant.SUCCESS_MESSAGE);
                 return restResponse;
@@ -302,7 +299,7 @@ public class ZkController {
         restResponse.setCode(Constant.FAIL_CODE);
         restResponse.setMessage(Constant.FAIL_MESSAGE);
         try {
-            userJson.updateServerConfigAsString(cluster, body);//字符串
+            userJson.updateAsString(cluster, body);//字符串
             //todo check
             restResponse.setCode(Constant.SUCCESS_CODE);
             restResponse.setMessage(Constant.SUCCESS_MESSAGE);
@@ -315,7 +312,7 @@ public class ZkController {
     private RestResponse<String> query(ZkConfigService json, String cluster) {
         RestResponse<String> restResponse = new RestResponse<>();
         try {
-            restResponse.setData(json.getServerConfigAsString(cluster));
+            restResponse.setData(json.getAsString(cluster));
             restResponse.setCode(Constant.SUCCESS_CODE);
             restResponse.setMessage(Constant.SUCCESS_MESSAGE);
         } catch (Exception e) {
@@ -329,7 +326,7 @@ public class ZkController {
     private RestResponse<String> update(ZkConfigService userJson, String cluster, JSON jsonObject) {
         RestResponse<String> restResponse = new RestResponse<>();
         try {
-            userJson.updateServerConfigAsJson(cluster, jsonObject);
+            userJson.updateAsJson(cluster, jsonObject);
             restResponse.setCode(Constant.SUCCESS_CODE);
             restResponse.setMessage(Constant.SUCCESS_MESSAGE);
         } catch (Exception e) {
