@@ -149,7 +149,10 @@ public class ZkController {
         try {
             Optional<String> path = clusterJson.getChildrenWithPath(cluster, finalClusterName::equals);
             if (path.isPresent()) {
-                clusterJson.getClient().setData().forPath(path.get(), jsonObject.toJSONString().getBytes());
+                clusterJson.getClient()
+                        .transactionOp()
+                        .setData()
+                        .forPath(path.get(), jsonObject.toJSONString().getBytes());
                 restResponse.setCode(Constant.SUCCESS_CODE);
                 restResponse.setMessage(Constant.SUCCESS_MESSAGE);
                 return restResponse;
