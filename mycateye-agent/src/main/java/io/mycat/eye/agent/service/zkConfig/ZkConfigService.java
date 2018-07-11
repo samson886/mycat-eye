@@ -49,7 +49,7 @@ public class ZkConfigService {
     }
     public void setChildren(String key, String text) throws Exception {
         String format = String.format(templeate, client, path);
-        client.setData().forPath(format + "\\" + key, text.getBytes());
+        client.setData().forPath(format + "/" + key, text.getBytes());
     }
 
     public Optional<String> getChildren(String cluster,Predicate<String> predicate) throws Exception {
