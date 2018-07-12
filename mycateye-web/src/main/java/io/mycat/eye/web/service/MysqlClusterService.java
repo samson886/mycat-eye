@@ -20,4 +20,5 @@ public class MysqlClusterService {
     public List<MysqlCluster> getAll(MysqlClusterExample example){
         return mapper.selectByExample(example);
     }
+
 }

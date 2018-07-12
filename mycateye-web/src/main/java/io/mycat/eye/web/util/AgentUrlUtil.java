@@ -24,42 +24,44 @@ public class AgentUrlUtil {
         return agentUrl + "/statement/history/{serverId}/{orderBy}";
     }
 
-    String agentZkUrl = agentUrl + "/zk";
+    public String getAgentZkUrl() {
+        return agentUrl + "/zk";
+    }
 
     public String getZkClusterAll() {
-        return agentZkUrl + "/{cluster}/server/cluster/all";
+        return getAgentZkUrl() + "/{cluster}/server/cluster/all";
     }
 
     public String getZkCluster() {
-        return agentZkUrl + "/{cluster}/server/cluster/{clusterName}";
+        return getAgentZkUrl() + "/{cluster}/server/cluster/{clusterName}";
     }
 
     public String updateZkCluster() {
-        return agentZkUrl + "/{cluster}/server/cluster/{clusterName}";
+        return getAgentZkUrl() + "/{cluster}/server/cluster/{clusterName}";
     }
 
     public String getDefault() {
-        return agentZkUrl + "/{cluster}/server/default";
+        return getAgentZkUrl() + "/{cluster}/server/default";
     }
 
     public String updateDefault() {
-        return agentZkUrl + "/{cluster}/server/default";
+        return getAgentZkUrl() + "/{cluster}/server/default";
     }
 
     public String getUser() {
-        return agentZkUrl + "/{cluster}/server/user";
+        return getAgentZkUrl() + "/{cluster}/server/user";
     }
 
     public String updateUser() {
-        return agentZkUrl + "/{cluster}/server/user";
+        return getAgentZkUrl() + "/{cluster}/server/user";
     }
 
     public String getCharset() {
-        return agentZkUrl + "/{cluster}/server/charset";
+        return getAgentZkUrl() + "/{cluster}/server/charset";
     }
 
     public String updateCharset() {
-        return agentZkUrl + "/{cluster}/server/charset";
+        return getAgentZkUrl() + "/{cluster}/server/charset";
     }
 
     public String getCreateTable() {
