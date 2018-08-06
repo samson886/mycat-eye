@@ -59,7 +59,15 @@ public class AgentUrlUtil {
     public String getCharset() {
         return getAgentZkUrl() + "/{cluster}/server/charset";
     }
-
+    public String getSchema() {
+        return getAgentZkUrl() + "/{cluster}/schema/schema";
+    }
+    public String getDataHost() {
+        return getAgentZkUrl() + "/{cluster}/schema/dataHost";
+    }
+    public String getDataNode() {
+        return getAgentZkUrl() + "/{cluster}/schema/dataNode";
+    }
     public String updateCharset() {
         return getAgentZkUrl() + "/{cluster}/server/charset";
     }
