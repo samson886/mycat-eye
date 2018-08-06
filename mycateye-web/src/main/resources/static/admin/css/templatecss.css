@@ -358,6 +358,7 @@
 .margin-right-75{margin-right:75px;}
 .margin-super-top{margin-top:50px;}
 .margin-large-35{margin-right:35px;}
+.margin-min-15{margin-right:15px;}
 .margin-top-35{margin-top:35px;}
 .margin-top-25{margin-top:25px;}
 .margin-tb-25{margin:25px 0;}
@@ -720,3 +721,5 @@ ol{padding-left: 24px;}
 .text-lh{line-height: 22px;}
 .text-lh-big{line-height: 24px;}
 .text-lh-large{line-height: 28px;}
+
+/**/

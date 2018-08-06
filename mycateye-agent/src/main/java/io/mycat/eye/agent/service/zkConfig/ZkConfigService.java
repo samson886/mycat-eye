@@ -2,6 +2,7 @@ package io.mycat.eye.agent.service.zkConfig;
 
 import com.alibaba.fastjson.JSON;
 import org.apache.curator.framework.CuratorFramework;
+import org.apache.curator.framework.api.transaction.CuratorOp;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -51,7 +52,9 @@ public class ZkConfigService {
      * @throws Exception
      */
     public void saveDataInCluster(String cluster, String data) throws Exception {
-        client.transactionOp().setData().forPath(String.format(templeate, cluster, path), data.getBytes());
+//        CuratorOp t = client.transactionOp().setData().forPath(String.format(templeate, cluster, path), data.getBytes());
+        client.setData().forPath(String.format(templeate, cluster, path), data.getBytes());
+
     }
 
     /**

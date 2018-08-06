@@ -1,5 +1,7 @@
 package io.mycat.eye.web.dto;
 
+import com.sun.xml.internal.rngom.ast.builder.BuildException;
+
 /**
  * Rest响应结果对象
  * @ClassName:  RestResponse   
@@ -59,5 +61,11 @@ public class RestResponse<T>  {
         restResponse.setCode(code);
         restResponse.setMessage(errorMessage);
         return restResponse;
+    }
+    public static RestResponse<Object> buildOKResponse(String msg) {
+        return buildExceptionResponse(200, msg);
+    }
+    public static RestResponse<Object> buildErrorResponse(String errorMessage) {
+        return buildExceptionResponse(700, errorMessage);
     }
 }

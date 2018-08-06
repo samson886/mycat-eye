@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no" />
-    <title>MyCAT EYE-mycat setting server</title>
+    <title>MyCAT EYE-mycat setting Schema</title>
     <link href="bootstrap-3.3.5-dist/css/bootstrap.min.css" title="" rel="stylesheet" />
     <link href="../assets/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="css/jquery.mloading.css" />
@@ -162,7 +162,7 @@
                     <span class="sublist-title">Mycat管理</span>
                 </div>
                 <ul class="navContent">
-                    <li>
+                    <li class="active">
                         <div class="showtitle">
                             <img src="img/leftimg.png" />Mycat集群管理
                         </div>
@@ -197,7 +197,7 @@
                             <span class="sub-title">系统属性</span>
                         </a>
                     </li>
-                    <li class="active">
+                    <li >
                         <div class="showtitle">
                             <img src="img/leftimg.png" />参数配置
                         </div>
@@ -246,10 +246,13 @@
                         <div class="tab-content">
                             <div class="tab-pane fade active in" id="one">
                                 <div class="widget-body no-padding" id="mycatSchemaContainer">
-                                    <div class=""><h4><span>数据源</span></h4></div>
+                                    <div class=""><h4><span>schema</span></h4></div>
                                     <div class="manage-detail">
                                         <div class="margin-tb manage-detail-con clearfix">
-                                            <a class="h5 custom pull-left" id="btnAddSchema" href="javascript:;">新增逻辑节点</a>
+                                            <a class="h5 custom pull-left " id="btnAddSchema" href="javascript:void(0);">新增schema</a>
+                                            <a class="h5 custom pull-right margin-min-15" id="getSchemaFromZk" href="javascript:void(0);">从zk获取配置</a>
+                                            <a class="h5 custom pull-right margin-min-15" id="saveLocalSchema" href="javascript:void(0);">保存后端数据库</a>
+                                            <a class="h5 custom pull-right margin-min-15" id="saveSchema" href="javascript:void(0);">保存到ZK</a>
                                         </div>
                                     </div>
                                     <table class="table table-striped" id="mySchemaModalContainer">
@@ -258,6 +261,7 @@
                                             <th>名称</th>
                                             <th>checkSQLschema</th>
                                             <th>sqlMaxLimit</th>
+                                            <th>dataNode</th>
                                             <th>操作</th>
                                         </tr>
                                         </thead>
@@ -279,6 +283,9 @@
                                                 <th>rule</th>
                                                 <th>dataNode</th>
                                                 <th>primaryKey</th>
+                                                <th>自增长</th>
+                                                <th>分表</th>
+                                                <th>添加limit</th>
                                                 <th>操作</th>
                                             </tr>
                                         </thead>
@@ -319,7 +326,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="myTableModalLabel"><span>新增</span>逻辑节点</h5>
+                <h5 class="modal-title" id="myTableModalLabel"><span>新增</span>table</h5>
                 <button type="button" class="fa fa-close close" data-dismiss="modal" aria-label="Close">
                 </button>
             </div>
@@ -339,10 +346,11 @@
 
 <div id="childTableContainer" style="display: none">
     <div class="" id="" >
-        <div class=""><h4><span>childTableList</span></h4></div>
+        <div class=""><h4><span id="childTableContainerTitle">childTableList</span></h4> </div>
         <div class="manage-detail">
             <div class="margin-tb manage-detail-con clearfix">
                 <a class="h5 custom pull-left" id="btnAddChildTable" href="javascript:;">新增Childtable</a>
+                <a class="h5 custom pull-right" id="backChildTable" href="javascript:void(0);">返回</a>
             </div>
         </div>
         <table class="table table-striped" id="myChildTableContainer">
@@ -352,6 +360,7 @@
                 <th>joinKey</th>
                 <th>parentKey</th>
                 <th>primaryKey</th>
+                <th>添加limit</th>
                 <th>操作</th>
             </tr>
             </thead>
@@ -377,25 +386,43 @@
 <script src="../assets/js/utils.js"></script>
 <script src="script/juicer-min.js"></script>
 <script src="script/layer/layer.js"></script>
-<!-- Schema模板 -->
+<!-- Schema编辑模板模板 -->
 <script id="tmpl" type="text/template">
     <div class="form-horizontal">
         <div class="form-group mt10">
-            <label class="col-sm-2 control-label">name：</label>
-            <div class="col-sm-10">
+            <label class="col-sm-3 control-label">name：</label>
+            <div class="col-sm-9">
                 <input class="form-control" type="text" value="${name}" name="name" data-old-name="${name}"/>
             </div>
         </div>
         <div class="form-group mt10">
-            <label class="col-sm-2 control-label">checkSQLschema：</label>
-            <div class="col-sm-10">
-                <input class="form-control" type="text" value="${checkSQLschema}" name="checkSQLschema" />
+            <label class="col-sm-3 control-label">checkSQLschema：</label>
+            <div class="col-sm-9">
+                <!--<input class="form-control" type="text" value="${checkSQLschema}" name="checkSQLschema" />-->
+                <label class="custom-control custom-radio">
+                <input name="checkSQLschema" value="true" type="radio" class="custom-control-input " ${true==checkSQLschema?"checked":""}>
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">是</span>
+                </label>
+                <label class="custom-control custom-radio">
+                    <input name="checkSQLschema" value="false" type="radio" class="custom-control-input " ${(false==checkSQLschema)?"checked":""}  ${(undefined==checkSQLschema)?"checked":""}>
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description">否</span>
+                </label>
             </div>
         </div>
+
         <div class="form-group mt10">
-            <label class="col-sm-2 control-label">sqlMaxLimit：</label>
-            <div class="col-sm-10">
+            <label class="col-sm-3 control-label">sqlMaxLimit：</label>
+            <div class="col-sm-9">
                 <input class="form-control" type="text" value="${sqlMaxLimit}" name="sqlMaxLimit" />
+            </div>
+
+         </div>
+        <div class="form-group mt10">
+            <label class="col-sm-3 control-label">dataNode：</label>
+            <div class="col-sm-9">
+                <input class="form-control" type="text" value="${dataNode}" name="dataNode" />
             </div>
         </div>
     </div>
@@ -408,45 +435,85 @@
 <script id="tableTmpl" type="text/template">
     <div class="form-horizontal">
         <div class="form-group mt10">
-            <label class="col-sm-2 control-label">name：</label>
-            <div class="col-sm-10">
+            <label class="col-sm-3 control-label">name：</label>
+            <div class="col-sm-9">
                 <input class="form-control" type="text" value="${name}" name="name" data-old-name="${name}" data-schema-name="${schemaName}"/>
             </div>
         </div>
 
         <!-- 判断是否globalTable -->
         <div class="form-group mt10">
-            <label class="col-sm-2 control-label">是否全局表：</label>
-            <div class="col-sm-10">
+            <label class="col-sm-3 control-label">全局表：</label>
+            <div class="col-sm-9">
                 <label class="custom-control custom-radio">
-                    <input name="switchType" value="0" type="radio" class="custom-control-input loadZk" ${"global"==type?"checked":""}>
+                    <input name="switchType" value="global" type="radio" class="custom-control-input loadZk" ${"global"==type?"checked":""}>
                     <span class="custom-control-indicator"></span>
                     <span class="custom-control-description">是</span>
                 </label>
                 <label class="custom-control custom-radio">
-                    <input name="switchType" value="1" type="radio" class="custom-control-input loadZk" ${"global"!=type?"checked":""}>
+                    <input name="switchType" value="" type="radio" class="custom-control-input loadZk" ${"global"!=type?"checked":""}>
                     <span class="custom-control-indicator"></span>
                     <span class="custom-control-description">否</span>
                 </label>
             </div>
         </div>
 
-        <div class="form-group mt10 ruleDiv"  ${"global"==type?"stype='display:none'":""}>
-            <label class="col-sm-2 control-label">rule：</label>
-            <div class="col-sm-10">
+        <div class="form-group mt10 ruleDiv"  >
+            <label class="col-sm-3 control-label">rule：</label>
+            <div class="col-sm-9">
                 <input class="form-control" type="text" value="${rule}" name="rule" />
             </div>
         </div>
         <div class="form-group mt10">
-            <label class="col-sm-2 control-label">dataNode：</label>
-            <div class="col-sm-10">
+            <label class="col-sm-3 control-label">dataNode：</label>
+            <div class="col-sm-9">
                 <input class="form-control" type="text" value="${dataNode}" name="dataNode" />
             </div>
         </div>
+
         <div class="form-group mt10 "  >
-            <label class="col-sm-2 control-label">primaryKey：</label>
-            <div class="col-sm-10">
+            <label class="col-sm-3 control-label">primaryKey：</label>
+            <div class="col-sm-9">
                 <input class="form-control" type="text" value="${primaryKey}" name="primaryKey" />
+            </div>
+        </div>
+
+        <!-- 判断是否globalTable -->
+        <div class="form-group mt10">
+            <label class="col-sm-3 control-label">自增长：</label>
+            <div class="col-sm-9">
+                <label class="custom-control custom-radio">
+                    <input name="autoIncrement" value="true" type="radio" class="custom-control-input " ${true==autoIncrement?"checked":""}>
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description">是</span>
+                </label>
+                <label class="custom-control custom-radio">
+                    <input name="autoIncrement" value="false" type="radio" class="custom-control-input " ${(false==autoIncrement)?"checked":""}  ${(undefined==autoIncrement)?"checked":""}>
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description">否</span>
+                </label>
+            </div>
+        </div>
+        <div class="form-group mt10 "  >
+            <label class="col-sm-3 control-label">subTables：</label>
+            <div class="col-sm-9">
+                <input class="form-control" type="text" value="${subTables}" name="subTables" />
+            </div>
+        </div>
+        <!-- 判断是否needAddLimit-->
+        <div class="form-group mt10">
+            <label class="col-sm-3 control-label">添加limit：</label>
+            <div class="col-sm-9">
+                <label class="custom-control custom-radio">
+                    <input name="needAddLimit" value="true" type="radio" class="custom-control-input " ${true==needAddLimit?"checked":""}>
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description">是</span>
+                </label>
+                <label class="custom-control custom-radio">
+                    <input name="needAddLimit" value="false" type="radio" class="custom-control-input " ${(false==needAddLimit)?"checked":""}  ${(undefined==needAddLimit)?"checked":""}>
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description">否</span>
+                </label>
             </div>
         </div>
     </div>
@@ -456,22 +523,22 @@
 <!-- Schema的childTable模板 -->
 <script id="childTableTmpl" type="text/template">
     <!--<div class="modal-dialog" role="document">-->
-        <div class="modal-content">
+        <div class="">
             <div class="modal-body">
                 <div class="form-horizontal" >
                     <div class="form-horizontal">
                         <!---->
                         <div class="form-group mt10">
-                            <label class="col-sm-2 control-label">name：</label>
-                            <div class="col-sm-10">
+                            <label class="col-sm-3 control-label">name：</label>
+                            <div class="col-sm-9">
                                 <input class="form-control" type="text" value="${name}" name="name" data-old-name="${name}" />
                             </div>
                         </div>
 
                         <!-- 判断是否globalTable -->
                         <div class="form-group mt10">
-                            <label class="col-sm-2 control-label">是否自增长：</label>
-                            <div class="col-sm-10">
+                            <label class="col-sm-3 control-label">是否自增长：</label>
+                            <div class="col-sm-9">
                                 <label class="custom-control custom-radio">
                                     <input name="autoIncrement" value="0" type="radio" class="custom-control-input loadZk" ${"true"==autoIncrement?"checked":""}>
                                     <span class="custom-control-indicator"></span>
@@ -486,27 +553,43 @@
                         </div>
                     </div>
                     <div class="form-group mt10">
-                        <label class="col-sm-2 control-label">joinKey：</label>
-                        <div class="col-sm-10">
+                        <label class="col-sm-3 control-label">joinKey：</label>
+                        <div class="col-sm-9">
                             <input class="form-control" type="text" value="${joinKey}" name="joinKey" />
                         </div>
                     </div>
                     <div class="form-group mt10 "  >
-                        <label class="col-sm-2 control-label">parentKey：</label>
-                        <div class="col-sm-10">
+                        <label class="col-sm-3 control-label">parentKey：</label>
+                        <div class="col-sm-9">
                             <input class="form-control" type="text" value="${parentKey}" name="parentKey" />
                         </div>
                     </div>
                     <div class="form-group mt10 "  >
-                        <label class="col-sm-2 control-label">primaryKey：</label>
-                        <div class="col-sm-10">
+                        <label class="col-sm-3 control-label">primaryKey：</label>
+                        <div class="col-sm-9">
                             <input class="form-control" type="text" value="${primaryKey}" name="primaryKey" />
+                        </div>
+                    </div>
+                    <!-- 判断是否needAddLimit-->
+                    <div class="form-group mt10">
+                        <label class="col-sm-3 control-label">添加limit：</label>
+                        <div class="col-sm-9">
+                            <label class="custom-control custom-radio">
+                                <input name="needAddLimit" value="true" type="radio" class="custom-control-input " ${true==needAddLimit?"checked":""}>
+                                <span class="custom-control-indicator"></span>
+                                <span class="custom-control-description">是</span>
+                            </label>
+                            <label class="custom-control custom-radio">
+                                <input name="needAddLimit" value="false" type="radio" class="custom-control-input " ${(false==needAddLimit)?"checked":""}  ${(undefined==needAddLimit)?"checked":""}>
+                                <span class="custom-control-indicator"></span>
+                                <span class="custom-control-description">否</span>
+                            </label>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-secondary cancelChildTable" id="cancelChildTable" data-dismiss="modal">取消</button>
                 <button type="button" class="btn btn-info btn-submit editOrAddTable" id="editOrAddChildTable">提交</button>
             </div>
         </div>
@@ -520,18 +603,39 @@
     layer.config({
         path: '/script/layer/' //layer.js所在的目录，可以是绝对目录，也可以是相对目录
     });
-    function fetchData() {
+    function fetchData(forceFromZk) {
         if(table){
+            for(var attr in schemaMap) {
+                delete schemaMap[attr];
+            }
+            $('#container').hide();
             table.destroy();
         }
         //http://www.datatables.club/example/data_sources/js_array.html
         table = $('#mySchemaModalContainer').DataTable({
             'oLanguage': dtb.oLanguage,
-            'ajax': '/mycat/cluster/getSchemaList',
+            'ajax': {
+                "url":  String.format("/mycat/zk/{0}/schema/schema",getParameter("cluster")) ,
+                "data":{
+                    forceFromZk : forceFromZk?1:0
+                },
+                "dataSrc": function ( json ) {
+                    if(json.code == 200){
+                        if(typeof  json.data == "string"){
+                            return JSON.parse(json.data);
+                        }
+                        return json.data;
+                    } else{
+                        layer.msg("请求失败！");
+                    }
+                    return [];
+                }
+            } ,
             'columns': [
                 {'data': 'name'},
                 {'data': 'checkSQLschema'},
-                {'data': 'sqlMaxLimit'}
+                {'data': 'sqlMaxLimit'},
+                {'data': 'dataNode'}
             ],
             'columnDefs': [
                 {
@@ -541,8 +645,10 @@
                             '| <a href="javascript:void(0)" class="btn-edit text-info edit editSchema" data-name="'+row['name']+'"><i class="fa fa-edit"></i> 编辑</a>'
                            + '| <a href="javascript:void(0)" class="btn-edit text-info edit editSchemaTableList" data-name="'+row['name']+'"><i class="fa fa-edit"></i> 编辑tableList</a>' +'';
                     },
-                    'targets': 3
-                }
+                    'targets': 4
+                },
+                {"defaultContent": "",
+                    "targets": "_all"}
             ],
             "drawCallback": function( settings ) {
             }
@@ -562,10 +668,53 @@
         }
     });
 
+    //todo 保存后端数据库
     $("#btnAddSchema").on("click", function () {
         addOrEditSchema($(this),"add");
     })
-
+    //saveLocalSchema
+    //saveSchema
+    $("#saveSchema").on("click", function () {
+        var list = [];
+        for(var schemaName in schemaMap) {
+            list.push(schemaMap[schemaName]);
+        }
+        console.log(JSON.stringify(list));
+        saveSchemaToRemote(String.format("/mycat/zk/{0}/schema/schema",getUrlParam("cluster")), list);
+    });
+    $("#saveLocalSchema").on("click", function () {
+        var list = [];
+        for(var schemaName in schemaMap) {
+            list.push(schemaMap[schemaName]);
+        }
+        console.log(JSON.stringify(list));
+        saveSchemaToRemote(String.format("/mycat/zk/{0}/schema/updateLocalSchema",getUrlParam("cluster")), list);
+    })
+    //getSchemaFromZk
+    $("#getSchemaFromZk").on("click", function () {
+       fetchData(true);
+    })
+    var saveSchemaToRemote = function (url, data) {
+        $.ajax({
+            url: url,
+            method: 'post',
+            data:{
+                body : JSON.stringify(data)
+            },
+            success: function(res, status,jqxhr){
+                if(res.code && res.code==200){
+                    layer.msg("保存成功");
+                    //fetchData();
+                }else{
+                    notifi.error('Error: '+res.message)
+                }
+            },
+            error: function(err,status){
+                console.log(err);
+                notifi.error(err || err.message? err.message:'');
+            }
+        });
+    }
     $("#mycatSchemaContainer").on("click",".editSchema", function () {
         addOrEditSchema($(this),"edit");
     });
@@ -595,6 +744,7 @@
             delete schemaMap[oldDataNodeName];
             schemaMap[json["name"]] = $.extend(obj, json);
         }
+        return schemaMap[json["name"]];
     };
 
     //删除schema列表.
@@ -609,11 +759,12 @@
             var val = $(this).val();
             obj[name] = val;
         });
+        var checkSQLschema = $("#editSchemaModalContainer").find("input[name=checkSQLschema]:checked").val() == "true" ?true: false;
+        obj["checkSQLschema"] = checkSQLschema;
         var oldSchema =  $("#editSchemaModalContainer").find("input[name='name']").data("old-name");
         addSchema(oldSchema, obj);
         if(oldSchema !== "") {
-            $('#mySchemaModalContainer').DataTable().row($("#editSchemaModalContainer").find("input[data-name='"+oldSchema+"']").parents('tr')).data(getSchema(obj["name"])).draw();
-
+            $('#mySchemaModalContainer').DataTable().row($("#mycatSchemaContainer").find("a[data-name='"+oldSchema+"']").parents("tr")).data(getSchema(obj["name"])).draw();
         }else {
             $('#mySchemaModalContainer').DataTable().row.add(getSchema(obj["name"])).draw();
 
@@ -668,11 +819,15 @@
             'oLanguage': dtb.oLanguage,
             "data": tableList,
             'columns': [
-                {'data': 'name'},
-                {'data': 'type'},
+                {'data': 'name',"width":"60px"},
+                {'data': 'type',"width":"30px"},
                 {'data': 'rule'},
-                {'data': 'dataNode'},
-                {'data': 'primaryKey'}
+                {'data': 'dataNode',"width":"130px"},
+                {'data': 'primaryKey',"width":"30px"},
+                {'data': 'autoIncrement',"width":"30px"},
+                {'data': 'subTables'},
+                {'data': 'needAddLimit',"width":"30px"}
+
             ],
             'columnDefs': [
                 {
@@ -681,7 +836,8 @@
                             '| <a href="javascript:void(0)" class="btn-edit text-info edit editTable" data-name="'+row['name']+'"><i class="fa fa-edit"></i> 编辑</a>'
                             + '| <a href="javascript:void(0)" class="btn-edit text-info edit editChildTableList" data-name="'+row['name']+'"><i class="fa fa-edit"></i> 编辑childTable</a>' +'';
                     },
-                    'targets': 5
+                    'targets': 8,
+                    "width":"130px"
                 },
                 {"defaultContent": "",
                     "targets": "_all"}
@@ -733,12 +889,20 @@
             var val = $(this).val();
             obj[name] = val;
         });
+        var type = $("#editTableModalContainer").find("input[name=type]:checked").val();
+        obj["type"] = type;
+        var autoIncrement = $("#editTableModalContainer").find("input[name=autoIncrement]:checked").val() == "true" ?true: false;
+        obj["autoIncrement"] = autoIncrement;
+        var needAddLimit = $("#editTableModalContainer").find("input[name=needAddLimit]:checked").val() == "true" ?true: false;
+        obj["needAddLimit"] = needAddLimit;
         var  oldTable= container.find("input[name='name']").data("old-name");
         var schemaName = container.find("input[name='name']").data("schema-name");
         setTable(schemaName, oldTable, obj);
         if (oldTable !== "") {
             //有问题 todo
-            $('#mySchemaTableContainer').DataTable().row(container.find("input[name='name']").parents('tr')).data(getTable(schemaName, obj["name"])).draw();
+//            $('#mySchemaModalContainer').DataTable().row().data(getSchema(obj["name"])).draw();
+
+            $('#mySchemaTableContainer').DataTable().row($("#container").find("a[data-name='"+oldTable+"']").parents('tr')).data(getTable(schemaName, obj["name"])).draw();
         } else {
             $('#mySchemaTableContainer').DataTable().row.add(getTable(schemaName, obj["name"])).draw();
 
@@ -774,6 +938,7 @@
 
     $('#myChildTableContainer').on("click", ".editChildTableList",function () {
         var childArgs = getChildTableArgs($(this));
+        //判断
 
         var childList = getChlidList(childArgs.schemaName, childArgs.tableName, childArgs.childNameArrays);
         showChildList (childArgs.schemaName, childArgs.tableName, childArgs.childNameArrays , childList);
@@ -782,10 +947,16 @@
         if(childList == undefined) childList = [];
         $('#myChildTableContainer').dataTable().fnDestroy();
 
-        $('#childTableContainer').attr("schemaName",schemaName);
-        $('#childTableContainer').attr("tableName",tableName);
-        $('#childTableContainer').attr("childNameArrays",childNameArrays.join(","));
-
+        $('#childTableContainer').attr("schemaName", schemaName);
+        $('#childTableContainer').attr("tableName", tableName);
+        $('#childTableContainer').attr("childNameArrays", childNameArrays.join(","));
+        $('#childTableContainerTitle').html(String.format("childTableList({0}{1})", tableName , childNameArrays.length>0? "->"+childNameArrays.join("->"):""));
+        //
+        if(childNameArrays.length ==0){
+            $("#backChildTable").hide()
+        } else {
+            $("#backChildTable").show()
+        }
         $('#myChildTableContainer').DataTable({
             'oLanguage': dtb.oLanguage,
             "data": childList,
@@ -793,7 +964,9 @@
                 {'data': 'name'},
                 {'data': 'joinKey'},
                 {'data': 'parentKey'},
-                {'data': 'primaryKey'}
+                {'data': 'primaryKey'},
+                {'data': 'needAddLimit',"width":"30px"}
+
             ],
             'columnDefs': [
                 {
@@ -802,7 +975,7 @@
                             '| <a href="javascript:void(0)" class="btn-edit text-info edit editChildTable" data-name="'+row['name']+'"><i class="fa fa-edit"></i> 编辑</a>'
                             + '| <a href="javascript:void(0)" class="btn-edit text-info edit editChildTableList" data-name="'+row['name']+'"><i class="fa fa-edit"></i> 编辑childTable</a>' +'';
                     },
-                    'targets': 4
+                    'targets': 5
                 },
                 {"defaultContent": "",
                     "targets": "_all"}
@@ -849,7 +1022,7 @@
             type: 1,
             shade: false,
             scrollbar: false,
-            area: ['520px', '440px'], //宽高
+            area: ['520px', '420px'], //宽高
 //            title: false, //不显示标题
             content: $('#editChildTableContainer'), //捕获的元素，注意：最好该指定的元素要存放在body最外层，否则可能被其它的相对元素所影响
             cancel: function(){
@@ -865,13 +1038,32 @@
             type: 1,
             shade: false,
             scrollbar: false,
-            area: ['520px', '440px'], //宽高
+            area: ['520px', '420px'], //宽高
             content: $('#editChildTableContainer'), //捕获的元素，注意：最好该指定的元素要存放在body最外层，否则可能被其它的相对元素所影响
             cancel: function(){
             }
         });
     });
+    $("#childTableContainer").on("click","#backChildTable",function () {
+        var childArgs = getChildTableArgs($(this));
 
+        if(childArgs.childNameArrays.length == 1){
+            layer.msg("已经是最顶级目录了");
+            return;
+        }
+
+        childArgs.childNameArrays.pop();
+        childArgs.childNameArrays.pop();
+
+        var childList = getChlidList(childArgs.schemaName, childArgs.tableName, childArgs.childNameArrays);
+        showChildList (childArgs.schemaName, childArgs.tableName, childArgs.childNameArrays , childList);
+
+    });
+    //cancelChildTable
+    $("#editChildTableContainer").on("click","#cancelChildTable",function () {
+        debugger;
+        layer.close(childLayerId);
+    });
     //保存childTable表
     $("#editChildTableContainer").on("click","#editOrAddChildTable",function () {
         var obj  = {};
@@ -880,7 +1072,8 @@
             var val = $(this).val();
             obj[name] = val;
         });
-        obj.autoIncrement = $("#editChildTableContainer").find("input[name=autoIncrement]:checked").val() =="0"?"false":"true";
+        obj.autoIncrement = $("#editChildTableContainer").find("input[name=autoIncrement]:checked").val() =="0"?false:true;
+        obj.needAddLimit = $("#editChildTableContainer").find("input[name=needAddLimit]:checked").val() =="true"?true:false;
 
         var oldChildName =  $("#editChildTableContainer").find("input[name='name']").data("old-name");
         var childArgs = getChildTableArgs($("#editChildTableContainer").find("input[name='name']"));

@@ -249,6 +249,9 @@
                                     <div class="manage-detail">
                                         <div class="margin-tb manage-detail-con clearfix">
                                             <a class="h5 custom pull-left" id="btnAddDataHost" href="javascript:;">新增集群</a>
+                                            <a class="h5 custom pull-right margin-min-15" id="getFromZk" href="javascript:void(0);">从zk获取配置</a>
+                                            <a class="h5 custom pull-right margin-min-15" id="saveToDB" href="javascript:void(0);">保存后端数据库</a>
+                                            <a class="h5 custom pull-right margin-min-15" id="saveToZk" href="javascript:void(0);">保存到ZK</a>
                                         </div>
                                     </div>
                                     <table class="table table-striped" id="mycatDataHostTable">
@@ -271,8 +274,57 @@
 
                                 </div>
 
-                                <div class="" id="container">
+                                <!-- 编辑container-->
+                                <div class="" id="container" style="display: none">
                                 </div>
+
+                                <div class="widget-body no-padding" id="writeHostContainer" style="display: none">
+                                    <div class=""><h4><span></span></h4></div>
+                                    <div class="manage-detail">
+                                        <div class="margin-tb manage-detail-con clearfix">
+                                            <a class="h5 custom pull-left" id="btnAddwriteHost" href="javascript:;">新增writeHost</a>
+                                        </div>
+                                    </div>
+                                    <table class="table table-striped" id="mycatWriteHostTable">
+                                        <thead>
+                                            <tr>
+                                                <th>host</th>
+                                                <th>url</th>
+                                                <th>user</th>
+                                                <th>password</th>
+                                                <th>weight</th>
+                                                <th>usingDecrypt</th>
+                                                <th>编辑</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+
+                                </div>
+                                <!--readHost table -->
+                                <div class="widget-body no-padding" id="readHostContainer" style="display: none">
+                                    <div class=""><h4><span></span></h4></div>
+                                    <div class="manage-detail">
+                                        <div class="margin-tb manage-detail-con clearfix">
+                                            <a class="h5 custom pull-left" id="btnAddreadHost" href="javascript:;">新增readHost</a>
+                                        </div>
+                                    </div>
+                                    <table class="table table-striped" id="mycatReadHostTable">
+                                        <thead>
+                                        <tr>
+                                            <th>host</th>
+                                            <th>url</th>
+                                            <th>user</th>
+                                            <th>password</th>
+                                            <th>weight</th>
+                                            <th>usingDecrypt</th>
+                                            <th>编辑</th>
+                                        </tr>
+                                        </thead>
+                                    </table>
+
+                                </div>
+                                <!--<div class="" id="" style="display: none">-->
+                                <!--</div>-->
                             </div>
                         </div>
                     </div>
@@ -282,33 +334,11 @@
     </div>
 </div>
 
-
-<!--<div class="modal fade myModal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModal" aria-hidden="true">-->
-    <!--<div class="modal-dialog" role="document">-->
-        <!--<div class="modal-content">-->
-            <!--<div class="modal-header">-->
-                <!--<h5 class="modal-title" id="myModalLabel"><span>新增</span>节点</h5>-->
-                <!--<button type="button" class="fa fa-close close" data-dismiss="modal" aria-label="Close">-->
-                <!--</button>-->
-            <!--</div>-->
-            <!--<div class="modal-body">-->
-                <!--&lt;!&ndash;<div class="form-horizontal" id="container">&ndash;&gt;-->
-
-                <!--&lt;!&ndash;</div>&ndash;&gt;-->
-            <!--</div>-->
-            <!--<div class="modal-footer">-->
-                <!--<button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>-->
-                <!--<button type="button" class="btn btn-info btn-submit">提交</button>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
-<!--</div>-->
-
 <div class="modal fade myModal" id="myHostModal" tabindex="0" role="dialog" aria-labelledby="myModal" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="myHostLabel"><span>新增</span>节点</h5>
+                <h5 class="modal-title" id="addHostNode"><span>新增</span>节点</h5>
                 <button type="button" class="fa fa-close close" data-dismiss="modal" aria-label="Close">
                 </button>
             </div>
@@ -327,6 +357,8 @@
 
 
 
+
+
 <!-- javascript -->
 <script src="script/jquery-1.11.1.min.js" type="text/javascript"></script>
 <script src="script/jquery.cookie.js" type="text/javascript"></script>
@@ -342,6 +374,8 @@
 <script src="script/custom/current-node.js"></script>
 <script src="../assets/js/utils.js"></script>
 <script src="script/juicer-min.js"></script>
+<script src="script/layer/layer.js"></script>
+
 <!-- dataHost模板 -->
 <script id="tmpl" type="text/template">
     <div class="form-horizontal">
@@ -425,57 +459,6 @@
             </div>
         </div>
 
-        {@if type=="edit"}
-        <div class=""><hr /></div>
-        <div  class="form-group mt10">
-            <label class="col-sm-2 control-label">writeHost：</label>
-            <div class="manage-detail">
-                <div class="margin-tb manage-detail-con clearfix">
-                    <a class="h5 custom pull-left" id="btnAddWriteDataHost" data-data_host_name="${name}"  data-type="writeHostType" href="javascript:;">新增writeHost</a>
-                </div>
-            </div>
-        </div>
-        <div class="form-group mt10">
-            <div class="col-sm-1">
-            </div>
-            <div class="col-sm-10">
-                <table class="form-horizontal table " id="">
-                    <thead>
-                    <tr>
-                        <th>用户名</th>
-                        <th>密码</th>
-                        <th>host</th>
-                        <th>url</th>
-                        <th>编辑</th>
-                    </tr>
-                    </thead>
-
-                    <tbody>
-                    {@if writeHost.length==0}
-                    <tr align="center"><td colspan="7"><font color="red">暂无相关writeHost</font></td></tr>
-                    {@/if}
-                    {@each writeHost as item,i}
-                    <tr>
-                        <td>${item.user}</td>
-                        <td>${item.password}</td>
-                        <td>${item.host}</td>
-                        <td>${item.url}</td>
-                        <td>
-                            <a href="javascript:void(0)" data-write_host_name="${item.host}" data-data_host_name="${name}" data-type="writeHostType" class="btn-edit text-info editHost" data-name=""><i class="fa fa-edit editHost"></i> 编辑</a>|
-                            <a href="javascript:void(0)" data-write_host_name="${item.host}" data-data_host_name="${name}" data-type="writeHostType"  class="btn-edit text-info edit manageReadHost" data-name="" ><i class="fa fa-edit"></i> 管理readHost</a>
-                        </td>
-                    </tr>
-                    {@/each}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <div class=""><hr /></div>
-
-        <div id="readHostContainer">
-
-        </div>
-        {@/if}
         <div class="form-group mt10">
             <label class="col-sm-4 control-label">&nbsp;</label>
             <div class="col-sm-8">
@@ -487,94 +470,88 @@
 
 </script>
 
-<script id="readHostTpl" type="text/template">
-    <div  class="form-group mt10">
-        <label class="col-sm-2 control-label">${writeHostName}的readHost：</label>
-        <div class="manage-detail">
-            <div class="margin-tb manage-detail-con clearfix">
-                <a class="h5 custom pull-left" id="btnAdReadDataHost" data-type="readDataHost" data-data_host_name="${dataHostName}" href="javascript:;">新增readHost</a>
+<script id="myHostModalTpl" type="text/template">
+    <div id="editHostContainer" class="form-horizontal">
+        <input type="hidden" name="type" data-read_host_name="${readHostName}"
+               data-write_host_name="${writeHostName}" data-data_host_name="${dataHostName}" data-type="${type}" value="${type}" isWrite="${isWrite}"/>
+        <div class="form-group mt10">
+            <label class="col-sm-4 control-label">host：</label>
+            <div class="col-sm-8">
+                <input class="form-control" type="text" value="${host}" name="host"/>
+            </div>
+        </div>
+        <div class=" form-group mt10">
+            <label class="col-sm-4 control-label">url：</label>
+            <div class="col-sm-8">
+                <input class="form-control" type="text" value="${url}" name="url"/>
+            </div>
+        </div>
+        <div class=" form-group mt10">
+            <label class="col-sm-4 control-label">password：</label>
+            <div class="col-sm-8">
+                <input class="form-control" type="text" value="${password}" name="password"/>
+            </div>
+        </div>
+        <div class="form-group mt10">
+            <label class="col-sm-4 control-label">user：</label>
+            <div class="col-sm-8">
+                <input class="form-control" type="text" value="${user}" name="user"/>
+            </div>
+        </div>
+        <div class="form-group mt10">
+            <label class="col-sm-4 control-label">weight：</label>
+            <div class="col-sm-8">
+                <input class="form-control" type="text" value="${weight}" name="weight"/>
+            </div>
+        </div>
+        <div class="form-group mt10">
+            <label class="col-sm-4 control-label">usingDecrypt：</label>
+            <div class="col-sm-8">
+                <input class="form-control" type="text" value="${usingDecrypt}" name="usingDecrypt"/>
+            </div>
+        </div>
+        <div class="form-group mt10">
+            <label class="col-sm-4 control-label">&nbsp;</label>
+            <div class="col-sm-8">
+                <button type="button" class="btn btn-secondary btn-cancel cancelwriteHost">取消</button>
+                <button type="button" class="btn btn-info btn-submit submitWriteHost" data-name="" data-type="add">提交</button>
             </div>
         </div>
     </div>
-    <div  class="form-group mt10">
-        <div class="col-sm-1">
-        </div>
-        <div class="col-sm-10">
-            <table class="form-horizontal table " >
-                <thead>
-                <tr>
-                    <th>用户名</th>
-                    <th>密码</th>
-                    <th>host</th>
-                    <th>url</th>
-                    <th>编辑</th>
-                </tr>
-                </thead>
 
-                <tbody>
-                {@if readHost.length==0}
-                <tr align="center"><td colspan="7"><font color="red">暂无相关readHost</font></td></tr>
-                {@/if}
-                {@each readHost as item,i}
-                <tr>
-                    <td>${item.user}</td>
-                    <td>${item.password}</td>
-                    <td>${item.host}</td>
-                    <td>${item.url}</td>
-                    <td>
-                        <a href="javascript:void(0)" data-read_host_name="${item.host}"
-                           data-type="readHostType" data-write_host_name="${writeHostName}"
-                           data-data_host_name="${dataHostName}" class="btn-edit text-info editHost" data-name=""><i class="fa fa-edit"></i> 编辑</a>
-                    </td>
-                </tr>
-                {@/each}
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-</script>
-<script id="myHostModalTpl" type="text/template">
-    <input type="hidden" name = "type"   data-read_host_name="${readHostName}"
-           data-write_host_name="${writeHostName}" data-data_host_name="${dataHostName}" data-type="${type}"  value="${type}
-    "/>
-    <div class="form-group mt10">
-        <label class="col-sm-4 control-label">用户名：</label>
-        <div class="col-sm-8">
-            <input class="form-control" type="text" value="${user}" name="user" />
-        </div>
-    </div>
-    <div class="form-group mt10">
-        <label class="col-sm-4 control-label">密码：</label>
-        <div class="col-sm-8">
-            <input class="form-control" type="text" value="${password}" name="password" />
-        </div>
-    </div>
-    <div class="form-group mt10">
-        <label class="col-sm-4 control-label">host别名：</label>
-        <div class="col-sm-8">
-            <input class="form-control" type="text" value="${host}" name="host" />
-        </div>
-    </div>
-    <div class="form-group mt10">
-        <label class="col-sm-4 control-label">host名称：</label>
-        <div class="col-sm-8">
-            <input class="form-control" type="text" value="${url}" name="url" />
-        </div>
-    </div>
 </script>
 
 <script type="text/javascript">
     var table;
     var dataMap ={};
 
-    function fetchData() {
+    function fetchData(forceFromZk) {
         if(table){
+            for(var attr in schemaMap) {
+                delete dataMap[attr];
+            }
+            $('#container').hide();
             table.destroy();
         }
         table = $('#mycatDataHostTable').DataTable({
             'oLanguage': dtb.oLanguage,
-            'ajax': '/mycat/cluster/getDataHostList',
+            'ajax': {
+                "url":  String.format("/mycat/zk/{0}/schema/dataHost", getParameter("cluster")) ,
+                "data":{
+                    forceFromZk : forceFromZk?1:0
+                },
+                "dataSrc": function ( json ) {
+                    if(json.code == 200){
+                        if(typeof  json.data == "string"){
+                            return JSON.parse(json.data);
+                        }
+                        return json.data;
+                    } else{
+                        layer.msg("请求失败！");
+                    }
+                    return [];
+                }
+            } ,
             'columns': [
                 {'data': 'name'},
                 {'data': 'dbType'},
@@ -591,35 +568,92 @@
                     'render': function(data,type,row,pos){
                         dataMap[row["name"]] = row;
                         return '<a href="javascript:void(0)" class="btn-del text-info" data-name="'+row['name']+'"  data-row="'+pos['row']+'"><i class="fa fa-trash-o"></i> 删除</a> ' +
-                            '| <a href="javascript:void(0)" class="btn-edit text-info edit " data-name="'+row['name']+'"  data-row="'+pos['row']+'"><i class="fa fa-edit"></i> 编辑</a>' ;
-    },
+                            '| <a href="javascript:void(0)" class="btn-edit text-info edit " data-name="'+row['name']+'"  data-row="'+pos['row']+'"><i class="fa fa-edit"></i> 编辑</a>'+
+                           String.format( '| <a href="javascript:void(0)" class="btn-edit text-info editWriteHost " data-name="{0}"  data-row="{1}"><i class="fa fa-edit"></i> 编辑writeHost</a>',row['name'] ,pos['row']);
+                    },
                     'targets': 9
-                }
+                },
+                {"defaultContent": "",
+                    "targets": "_all"}
             ],
             "drawCallback": function( settings ) {
-                console.log("======drawCallback" ,settings);
                }
         });
     }
     fetchData();
 
     var myModal = $("#myModal");
+
+    //getFromZk saveToDB saveToZk
+    $("#getFromZk").bind("click",function () {
+        fetchData(true);
+    });
+    //saveSchema
+    $("#saveToZk").on("click", function () {
+        var list = [];
+        for(var schemaName in dataMap) {
+            list.push(dataMap[schemaName]);
+        }
+        saveSchemaToRemote(String.format("/mycat/zk/{0}/schema/dataHost",getUrlParam("cluster")), list);
+    });
+
+    $("#saveToDB").on("click", function () {
+        var list = [];
+        for(var schemaName in dataMap) {
+            list.push(dataMap[schemaName]);
+        }
+        saveSchemaToRemote(String.format("/mycat/zk/{0}/schema/updateLocalDataHost",getUrlParam("cluster")), list);
+    })
+    var saveSchemaToRemote = function (url, data) {
+        $.ajax({
+            url: url,
+            method: 'post',
+            data:{
+                body : JSON.stringify(data)
+            },
+            success: function(res, status,jqxhr){
+                if(res.code && res.code==200){
+                    layer.msg("保存成功");
+                    //fetchData();
+                }else{
+                    notifi.error('Error: '+res.message)
+                }
+            },
+            error: function(err,status){
+                console.log(err);
+                notifi.error(err || err.message? err.message:'');
+            }
+        });
+    };
     //新增 dataHost
     $("#btnAddDataHost").bind("click",function () {
         var html = juicer($("#tmpl").html(), {type:"add"})
         $("#container").html(html);
-       // myModal.modal('show');
+        // myModal.modal('show');
+        editOrAddDataHost();
 
     })
-
     $("#mycatDataHostTableContainer").on("click",".edit",function () {
         var name = $(this).data("name");
         var json = dataMap[name];
         json.type="edit";
         var html = juicer($("#tmpl").html(), json);
         $("#container").html(html);
+        editOrAddDataHost(json);
     });
-    //dataHost的新增编辑提交.
+    //editWriteHost
+     var editOrAddDataHost = function (json) {
+          laeryId = layer.open({
+             type: 1,
+             shade: false,
+             scrollbar: false,
+             area: ['1020px', '640px'], //宽高
+             content: $("#container"), //捕获的元素，注意：最好该指定的元素要存放在body最外层，否则可能被其它的相对元素所影响
+             cancel: function(){
+             }
+          });
+     }
+     //dataHost的新增编辑提交.
     $("#container").on("click",".submitDataHost",function () {
         var obj  = {};
         $("#container").find("input").each(function () {
@@ -633,12 +667,20 @@
         var oldDataHostName = $(this) .data("name");
         if(type == "edit"){
             $('#mycatDataHostTable').DataTable();
-
         }
         var json = addDataHost(oldDataHostName, obj);
-        $('#mycatDataHostTable').DataTable().row.add(json).draw(false);
-        // myModal.modal('show');
+        if(oldDataHostName !== "") {
+            $('#mycatDataHostTable').DataTable().row($("#mycatDataHostTable").find("a[data-name='"+oldDataHostName+"']").parents("tr")).data(json).draw(false);
+        }else {
+            $('#mycatDataHostTable').DataTable().row.add(json).draw(false);
+
+        }
+        layer.close(laeryId);
     });
+     //取消编辑dataHostlayer
+    $("#container").on("click",".cancelDataHost",function () {
+        layer.close(laeryId);
+    })
 
     $("#mycatDataHostTableContainer").on( "click",".btn-del",function () {
         var row = $(this).data("row");
@@ -647,28 +689,295 @@
         delDataHost(name);
     });
 
+    $("#mycatDataHostTableContainer").on("click",".editWriteHost",function () {
+        $("#mycatWriteHostTable").dataTable().fnDestroy();
+        var dataHostName = $(this).data("name");
+        var dataHost = getDataHost(dataHostName);
+        $('#mycatWriteHostTable').attr("dataHostName", dataHostName);
+        $('#mycatWriteHostTable').DataTable({
+            'oLanguage': dtb.oLanguage,
+            "data": dataHost["writeHost"],
+            'columns': [
+                {'data': 'host'},
+                {'data': 'url'},
+                {'data': 'user'},
+                {'data': 'password'},
+                {'data': 'weight'},
+                {'data': 'usingDecrypt'}
+            ],
+            'columnDefs': [
+                {
+                    'render': function(data,type,row){
+                        return '<a href="javascript:void(0)" class="btn-del text-info delWriteTable" data-name="'+row['host']+'"><i class="fa fa-trash-o"></i> 删除</a> ' +
+                            '| <a href="javascript:void(0)" class="btn-edit text-info edit editWriteTable" data-name="'+row['host']+'"><i class="fa fa-edit"></i> 编辑</a>'
+                            + String.format('| <a href="javascript:void(0)" class="btn-edit text-info edit editreadHostList" data-name="{0}" data-data-host="{0}"><i class="fa fa-edit"></i> 编辑readHost</a>' , row['host'],dataHostName);
+                    },
+                    'targets': 6
+                },
+                {"defaultContent": "",
+                    "targets": "_all"}
+            ],
+            "drawCallback": function( settings ) {
+            }
+        });
+        $("#mycatWriteHostTable").attr("style","");
+        laeryId = layer.open({
+            type: 1,
+            shade: false,
+            scrollbar: false,
+            area: ['1020px', '640px'], //宽高
+            content: $("#writeHostContainer"), //捕获的元素，注意：最好该指定的元素要存放在body最外层，否则可能被其它的相对元素所影响
+            cancel: function(){
+            }
+        });
+
+    });
+    //writeHost 编辑
+    ////myHostModalTpl editHostContainer
+    //新增
+    $("#btnAddwriteHost").bind("click",function () {
+        editOrAddWriteHost("" , true , "add" );
+    })
+    var editOrAddWriteHost = function ( houstName, isWrite, type) {
+        var dataHostName =  $('#mycatWriteHostTable').attr("dataHostName");
+        var dataHost = getDataHost(dataHostName);
+        var json = dataSource(dataHost.writeHost, "host").get(houstName);
+        json = $.extend({
+            "dataHostName": dataHostName,
+            "writeHostName": houstName,
+            "type": type,
+            "isWrite": isWrite,
+        },json);
+
+        var html = juicer($("#myHostModalTpl").html(), json);
+        writeLaeryId = layer.open({
+            type: 1,
+            shade: false,
+            scrollbar: false,
+            area: ['500px', '370px'], //宽高
+            content: html, //捕获的元素，注意：最好该指定的元素要存放在body最外层，否则可能被其它的相对元素所影响
+            cancel: function(){
+
+            }
+        });
+        bindEvent();
+    };
+
+    //编辑
+    $("#mycatWriteHostTable").on("click",".editWriteTable",function(){
+        var host = $(this).data("name");
+        editOrAddWriteHost(host , true , "edit" );
+    });
+
+    //删除writeHost
+    $("#mycatWriteHostTable").on("click",".delWriteTable",function(){
+        if(confirm("确定删除吗？")) {
+            //界面上删除一行shema的记录
+            $("#mycatWriteHostTable").DataTable().row($(this).parents('tr')).remove().draw();
+
+            var dataHostName =  $('#mycatWriteHostTable').attr("dataHostName");
+            var dataHost = getDataHost(dataHostName);
+            var oldHostName = $(this).data("name");
+            dataSource(dataHost.writeHost, "host").del(oldHostName);
+            layer.msg("删除成功");
+        }
+    });
+
+    var bindEvent = function () {
+        //提交
+        $(".submitWriteHost").click("click",function () {
+            var container = $("#editHostContainer");
+            var tableContainer = $("#mycatWriteHostTable");
+            var obj  = {};
+            container.find("input").each(function () {
+                var name = $(this).attr("name");
+                var val = $(this).val();
+                obj[name] = val;
+            });
+//            obj.autoIncrement = $("#editChildTableContainer").find("input[name=autoIncrement]:checked").val() =="0"?false:true;
+
+            var oldHostName =  container.find("input[name='type']").attr("data-write_host_name");
+            var dataHostName =  $('#mycatWriteHostTable').attr("dataHostName");
+            var dataHost = getDataHost(dataHostName);
+            obj = dataSource(dataHost.writeHost, "host").add(oldHostName, obj);
+
+            if(oldHostName !== "") {
+                tableContainer.DataTable().row(tableContainer.find("a[data-name='"+oldHostName+"']").parents("tr")).data(obj).draw(false);
+            }else {
+                tableContainer.DataTable().row.add(obj).draw(false);
+            }
+            layer.close(writeLaeryId);
+        });
+        $(".cancelwriteHost").click("click",function () {
+            layer.close(writeLaeryId);
+        });
+    };
+
+    //mycatReadHostTable
+    $("#mycatWriteHostTable").on("click",".editreadHostList",function(){
+        var writeDataHostName = $(this).data("name");
+       var readHostList = getReadHostList(writeDataHostName);
+       //关闭writeHost表格
+        layer.close(laeryId);
+        $("#mycatReadHostTable").dataTable().fnDestroy();
+        $("#mycatReadHostTable").attr("write_host_name", writeDataHostName);
+        $('#mycatReadHostTable').DataTable({
+            'oLanguage': dtb.oLanguage,
+            "data": readHostList,
+            'columns': [
+                {'data': 'host'},
+                {'data': 'url'},
+                {'data': 'user'},
+                {'data': 'password'},
+                {'data': 'weight'},
+                {'data': 'usingDecrypt'}
+            ],
+            'columnDefs': [
+                {
+                    'render': function(data,type,row){
+                        return String.format(  '<a href="javascript:void(0)" class="btn-del text-info delReadTable" write_host_name="{0}" data-name="'+row['host']+'"><i class="fa fa-trash-o"></i> 删除</a> ',writeDataHostName )
+                       + String.format('| <a href="javascript:void(0)" class="btn-edit text-info edit editReadTable" write_host_name="{0}" data-name="'+row['host']+'"><i class="fa fa-edit"></i> 编辑</a>' ,writeDataHostName) ;
+                    },
+                    'targets': 6
+                },
+                {"defaultContent": "",
+                    "targets": "_all"}
+            ],
+            "drawCallback": function( settings ) {
+            }
+        });
+        $("#mycatReadHostTable").attr("style","");
+        laeryId = layer.open({
+            type: 1,
+            shade: false,
+            scrollbar: false,
+            area: ['1020px', '640px'], //宽高
+            content: $("#readHostContainer"), //捕获的元素，注意：最好该指定的元素要存放在body最外层，否则可能被其它的相对元素所影响
+            cancel: function(){
+            }
+        });
+
+    });
+
+    //删除writeHost
+    $("#mycatReadHostTable").on("click",".delReadTable",function(){
+        if(confirm("确定删除吗？")) {
+            //界面上删除一行shema的记录
+            $("#mycatReadHostTable").DataTable().row($(this).parents('tr')).remove().draw();
+
+            var writeHostName =  $("#mycatReadHostTable").attr("write_host_name");
+            var readHostList = getReadHostList(writeHostName);
+            var readHostName = $(this).data("name");
+            var json = dataSource(readHostList, "host").del(readHostName);
+            layer.msg("删除成功");
+        }
+    });
+
+    //编辑
+    $("#btnAddreadHost").bind("click", function () {
+        editOrAddReadHost("", false, "add");
+    });
+    //编辑
+    $("#mycatReadHostTable").on("click", ".editReadTable", function () {
+        var readHostName = $(this).data("name");
+        editOrAddReadHost(readHostName, false, "edit");
+    });
+
+    var editOrAddReadHost = function ( houstName, isWrite, type) {
+//        var writeDataHostName =
+        var writeHostName =  $("#mycatReadHostTable").attr("write_host_name");
+        var readHostList = getReadHostList(writeHostName);
+        var dataHostName =  $('#mycatWriteHostTable').attr("dataHostName");
+        var json = dataSource(readHostList, "host").get(houstName);
+        json = $.extend({
+            "dataHostName": dataHostName,
+            "writeHostName": writeHostName,
+            "readHostName": houstName,
+            "type": type,
+            "isWrite": isWrite,
+        },json);
+
+        var html = juicer($("#myHostModalTpl").html(), json);
+        readLaeryId = layer.open({
+            type: 1,
+            shade: false,
+            scrollbar: false,
+            area: ['500px', '370px'], //宽高
+            content: html, //捕获的元素，注意：最好该指定的元素要存放在body最外层，否则可能被其它的相对元素所影响
+            cancel: function(){
+
+            }
+        });
+//        var container = $("#editHostContainer");
+//        var tableContainer = $("#mycatWriteHostTable");
+        bindReadEvent($("#editHostContainer"),  $("#mycatReadHostTable"), dataSource(readHostList, "host") , readLaeryId);
+    };
+
+    var bindReadEvent = function (container, tableContainer, ds, myLayerId) {
+        //提交
+        $(".submitWriteHost").click("click",function () {
+            var obj  = {};
+            container.find("input").each(function () {
+                var name = $(this).attr("name");
+                var val = $(this).val();
+                obj[name] = val;
+            });
+//            obj.autoIncrement = $("#editChildTableContainer").find("input[name=autoIncrement]:checked").val() =="0"?false:true;
+
+            var oldHostName =  container.find("input[name='type']").attr("data-read_host_name");
+            var dataHostName =  $('#mycatWriteHostTable').attr("dataHostName");
+            var dataHost = getDataHost(dataHostName);
+            obj = ds.add(oldHostName, obj);
+
+            if(oldHostName !== "") {
+                tableContainer.DataTable().row(tableContainer.find("a[data-name='"+oldHostName+"']").parents("tr")).data(obj).draw(false);
+            }else {
+                tableContainer.DataTable().row.add(obj).draw(false);
+            }
+            layer.close(myLayerId);
+        });
+        $(".cancelwriteHost").click("click",function () {
+            layer.close(myLayerId);
+        });
+    };
 
 
+    var getReadHostList = function (writeDataHost) {
+//        var oldHostName =  $container.data("name");
+        var dataHostName =  $('#mycatWriteHostTable').attr("dataHostName");
+        var dataHost = getDataHost(dataHostName);
+        var obj = dataSource(dataHost.writeHost, "host").get(writeDataHost);
+        if(obj.readHost == undefined){
+            obj.readHost = [];
+        }
+        return obj.readHost;
+    }
+
+    //保存
+
+    //取消
 
     //封装数据结构
     var getDataHost = function (dataHostName) {
         return dataMap[dataHostName];
-    }
+    };
     //添加一个dataHost
     var addDataHost = function (oldDataHostName, json) {
         if(oldDataHostName == "") {
-            data[json["name"]] = json;
+            dataMap[json["name"]] = json;
         } else {
             var obj = dataMap[oldDataHostName];
             delete dataMap[oldDataHostName];
             dataMap[json["name"]] = $.extend(obj, json);
         }
         return dataMap[json["name"]];
-    }
+    };
 
     var delDataHost = function (dataHostName) {
         dataMap[dataHostName] = null;
     }
+
+
 
 
 

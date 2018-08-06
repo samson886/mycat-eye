@@ -22,12 +22,19 @@ public class ZkController {
     ZkConfigService defaultJson;
     ZkConfigService clusterJson;
 
+    ZkConfigService schemaJson;
+    ZkConfigService dataNodeJson;
+    ZkConfigService dataHostJson;
+
     public ZkController(ZkConfigServiceFactory zkConfigServiceFactory) {
         this.userJson = zkConfigServiceFactory.create("user", "server/user");
         this.indexToCharsetPropertiesJson = zkConfigServiceFactory
                 .create("index_to_charset_properties", "server/index_to_charset.properties");
         this.defaultJson = zkConfigServiceFactory.create("default", "server/default");
         this.clusterJson = zkConfigServiceFactory.create("cluster", "server/cluster");
+        this.schemaJson = zkConfigServiceFactory.create("schema", "schema/schema");
+        this.dataNodeJson = zkConfigServiceFactory.create("dataNode", "schema/dataNode");
+        this.dataHostJson = zkConfigServiceFactory.create("dataHost", "schema/dataHost");
     }
 
     /**
@@ -308,6 +315,73 @@ public class ZkController {
         }
         return restResponse;
     }
+// schema
+    /**
+     http://127.0.0.1:7003/agent/zk/mycat-cluster-1/schema/schema
+     * @param cluster
+     * @return
+     */
+    @RequestMapping(value = "/{cluster}/schema/schema", method = {RequestMethod.GET})
+    @CrossOrigin(origins = "*")
+    public RestResponse<String> getSchema(@PathVariable String cluster) {
+        return query(this.schemaJson, cluster);
+    }
+    /**
+     http://127.0.0.1:7003/agent/zk/mycat-cluster-1/schema/schema
+     * @param cluster
+     * @return
+     */
+    @RequestMapping(value = "/{cluster}/schema/schema", method = {RequestMethod.POST})
+    @CrossOrigin(origins = "*")
+    public RestResponse<String> updateSchema(@PathVariable String cluster, @RequestBody String body) {
+        return update(this.schemaJson, cluster, body);
+    }
+    //dataHost
+    /**
+     http://127.0.0.1:7003/agent/zk/mycat-cluster-1/schema/dataHost
+     * @param cluster
+     * @return
+     */
+    @RequestMapping(value = "/{cluster}/schema/dataHost", method = {RequestMethod.GET})
+    @CrossOrigin(origins = "*")
+    public RestResponse<String> getDataHost(@PathVariable String cluster) {
+        return query(dataHostJson, cluster);
+    }
+    /**
+     http://127.0.0.1:7003/agent/zk/mycat-cluster-1/schema/dataHost
+     * @param cluster
+     * @return
+     */
+    @RequestMapping(value = "/{cluster}/schema/dataHost", method = {RequestMethod.POST})
+    @CrossOrigin(origins = "*")
+    public RestResponse<String> updateDataHost(@PathVariable String cluster, @RequestBody String body) {
+
+        return update(this.dataHostJson, cluster, body);
+    }
+    //dataNode
+    /**
+     http://127.0.0.1:7003/agent/zk/mycat-cluster-1/schema/dataNode
+     * @param cluster
+     * @return
+     */
+    @RequestMapping(value = "/{cluster}/schema/dataNode", method = {RequestMethod.GET})
+    @CrossOrigin(origins = "*")
+    public RestResponse<String> getDataNode(@PathVariable String cluster) {
+        return query(this.dataNodeJson, cluster);
+    }
+    /**
+     http://127.0.0.1:7003/agent/zk/mycat-cluster-1/schema/dataNode
+     * @param cluster
+     * @return
+     */
+    @RequestMapping(value = "/{cluster}/schema/dataNode", method = {RequestMethod.POST})
+    @CrossOrigin(origins = "*")
+    public RestResponse<String> updateDataNode(@PathVariable String cluster, @RequestBody String body) {
+
+        return update(this.dataNodeJson, cluster, body);
+    }
+
+
 
     private RestResponse<String> query(ZkConfigService json, String cluster) {
         RestResponse<String> restResponse = new RestResponse<>();
@@ -327,6 +401,19 @@ public class ZkController {
         RestResponse<String> restResponse = new RestResponse<>();
         try {
             userJson.updateAsJson(cluster, jsonObject);
+            restResponse.setCode(Constant.SUCCESS_CODE);
+            restResponse.setMessage(Constant.SUCCESS_MESSAGE);
+        } catch (Exception e) {
+            e.printStackTrace();
+            restResponse.setCode(Constant.FAIL_CODE);
+            restResponse.setMessage(Constant.FAIL_MESSAGE);
+        }
+        return restResponse;
+    }
+    private RestResponse<String> update(ZkConfigService userJson, String cluster, String body) {
+        RestResponse<String> restResponse = new RestResponse<>();
+        try {
+            userJson.updateAsString(cluster, body);
             restResponse.setCode(Constant.SUCCESS_CODE);
             restResponse.setMessage(Constant.SUCCESS_MESSAGE);
         } catch (Exception e) {

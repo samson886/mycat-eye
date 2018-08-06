@@ -218,4 +218,43 @@
             this.splice(index, 1);
         }
     };
+    window.dataSource = function (dataSource , idName) {
+        if(dataSource == undefined) {
+            dataSource = [];
+        }
+        return {
+            get: function (name) {
+                for(var index = 0 ; index < dataSource.length; index++) {
+                    var row = dataSource[index];
+                    if(row[idName] == name) {
+                        return row;
+                    }
+                }
+            },
+            add: function (oldName , json) {
+                if(oldName == ""){
+                    dataSource.push(json);
+                    return json;
+                }else {
+                    for(var index = 0 ; index < dataSource.length; index++) {
+                        var row = dataSource[index];
+                        if(row[idName] == oldName) {
+                            dataSource[index] = $.extend(row,  json);
+                            return dataSource[index];
+                        }
+                    }
+                }
+            },
+            del: function (oldName) {
+                for(var index = 0 ; index < dataSource.length; index++) {
+                    var row = dataSource[index];
+                    if(row[idName] == oldName) {
+                        dataSource.remove(row);
+                    }
+                }
+            }
+        }
+    };
+    //
+
 })(window,jQuery,undefined);
