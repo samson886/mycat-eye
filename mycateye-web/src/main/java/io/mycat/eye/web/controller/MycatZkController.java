@@ -320,7 +320,7 @@ public class MycatZkController {
     @CrossOrigin(origins = "*")
     public RestResponse<Object> getDataNode(@PathVariable String cluster,Integer forceFromZk) {
         String response = null;
-        response = fetchData(cluster, forceFromZk, agentUrlUtil.getDataHost());
+        response = fetchData(cluster, forceFromZk, agentUrlUtil.getDataNode());
         RestResponse<Object> restResponse = returnRestResponse(response);
         if(restResponse.getCode() != Constant.REST_FAIL_CODE){
             ZkConfigService.putData(cluster, agentUrlUtil.getDataNode(), JSON.toJSONString(restResponse.getData()));
@@ -338,7 +338,7 @@ public class MycatZkController {
     @RequestMapping(value = "/{cluster}/schema/dataNode", method = {RequestMethod.POST})
     @CrossOrigin(origins = "*")
     public RestResponse<Object> updateDataNode(@PathVariable String cluster,  String body ) {
-        String response = restTemplateUtils.postBodyWithOneUriParams(agentUrlUtil.getDataHost(), "cluster", cluster, body);
+        String response = restTemplateUtils.postBodyWithOneUriParams(agentUrlUtil.getDataNode(), "cluster", cluster, body);
         ZkConfigService.putData(cluster, agentUrlUtil.getDataNode(), body);
         return returnRestResponse(response);
     }

@@ -249,6 +249,9 @@
                                     <div class="manage-detail">
                                         <div class="margin-tb manage-detail-con clearfix">
                                             <a class="h5 custom pull-left" id="btnAddDataHost" href="javascript:;">新增逻辑节点</a>
+                                            <a class="h5 custom pull-right margin-min-15" id="getFromZk" href="javascript:void(0);">从zk获取配置</a>
+                                            <a class="h5 custom pull-right margin-min-15" id="saveToDB" href="javascript:void(0);">保存后端数据库</a>
+                                            <a class="h5 custom pull-right margin-min-15" id="saveToZk" href="javascript:void(0);">保存到ZK</a>
                                         </div>
                                     </div>
                                     <table class="table table-striped" id="myDataNodeHostModalContainer">
@@ -314,6 +317,8 @@
 <script src="script/custom/current-node.js"></script>
 <script src="../assets/js/utils.js"></script>
 <script src="script/juicer-min.js"></script>
+<script src="script/layer/layer.js"></script>
+
 <!-- dataHost模板 -->
 <script id="tmpl" type="text/template">
     <div class="form-horizontal">
@@ -391,13 +396,32 @@
     var table;
     var dataNodeMap ={};
 
-    function fetchData() {
+    function fetchData(forceFromZk) {
         if(table){
+            for(var attr in dataNodeMap) {
+                delete dataNodeMap[attr];
+            }
             table.destroy();
         }
         table = $('#myDataNodeHostModalContainer').DataTable({
             'oLanguage': dtb.oLanguage,
-            'ajax': '/mycat/cluster/getDataNodeList',
+            'ajax': {
+                "url": String.format("/mycat/zk/{0}/schema/dataNode",getParameter("cluster")) ,
+                "data":{
+                    forceFromZk : forceFromZk?1:0
+                },
+                "dataSrc": function ( json ) {
+                    if(json.code == 200){
+                        if(typeof  json.data == "string"){
+                            return JSON.parse(json.data);
+                        }
+                        return json.data;
+                    } else{
+                        layer.msg("请求失败！");
+                    }
+                    return [];
+                }
+            } ,
             'columns': [
                 {'data': 'name'},
                 {'data': 'database'},
@@ -411,21 +435,63 @@
                             '| <a href="javascript:void(0)" class="btn-edit text-info edit " data-name="'+row['name']+'"  data-row="'+pos['row']+'"><i class="fa fa-edit"></i> 编辑</a>' ;
                     },
                     'targets': 3
-                }
+                },
+                {"defaultContent": "",
+                    "targets": "_all"}
             ],
             "drawCallback": function( settings ) {
                }
         });
     }
     fetchData();
+    //getFromZk saveToDB saveToZk
+    $("#getFromZk").bind("click",function () {
+        fetchData(true);
+    });
+    //saveSchema
+    $("#saveToZk").on("click", function () {
+        var list = [];
+        for(var schemaName in dataNodeMap) {
+            list.push(dataNodeMap[schemaName]);
+        }
+        saveSchemaToRemote(String.format("/mycat/zk/{0}/schema/dataNode",getUrlParam("cluster")), list);
+    });
 
+    $("#saveToDB").on("click", function () {
+        var list = [];
+        for(var schemaName in dataNodeMap) {
+            list.push(dataNodeMap[schemaName]);
+        }
+        saveSchemaToRemote(String.format("/mycat/zk/{0}/schema/updateLocalDataNode",getUrlParam("cluster")), list);
+    });
+    var saveSchemaToRemote = function (url, data) {
+        $.ajax({
+            url: url,
+            method: 'post',
+            data:{
+                body : JSON.stringify(data)
+            },
+            success: function(res, status,jqxhr){
+                if(res.code && res.code==200){
+                    layer.msg("保存成功");
+                    //fetchData();
+                }else{
+                    notifi.error('Error: '+res.message)
+                }
+            },
+            error: function(err,status){
+                console.log(err);
+                notifi.error(err || err.message? err.message:'');
+            }
+        });
+    };
     var myModal = $("#myModal");
     //新增 dataHost
     $("#btnAddDataHost").bind("click",function () {
         addOrEditDataHost($(this),"add");
     });
 
-    $("#mycatDataHostTableContainer").on("click",".editDataNodeHost", function () {
+    $("#myDataNodeHostModalContainer").on("click",".edit", function () {
         addOrEditDataHost($(this),"edit");
     });
     var addOrEditDataHost = function (obj, type) {
@@ -440,10 +506,12 @@
     }
 
     $("#mycatDataHostTableContainer").on( "click",".btn-del",function () {
-        var row = $(this).data("row");
-        var name = $(this).data("name");
-        table.row(row).remove().draw(true)
-        delDataNodeHost(name);
+        if(confirm("确定删除吗？")) {
+            var name = $(this).data("name");
+            $("#myDataNodeHostModalContainer").DataTable().row($(this).parents('tr')).remove().draw();
+            delDataNodeHost(name);
+        }
+
     });
 
 
@@ -464,7 +532,7 @@
     };
 
     var delDataNodeHost = function (dataNodeName) {
-        dataNodeMap[dataNodeName] = null;
+        delete dataNodeMap[dataNodeName] ;
     };
     
     $(".editOrAddDataNodeHost").click(function () {
@@ -477,12 +545,13 @@
         var oldDataNodeHost =  $("#editDataNodeHostModalContainer").find("input[name='name']").data("old-name");
         obj = addDataNodeHost(oldDataNodeHost, obj);
         myModal.modal('hide');
-        var target = $("a[data-name='"+oldDataNodeHost+"']");
-        if(target){
-            var row = target.data("row");
-            table.row(row).data(obj).draw(false)
+        var target = $("a[data-name='"+oldDataNodeHost+"']"); //myDataNodeHostModalContainer
+        var tableContainer = $("#myDataNodeHostModalContainer");
+        if(oldDataNodeHost != ""){
+            $('#myDataNodeHostModalContainer').DataTable().row(tableContainer.find("a[data-name='"+oldDataNodeHost+"']").parents("tr")).data(obj).draw(false);
         } else {
-            table.row.add(obj).draw(false);
+            //.DataTable().row.add(obj).draw(false);
+            $('#myDataNodeHostModalContainer').DataTable().row.add(obj).draw(false);
         }
 
     })

@@ -536,7 +536,7 @@
         table = $('#mycatDataHostTable').DataTable({
             'oLanguage': dtb.oLanguage,
             'ajax': {
-                "url":  String.format("/mycat/zk/{0}/schema/dataHost",getParameter("cluster")) ,
+                "url":  String.format("/mycat/zk/{0}/schema/dataHost", getParameter("cluster")) ,
                 "data":{
                     forceFromZk : forceFromZk?1:0
                 },
