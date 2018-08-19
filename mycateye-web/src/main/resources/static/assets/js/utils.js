@@ -218,6 +218,13 @@
             this.splice(index, 1);
         }
     };
+    window.delEmptyAttr = function (obj) {
+        for(var attr in obj){
+            if(!obj[attr]){
+                delete obj[attr];
+            }
+        }
+    }
     window.dataSource = function (dataSource , idName) {
         if(dataSource == undefined) {
             dataSource = [];
@@ -233,6 +240,7 @@
             },
             add: function (oldName , json) {
                 if(oldName == ""){
+                    delEmptyAttr(json);
                     dataSource.push(json);
                     return json;
                 }else {
@@ -240,6 +248,7 @@
                         var row = dataSource[index];
                         if(row[idName] == oldName) {
                             dataSource[index] = $.extend(row,  json);
+                            delEmptyAttr(dataSource[index]);
                             return dataSource[index];
                         }
                     }
