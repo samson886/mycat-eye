@@ -400,12 +400,12 @@
             <div class="col-sm-9">
                 <!--<input class="form-control" type="text" value="${checkSQLschema}" name="checkSQLschema" />-->
                 <label class="custom-control custom-radio">
-                <input name="checkSQLschema" value="true" type="radio" class="custom-control-input " ${true==checkSQLschema?"checked":""}>
+                <input name="checkSQLschema" value="true" type="radio" class="custom-control-input " ${true==checkSQLschema?"checked":""} ${(undefined==checkSQLschema)?"checked":""}>
                 <span class="custom-control-indicator"></span>
                 <span class="custom-control-description">是</span>
                 </label>
                 <label class="custom-control custom-radio">
-                    <input name="checkSQLschema" value="false" type="radio" class="custom-control-input " ${(false==checkSQLschema)?"checked":""}  ${(undefined==checkSQLschema)?"checked":""}>
+                    <input name="checkSQLschema" value="false" type="radio" class="custom-control-input " ${(false==checkSQLschema)?"checked":""}  >
                     <span class="custom-control-indicator"></span>
                     <span class="custom-control-description">否</span>
                 </label>
@@ -446,12 +446,12 @@
             <label class="col-sm-3 control-label">全局表：</label>
             <div class="col-sm-9">
                 <label class="custom-control custom-radio">
-                    <input name="switchType" value="global" type="radio" class="custom-control-input loadZk" ${"global"==type?"checked":""}>
+                    <input name="type" value="global" type="radio" class="custom-control-input loadZk" ${"global"==type?"checked":""}>
                     <span class="custom-control-indicator"></span>
                     <span class="custom-control-description">是</span>
                 </label>
                 <label class="custom-control custom-radio">
-                    <input name="switchType" value="" type="radio" class="custom-control-input loadZk" ${"global"!=type?"checked":""}>
+                    <input name="type" value="" type="radio" class="custom-control-input loadZk" ${"global"!=type?"checked":""}>
                     <span class="custom-control-indicator"></span>
                     <span class="custom-control-description">否</span>
                 </label>
@@ -494,7 +494,7 @@
                 </label>
             </div>
         </div>
-        <div class="form-group mt10 "  >
+        <div class="form-group mt10 ruleDiv "  >
             <label class="col-sm-3 control-label">subTables：</label>
             <div class="col-sm-9">
                 <input class="form-control" type="text" value="${subTables}" name="subTables" />
@@ -505,12 +505,12 @@
             <label class="col-sm-3 control-label">添加limit：</label>
             <div class="col-sm-9">
                 <label class="custom-control custom-radio">
-                    <input name="needAddLimit" value="true" type="radio" class="custom-control-input " ${true==needAddLimit?"checked":""}>
+                    <input name="needAddLimit" value="true" type="radio" class="custom-control-input " ${true==needAddLimit?"checked":""} ${(undefined==needAddLimit)?"checked":""}>
                     <span class="custom-control-indicator"></span>
                     <span class="custom-control-description">是</span>
                 </label>
                 <label class="custom-control custom-radio">
-                    <input name="needAddLimit" value="false" type="radio" class="custom-control-input " ${(false==needAddLimit)?"checked":""}  ${(undefined==needAddLimit)?"checked":""}>
+                    <input name="needAddLimit" value="false" type="radio" class="custom-control-input " ${(false==needAddLimit)?"checked":""}  >
                     <span class="custom-control-indicator"></span>
                     <span class="custom-control-description">否</span>
                 </label>
@@ -787,8 +787,11 @@
         for(var i = 0 ; i < schemaJson.table.length; i++) {
             if(schemaJson.table[i].name == oldTableName) {
                  schemaJson.table[i] = $.extend(schemaJson.table[i],  tableJson);
+                delEmptyAttr(schemaJson.table[i]);
+                 return;
             }
         }
+        delEmptyAttr(tableJson);
         schemaJson.table.push(tableJson);
     }
     var delTable = function (schemaName, tableName) {
@@ -864,10 +867,23 @@
         var json = $.extend({schemaName: schemaName}, {} )
         $("#editTableModalContainer").html(juicer(html, json));
         $("#myTableModal").modal("show");
+
+
     });
-
-
-
+    var checkIfGlobal = function (isClear) {
+        var type = $("#editTableModalContainer").find("input[name=type]:checked").val();
+        if(type == ""){
+            $(".ruleDiv").show();
+        } else{
+            $(".ruleDiv").hide();
+        }
+        if(isClear){
+            $(".ruleDiv").find("input[name=rule],input[name=subTables]").val("");
+        }
+    }
+    $("#editTableModalContainer").on("click","input[name=type]",function () {
+        checkIfGlobal(true);
+    });
 
     $("#container").on("click",".editTable",function () {
         var html = $("#tableTmpl").html();
@@ -876,7 +892,10 @@
         var tableJson = getTable(schemaName, tableName);
         var json = $.extend({schemaName: schemaName}, tableJson )
         $("#editTableModalContainer").html(juicer(html, json));
+//        debugger
+        checkIfGlobal(false);
         $("#myTableModal").modal("show");
+
         //tableTmpl
     });
     //
@@ -1136,9 +1155,11 @@
         for(var i = 0 ; i < childList.length; i ++) {
             if(oldChildName == childList[i].name) {
                 childList[i] = $.extend(childList[i],  childJson);
+                delEmptyAttr(childList[i]);
                 return childList[i];
             }
         }
+        delEmptyAttr(childJson);
         childList.push(childJson);
         return childJson;
     };
