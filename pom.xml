@@ -3,19 +3,31 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<artifactId>mycateye-agent</artifactId>
+	<groupId>io.mycat.eye</groupId>
+	<artifactId>Mycat-Eye</artifactId>
 	<version>0.8</version>
-	<packaging>jar</packaging>
+	<packaging>pom</packaging>
 
-	<name>mycateye-agent</name>
-	<description>mycateye-agent</description>
+	<name>Mycat-Eye</name>
+	<description>Mycat-Eye</description>
 
 	<parent>
-		<groupId>io.mycat.eye</groupId>
-		<artifactId>Mycat-Eye</artifactId>
-		<version>0.8</version>
-		<relativePath>../pom.xml</relativePath>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.5.2.RELEASE</version>
+		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
+
+	<modules>
+		<module>mycateye-agent</module>
+		<module>mycateye-web</module>
+	</modules>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+	</properties>
 
 	<dependencies>
 		<dependency>
@@ -89,11 +101,6 @@
 		<dependency>
 			<groupId>commons-collections</groupId>
 			<artifactId>commons-collections</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.curator</groupId>
-			<artifactId>curator-framework</artifactId>
-			<version>4.0.1</version>
 		</dependency>
 
 	</dependencies>
