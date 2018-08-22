@@ -10,12 +10,7 @@
  */
 package io.mycat.eye.web.service.impl;
 
-import java.util.List;
-
-import javax.annotation.Resource;
-
-import org.springframework.stereotype.Service;
-
+import io.mycat.eye.common.util.Md5Util;
 import io.mycat.eye.web.bean.SysUser;
 import io.mycat.eye.web.bean.SysUserExample;
 import io.mycat.eye.web.bean.SysUserExample.Criteria;
@@ -23,7 +18,10 @@ import io.mycat.eye.web.dto.RestResponse;
 import io.mycat.eye.web.mapper.SysUserMapper;
 import io.mycat.eye.web.service.LoginService;
 import io.mycat.eye.web.util.Constant;
-import io.mycat.eye.web.util.Md5Util;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @ClassName: LoginServiceImpl
