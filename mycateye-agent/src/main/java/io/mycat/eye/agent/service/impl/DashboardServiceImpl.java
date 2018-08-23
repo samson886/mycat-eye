@@ -10,28 +10,22 @@
  */
 package io.mycat.eye.agent.service.impl;
 
+import io.mycat.eye.agent.bean.Constant;
+import io.mycat.eye.agent.bean.MysqlStatusHistory;
+import io.mycat.eye.agent.bean.MysqlStatusHistoryExample;
+import io.mycat.eye.agent.dto.*;
+import io.mycat.eye.agent.mapper.MysqlServerMapper;
+import io.mycat.eye.agent.mapper.MysqlStatusHistoryMapper;
+import io.mycat.eye.agent.service.DashboardService;
+import io.mycat.eye.agent.util.SysSampleUtil;
+import io.mycat.eye.common.util.MiscUtil;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-
-import javax.annotation.Resource;
-
-import org.springframework.stereotype.Service;
-
-import io.mycat.eye.agent.bean.Constant;
-import io.mycat.eye.agent.bean.MysqlStatusHistory;
-import io.mycat.eye.agent.bean.MysqlStatusHistoryExample;
-import io.mycat.eye.agent.dto.ChartDataDto;
-import io.mycat.eye.agent.dto.DashboardOverview;
-import io.mycat.eye.agent.dto.PagedDto;
-import io.mycat.eye.agent.dto.Processlist;
-import io.mycat.eye.agent.dto.QueryResult;
-import io.mycat.eye.agent.mapper.MysqlServerMapper;
-import io.mycat.eye.agent.mapper.MysqlStatusHistoryMapper;
-import io.mycat.eye.agent.service.DashboardService;
-import io.mycat.eye.agent.util.MiscUtil;
-import io.mycat.eye.agent.util.SysSampleUtil;
 
 /**   
  * @ClassName:  DashboardServiceImpl   

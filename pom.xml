@@ -19,6 +19,7 @@
 	</parent>
 
 	<modules>
+		<module>mycateye-common</module>
 		<module>mycateye-agent</module>
 		<module>mycateye-web</module>
 	</modules>

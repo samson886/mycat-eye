@@ -1,20 +1,19 @@
 package io.mycat.eye.web.service.impl;
 
-import java.util.Date;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.StringUtils;
-
+import io.mycat.eye.common.util.Md5Util;
 import io.mycat.eye.web.bean.SysUser;
 import io.mycat.eye.web.bean.SysUserExample;
 import io.mycat.eye.web.exception.BusinessException;
 import io.mycat.eye.web.exception.sys.user.SysUserExceptionEnum;
 import io.mycat.eye.web.mapper.SysUserMapper;
 import io.mycat.eye.web.service.SysUserService;
-import io.mycat.eye.web.util.Md5Util;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
+
+import java.util.Date;
+import java.util.List;
 
 /**
  * Created by BQ0082 on 2017/3/31.
